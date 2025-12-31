@@ -1,0 +1,165 @@
+[gd_scene load_steps=11 format=3 uid="uid://pmisojk3kuhk"]
+
+[ext_resource type="Script" uid="uid://c1yxvx2f70gy5" path="res://Global/Scenes/global.gd" id="1_n8fn5"]
+[ext_resource type="Shader" uid="uid://8ofnbwix6jjk" path="res://Global/Scenes/Transitions.gdshader" id="2_u0kcs"]
+[ext_resource type="AudioStream" uid="uid://d0mnmpirkl0vj" path="res://Global/Audio/CaffinatedStrings.mp3" id="3_u0kcs"]
+
+[sub_resource type="Animation" id="Animation_avv5p"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/TextureRect:material:shader_parameter/invert")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/TextureRect:material:shader_parameter/progress")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_y8e5j"]
+resource_name = "default_begin"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/TextureRect:material:shader_parameter/invert")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/TextureRect:material:shader_parameter/progress")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 1.0001),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 8.0, 0.0]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["default"],
+"method": &"get_end_anim"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_1elat"]
+resource_name = "default_end"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/TextureRect:material:shader_parameter/invert")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/TextureRect:material:shader_parameter/progress")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 1.0001),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 8.0, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a7wdd"]
+_data = {
+&"RESET": SubResource("Animation_avv5p"),
+&"default_begin": SubResource("Animation_y8e5j"),
+&"default_end": SubResource("Animation_1elat")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_17vvb"]
+shader = ExtResource("2_u0kcs")
+shader_parameter/use_sprite_alpha = true
+shader_parameter/use_transition_texture = false
+shader_parameter/transition_type = 0
+shader_parameter/position = Vector2(0, 0)
+shader_parameter/invert = true
+shader_parameter/grid_size = Vector2(10, 10)
+shader_parameter/rotation_angle = 0.0
+shader_parameter/stagger = Vector2(0, 0)
+shader_parameter/stagger_frequency = Vector2i(2, 2)
+shader_parameter/flip_frequency = Vector2i(1, 1)
+shader_parameter/basic_feather = 0.0
+shader_parameter/use_mask_size = false
+shader_parameter/mask_size = Vector2(100, 100)
+shader_parameter/edges = 6
+shader_parameter/shape_feather = 0.1
+shader_parameter/sectors = 1
+shader_parameter/clock_feather = 0.0
+shader_parameter/progress = 0.0
+shader_parameter/progress_bias = Vector2(2, 3)
+
+[sub_resource type="Gradient" id="Gradient_n8fn5"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.4973822, 0.7905759)
+colors = PackedColorArray(4.3317675e-07, 0.13606212, 0.33160415, 1, 0, 0.25799668, 0.5805708, 1, 0, 0.4666667, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_u0kcs"]
+gradient = SubResource("Gradient_n8fn5")
+fill_to = Vector2(0, 1)
+
+[node name="Global" type="Node"]
+process_mode = 3
+script = ExtResource("1_n8fn5")
+
+[node name="Transitions" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_a7wdd")
+}
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 5
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_17vvb")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_u0kcs")
+
+[node name="GlobalMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_u0kcs")
+autoplay = true
+bus = &"Music"

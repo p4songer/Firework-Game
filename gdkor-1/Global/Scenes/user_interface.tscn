@@ -1,0 +1,107 @@
+[gd_scene load_steps=7 format=3 uid="uid://cbjctmxdlnhod"]
+
+[ext_resource type="Script" uid="uid://dj3oojnn4s31" path="res://Global/Scenes/user_interface.gd" id="1_tb5ua"]
+[ext_resource type="Theme" uid="uid://s8eqo3epuhi7" path="res://Global/MainTheme.tres" id="2_nkuyb"]
+[ext_resource type="PackedScene" uid="uid://dcdf81eayjyro" path="res://MainMenu/options.tscn" id="3_ugsu1"]
+
+[sub_resource type="Animation" id="Animation_nvj2q"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pause:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(180, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pause:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_bxdhv"]
+resource_name = "pause"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pause:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.33333334),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(180, 720), Vector2(180, -100), Vector2(180, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pause:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hu46r"]
+_data = {
+&"RESET": SubResource("Animation_nvj2q"),
+&"pause": SubResource("Animation_bxdhv")
+}
+
+[node name="UI" type="CanvasLayer"]
+process_mode = 3
+layer = -1
+script = ExtResource("1_tb5ua")
+
+[node name="Points" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = 39.0
+offset_right = 20.0
+offset_bottom = 62.0
+grow_horizontal = 2
+theme = ExtResource("2_nkuyb")
+text = "0"
+
+[node name="Pause" type="PanelContainer" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -360.0
+offset_top = -360.0
+offset_right = 360.0
+offset_bottom = 360.00098
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(360, 360)
+theme = ExtResource("2_nkuyb")
+
+[node name="Options" parent="Pause" instance=ExtResource("3_ugsu1")]
+layout_mode = 2
+
+[node name="PauseAnim" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_hu46r")
+}

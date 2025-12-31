@@ -1,0 +1,1495 @@
+[gd_scene load_steps=132 format=3 uid="uid://dparjwo4ol8yn"]
+
+[ext_resource type="Texture2D" uid="uid://5uoe8vwxtyys" path="res://art/Background three 4.png" id="1_3n7vm"]
+[ext_resource type="Texture2D" uid="uid://dm46aedx1qs3h" path="res://art/options background 2.png" id="2_arhjh"]
+[ext_resource type="Texture2D" uid="uid://b3hxybv3nbjmv" path="res://art/nonmetal frame.png" id="2_ki15f"]
+[ext_resource type="Texture2D" uid="uid://bpkm43gdysejc" path="res://art/noble gas frame.png" id="4_0261c"]
+[ext_resource type="Texture2D" uid="uid://djeqh1umnjrqm" path="res://art/alkali metal frame.png" id="5_e3raj"]
+[ext_resource type="Texture2D" uid="uid://bgupwdsru5mw0" path="res://art/alkaline earth frame.png" id="6_y13mq"]
+[ext_resource type="Texture2D" uid="uid://bmqyjftqvtmhw" path="res://art/simimetal frame.png" id="7_0261c"]
+[ext_resource type="Texture2D" uid="uid://cj7jsokj5w06f" path="res://art/halogen frame.png" id="8_y13mq"]
+[ext_resource type="Texture2D" uid="uid://bsgblqr6hyfjw" path="res://art/basic metal frame.png" id="9_mva8e"]
+[ext_resource type="Texture2D" uid="uid://jpiiqoslsba8" path="res://art/transition metal frame.png" id="10_ny8ul"]
+[ext_resource type="Texture2D" uid="uid://bwwnyxhsbdnqq" path="res://art/lanthanide frame.png" id="11_r8i0v"]
+[ext_resource type="Texture2D" uid="uid://cx70ukosxs1ei" path="res://art/actinide frame.png" id="12_trmqt"]
+[ext_resource type="Texture2D" uid="uid://dqdf0wk8lmxgi" path="res://art/... frame.png" id="13_r8i0v"]
+[ext_resource type="Texture2D" uid="uid://cn65tch2ph6rh" path="res://art/Hydrogen 10.png" id="14_aq2i0"]
+[ext_resource type="Texture2D" uid="uid://vo5u6emgqvqo" path="res://art/Helium 10.png" id="15_v4tu4"]
+[ext_resource type="Texture2D" uid="uid://coucigly1l24p" path="res://art/Lithium 10.png" id="16_388oq"]
+[ext_resource type="Texture2D" uid="uid://btwuv7vmcea7e" path="res://art/Beryllium 10.png" id="17_tyyf4"]
+[ext_resource type="Texture2D" uid="uid://dmsnhap8a8rym" path="res://art/Boron 10.png" id="18_3ixmh"]
+[ext_resource type="Texture2D" uid="uid://bclaw8cg8souf" path="res://art/Carbon 10.png" id="19_46jm2"]
+[ext_resource type="Texture2D" uid="uid://bx8obgb6s4s3j" path="res://art/Nitrogen 10.png" id="20_guyns"]
+[ext_resource type="Texture2D" uid="uid://2hax7wh0ddxn" path="res://art/Oxygen 10.png" id="21_wi3o4"]
+[ext_resource type="Texture2D" uid="uid://clqyavnrtn72u" path="res://art/Fluorine 10.png" id="22_2eixh"]
+[ext_resource type="Texture2D" uid="uid://vuxrgosvg64j" path="res://art/Neon1 10.png" id="23_wql3a"]
+[ext_resource type="Texture2D" uid="uid://dp8ae0k8ex02p" path="res://art/Sodium 10.png" id="24_h2slh"]
+[ext_resource type="Texture2D" uid="uid://r074ly1yeknb" path="res://art/Magnesium 10.png" id="25_1h5q7"]
+[ext_resource type="Texture2D" uid="uid://c50cyt4p1en17" path="res://art/Aluminum 10.png" id="26_uxi7a"]
+[ext_resource type="Texture2D" uid="uid://dp6k0d2c3flre" path="res://art/Silicon 10.png" id="27_qg8c0"]
+[ext_resource type="Texture2D" uid="uid://c1xq3wu8gwyj6" path="res://art/Phosphorus 10.png" id="28_mhiv2"]
+[ext_resource type="Texture2D" uid="uid://b4r3cj8tq6en0" path="res://art/Sulfer 10.png" id="29_4d2l7"]
+[ext_resource type="Texture2D" uid="uid://xjmv52xritoo" path="res://art/Clorine 10.png" id="30_vevac"]
+[ext_resource type="Texture2D" uid="uid://cmxih3gdbch4i" path="res://art/Argon 10.png" id="31_ou2sg"]
+[ext_resource type="Texture2D" uid="uid://dtqt3u73y7y01" path="res://art/Potassium 10.png" id="32_6unrx"]
+[ext_resource type="Texture2D" uid="uid://nchtxrjv3yiy" path="res://art/Calcium 10.png" id="33_bsqcl"]
+[ext_resource type="Texture2D" uid="uid://bunog75la65w6" path="res://art/Scandium 10.png" id="34_rmpvp"]
+[ext_resource type="Texture2D" uid="uid://e4kf42mkn65t" path="res://art/Titanium 10.png" id="35_04wo3"]
+[ext_resource type="Texture2D" uid="uid://bstc0av8fje0h" path="res://art/Vanadium 10.png" id="36_hv82o"]
+[ext_resource type="Texture2D" uid="uid://c8il3xtq3g4qt" path="res://art/Chromium 10.png" id="37_35sx4"]
+[ext_resource type="Texture2D" uid="uid://d13o71xb3rej7" path="res://art/Manganese 10.png" id="38_3cogd"]
+[ext_resource type="Texture2D" uid="uid://ej8trnv2klcq" path="res://art/Iron 10.png" id="39_xnyju"]
+[ext_resource type="Texture2D" uid="uid://bor3m7t3y0u67" path="res://art/Cobalt white 10.png" id="40_m05ar"]
+[ext_resource type="Texture2D" uid="uid://b5xqv52s8ewn0" path="res://art/Nickel 10.png" id="41_lmaw6"]
+[ext_resource type="Texture2D" uid="uid://ch4d6ewtteaag" path="res://art/Copper 10.png" id="42_1tjvp"]
+[ext_resource type="Texture2D" uid="uid://nwxin0skn7i8" path="res://art/Zinc 10.png" id="43_qyvgx"]
+[ext_resource type="Texture2D" uid="uid://dm32sdmwrwwm1" path="res://art/Gallium 10.png" id="44_fv21f"]
+[ext_resource type="Texture2D" uid="uid://pnoy36dleh0g" path="res://art/Germanium 10.png" id="45_y8mb7"]
+[ext_resource type="Texture2D" uid="uid://bdvpgchag5ucp" path="res://art/Arsenic 10.png" id="46_8wqf4"]
+[ext_resource type="Texture2D" uid="uid://y857tnf1w6f0" path="res://art/Selenium 10.png" id="47_27efn"]
+[ext_resource type="Texture2D" uid="uid://c70e20522gm7k" path="res://art/Bromine 10.png" id="48_avofd"]
+[ext_resource type="Texture2D" uid="uid://cg3yglxr6nm0" path="res://art/Krypton 10.png" id="49_7fqpi"]
+[ext_resource type="Texture2D" uid="uid://cmdww32k5yxvd" path="res://art/Rubidium 10.png" id="50_6j4xq"]
+[ext_resource type="Texture2D" uid="uid://chlmmbpshrsqy" path="res://art/Strontium 10.png" id="51_m7daf"]
+[ext_resource type="Texture2D" uid="uid://b8t8w2dyvufq7" path="res://art/Yttrium 10.png" id="52_m5sa1"]
+[ext_resource type="Texture2D" uid="uid://bnumecl4erfm2" path="res://art/Zirconium 10.png" id="53_04ocg"]
+[ext_resource type="Texture2D" uid="uid://c3m5nkda75w63" path="res://art/Niobium 10.png" id="54_rnocr"]
+[ext_resource type="Texture2D" uid="uid://b88ghcd62hev3" path="res://art/Molybdenum 10.png" id="55_68d0k"]
+[ext_resource type="Texture2D" uid="uid://bkm4vf3nghrki" path="res://art/Technetium 10.png" id="56_dsyd3"]
+[ext_resource type="Texture2D" uid="uid://cfdicaj8kvvou" path="res://art/Ruthenium 10.png" id="57_xlmy1"]
+[ext_resource type="Texture2D" uid="uid://dnhcjqm51bmhd" path="res://art/Rhodium 10.png" id="58_igr80"]
+[ext_resource type="Texture2D" uid="uid://dqr6q5jveiyc8" path="res://art/Palladium 10.png" id="59_jiy1t"]
+[ext_resource type="Texture2D" uid="uid://x2l0so8jdv31" path="res://art/Silver 10.png" id="60_4yau0"]
+[ext_resource type="Texture2D" uid="uid://bsy5k7cyby8f4" path="res://art/Cadmium 10.png" id="61_4vibb"]
+[ext_resource type="Texture2D" uid="uid://c6j6r86m6vlvv" path="res://art/Indium 10.png" id="62_bok02"]
+[ext_resource type="Texture2D" uid="uid://c3eywby3i08ul" path="res://art/Tin 10.png" id="63_4ik68"]
+[ext_resource type="Texture2D" uid="uid://b4w21rx3w84vk" path="res://art/Antimony 10.png" id="64_kg3q3"]
+[ext_resource type="Texture2D" uid="uid://dweruanwefj7n" path="res://art/Tellurium 10.png" id="65_vneqo"]
+[ext_resource type="Texture2D" uid="uid://biv5add8003a3" path="res://art/Iodine 10.png" id="66_o2tp8"]
+[ext_resource type="Texture2D" uid="uid://bk0gfb5j0b4pb" path="res://art/Xenon 10.png" id="67_dgwog"]
+[ext_resource type="Texture2D" uid="uid://bf7co2n1j4jdj" path="res://art/Cesium 10.png" id="68_p217i"]
+[ext_resource type="Texture2D" uid="uid://bahgkmycwgpiw" path="res://art/Barium 10.png" id="69_5lum1"]
+[ext_resource type="Texture2D" uid="uid://bf2qymqdupv08" path="res://art/Lanthanum 10.png" id="70_cmdgt"]
+[ext_resource type="Texture2D" uid="uid://56uchain16wo" path="res://art/Cerium 10.png" id="71_6qnfr"]
+[ext_resource type="Texture2D" uid="uid://dtlfmm6f2fbvl" path="res://art/Praseodymium 10.png" id="72_5lngo"]
+[ext_resource type="Texture2D" uid="uid://cbe0usm6e5qhw" path="res://art/Neodymium 10.png" id="73_034dh"]
+[ext_resource type="Texture2D" uid="uid://cjvvndwuti70o" path="res://art/Promethium 10.png" id="74_o416i"]
+[ext_resource type="Texture2D" uid="uid://c0h532xnrmjtu" path="res://art/Samarium 10.png" id="75_630ms"]
+[ext_resource type="Texture2D" uid="uid://cpsvmm3riy653" path="res://art/Europium 10.png" id="76_1lhx7"]
+[ext_resource type="Texture2D" uid="uid://btqatexrae0hs" path="res://art/Gadolinium 10.png" id="77_axle2"]
+[ext_resource type="Texture2D" uid="uid://dqnh805uv25rw" path="res://art/Terbium 10.png" id="78_bscqm"]
+[ext_resource type="Texture2D" uid="uid://cgtw3axptix7p" path="res://art/Dysprosium 10.png" id="79_a2wbh"]
+[ext_resource type="Texture2D" uid="uid://2sgr0asu3dvw" path="res://art/Holmium 10.png" id="80_0w2jr"]
+[ext_resource type="Texture2D" uid="uid://f1h7sektqkfl" path="res://art/Erbium 10.png" id="81_lyod1"]
+[ext_resource type="Texture2D" uid="uid://cijj87r0sxm2o" path="res://art/Thulium 10.png" id="82_8d3uo"]
+[ext_resource type="Texture2D" uid="uid://buavsh54ns4fi" path="res://art/Ytterbium 10.png" id="83_8din3"]
+[ext_resource type="Texture2D" uid="uid://dcphvhyw07vtr" path="res://art/Lutetium 10.png" id="84_1tg7g"]
+[ext_resource type="Texture2D" uid="uid://fltfs10rvq7q" path="res://art/Hafnium 10.png" id="85_noxru"]
+[ext_resource type="Texture2D" uid="uid://cu02e5mwkmnot" path="res://art/Tantalum 10.png" id="86_pqymt"]
+[ext_resource type="Texture2D" uid="uid://d1vuey718kv36" path="res://art/Tungsten 10.png" id="87_ne8yy"]
+[ext_resource type="Texture2D" uid="uid://da8rhpukbd7g2" path="res://art/Rhenium 10.png" id="88_j2bpk"]
+[ext_resource type="Texture2D" uid="uid://2jdniv43xl5t" path="res://art/Osmium 10.png" id="89_l4dan"]
+[ext_resource type="Texture2D" uid="uid://w1ylxryimr8o" path="res://art/Iridium 10.png" id="90_rlvmq"]
+[ext_resource type="Texture2D" uid="uid://dd7hp0l7iw1wk" path="res://art/Platinum 10.png" id="91_w0jud"]
+[ext_resource type="Texture2D" uid="uid://dhl1xo8lxnpfc" path="res://art/Gold 10.png" id="92_7j386"]
+[ext_resource type="Texture2D" uid="uid://deuastjlpkqvj" path="res://art/Mercury 10.png" id="93_kc3mb"]
+[ext_resource type="Texture2D" uid="uid://bnekkpbsm4avp" path="res://art/Thallium 10.png" id="94_hb3bj"]
+[ext_resource type="Texture2D" uid="uid://bok41vsj52ym5" path="res://art/Lead 10.png" id="95_3gl2u"]
+[ext_resource type="Texture2D" uid="uid://cj2kvsmofaqr4" path="res://art/Bismuth 10.png" id="96_fjanm"]
+[ext_resource type="Texture2D" uid="uid://b5xnu0vahu7x7" path="res://art/Polonium 10.png" id="97_ka0tc"]
+[ext_resource type="Texture2D" uid="uid://coq5ni8lr8xxj" path="res://art/Astatine 10.png" id="98_6dqev"]
+[ext_resource type="Texture2D" uid="uid://dewkmpjtf463k" path="res://art/Radon 10.png" id="99_322ri"]
+[ext_resource type="Texture2D" uid="uid://cbeu7cqyy08ou" path="res://art/Francium 10.png" id="100_ihetc"]
+[ext_resource type="Texture2D" uid="uid://bdhwukjqxxeyg" path="res://art/Radium 10.png" id="101_r8itb"]
+[ext_resource type="Texture2D" uid="uid://cfrgkcw85a6ml" path="res://art/Actinium 10.png" id="102_34h0f"]
+[ext_resource type="Texture2D" uid="uid://p7g3tq7pwdbc" path="res://art/Thorium 10.png" id="103_lktx1"]
+[ext_resource type="Texture2D" uid="uid://dut4lwxk1wxdf" path="res://art/Protactinium 10.png" id="104_6x0c5"]
+[ext_resource type="Texture2D" uid="uid://bdkc03yeg60hl" path="res://art/Uranium 10.png" id="105_1sbth"]
+[ext_resource type="Texture2D" uid="uid://d4dxjaqe31844" path="res://art/Neptunium 10.png" id="106_aw3au"]
+[ext_resource type="Texture2D" uid="uid://cx173vnn0u0is" path="res://art/Plutonium 10.png" id="107_u7q8u"]
+[ext_resource type="Texture2D" uid="uid://4ew2ewa07go4" path="res://art/Americium 10.png" id="108_fgvl2"]
+[ext_resource type="Texture2D" uid="uid://bgccyhhn7gi14" path="res://art/Curium 10.png" id="109_5nopt"]
+[ext_resource type="Texture2D" uid="uid://c87nht4pv702n" path="res://art/Berkelium 10.png" id="110_ss30f"]
+[ext_resource type="Texture2D" uid="uid://cmg88dpxnqcuq" path="res://art/Californium 10.png" id="111_4v6n4"]
+[ext_resource type="Texture2D" uid="uid://4w72t83smvyh" path="res://art/Einsteinium 10.png" id="112_2ywhu"]
+[ext_resource type="Texture2D" uid="uid://bjxo2grgeyyeq" path="res://art/Fermium 10.png" id="113_4aiyy"]
+[ext_resource type="Texture2D" uid="uid://3kajysnmu2is" path="res://art/Mendelevium 10.png" id="114_pt4pv"]
+[ext_resource type="Texture2D" uid="uid://cq8w2t82t0lql" path="res://art/Nobelium 10.png" id="115_a7asg"]
+[ext_resource type="Texture2D" uid="uid://bxhy7imgxx2ej" path="res://art/Lawrencium 10.png" id="116_i8ipi"]
+[ext_resource type="Texture2D" uid="uid://ksxdltb3ietm" path="res://art/Rutherfordium 10.png" id="117_8scgf"]
+[ext_resource type="Texture2D" uid="uid://ifu22bekko6w" path="res://art/Dubnium 10.png" id="118_42p3p"]
+[ext_resource type="Texture2D" uid="uid://pv0o1h3c5ana" path="res://art/Seaborgium 10.png" id="119_1abma"]
+[ext_resource type="Texture2D" uid="uid://dqlumdjcgc3p8" path="res://art/Bohrium 10.png" id="120_yjaj6"]
+[ext_resource type="Texture2D" uid="uid://bhrtdef6bnxcn" path="res://art/Hassium 10.png" id="121_ii46l"]
+[ext_resource type="Texture2D" uid="uid://dx02m1u2rct3j" path="res://art/Meitnerium 10.png" id="122_tqhkm"]
+[ext_resource type="Texture2D" uid="uid://cd0sfixjsk7du" path="res://art/Darmstadtium 10.png" id="123_dwh5c"]
+[ext_resource type="Texture2D" uid="uid://dxr3wvt2ioufa" path="res://art/Roentgenium 10.png" id="124_a0b5g"]
+[ext_resource type="Texture2D" uid="uid://bcmwa1glbq3jr" path="res://art/Copernicium 10.png" id="125_uvbnp"]
+[ext_resource type="Texture2D" uid="uid://cf5n51mcnngw4" path="res://art/Nihonium 10.png" id="126_gru5f"]
+[ext_resource type="Texture2D" uid="uid://buif6dcotjbfl" path="res://art/Flerovium 10.png" id="127_p0t4d"]
+[ext_resource type="Texture2D" uid="uid://cewuwekp0c0gb" path="res://art/Moscovium 10.png" id="128_37u21"]
+[ext_resource type="Texture2D" uid="uid://bw41ylcjsv5be" path="res://art/Livermorium 10.png" id="129_rl8jg"]
+[ext_resource type="Texture2D" uid="uid://d1fbdhowihahx" path="res://art/Tennessine 10.png" id="130_etht1"]
+[ext_resource type="Texture2D" uid="uid://b3al6u3odv651" path="res://art/Oganesson 10.png" id="131_lnmmm"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="BackgroundThree4" type="TextureRect" parent="."]
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2
+texture = ExtResource("1_3n7vm")
+
+[node name="OptionsBackground2" type="Sprite2D" parent="."]
+position = Vector2(1662, 540)
+scale = Vector2(2, 2)
+texture = ExtResource("2_arhjh")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1532.0
+offset_right = 2061.0
+offset_bottom = 479.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 2880.0
+offset_bottom = 1620.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.4, 0.4)
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 2700)
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/HBoxContainer/ScrollContainer"]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer"]
+layout_mode = 2
+columns = 4
+
+[node name="NonmetalFrame" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("2_ki15f")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="NobleGasFrame" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("4_0261c")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="AlkaliMetalFrame" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("5_e3raj")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="AlkalineEarthFrame" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("6_y13mq")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SimimetalFrame" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("7_0261c")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="NonmetalFrame2" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("2_ki15f")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="NonmetalFrame3" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("2_ki15f")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="NonmetalFrame4" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("2_ki15f")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="HalogenFrame" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("8_y13mq")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="NobleGasFrame2" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("4_0261c")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="AlkaliMetalFrame2" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("5_e3raj")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="AlkalineEarthFrame2" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("6_y13mq")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BasicMetalFrame" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("9_mva8e")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SimimetalFrame2" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("7_0261c")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="NonmetalFrame5" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("2_ki15f")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="NonmetalFrame6" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("2_ki15f")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="HalogenFrame2" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("8_y13mq")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="NobleGasFrame3" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("4_0261c")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="AlkaliMetalFrame3" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("5_e3raj")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="AlkalineEarthFrame3" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("6_y13mq")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TransitionMetalFrame" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("10_ny8ul")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TransitionMetalFrame2" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("10_ny8ul")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TransitionMetalFrame3" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("10_ny8ul")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TransitionMetalFrame4" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("10_ny8ul")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TransitionMetalFrame5" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("10_ny8ul")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TransitionMetalFrame6" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("10_ny8ul")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TransitionMetalFrame7" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("10_ny8ul")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TransitionMetalFrame8" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("10_ny8ul")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TransitionMetalFrame9" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("10_ny8ul")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TransitionMetalFrame10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("10_ny8ul")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BasicMetalFrame2" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("9_mva8e")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SimimetalFrame3" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("7_0261c")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SimimetalFrame4" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("7_0261c")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="NonmetalFrame7" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("2_ki15f")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="HalogenFrame3" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("8_y13mq")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="NobleGasFrame4" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("4_0261c")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="AlkaliMetalFrame4" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("5_e3raj")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="AlkalineEarthFrame4" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("6_y13mq")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TransitionMetalFrame11" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("10_ny8ul")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TransitionMetalFrame12" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("10_ny8ul")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TransitionMetalFrame13" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("10_ny8ul")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TransitionMetalFrame14" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("10_ny8ul")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TransitionMetalFrame15" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("10_ny8ul")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TransitionMetalFrame16" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("10_ny8ul")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TransitionMetalFrame17" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("10_ny8ul")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TransitionMetalFrame18" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("10_ny8ul")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TransitionMetalFrame19" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("10_ny8ul")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TransitionMetalFrame20" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("10_ny8ul")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BasicMetalFrame3" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("9_mva8e")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BasicMetalFrame4" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("9_mva8e")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SimimetalFrame5" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("7_0261c")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SimimetalFrame6" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("7_0261c")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="HalogenFrame4" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("8_y13mq")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="NobleGasFrame5" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("4_0261c")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="AlkaliMetalFrame5" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("5_e3raj")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="AlkalineEarthFrame5" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("6_y13mq")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="LanthanideFrame" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("11_r8i0v")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="LanthanideFrame2" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("11_r8i0v")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="LanthanideFrame3" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("11_r8i0v")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="LanthanideFrame4" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("11_r8i0v")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="LanthanideFrame5" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("11_r8i0v")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="LanthanideFrame6" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("11_r8i0v")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="LanthanideFrame7" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("11_r8i0v")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="LanthanideFrame8" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("11_r8i0v")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="LanthanideFrame9" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("11_r8i0v")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="LanthanideFrame10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("11_r8i0v")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="LanthanideFrame11" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("11_r8i0v")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="LanthanideFrame12" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("11_r8i0v")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="LanthanideFrame13" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("11_r8i0v")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="LanthanideFrame14" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("11_r8i0v")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="LanthanideFrame15" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("11_r8i0v")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TransitionMetalFrame21" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("10_ny8ul")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TransitionMetalFrame22" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("10_ny8ul")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TransitionMetalFrame23" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("10_ny8ul")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TransitionMetalFrame24" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("10_ny8ul")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TransitionMetalFrame25" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("10_ny8ul")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TransitionMetalFrame26" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("10_ny8ul")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TransitionMetalFrame27" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("10_ny8ul")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TransitionMetalFrame28" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("10_ny8ul")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TransitionMetalFrame29" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("10_ny8ul")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BasicMetalFrame5" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("9_mva8e")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BasicMetalFrame6" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("9_mva8e")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BasicMetalFrame7" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("9_mva8e")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SimimetalFrame7" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("7_0261c")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="HalogenFrame5" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("8_y13mq")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="NobleGasFrame6" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("4_0261c")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="AlkaliMetalFrame6" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("5_e3raj")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="AlkalineEarthFrame6" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("6_y13mq")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ActinideFrame" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("12_trmqt")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ActinideFrame2" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("12_trmqt")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ActinideFrame3" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("12_trmqt")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ActinideFrame4" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("12_trmqt")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ActinideFrame5" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("12_trmqt")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ActinideFrame6" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("12_trmqt")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ActinideFrame7" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("12_trmqt")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ActinideFrame8" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("12_trmqt")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ActinideFrame9" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("12_trmqt")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ActinideFrame10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("12_trmqt")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ActinideFrame11" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("12_trmqt")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ActinideFrame12" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("12_trmqt")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ActinideFrame13" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("12_trmqt")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ActinideFrame14" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("12_trmqt")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ActinideFrame15" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("12_trmqt")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TransitionMetalFrame30" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("10_ny8ul")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TransitionMetalFrame31" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("10_ny8ul")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TransitionMetalFrame32" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("10_ny8ul")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TransitionMetalFrame33" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("10_ny8ul")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TransitionMetalFrame34" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("10_ny8ul")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TransitionMetalFrame35" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("10_ny8ul")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TransitionMetalFrame36" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("10_ny8ul")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TransitionMetalFrame37" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("10_ny8ul")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TransitionMetalFrame38" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("10_ny8ul")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BasicMetalFrame8" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("9_mva8e")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BasicMetalFrame9" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("9_mva8e")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BasicMetalFrame10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("9_mva8e")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BasicMetalFrame11" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("9_mva8e")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="HalogenFrame6" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("8_y13mq")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="NobleGasFrame7" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("4_0261c")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="___Frame" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(884, 1000)
+layout_mode = 2
+texture = ExtResource("13_r8i0v")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="GridContainer2" type="GridContainer" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/h_separation = 640
+theme_override_constants/v_separation = 754
+columns = 4
+
+[node name="Hydrogen10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("14_aq2i0")
+
+[node name="Helium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("15_v4tu4")
+
+[node name="Lithium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("16_388oq")
+
+[node name="Beryllium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("17_tyyf4")
+
+[node name="Boron10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("18_3ixmh")
+
+[node name="Carbon10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("19_46jm2")
+
+[node name="Nitrogen10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("20_guyns")
+
+[node name="Oxygen10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("21_wi3o4")
+
+[node name="Fluorine10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("22_2eixh")
+
+[node name="Neon110" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("23_wql3a")
+
+[node name="Sodium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("24_h2slh")
+
+[node name="Magnesium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("25_1h5q7")
+
+[node name="Aluminum10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("26_uxi7a")
+
+[node name="Silicon10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("27_qg8c0")
+
+[node name="Phosphorus10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("28_mhiv2")
+
+[node name="Sulfer10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("29_4d2l7")
+
+[node name="Clorine10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("30_vevac")
+
+[node name="Argon10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("31_ou2sg")
+
+[node name="Potassium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("32_6unrx")
+
+[node name="Cadmium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("33_bsqcl")
+
+[node name="Scandium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("34_rmpvp")
+
+[node name="Titanium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("35_04wo3")
+
+[node name="Vanadium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("36_hv82o")
+
+[node name="Chromium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("37_35sx4")
+
+[node name="Manganese10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("38_3cogd")
+
+[node name="Iron10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("39_xnyju")
+
+[node name="CobaltWhite10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("40_m05ar")
+
+[node name="Nickel10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("41_lmaw6")
+
+[node name="Copper10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("42_1tjvp")
+
+[node name="Zinc10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("43_qyvgx")
+
+[node name="Gallium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("44_fv21f")
+
+[node name="Germanium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("45_y8mb7")
+
+[node name="Arsenic10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("46_8wqf4")
+
+[node name="Selenium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("47_27efn")
+
+[node name="Bromine10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("48_avofd")
+
+[node name="Krypton10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("49_7fqpi")
+
+[node name="Rubidium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("50_6j4xq")
+
+[node name="Strontium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("51_m7daf")
+
+[node name="Yttrium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("52_m5sa1")
+
+[node name="Zirconium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("53_04ocg")
+
+[node name="Niobium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("54_rnocr")
+
+[node name="Molybdenum10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("55_68d0k")
+
+[node name="Technetium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("56_dsyd3")
+
+[node name="Ruthenium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("57_xlmy1")
+
+[node name="Rhodium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("58_igr80")
+
+[node name="Palladium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("59_jiy1t")
+
+[node name="Silver10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("60_4yau0")
+
+[node name="Cadmium11" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("61_4vibb")
+
+[node name="Indium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("62_bok02")
+
+[node name="Tin10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("63_4ik68")
+
+[node name="Antimony10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("64_kg3q3")
+
+[node name="Tellurium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("65_vneqo")
+
+[node name="Iodine10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("66_o2tp8")
+
+[node name="Xenon10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("67_dgwog")
+
+[node name="Cesium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("68_p217i")
+
+[node name="Barium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("69_5lum1")
+
+[node name="Lanthanum10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("70_cmdgt")
+
+[node name="Cerium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("71_6qnfr")
+
+[node name="Praseodymium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("72_5lngo")
+
+[node name="Neodymium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("73_034dh")
+
+[node name="Promethium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("74_o416i")
+
+[node name="Samarium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("75_630ms")
+
+[node name="Europium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("76_1lhx7")
+
+[node name="Gadolinium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("77_axle2")
+
+[node name="Terbium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("78_bscqm")
+
+[node name="Dysprosium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("79_a2wbh")
+
+[node name="Holmium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("80_0w2jr")
+
+[node name="Erbium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("81_lyod1")
+
+[node name="Thulium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("82_8d3uo")
+
+[node name="Ytterbium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("83_8din3")
+
+[node name="Lutetium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("84_1tg7g")
+
+[node name="Hafnium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("85_noxru")
+
+[node name="Tantalum10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("86_pqymt")
+
+[node name="Tungsten10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("87_ne8yy")
+
+[node name="Rhenium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("88_j2bpk")
+
+[node name="Osmium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("89_l4dan")
+
+[node name="Iridium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("90_rlvmq")
+
+[node name="Platinum10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("91_w0jud")
+
+[node name="Gold10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("92_7j386")
+
+[node name="Mercury10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("93_kc3mb")
+
+[node name="Thallium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("94_hb3bj")
+
+[node name="Lead10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("95_3gl2u")
+
+[node name="Bismuth10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("96_fjanm")
+
+[node name="Polonium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("97_ka0tc")
+
+[node name="Astatine10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("98_6dqev")
+
+[node name="Radon10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("99_322ri")
+
+[node name="Francium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("100_ihetc")
+
+[node name="Radium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("101_r8itb")
+
+[node name="Actinium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("102_34h0f")
+
+[node name="Thorium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("103_lktx1")
+
+[node name="Protactinium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("104_6x0c5")
+
+[node name="Uranium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("105_1sbth")
+
+[node name="Neptunium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("106_aw3au")
+
+[node name="Plutonium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("107_u7q8u")
+
+[node name="Americium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("108_fgvl2")
+
+[node name="Curium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("109_5nopt")
+
+[node name="Berkelium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("110_ss30f")
+
+[node name="Californium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("111_4v6n4")
+
+[node name="Einsteinium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("112_2ywhu")
+
+[node name="Fermium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("113_4aiyy")
+
+[node name="Mendelevium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("114_pt4pv")
+
+[node name="Nobelium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("115_a7asg")
+
+[node name="Lawrencium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("116_i8ipi")
+
+[node name="Rutherfordium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("117_8scgf")
+
+[node name="Dubnium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("118_42p3p")
+
+[node name="Seaborgium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("119_1abma")
+
+[node name="Bohrium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("120_yjaj6")
+
+[node name="Hassium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("121_ii46l")
+
+[node name="Meitnerium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("122_tqhkm")
+
+[node name="Darmstadtium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("123_dwh5c")
+
+[node name="Roentgenium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("124_a0b5g")
+
+[node name="Copernicium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("125_uvbnp")
+
+[node name="Nihonium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("126_gru5f")
+
+[node name="Flerovium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("127_p0t4d")
+
+[node name="Moscovium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("128_37u21")
+
+[node name="Livermorium10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("129_rl8jg")
+
+[node name="Tennessine10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("130_etht1")
+
+[node name="Oganesson10" type="TextureRect" parent="CanvasLayer/HBoxContainer/ScrollContainer/MarginContainer/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("131_lnmmm")
+
+[node name="HalogenFrame" type="TextureRect" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("8_y13mq")

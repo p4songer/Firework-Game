@@ -1,0 +1,105 @@
+[gd_scene load_steps=7 format=3 uid="uid://dcdf81eayjyro"]
+
+[ext_resource type="Script" uid="uid://dau0wb7wpmxhh" path="res://MainMenu/options.gd" id="1_1cv0g"]
+[ext_resource type="PackedScene" uid="uid://cmnjedqmptyeh" path="res://MainMenu/audio_slider.tscn" id="2_c0v11"]
+[ext_resource type="Theme" uid="uid://s8eqo3epuhi7" path="res://Global/MainTheme.tres" id="2_fsaj3"]
+[ext_resource type="AudioStream" uid="uid://djpspmxbps58q" path="res://Global/Audio/Click.wav" id="4_0lrlo"]
+
+[sub_resource type="Gradient" id="Gradient_nhkf3"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.4973822, 0.7905759)
+colors = PackedColorArray(4.3317675e-07, 0.13606212, 0.33160415, 1, 0, 0.25799668, 0.5805708, 1, 0, 0.4666667, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_0lrlo"]
+gradient = SubResource("Gradient_nhkf3")
+fill_from = Vector2(0, 0.65384614)
+fill_to = Vector2(0, 0)
+
+[node name="Options" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1cv0g")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_0lrlo")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 100
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Menu" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+theme = ExtResource("2_fsaj3")
+theme_override_font_sizes/font_size = 50
+text = "RETURN TO MENU"
+
+[node name="Music" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_fsaj3")
+theme_override_font_sizes/font_size = 50
+text = "Music"
+
+[node name="MSlider" parent="MarginContainer/VBoxContainer" instance=ExtResource("2_c0v11")]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_fsaj3")
+bus_name = "Music"
+
+[node name="SFX" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_fsaj3")
+theme_override_font_sizes/font_size = 50
+text = "SFX"
+
+[node name="SSlider" parent="MarginContainer/VBoxContainer" instance=ExtResource("2_c0v11")]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_fsaj3")
+bus_name = "SFX"
+
+[node name="Dialogue" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_fsaj3")
+theme_override_font_sizes/font_size = 50
+text = "Dialogue"
+
+[node name="DSlider" parent="MarginContainer/VBoxContainer" instance=ExtResource("2_c0v11")]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_fsaj3")
+bus_name = "Dialogue"
+
+[node name="SFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_0lrlo")
+bus = &"SFX"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Menu" to="." method="_on_menu_pressed"]
+[connection signal="gui_input" from="MarginContainer/VBoxContainer/SSlider" to="." method="_on_sfx_gui_input"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/SSlider" to="." method="_on_sfx_value_changed"]
