@@ -70,18 +70,6 @@ process_mode = 3
 layer = -1
 script = ExtResource("1_tb5ua")
 
-[node name="Points" type="Label" parent="."]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -20.0
-offset_top = 39.0
-offset_right = 20.0
-offset_bottom = 62.0
-grow_horizontal = 2
-theme = ExtResource("2_nkuyb")
-text = "0"
-
 [node name="Pause" type="PanelContainer" parent="."]
 visible = false
 anchors_preset = 8
@@ -89,10 +77,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -360.0
-offset_top = -360.0
-offset_right = 360.0
-offset_bottom = 360.00098
+offset_left = -396.0
+offset_top = -324.0
+offset_right = 324.0
+offset_bottom = 396.00098
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(360, 360)
@@ -105,3 +93,25 @@ layout_mode = 2
 libraries = {
 &"": SubResource("AnimationLibrary_hu46r")
 }
+
+[node name="HBox" type="HBoxContainer" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="Previous" type="Button" parent="HBox"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+text = "<"
+
+[node name="ColorLabel" type="Label" parent="HBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "COLOR"
+
+[node name="Next" type="Button" parent="HBox"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+text = ">"

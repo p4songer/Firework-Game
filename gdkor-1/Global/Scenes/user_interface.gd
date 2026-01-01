@@ -11,7 +11,9 @@ const OPTIONS = preload("uid://dcdf81eayjyro")
 signal pause_menu_changed
 
 func _ready() -> void:
-	EventBus.target_clicked.connect(_on_target_clicked)
+	$HBox/Previous.pressed.connect(_on_color_pressed.bind(-1))
+	$HBox/Next.pressed.connect(_on_color_pressed.bind(1))
+	$HBox/ColorLabel.text = Global.active_array[0]
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -32,5 +34,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_tree().paused = pausing
 
 
-func _on_target_clicked(points : int) -> void:
-	$Points.text = str(int($Points.text) + points)
+func _on_color_pressed(direction : int) -> void:
+	Global.firework_index = wrap(Global.firework_index + direction, 0, len(Global.active_array))
+	$HBox/ColorLabel.text = Global.active_array[Global.firework_index]

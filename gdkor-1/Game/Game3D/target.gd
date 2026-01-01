@@ -1,1 +1,0 @@
-class_name Target extends StaticBody3D

@@ -1,5 +1,18 @@
 extends Node
 
+const FIREWORK_DICT : Dictionary = {
+	"red": "the red kind",
+	"blue": "the blue kind",
+	"green": "the green kind"
+}
+var active_array : Array
+var firework_index : int = 0
+
+func _ready() -> void:
+	for item in FIREWORK_DICT.keys():
+		active_array.append(FIREWORK_DICT[item])
+
+#region Transition Functionality
 enum TRANSITIONS {
 	DEFAULT
 }
@@ -30,3 +43,4 @@ func _change_scene() -> void:
 	tree.get_root().add_child(_next_scene)
 	tree.get_root().remove_child(_previous_scene)
 	tree.set_current_scene(_next_scene)
+#endregion
