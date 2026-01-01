@@ -1,16 +1,24 @@
 extends Node
 
 const FIREWORK_DICT : Dictionary = {
-	"red": "the red kind",
-	"blue": "the blue kind",
-	"green": "the green kind"
+	"red": {"text": "the red kind", "color": Color(1.0, 0.0, 0.0, 1.0)},
+	"blue": {"text": "the blue kind", "color": Color(0.0, 0.367, 1.0, 1.0)},
+	"green": {"text": "the green kind", "color": Color(0.0, 0.715, 0.1, 1.0)},
 }
 var active_array : Array
 var firework_index : int = 0
 
 func _ready() -> void:
 	for item in FIREWORK_DICT.keys():
-		active_array.append(FIREWORK_DICT[item])
+		active_array.append(item)
+
+
+func get_dict_item(request : String):
+	match request:
+		"text":
+			return FIREWORK_DICT[active_array[firework_index]].text
+		"color":
+			return FIREWORK_DICT[active_array[firework_index]].color
 
 #region Transition Functionality
 enum TRANSITIONS {

@@ -1,3 +1,3 @@
 extends Node
 
-signal target_clicked(points: int)
+signal color_changed(new_color : Color)
