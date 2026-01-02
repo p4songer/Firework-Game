@@ -2,6 +2,10 @@ extends Node2D
 
 @onready var firework: CPUParticles2D = $Firework
 
+var is_crackle : bool = false
+
+const CRACKLE_EFFECT = preload("uid://erboc5klvgf")
+
 """
 COLORS KEY:
 Red: Strontium or Lithium.
@@ -42,6 +46,13 @@ customize lift charge
 	(for mines) color.
 """
 
+"""
+NOTES FOR EFFECTS
+crackle:
+	ColorGradiant, Liketime = 2, Lifetime Random = 1
+
+"""
+
 func _ready() -> void:
 	EventBus.color_changed.connect(_on_color_changed)
 
@@ -50,6 +61,20 @@ func _on_color_changed(new_color : Color) -> void:
 	launch_firework(new_color)
 
 
-func launch_firework(selected_color: Color) -> void:
+func launch_firework(selected_color: Color = Color(0.0, 0.0, 0.0, 0.0)) -> void:
 	firework.self_modulate = selected_color
 	firework.emitting = true
+
+
+func _on_canister_set_crackle() -> void:
+	is_crackle = not is_crackle
+	if is_crackle:
+		firework.color_ramp = CRACKLE_EFFECT
+		firework.lifetime = 2.0
+		firework.lifetime_randomness = 1
+		launch_firework()
+	else:
+		firework.color_ramp = null
+		firework.lifetime = 1.0
+		firework.lifetime_randomness = 0
+		launch_firework()

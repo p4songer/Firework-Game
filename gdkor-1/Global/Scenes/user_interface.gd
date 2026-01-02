@@ -36,5 +36,5 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _on_color_pressed(direction : int) -> void:
-	Global.firework_index = wrap(Global.firework_index + direction, 0, len(Global.color_array))
+	Global.color_index = wrap(Global.color_index + direction, 0, len(Global.color_array))
 	#update_text()

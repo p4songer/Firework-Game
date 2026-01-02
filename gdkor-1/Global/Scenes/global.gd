@@ -15,7 +15,7 @@ const FIREWORK_DICT : Dictionary = {
 	"silver": {"text": "Zirconium", "color": Color(0.71, 0.71, 0.71, 1.0)},
 }
 var color_array : Array
-var firework_index : int = 0
+var color_index : int = 0
 
 func _ready() -> void:
 	for item in FIREWORK_DICT.keys():
@@ -34,9 +34,9 @@ func get_dict_array(request: String) -> Array:
 func get_dict_item(request : String):
 	match request:
 		"text":
-			return FIREWORK_DICT[color_array[firework_index]].text
+			return FIREWORK_DICT[color_array[color_index]].text
 		"color":
-			return FIREWORK_DICT[color_array[firework_index]].color
+			return FIREWORK_DICT[color_array[color_index]].color
 
 #region Transition Functionality
 enum TRANSITIONS {

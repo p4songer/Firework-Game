@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://dydw0o4rwye4u"]
+[gd_scene load_steps=13 format=3 uid="uid://dydw0o4rwye4u"]
 
 [ext_resource type="Script" uid="uid://cj4hbwmb0tjvx" path="res://Game/game_2d.gd" id="1_ipvn0"]
 [ext_resource type="PackedScene" uid="uid://cbjctmxdlnhod" path="res://Global/Scenes/user_interface.tscn" id="2_lbxe4"]
 [ext_resource type="Texture2D" uid="uid://buopjoco8g5ha" path="res://Game/Assets/TempDiagram.jpg" id="3_bxdhv"]
 [ext_resource type="Texture2D" uid="uid://yjrac1p0hldq" path="res://Game/Assets/Types.png" id="4_nvj2q"]
 [ext_resource type="Script" uid="uid://ctg8rng1inc62" path="res://Game/canister.gd" id="4_rxxwj"]
+[ext_resource type="Gradient" uid="uid://erboc5klvgf" path="res://Game/CrackleEffect.tres" id="6_xji1t"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nvj2q"]
 radius = 64.0
@@ -85,8 +86,29 @@ damping_max = 600.0
 angle_max = 360.0
 scale_amount_curve = SubResource("Curve_rvcal")
 
+[node name="Effect" type="CPUParticles2D" parent="."]
+position = Vector2(794, 329)
+emitting = false
+amount = 500
+texture = SubResource("GradientTexture2D_hu46r")
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+lifetime_randomness = 1.0
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 490)
+initial_velocity_min = 200.0
+initial_velocity_max = 750.0
+damping_min = 100.0
+damping_max = 600.0
+angle_max = 360.0
+scale_amount_curve = SubResource("Curve_rvcal")
+color_ramp = ExtResource("6_xji1t")
+
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(791, 342)
 zoom = Vector2(0.5, 0.5)
 
+[connection signal="set_crackle" from="Canister" to="." method="_on_canister_set_crackle"]
 [connection signal="about_to_popup" from="Canister/MenuButton" to="Canister" method="_on_menu_button_about_to_popup"]
