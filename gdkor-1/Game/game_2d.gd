@@ -50,7 +50,8 @@ customize lift charge
 NOTES FOR EFFECTS
 crackle:
 	ColorGradiant, Liketime = 2, Lifetime Random = 1
-
+palm:
+	might need to manually animate a certain number of stars
 """
 
 func _ready() -> void:
