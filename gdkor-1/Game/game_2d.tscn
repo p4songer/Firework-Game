@@ -1,27 +1,18 @@
-[gd_scene load_steps=13 format=3 uid="uid://dydw0o4rwye4u"]
+[gd_scene load_steps=10 format=3 uid="uid://dydw0o4rwye4u"]
 
 [ext_resource type="Script" uid="uid://cj4hbwmb0tjvx" path="res://Game/game_2d.gd" id="1_ipvn0"]
 [ext_resource type="PackedScene" uid="uid://cbjctmxdlnhod" path="res://Global/Scenes/user_interface.tscn" id="2_lbxe4"]
-[ext_resource type="Texture2D" uid="uid://buopjoco8g5ha" path="res://Game/Assets/TempDiagram.jpg" id="3_bxdhv"]
+[ext_resource type="PackedScene" uid="uid://bxnuykamvq5wl" path="res://Game/firework.tscn" id="3_xji1t"]
 [ext_resource type="Texture2D" uid="uid://yjrac1p0hldq" path="res://Game/Assets/Types.png" id="4_nvj2q"]
-[ext_resource type="Script" uid="uid://ctg8rng1inc62" path="res://Game/canister.gd" id="4_rxxwj"]
+[ext_resource type="Script" uid="uid://c004wbgk1e1ir" path="res://Game/camera_2d.gd" id="6_51wm4"]
 [ext_resource type="Script" uid="uid://bnuxo4gd2vx8p" path="res://Game/launcher.gd" id="6_xji1t"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_nvj2q"]
-radius = 64.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_hu46r"]
-radius = 97.646904
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_rvcal"]
-size = Vector2(116.02052, 59.68814)
-
-[sub_resource type="Gradient" id="Gradient_nvj2q"]
+[sub_resource type="Gradient" id="Gradient_xji1t"]
 offsets = PackedFloat32Array(0, 0.5466667, 0.66)
 colors = PackedColorArray(1, 1, 1, 1, 0.77, 0.77, 0.77, 1, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_hu46r"]
-gradient = SubResource("Gradient_nvj2q")
+gradient = SubResource("Gradient_xji1t")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
@@ -33,58 +24,17 @@ point_count = 3
 script = ExtResource("1_ipvn0")
 
 [node name="UI" parent="." instance=ExtResource("2_lbxe4")]
-layer = 1
+offset = Vector2(-256, 0)
+transform = Transform2D(1, 0, 0, 1, -256, 0)
 dimension_2d = true
 
-[node name="Canister" type="Sprite2D" parent="."]
+[node name="Firework" parent="." instance=ExtResource("3_xji1t")]
 position = Vector2(583, 331)
-scale = Vector2(1.4480197, 1.4575758)
-texture = ExtResource("3_bxdhv")
-offset = Vector2(85, -20)
-script = ExtResource("4_rxxwj")
-
-[node name="Break" type="Area2D" parent="Canister"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Canister/Break"]
-shape = SubResource("CircleShape2D_nvj2q")
-
-[node name="Filler" type="Area2D" parent="Canister"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Canister/Filler"]
-shape = SubResource("CircleShape2D_hu46r")
-
-[node name="Lifting" type="Area2D" parent="Canister"]
-position = Vector2(0, 115.259865)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Canister/Lifting"]
-position = Vector2(1.3811951, -6.5177)
-scale = Vector2(1, 0.9999999)
-shape = SubResource("RectangleShape2D_rvcal")
-
-[node name="MenuButton" type="MenuButton" parent="Canister"]
-z_index = 2
 
 [node name="Shape reference" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(2245, 566)
 texture = ExtResource("4_nvj2q")
-
-[node name="Firework" type="CPUParticles2D" parent="."]
-position = Vector2(794, 329)
-emitting = false
-amount = 500
-texture = SubResource("GradientTexture2D_hu46r")
-one_shot = true
-explosiveness = 1.0
-direction = Vector2(0, 0)
-spread = 180.0
-gravity = Vector2(0, 490)
-initial_velocity_min = 200.0
-initial_velocity_max = 750.0
-damping_min = 100.0
-damping_max = 600.0
-angle_max = 360.0
-scale_amount_curve = SubResource("Curve_rvcal")
 
 [node name="Effect" type="CPUParticles2D" parent="."]
 position = Vector2(794, 329)
@@ -110,10 +60,12 @@ scale_amount_curve = SubResource("Curve_rvcal")
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(791, 342)
 zoom = Vector2(0.5, 0.5)
+limit_left = -250
+limit_right = 1800
+limit_bottom = 950
+position_smoothing_enabled = true
+script = ExtResource("6_51wm4")
 
 [node name="Launcher" type="Node2D" parent="."]
-position = Vector2(796, 361)
+position = Vector2(790, 900)
 script = ExtResource("6_xji1t")
-
-[connection signal="set_crackle" from="Canister" to="." method="_on_canister_set_crackle"]
-[connection signal="about_to_popup" from="Canister/MenuButton" to="Canister" method="_on_menu_button_about_to_popup"]

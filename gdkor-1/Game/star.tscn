@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://c6fgnywnyo63w"]
 
 [ext_resource type="Script" uid="uid://boiv1lil4du77" path="res://Game/star.gd" id="1_tike1"]
-[ext_resource type="Curve" uid="uid://ccpya8254nelx" path="res://Game/BrocadeStar.tres" id="2_vrltc"]
+[ext_resource type="Curve" uid="uid://ccpya8254nelx" path="res://Game/Resources/BrocadeStar.tres" id="2_vrltc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vm7g0"]
 
@@ -31,3 +31,5 @@ one_shot = true
 gravity = Vector2(0, 0)
 scale_amount_max = 1.5
 scale_amount_curve = ExtResource("2_vrltc")
+
+[connection signal="finished" from="CPUParticles2D" to="." method="_on_cpu_particles_2d_finished"]

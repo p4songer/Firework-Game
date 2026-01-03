@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://cbjctmxdlnhod"]
+[gd_scene load_steps=8 format=3 uid="uid://cbjctmxdlnhod"]
 
 [ext_resource type="Script" uid="uid://dj3oojnn4s31" path="res://Global/Scenes/user_interface.gd" id="1_tb5ua"]
 [ext_resource type="Theme" uid="uid://s8eqo3epuhi7" path="res://Global/MainTheme.tres" id="2_nkuyb"]
 [ext_resource type="PackedScene" uid="uid://dcdf81eayjyro" path="res://MainMenu/options.tscn" id="3_ugsu1"]
+[ext_resource type="Texture2D" uid="uid://be6ekjt8xxlgo" path="res://Game/Assets/SkyBackground.png" id="4_uksao"]
 
 [sub_resource type="Animation" id="Animation_nvj2q"]
 length = 0.001
@@ -68,7 +69,13 @@ _data = {
 [node name="UI" type="CanvasLayer"]
 process_mode = 3
 layer = -1
+follow_viewport_enabled = true
 script = ExtResource("1_tb5ua")
+
+[node name="PauseAnim" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_hu46r")
+}
 
 [node name="Pause" type="PanelContainer" parent="."]
 visible = false
@@ -89,30 +96,18 @@ theme = ExtResource("2_nkuyb")
 [node name="Options" parent="Pause" instance=ExtResource("3_ugsu1")]
 layout_mode = 2
 
-[node name="PauseAnim" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_hu46r")
-}
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(2, 3)
+pivot_offset = Vector2(0, 1024)
+mouse_filter = 2
+texture = ExtResource("4_uksao")
 
-[node name="HBox" type="HBoxContainer" parent="."]
-anchors_preset = 10
-anchor_right = 1.0
-grow_horizontal = 2
-theme_override_constants/separation = 50
-alignment = 1
-
-[node name="Previous" type="Button" parent="HBox"]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-text = "<"
-
-[node name="ColorLabel" type="Label" parent="HBox"]
-visible = false
-layout_mode = 2
+[node name="Button" type="Button" parent="."]
+offset_right = 8.0
+offset_bottom = 8.0
 theme_override_font_sizes/font_size = 50
-text = "COLOR"
+text = "Launch!"
 
-[node name="Next" type="Button" parent="HBox"]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-text = ">"
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
