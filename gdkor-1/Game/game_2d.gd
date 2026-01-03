@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var firework: Sprite2D = $Firework
+@onready var firework: Node2D = $Firework
 
 var is_crackle : bool = false
 var active_color : Color
@@ -60,25 +60,21 @@ func _ready() -> void:
 	EventBus.star_finished_emitting.connect(_on_star_finished)
 
 
-func launch_firework(selected_color: Color = Color(0.0, 0.0, 0.0, 0.0)) -> void:
-	active_color = selected_color
-	
+func launch_firework() -> void:
 	var new_fire = STAR.instantiate()
-	new_fire.global_position = $Firework.global_position
+	new_fire.global_position = firework.global_position
 	new_fire.can_emit_signal = true
 	self.add_child(new_fire)
 	$Camera2D.target = new_fire
-	new_fire.apply_central_impulse(Vector2.UP * 3250)
-	#new_fire.modulate = selected_color
+	new_fire.apply_central_impulse(Vector2.UP * 3500)
+	new_fire.modulate = firework.break_data.main_color
+	firework.toggle_sprite()
 
 #
 #func _on_canister_set_crackle() -> void:
 	#is_crackle = not is_crackle
 	#if is_crackle:
-		#firework.color_ramp = CRACKLE_EFFECT
-		#firework.lifetime = 2.0
-		#firework.lifetime_randomness = 1
-		#launch_firework()
+
 	#else:
 		#firework.color_ramp = null
 		#firework.lifetime = 1.0
@@ -92,7 +88,7 @@ func _on_star_finished() -> void:
 	
 	firework.global_position = $Camera2D.global_position
 	firework.self_modulate = active_color
-	firework.next_stage()
-	await firework.finished
-	
-	$Camera2D.target = $Launcher
+	firework.display("break")
+	#await firework.finished
+	#
+	#$Camera2D.target = $Launcher

@@ -29,7 +29,7 @@ transform = Transform2D(1, 0, 0, 1, -256, 0)
 dimension_2d = true
 
 [node name="Firework" parent="." instance=ExtResource("3_xji1t")]
-position = Vector2(583, 331)
+position = Vector2(797, 471)
 
 [node name="Shape reference" type="Sprite2D" parent="."]
 visible = false

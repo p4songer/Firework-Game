@@ -25,25 +25,29 @@ fill_from = Vector2(0.5, 0.5)
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.72674423, 0.7415731), -1.0610263, -1.0610263, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[node name="Firework" type="Sprite2D"]
-z_index = 2
+[node name="Firework" type="Node2D"]
+script = ExtResource("2_qed3c")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(1.4480197, 1.4575758)
 texture = ExtResource("1_cbmfh")
 offset = Vector2(85, -20)
-script = ExtResource("2_qed3c")
 
 [node name="Break" type="Area2D" parent="."]
+scale = Vector2(1.4480197, 1.4575758)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Break"]
 shape = SubResource("CircleShape2D_nvj2q")
 
 [node name="Filler" type="Area2D" parent="."]
+scale = Vector2(1.4480197, 1.4575758)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Filler"]
 shape = SubResource("CircleShape2D_hu46r")
 
 [node name="Lifting" type="Area2D" parent="."]
-position = Vector2(0, 115.259865)
+position = Vector2(0, 167.99998)
+scale = Vector2(1.4480197, 1.4575758)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Lifting"]
 position = Vector2(1.3811951, -6.5177)
@@ -51,7 +55,7 @@ scale = Vector2(1, 0.9999999)
 shape = SubResource("RectangleShape2D_rvcal")
 
 [node name="Particles" type="CPUParticles2D" parent="."]
-position = Vector2(794, 329)
+scale = Vector2(1.4480197, 1.4575758)
 emitting = false
 amount = 500
 texture = SubResource("GradientTexture2D_cbmfh")
@@ -72,6 +76,7 @@ visible = false
 custom_minimum_size = Vector2(150, 0)
 offset_right = 150.0
 offset_bottom = 40.0
+scale = Vector2(1.5, 1.5)
 
 [node name="TabContainer" type="TabContainer" parent="PCnt"]
 layout_mode = 2
@@ -89,5 +94,5 @@ layout_mode = 2
 metadata/_tab_index = 1
 
 [connection signal="tab_clicked" from="PCnt/TabContainer" to="." method="_on_tab_container_tab_clicked"]
-[connection signal="about_to_popup" from="PCnt/TabContainer/Color" to="." method="_on_menu_button_about_to_popup"]
-[connection signal="about_to_popup" from="PCnt/TabContainer/Effect" to="." method="_on_menu_button_about_to_popup"]
+[connection signal="about_to_popup" from="PCnt/TabContainer/Color" to="Sprite2D" method="_on_menu_button_about_to_popup"]
+[connection signal="about_to_popup" from="PCnt/TabContainer/Effect" to="Sprite2D" method="_on_menu_button_about_to_popup"]

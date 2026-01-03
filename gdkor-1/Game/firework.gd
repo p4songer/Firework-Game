@@ -1,4 +1,4 @@
-extends Sprite2D
+extends Node2D
 
 enum BREAK_PATTERN {
 	FLOWER, CRACKLE, BROCADE, PALM
@@ -9,14 +9,19 @@ const STAR = preload("uid://c6fgnywnyo63w")
 
 var last_area_clicked : Area2D
 var active_area : Area2D
-var popup : PopupMenu
 
 # This is for setting menu buttons
 var effects_dict = {
-	0: "flower",
-	1: "crackle",
-	2: "brocade",
-	3: "palm"
+	BREAK_PATTERN.FLOWER: "flower",
+	BREAK_PATTERN.CRACKLE: "crackle",
+	BREAK_PATTERN.BROCADE: "brocade",
+	BREAK_PATTERN.PALM: "palm"
+}
+var F_METHODS : Dictionary = {
+	BREAK_PATTERN.FLOWER: _flower,
+	BREAK_PATTERN.CRACKLE: _crackle,
+	BREAK_PATTERN.BROCADE: _brocade,
+	BREAK_PATTERN.PALM: _palm,
 }
 
 @onready var panel: PanelContainer = $PCnt
@@ -26,7 +31,7 @@ var effects_dict = {
 
 
 @onready var lift_data : FireworkResource = FireworkResource.new()
-@onready var filler_data : FireworkResource = FireworkResource.new()
+@onready var effect_data : FireworkResource = FireworkResource.new()
 @onready var break_data : FireworkResource = FireworkResource.new()
 
 func _ready() -> void:
@@ -50,7 +55,10 @@ func _ready() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.is_pressed():
-		if not active_area: return
+		if not active_area: 
+			last_area_clicked = null
+			panel.hide()
+			return
 		
 		last_area_clicked = active_area
 		panel.global_position = get_global_mouse_position()
@@ -66,21 +74,23 @@ func _on_mouse_exited(which: Area2D) -> void:
 		active_area = null
 
 
-func _on_menu_button_about_to_popup() -> void:
-	pass
-
-
 func _on_color_selected(index: int) -> void:
 	Global.color_index = index
-	update_text()
+	match last_area_clicked.name:
+		"Break":
+			break_data.main_color = Global.get_dict_item("color")
+		"Effect":
+			effect_data.main_color = Global.get_dict_item("color")
+		"Lifting":
+			lift_data.main_color = Global.get_dict_item("color")
 
 
 func _on_effect_selected(index: int) -> void:
-	match last_area_clicked:
+	match last_area_clicked.name:
 		"Break":
 			break_data.effect = index
-		"Filler":
-			filler_data.effect = index
+		"Effect":
+			effect_data.effect = index
 		"Lifting":
 			lift_data.effect = index
 
@@ -93,6 +103,52 @@ func update_text() -> void:
 	EventBus.color_changed.emit(Global.get_dict_item("color"))
 
 
+func display(stage : String) -> void:
+	match stage:
+		"lift":
+			pass
+		"break":
+			print("%s is the color, \n%s is the Effect" % [break_data.main_color, effects_dict[break_data.effect]])
+			F_METHODS[break_data.effect].call(break_data.main_color)
+		"effect":
+			pass
 
-func next_stage() -> void:
+
+func toggle_sprite() -> void:
+	$Sprite2D.visible = not $Sprite2D.visible
+	self.rotation = 0
+
+
+func _flower(color_ref : Color) -> void:
 	particles.emitting = true
+	particles.self_modulate = color_ref
+
+
+func _brocade(color_ref: Color) -> void:
+	for i in 30:
+		var new_star : RigidBody2D = STAR.instantiate()
+		self.add_child(new_star)
+		new_star.apply_central_impulse(Vector2.UP.rotated(self.rotation) * 1000)
+		new_star.modulate = color_ref
+		self.rotate(randf_range(0.75, 2.5))
+
+
+func _palm(color_ref: Color) -> void:
+	self.rotation_degrees = randf_range(-60, 60)
+	#TODO Make number variable
+	for i in 10:
+		var new_star : RigidBody2D = STAR.instantiate()
+		self.add_child(new_star)
+		var x_dir = randf_range(-0.75, 0.75) # figure out minx maxx
+		var y_dir = randf_range(-0.25, -1.0)
+		var direction = Vector2(x_dir, y_dir).rotated(self.rotation).normalized() * 1000
+		new_star.apply_central_impulse(direction)
+		new_star.modulate = color_ref
+
+
+func _crackle(color_ref : Color) -> void:
+		particles.color_ramp = CRACKLE_EFFECT
+		particles.lifetime = 2.0
+		particles.lifetime_randomness = 1
+		particles.self_modulate = color_ref
+		particles.emitting = true
