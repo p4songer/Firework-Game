@@ -44,9 +44,9 @@ func _ready() -> void:
 	#Prepare menus
 	var col_pop = color_menu.get_popup()
 	col_pop.index_pressed.connect(_on_color_selected)
-	var popup_arr = Global.get_dict_array("text")
-	for p in popup_arr:
-		col_pop.add_item(p)
+	#var popup_arr = Global.get_dict_array("text")
+	#for p in popup_arr:
+		#col_pop.add_item(p)
 	
 	var eff_pop = effect_menu.get_popup()
 	eff_pop.index_pressed.connect(_on_effect_selected)
@@ -77,13 +77,14 @@ func _on_mouse_exited(which: Area2D) -> void:
 
 func _on_color_selected(index: int) -> void:
 	Global.color_index = index
-	match last_area_clicked.name:
-		"Break":
-			break_data.main_color = Global.get_dict_item("color")
-		"Effect":
-			effect_data.main_color = Global.get_dict_item("color")
-		"Lifting":
-			lift_data.main_color = Global.get_dict_item("color")
+	#FIXME refactor to use resources.
+	#match last_area_clicked.name:
+		#"Break":
+			#break_data.main_color = Global.get_dict_item("color")
+		#"Effect":
+			#effect_data.main_color = Global.get_dict_item("color")
+		#"Lifting":
+			#lift_data.main_color = Global.get_dict_item("color")
 
 
 func _on_effect_selected(index: int) -> void:
@@ -99,9 +100,9 @@ func _on_effect_selected(index: int) -> void:
 func _on_tab_container_tab_clicked(tab: int) -> void:
 	$PCnt/TabContainer.get_child(tab).show_popup()
 
-
-func update_text() -> void:
-	EventBus.color_changed.emit(Global.get_dict_item("color"))
+#FIXME Make sure this isn't needed.
+#func update_text() -> void:
+	#EventBus.color_changed.emit(Global.get_dict_item("color"))
 
 
 func display(stage : String) -> void:

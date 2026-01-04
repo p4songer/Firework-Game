@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dydw0o4rwye4u"]
+[gd_scene load_steps=12 format=3 uid="uid://dydw0o4rwye4u"]
 
 [ext_resource type="Script" uid="uid://cj4hbwmb0tjvx" path="res://Game/game_2d.gd" id="1_ipvn0"]
 [ext_resource type="PackedScene" uid="uid://cbjctmxdlnhod" path="res://Global/Scenes/user_interface.tscn" id="2_lbxe4"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://c004wbgk1e1ir" path="res://Game/camera_2d.gd" id="6_51wm4"]
 [ext_resource type="Script" uid="uid://bnuxo4gd2vx8p" path="res://Game/launcher.gd" id="6_xji1t"]
 [ext_resource type="Texture2D" uid="uid://bi56x6d7p0e7k" path="res://Game/Assets/LiftSprite.png" id="7_b5134"]
+[ext_resource type="PackedScene" uid="uid://46aqa6oxsn0e" path="res://Game/drawer.tscn" id="8_3re1x"]
 
 [sub_resource type="Gradient" id="Gradient_xji1t"]
 offsets = PackedFloat32Array(0, 0.5466667, 0.66)
@@ -21,18 +22,14 @@ fill_from = Vector2(0.5, 0.5)
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.72674423, 0.7415731), -1.0610263, -1.0610263, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[node name="ShellEditor" type="Node2D"]
+[node name="Game2D" type="Node2D"]
 script = ExtResource("1_ipvn0")
 
 [node name="UI" parent="." instance=ExtResource("2_lbxe4")]
-offset = Vector2(-256, 0)
-transform = Transform2D(1, 0, 0, 1, -256, 0)
 
 [node name="Firework" parent="." instance=ExtResource("3_xji1t")]
-position = Vector2(797, 471)
 
 [node name="Effect" type="CPUParticles2D" parent="."]
-position = Vector2(794, 329)
 emitting = false
 amount = 500
 texture = SubResource("GradientTexture2D_hu46r")
@@ -53,23 +50,21 @@ angle_max = 360.0
 scale_amount_curve = SubResource("Curve_rvcal")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(791, 342)
 zoom = Vector2(0.5, 0.5)
-limit_left = -250
-limit_right = 1800
-limit_bottom = 950
 position_smoothing_enabled = true
 script = ExtResource("6_51wm4")
 
 [node name="Launcher" type="Node2D" parent="."]
-position = Vector2(790, 900)
 script = ExtResource("6_xji1t")
 
 [node name="FireworkPart" type="Area2D" parent="."]
-position = Vector2(185, 484)
+position = Vector2(-512, 0)
 script = ExtResource("6_3re1x")
 part_texture = ExtResource("7_b5134")
 
 [node name="Sprite2D" type="Sprite2D" parent="FireworkPart"]
 z_index = 1
 centered = false
+
+[node name="Drawer" parent="." instance=ExtResource("8_3re1x")]
+drawer_offset = Vector2(950, 10)

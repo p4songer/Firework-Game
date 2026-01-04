@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://46aqa6oxsn0e"]
+
+[ext_resource type="Script" uid="uid://b3s2lldxyj1fk" path="res://drawer.gd" id="1_oori1"]
+[ext_resource type="Texture2D" uid="uid://c23fleix3rgh3" path="res://icon.svg" id="2_0505s"]
+
+[node name="Drawer" type="CanvasLayer"]
+scale = Vector2(0.5, 0.5)
+transform = Transform2D(0.5, 0, 0, 0.5, 0, 0)
+script = ExtResource("1_oori1")
+
+[node name="Drawer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(548, 0)
+offset_right = 548.0
+offset_bottom = 368.0
+mouse_filter = 2
+alignment = 2
+
+[node name="TextureButton" type="TextureButton" parent="Drawer"]
+layout_mode = 2
+texture_normal = ExtResource("2_0505s")
+
+[node name="GridContainer" type="GridContainer" parent="Drawer"]
+layout_mode = 2
+columns = 3
+
+[connection signal="pressed" from="Drawer/TextureButton" to="." method="_on_texture_button_pressed"]

@@ -29,6 +29,7 @@ point_count = 3
 script = ExtResource("2_qed3c")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -1
 scale = Vector2(1.4480197, 1.4575758)
 texture = ExtResource("1_cbmfh")
 offset = Vector2(85, -20)
