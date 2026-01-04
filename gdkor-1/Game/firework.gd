@@ -17,6 +17,7 @@ var effects_dict = {
 	BREAK_PATTERN.BROCADE: "brocade",
 	BREAK_PATTERN.PALM: "palm"
 }
+# TODO make fish effect
 var F_METHODS : Dictionary = {
 	BREAK_PATTERN.FLOWER: _flower,
 	BREAK_PATTERN.CRACKLE: _crackle,

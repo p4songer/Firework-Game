@@ -1,11 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://dydw0o4rwye4u"]
+[gd_scene load_steps=11 format=3 uid="uid://dydw0o4rwye4u"]
 
 [ext_resource type="Script" uid="uid://cj4hbwmb0tjvx" path="res://Game/game_2d.gd" id="1_ipvn0"]
 [ext_resource type="PackedScene" uid="uid://cbjctmxdlnhod" path="res://Global/Scenes/user_interface.tscn" id="2_lbxe4"]
 [ext_resource type="PackedScene" uid="uid://bxnuykamvq5wl" path="res://Game/firework.tscn" id="3_xji1t"]
-[ext_resource type="Texture2D" uid="uid://yjrac1p0hldq" path="res://Game/Assets/Types.png" id="4_nvj2q"]
+[ext_resource type="Script" uid="uid://b46oym1crodrq" path="res://Game/firework_part.gd" id="6_3re1x"]
 [ext_resource type="Script" uid="uid://c004wbgk1e1ir" path="res://Game/camera_2d.gd" id="6_51wm4"]
 [ext_resource type="Script" uid="uid://bnuxo4gd2vx8p" path="res://Game/launcher.gd" id="6_xji1t"]
+[ext_resource type="Texture2D" uid="uid://bi56x6d7p0e7k" path="res://Game/Assets/LiftSprite.png" id="7_b5134"]
 
 [sub_resource type="Gradient" id="Gradient_xji1t"]
 offsets = PackedFloat32Array(0, 0.5466667, 0.66)
@@ -20,21 +21,15 @@ fill_from = Vector2(0.5, 0.5)
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.72674423, 0.7415731), -1.0610263, -1.0610263, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[node name="Game2D" type="Node2D"]
+[node name="ShellEditor" type="Node2D"]
 script = ExtResource("1_ipvn0")
 
 [node name="UI" parent="." instance=ExtResource("2_lbxe4")]
 offset = Vector2(-256, 0)
 transform = Transform2D(1, 0, 0, 1, -256, 0)
-dimension_2d = true
 
 [node name="Firework" parent="." instance=ExtResource("3_xji1t")]
 position = Vector2(797, 471)
-
-[node name="Shape reference" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(2245, 566)
-texture = ExtResource("4_nvj2q")
 
 [node name="Effect" type="CPUParticles2D" parent="."]
 position = Vector2(794, 329)
@@ -69,3 +64,12 @@ script = ExtResource("6_51wm4")
 [node name="Launcher" type="Node2D" parent="."]
 position = Vector2(790, 900)
 script = ExtResource("6_xji1t")
+
+[node name="FireworkPart" type="Area2D" parent="."]
+position = Vector2(185, 484)
+script = ExtResource("6_3re1x")
+part_texture = ExtResource("7_b5134")
+
+[node name="Sprite2D" type="Sprite2D" parent="FireworkPart"]
+z_index = 1
+centered = false

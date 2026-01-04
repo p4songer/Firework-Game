@@ -8,17 +8,6 @@ var active_color : Color
 const STAR = preload("uid://c6fgnywnyo63w")
 
 """
-COLORS KEY:
-Red: Strontium or Lithium.
-Orange: Calcium, or Strontium + Sodium.
-Yellow: Sodium.
-Green: Barium (often Barium Chloride).
-Blue: Copper (often Copper Chloride).
-Purple (Lavender/Violet): Strontium + Copper.
-White: Magnesium, Aluminum,
-Gold: Iron filings, Charcoal. 
-Silver :  Titanium, Zirconium.
-
 LIFTING CHARGE:
 Any Effect or Color adds mine (cannot have hummer)
 Adding phthalate will make whistle
@@ -34,7 +23,7 @@ PATTERNS:
 Brocade : large break, glittering trails
 Crysanthenum : Any size break with basic color followed by crackle
 Peony : Any size break with basic color
-Palm : medium to small break with comets.
+Palm : medium to small break with comets. Paper rolls
 
 Order maybe:
 customize pellets.
@@ -45,14 +34,6 @@ customize break
 	color
 customize lift charge
 	(for mines) color.
-"""
-
-"""
-NOTES FOR EFFECTS
-crackle:
-	ColorGradiant, Liketime = 2, Lifetime Random = 1
-palm:
-	might need to manually animate a certain number of stars
 """
 
 func _ready() -> void:
@@ -69,17 +50,6 @@ func launch_firework() -> void:
 	new_fire.apply_central_impulse(Vector2.UP * 3500)
 	new_fire.modulate = firework.break_data.main_color
 	firework.toggle_sprite()
-
-#
-#func _on_canister_set_crackle() -> void:
-	#is_crackle = not is_crackle
-	#if is_crackle:
-
-	#else:
-		#firework.color_ramp = null
-		#firework.lifetime = 1.0
-		#firework.lifetime_randomness = 0
-		#launch_firework()
 
 
 func _on_star_finished() -> void:

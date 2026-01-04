@@ -14,6 +14,13 @@ const FIREWORK_DICT : Dictionary = {
 	"gold": {"text": "Iron + Charcoal", "color": Color(1.0, 0.816, 0.21, 1.0)},
 	"silver": {"text": "Zirconium", "color": Color(0.71, 0.71, 0.71, 1.0)},
 }
+const FIRE_RESOURCES : Array = [
+	preload("uid://chs5icc2rx3w7"), preload("uid://bxkbhs08v5r6r"), preload("uid://7jjmoa7qa28y"),
+	preload("uid://dgdvg4kucekux"), preload("uid://cqkcjrv1kywv0"), preload("uid://yh4cpjejnkb2"),
+	preload("uid://dic88j7pevp7"), preload("uid://chpyavxb1yn04"), preload("uid://wmuthliqpv3m"),
+	preload("uid://dfop8tbeeruhd"), preload("uid://iw02skqqsv1e"), preload("uid://dp7b46nggluhg"),
+	
+]
 var color_array : Array
 var color_index : int = 0
 
