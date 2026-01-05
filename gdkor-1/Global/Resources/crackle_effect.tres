@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="IngredientResource" load_steps=3 format=3 uid="uid://ba8pex888vrj8"]
+
+[ext_resource type="Texture2D" uid="uid://c23fleix3rgh3" path="res://icon.svg" id="1_gwuyx"]
+[ext_resource type="Script" uid="uid://cna124i1fi236" path="res://Game/Resources/IngredientResource.gd" id="2_4htbt"]
+
+[resource]
+script = ExtResource("2_4htbt")
+ing_name = "crackle"
+ing_color = Color(1, 1, 1, 1)
+ing_sprite = ExtResource("1_gwuyx")
+metadata/_custom_type_script = "uid://cna124i1fi236"

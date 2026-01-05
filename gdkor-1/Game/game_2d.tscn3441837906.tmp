@@ -67,5 +67,5 @@ z_index = 1
 centered = false
 
 [node name="Drawer" parent="." instance=ExtResource("8_3re1x")]
-color_drawer_offset = Vector2(950, 0)
-fx_drawer_offset = Vector2(950, 275)
+color_drawer_offset = null
+fx_drawer_offset = null

@@ -20,8 +20,11 @@ const FIRE_RESOURCES : Array = [
 	preload("uid://dic88j7pevp7"), preload("uid://chpyavxb1yn04"), preload("uid://wmuthliqpv3m"),
 	preload("uid://dfop8tbeeruhd"), preload("uid://iw02skqqsv1e"), preload("uid://dp7b46nggluhg"),
 ]
-#var color_array : Array
-#var color_index : int = 0
+const EFFECT_RESOURCES : Array = [
+	preload("uid://betka3xy08pd8"), preload("uid://ba8pex888vrj8"), preload("uid://dqn1ei0yfg4xk"),
+	preload("uid://p8bqtov2wh0x"),
+]
+var active_fireworks : Array = []
 
 #func _ready() -> void:
 	#for item in FIREWORK_DICT.keys():

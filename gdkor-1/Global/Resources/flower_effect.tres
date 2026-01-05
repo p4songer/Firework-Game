@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="IngredientResource" load_steps=3 format=3 uid="uid://betka3xy08pd8"]
+
+[ext_resource type="Texture2D" uid="uid://c23fleix3rgh3" path="res://icon.svg" id="1_b646c"]
+[ext_resource type="Script" uid="uid://cna124i1fi236" path="res://Game/Resources/IngredientResource.gd" id="1_gc0iu"]
+
+[resource]
+script = ExtResource("1_gc0iu")
+ing_name = "flower"
+ing_color = Color(1, 1, 1, 1)
+ing_sprite = ExtResource("1_b646c")
+metadata/_custom_type_script = "uid://cna124i1fi236"

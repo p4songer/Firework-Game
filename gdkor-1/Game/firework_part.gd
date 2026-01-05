@@ -2,10 +2,6 @@ extends Area2D
 
 @export var part_texture : CompressedTexture2D
 @export var ingredient : IngredientResource = IngredientResource.new()
-var new_ing : IngredientResource:
-	set(new_value):
-		new_ing = new_value
-		print(new_ing.ing_name)
 
 var mouse_active : bool = false
 
@@ -34,3 +30,4 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		if mouse_active:
 			EventBus.request_ingredient.emit(self)
+			print(ingredient.ing_name, " has effect ", ingredient.effect)
