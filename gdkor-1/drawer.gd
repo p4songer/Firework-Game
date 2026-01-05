@@ -9,6 +9,8 @@ var item_indexes : Dictionary = {}
 var ing_in_hand : IngredientResource = null
 
 func _ready() -> void:
+	EventBus.request_ingredient.connect(_on_request_ingredient)
+	
 	for idx in Global.FIRE_RESOURCES.size():
 		var new_button = Button.new()
 		var ing_res = Global.FIRE_RESOURCES[idx]
@@ -39,3 +41,8 @@ func _on_texture_button_pressed() -> void:
 
 func _on_ingredient_pressed(index : int) -> void:
 	ing_in_hand = item_indexes[index]
+
+
+func _on_request_ingredient(requestor: Node2D) -> void:
+	requestor.new_ing = ing_in_hand
+	ing_in_hand = null

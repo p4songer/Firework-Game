@@ -6,3 +6,5 @@ signal color_changed(new_color : Color)
 signal star_finished_emitting
 @warning_ignore("unused_signal")
 signal launch_firework
+@warning_ignore("unused_signal")
+signal request_ingredient(requestor: Node2D)

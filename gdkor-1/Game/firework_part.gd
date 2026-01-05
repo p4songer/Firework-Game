@@ -1,6 +1,13 @@
 extends Area2D
 
 @export var part_texture : CompressedTexture2D
+@export var ingredient : IngredientResource = IngredientResource.new()
+var new_ing : IngredientResource:
+	set(new_value):
+		new_ing = new_value
+		print(new_ing.ing_name)
+
+var mouse_active : bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -16,8 +23,14 @@ func _ready() -> void:
 
 
 func _mouse_enter() -> void:
-	print("mouse")
+	mouse_active = true
 
 
 func _mouse_exit() -> void:
-	print("mose gone")
+	mouse_active = false
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+		if mouse_active:
+			EventBus.request_ingredient.emit(self)
