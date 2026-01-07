@@ -50,7 +50,7 @@ angle_max = 360.0
 scale_amount_curve = SubResource("Curve_rvcal")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.5, 0.5)
+zoom = Vector2(0.4, 0.4)
 position_smoothing_enabled = true
 script = ExtResource("6_51wm4")
 

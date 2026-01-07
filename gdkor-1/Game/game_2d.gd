@@ -49,7 +49,9 @@ func launch_firework() -> void:
 	$Camera2D.target = new_fire
 	new_fire.apply_central_impulse(Vector2.UP * 3500)
 	new_fire.modulate = firework.break_data.main_color
-	firework.toggle_sprite()
+	#firework.toggle_sprite()
+	
+	firework.display(Global.active_fireworks.pop_front())
 
 
 func _on_star_finished() -> void:
@@ -57,8 +59,9 @@ func _on_star_finished() -> void:
 	$Camera2D.target = null
 	
 	firework.global_position = $Camera2D.global_position
-	firework.self_modulate = active_color
-	firework.display("break")
+	#firework.self_modulate = active_color
+	#firework.display(Global.a)
 	#await firework.finished
 	#
 	#$Camera2D.target = $Launcher
+	firework.display(Global.active_fireworks.pop_front())

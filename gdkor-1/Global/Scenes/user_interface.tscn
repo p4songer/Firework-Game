@@ -68,7 +68,7 @@ _data = {
 
 [node name="UI" type="CanvasLayer"]
 process_mode = 3
-layer = -1
+layer = -2
 script = ExtResource("1_tb5ua")
 
 [node name="UIAnim" type="AnimationPlayer" parent="."]
@@ -96,6 +96,7 @@ theme = ExtResource("2_nkuyb")
 layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="."]
+z_index = -2
 offset_right = 40.0
 offset_bottom = 40.0
 scale = Vector2(3, 4.5)

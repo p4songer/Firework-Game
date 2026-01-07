@@ -8,3 +8,5 @@ signal star_finished_emitting
 signal launch_firework
 @warning_ignore("unused_signal")
 signal request_ingredient(requestor: Node2D)
+@warning_ignore("unused_signal")
+signal part_finished

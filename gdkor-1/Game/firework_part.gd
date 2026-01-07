@@ -16,6 +16,8 @@ func _ready() -> void:
 		var collision_polygon: CollisionPolygon2D = CollisionPolygon2D.new()
 		collision_polygon.polygon = poly
 		self.add_child(collision_polygon)
+	
+	EventBus.part_finished.connect(_on_part_finished)
 
 
 func _mouse_enter() -> void:
@@ -31,3 +33,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		if mouse_active:
 			EventBus.request_ingredient.emit(self)
 			print(ingredient.ing_name, " has effect ", ingredient.effect)
+
+
+func _on_part_finished() -> void:
+	Global.active_fireworks.append(ingredient)
+	ingredient = IngredientResource.new()

@@ -9,6 +9,8 @@ var drawer_out : bool = false
 var active_tween : Tween
 var popup : PopupMenu
 
+var counter : int = 0
+
 const OPTIONS = preload("uid://dcdf81eayjyro")
 
 signal pause_menu_changed
@@ -28,4 +30,13 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _on_button_pressed() -> void:
+	EventBus.part_finished.emit()
+	counter += 1
+	
+	if counter == 3:
+		$Button.pressed.disconnect(_on_button_pressed)
+		$Button.pressed.connect(_launch_button_pressed)
+
+
+func _launch_button_pressed() -> void:
 	EventBus.launch_firework.emit()
