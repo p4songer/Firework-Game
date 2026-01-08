@@ -1,16 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://bxnuykamvq5wl"]
+[gd_scene load_steps=8 format=3 uid="uid://bxnuykamvq5wl"]
 
-[ext_resource type="Texture2D" uid="uid://buopjoco8g5ha" path="res://Game/Assets/TempDiagram.jpg" id="1_cbmfh"]
+[ext_resource type="Curve" uid="uid://ccpya8254nelx" path="res://Game/Resources/BrocadeStar.tres" id="2_cbmfh"]
 [ext_resource type="Script" uid="uid://ctg8rng1inc62" path="res://Game/firework.gd" id="2_qed3c"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_nvj2q"]
-radius = 64.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_hu46r"]
-radius = 97.646904
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_rvcal"]
-size = Vector2(116.02052, 59.68814)
 
 [sub_resource type="Gradient" id="Gradient_nvj2q"]
 offsets = PackedFloat32Array(0, 0.5466667, 0.66)
@@ -25,38 +16,16 @@ fill_from = Vector2(0.5, 0.5)
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.72674423, 0.7415731), -1.0610263, -1.0610263, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[node name="Firework" type="Node2D"]
-script = ExtResource("2_qed3c")
+[sub_resource type="Gradient" id="Gradient_tike1"]
+offsets = PackedFloat32Array(0, 0.5466667, 0.66)
+colors = PackedColorArray(1, 1, 1, 1, 0.77, 0.77, 0.77, 1, 1, 1, 1, 0)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
-z_index = -1
-scale = Vector2(1.4480197, 1.4575758)
-texture = ExtResource("1_cbmfh")
-offset = Vector2(85, -20)
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qed3c"]
+gradient = SubResource("Gradient_tike1")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
 
-[node name="Break" type="Area2D" parent="."]
-scale = Vector2(1.4480197, 1.4575758)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Break"]
-shape = SubResource("CircleShape2D_nvj2q")
-
-[node name="Filler" type="Area2D" parent="."]
-scale = Vector2(1.4480197, 1.4575758)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Filler"]
-shape = SubResource("CircleShape2D_hu46r")
-
-[node name="Lifting" type="Area2D" parent="."]
-position = Vector2(0, 167.99998)
-scale = Vector2(1.4480197, 1.4575758)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Lifting"]
-position = Vector2(1.3811951, -6.5177)
-scale = Vector2(1, 0.9999999)
-shape = SubResource("RectangleShape2D_rvcal")
-
-[node name="Particles" type="CPUParticles2D" parent="."]
+[node name="Firework" type="CPUParticles2D"]
 scale = Vector2(1.4480197, 1.4575758)
 emitting = false
 amount = 500
@@ -72,29 +41,13 @@ damping_min = 100.0
 damping_max = 600.0
 angle_max = 360.0
 scale_amount_curve = SubResource("Curve_qed3c")
+script = ExtResource("2_qed3c")
 
-[node name="PCnt" type="PanelContainer" parent="."]
-visible = false
-custom_minimum_size = Vector2(150, 0)
-offset_right = 150.0
-offset_bottom = 40.0
-scale = Vector2(1.5, 1.5)
-
-[node name="TabContainer" type="TabContainer" parent="PCnt"]
-layout_mode = 2
-current_tab = 0
-
-[node name="Color" type="MenuButton" parent="PCnt/TabContainer"]
-z_index = 2
-layout_mode = 2
-metadata/_tab_index = 0
-
-[node name="Effect" type="MenuButton" parent="PCnt/TabContainer"]
-visible = false
-z_index = 2
-layout_mode = 2
-metadata/_tab_index = 1
-
-[connection signal="tab_clicked" from="PCnt/TabContainer" to="." method="_on_tab_container_tab_clicked"]
-[connection signal="about_to_popup" from="PCnt/TabContainer/Color" to="Sprite2D" method="_on_menu_button_about_to_popup"]
-[connection signal="about_to_popup" from="PCnt/TabContainer/Effect" to="Sprite2D" method="_on_menu_button_about_to_popup"]
+[node name="Trail" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 150
+texture = SubResource("GradientTexture2D_qed3c")
+lifetime = 0.75
+gravity = Vector2(0, 0)
+scale_amount_max = 1.5
+scale_amount_curve = ExtResource("2_cbmfh")

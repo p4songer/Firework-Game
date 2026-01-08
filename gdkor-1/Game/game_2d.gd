@@ -1,6 +1,10 @@
 extends Node2D
 
-@onready var firework: Node2D = $Firework
+@onready var mine: CPUParticles2D = $Mine
+@onready var fire_break: CPUParticles2D = $Break
+@onready var effect: CPUParticles2D = $Effect
+
+@export var destination = Vector2.UP * 5000
 
 var is_crackle : bool = false
 var active_color : Color
@@ -8,6 +12,8 @@ var active_color : Color
 const STAR = preload("uid://c6fgnywnyo63w")
 
 """
+DUPLICATE COLORS ARE DIFFERENT SPRITES.
+
 LIFTING CHARGE:
 Any Effect or Color adds mine (cannot have hummer)
 Adding phthalate will make whistle
@@ -42,26 +48,40 @@ func _ready() -> void:
 
 
 func launch_firework() -> void:
-	var new_fire = STAR.instantiate()
-	new_fire.global_position = firework.global_position
-	new_fire.can_emit_signal = true
-	self.add_child(new_fire)
-	$Camera2D.target = new_fire
-	new_fire.apply_central_impulse(Vector2.UP * 3500)
-	new_fire.modulate = firework.break_data.main_color
-	#firework.toggle_sprite()
+	#var new_fire = STAR.instantiate()
+	#new_fire.global_position = firework.global_position
+	#new_fire.can_emit_signal = true
+	#self.add_child(new_fire)
+	#new_fire.apply_central_impulse(Vector2.UP * 3500)
+	$LaunchTimer.start()
+	var ingredient = Global.active_fireworks.pop_front()
+	mine.display(ingredient)
 	
-	firework.display(Global.active_fireworks.pop_front())
+	var tween = create_tween()
+	tween.tween_property(fire_break, "global_position", destination, 2.0)
+	tween.finished.connect(_on_star_finished)
+	effect.global_position = destination
+	fire_break.modulate = ingredient.ing_color #Global.active_fireworks[0].ing_color
 
 
 func _on_star_finished() -> void:
 	# stop moving camera
-	$Camera2D.target = null
-	
-	firework.global_position = $Camera2D.global_position
-	#firework.self_modulate = active_color
-	#firework.display(Global.a)
-	#await firework.finished
+	#$Camera2D.target = null
 	#
-	#$Camera2D.target = $Launcher
-	firework.display(Global.active_fireworks.pop_front())
+	#firework.global_position = $Camera2D.global_position
+	fire_break.display(Global.active_fireworks.pop_front())
+	$DelayTimer.start()
+	$Camera2D.target = effect
+
+
+func _on_delay_timer_timeout() -> void:
+	var rand_x = randf_range(fire_break.global_position.x - 100, fire_break.global_position.x + 100)
+	var rand_y = randf_range(fire_break.global_position.y - 250, fire_break.global_position.y + 250)
+	effect.global_position = Vector2(rand_x, rand_y)
+	effect.display(Global.active_fireworks.pop_front())
+	
+	#$Camera2D.target = firework
+
+
+func _on_launch_timer_timeout() -> void:
+	$Camera2D.target = fire_break
