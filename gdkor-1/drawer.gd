@@ -24,31 +24,38 @@ var fx_dict = {
 	BREAK_PATTERN.BROCADE: "brocade",
 	BREAK_PATTERN.PALM: "palm"
 }
-# TODO make fish effect
-var FX_METHODS : Dictionary = {
-	BREAK_PATTERN.FLOWER: _flower,
-	BREAK_PATTERN.CRACKLE: _crackle,
-	BREAK_PATTERN.BROCADE: _brocade,
-	BREAK_PATTERN.PALM: _palm,
-}
+
+const CHEM_BOX = preload("uid://dfo8q7vyrt5g0")
+
+## TODO make fish effect
+#var FX_METHODS : Dictionary = {
+	#BREAK_PATTERN.FLOWER: _flower,
+	#BREAK_PATTERN.CRACKLE: _crackle,
+	#BREAK_PATTERN.BROCADE: _brocade,
+	#BREAK_PATTERN.PALM: _palm,
+#}
+#
+#func _process(delta: float) -> void:
+	#self.offset = color_drawer_offset
 
 func _ready() -> void:
 	EventBus.request_ingredient.connect(_on_request_ingredient)
 	
-	# populate first drawer
+	# populate color drawer
 	for idx in Global.FIRE_RESOURCES.size():
-		var new_button = Button.new()
+		var new_button = CHEM_BOX.instantiate()
 		var ing_res = Global.FIRE_RESOURCES[idx]
-		new_button.icon = ing_res.ing_sprite
-		new_button.text = ing_res.ing_name
-		new_button.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		new_button.vertical_icon_alignment = VERTICAL_ALIGNMENT_BOTTOM
+		new_button.data = ing_res
+		#new_button.icon = ing_res.ing_sprite
+		#new_button.text = ing_res.ing_name
+		#new_button.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		#new_button.vertical_icon_alignment = VERTICAL_ALIGNMENT_BOTTOM
 		$Drawer/GridContainer.add_child(new_button)
 	
 		item_indexes[idx] = ing_res
 		new_button.pressed.connect(_on_ingredient_pressed.bind(idx))
 	
-	# populate second drawer
+	# populate effects drawer
 	for fx in fx_dict.keys():
 		var new_button = Button.new()
 		var ing_res = Global.EFFECT_RESOURCES[fx]
@@ -71,7 +78,7 @@ func _on_color_button_pressed() -> void:
 	color_tween.set_trans(Tween.TRANS_BACK)
 	var final = color_drawer_offset if color_drawer_out else Vector2(
 		#halve it because our scale is 0.5
-		color_drawer_offset.x - ($Drawer.size.x / 2), color_drawer_offset.y
+		color_drawer_offset.x - ($Drawer.size.x / 2.75), color_drawer_offset.y
 		)
 	color_tween.tween_property(self, "offset", final, 0.5)
 	
@@ -107,16 +114,16 @@ func _on_request_ingredient(requestor: Node2D) -> void:
 		#requestor.ingredient.ing_color = ing_in_hand.ing_color
 		ing_in_hand = null
 	requestor.ingredient.effect = fx_in_hand
-
-
-func _flower():
-	pass
-
-func _crackle():
-	pass
-
-func _brocade():
-	pass
-
-func _palm():
-	pass
+#
+#
+#func _flower():
+	#pass
+#
+#func _crackle():
+	#pass
+#
+#func _brocade():
+	#pass
+#
+#func _palm():
+	#pass

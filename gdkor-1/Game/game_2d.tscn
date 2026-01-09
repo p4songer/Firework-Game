@@ -14,8 +14,8 @@ script = ExtResource("1_ipvn0")
 [node name="UI" parent="." instance=ExtResource("2_lbxe4")]
 
 [node name="Drawer" parent="." instance=ExtResource("8_3re1x")]
-color_drawer_offset = Vector2(950, 0)
-fx_drawer_offset = Vector2(950, 275)
+color_drawer_offset = Vector2(890, 0)
+fx_drawer_offset = Vector2(890, 275)
 
 [node name="Mine" parent="." instance=ExtResource("3_xji1t")]
 position = Vector2(0, 540)
@@ -23,7 +23,6 @@ is_mine = true
 
 [node name="Break" parent="." instance=ExtResource("3_xji1t")]
 position = Vector2(0, 540)
-is_trail = true
 
 [node name="Effect" parent="." instance=ExtResource("3_xji1t")]
 position = Vector2(0, 540)

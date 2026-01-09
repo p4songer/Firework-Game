@@ -1,4 +1,6 @@
-[gd_resource type="Theme" load_steps=12 format=3 uid="uid://s8eqo3epuhi7"]
+[gd_resource type="Theme" load_steps=13 format=3 uid="uid://s8eqo3epuhi7"]
+
+[ext_resource type="FontFile" uid="uid://dnu5583ieb02x" path="res://Global/Permanent_Marker/PermanentMarker-Regular.ttf" id="1_3hdc6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3w4mj"]
 bg_color = Color(0, 0.26000005, 0.6, 1)
@@ -116,5 +118,7 @@ HSlider/icons/grabber_highlight = SubResource("GradientTexture2D_o5luq")
 HSlider/styles/grabber_area = SubResource("StyleBoxFlat_3itdm")
 HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_oyuok")
 HSlider/styles/slider = SubResource("StyleBoxFlat_pwukc")
-Label/font_sizes/font_size = 75
+Label/colors/font_color = Color(0, 0, 0, 1)
+Label/font_sizes/font_size = 21
+Label/fonts/font = ExtResource("1_3hdc6")
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_dpg1r")
