@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://pmisojk3kuhk"]
+[gd_scene load_steps=12 format=3 uid="uid://pmisojk3kuhk"]
 
 [ext_resource type="Script" uid="uid://c1yxvx2f70gy5" path="res://Global/Scenes/global.gd" id="1_n8fn5"]
 [ext_resource type="Shader" uid="uid://8ofnbwix6jjk" path="res://Global/Scenes/Transitions.gdshader" id="2_u0kcs"]
-[ext_resource type="AudioStream" uid="uid://d0mnmpirkl0vj" path="res://Global/Audio/CaffinatedStrings.mp3" id="3_u0kcs"]
+[ext_resource type="AudioStream" uid="uid://b8bnrt6ijc053" path="res://Global/Audio/FireworkMusic.mp3" id="3_avv5p"]
+[ext_resource type="AudioStream" uid="uid://2uojdnhfaiqk" path="res://Global/Audio/SelectSFX.mp3" id="4_y8e5j"]
 
 [sub_resource type="Animation" id="Animation_avv5p"]
 length = 0.001
@@ -160,6 +161,10 @@ mouse_filter = 2
 texture = SubResource("GradientTexture2D_u0kcs")
 
 [node name="GlobalMusic" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_u0kcs")
+stream = ExtResource("3_avv5p")
 autoplay = true
 bus = &"Music"
+
+[node name="GlobalSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_y8e5j")
+bus = &"SFX"

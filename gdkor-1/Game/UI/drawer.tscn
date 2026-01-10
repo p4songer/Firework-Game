@@ -1,12 +1,12 @@
 [gd_scene load_steps=3 format=3 uid="uid://46aqa6oxsn0e"]
 
-[ext_resource type="Script" uid="uid://b3s2lldxyj1fk" path="res://drawer.gd" id="1_oori1"]
-[ext_resource type="Texture2D" uid="uid://66lecqg7ljra" path="res://Game/Assets/BoxHandle.png" id="2_oori1"]
+[ext_resource type="Script" uid="uid://b3s2lldxyj1fk" path="res://Game/UI/drawer.gd" id="1_6vbnj"]
+[ext_resource type="Texture2D" uid="uid://66lecqg7ljra" path="res://Game/Assets/BoxHandle.png" id="2_6vhx2"]
 
 [node name="Drawer" type="CanvasLayer"]
 scale = Vector2(0.5, 0.5)
 transform = Transform2D(0.5, 0, 0, 0.5, 0, 0)
-script = ExtResource("1_oori1")
+script = ExtResource("1_6vbnj")
 
 [node name="Drawer" type="HBoxContainer" parent="."]
 custom_minimum_size = Vector2(548, 0)
@@ -17,7 +17,7 @@ alignment = 2
 
 [node name="TextureButton" type="TextureButton" parent="Drawer"]
 layout_mode = 2
-texture_normal = ExtResource("2_oori1")
+texture_normal = ExtResource("2_6vhx2")
 
 [node name="GridContainer" type="GridContainer" parent="Drawer"]
 layout_mode = 2
@@ -43,7 +43,7 @@ alignment = 2
 [node name="TextureButton" type="TextureButton" parent="Effects/Drawer"]
 layout_mode = 2
 size_flags_vertical = 8
-texture_normal = ExtResource("2_oori1")
+texture_normal = ExtResource("2_6vhx2")
 
 [node name="Grid" type="GridContainer" parent="Effects/Drawer"]
 layout_mode = 2

@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://dfo8q7vyrt5g0"]
 
 [ext_resource type="Texture2D" uid="uid://c1e55awbdmy2h" path="res://Game/Assets/ChemBox.png" id="1_2ihlu"]
-[ext_resource type="Script" uid="uid://uq44gjfskuxi" path="res://Game/chem_box.gd" id="1_ar6xj"]
+[ext_resource type="Script" uid="uid://uq44gjfskuxi" path="res://Game/UI/chem_box.gd" id="1_ar6xj"]
 [ext_resource type="Theme" uid="uid://s8eqo3epuhi7" path="res://Global/MainTheme.tres" id="2_ar6xj"]
 [ext_resource type="Texture2D" uid="uid://c4o26idv257oq" path="res://Game/Assets/Chem.png" id="3_m12b8"]
 [ext_resource type="Texture2D" uid="uid://c5uvgy5r4c0s3" path="res://Game/Assets/ChemHover.png" id="4_7l6lw"]

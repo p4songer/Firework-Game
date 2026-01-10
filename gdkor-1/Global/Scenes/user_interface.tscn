@@ -104,10 +104,20 @@ pivot_offset = Vector2(0, 1024)
 mouse_filter = 2
 texture = ExtResource("4_uksao")
 
-[node name="Button" type="Button" parent="."]
-offset_right = 8.0
-offset_bottom = 8.0
+[node name="VBox" type="VBoxContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Button" type="Button" parent="VBox"]
+layout_mode = 2
 theme_override_font_sizes/font_size = 50
 text = "Launch!"
 
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[node name="CheckBox" type="CheckBox" parent="VBox"]
+layout_mode = 2
+theme_override_constants/h_separation = 15
+theme_override_font_sizes/font_size = 40
+text = "Whistle"
+
+[connection signal="pressed" from="VBox/Button" to="." method="_on_button_pressed"]
+[connection signal="toggled" from="VBox/CheckBox" to="." method="_on_check_box_toggled"]

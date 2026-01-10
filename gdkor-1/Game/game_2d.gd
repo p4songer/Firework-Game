@@ -9,6 +9,11 @@ extends Node2D
 var is_crackle : bool = false
 var active_color : Color
 
+var whistle_arr : Array = [preload("uid://dd52q34uq2f1"), preload("uid://fb5jjrpt00tk")]
+var lift_arr : Array = [
+	preload("uid://dcc1xeh8vjkj0"), preload("uid://bg2rgv8001u0n")
+]
+
 const STAR = preload("uid://c6fgnywnyo63w")
 
 """
@@ -48,20 +53,26 @@ func _ready() -> void:
 
 
 func launch_firework() -> void:
-	#var new_fire = STAR.instantiate()
-	#new_fire.global_position = firework.global_position
-	#new_fire.can_emit_signal = true
-	#self.add_child(new_fire)
-	#new_fire.apply_central_impulse(Vector2.UP * 3500)
 	$LaunchTimer.start()
 	var ingredient = Global.active_fireworks.pop_front()
 	mine.display(ingredient)
 	
 	var tween = create_tween()
-	tween.tween_property(fire_break, "global_position", destination, 2.0)
+	tween.tween_property(fire_break, "global_position", destination, 1.35)
 	tween.finished.connect(_on_star_finished)
 	effect.global_position = destination
-	fire_break.modulate = ingredient.ing_color #Global.active_fireworks[0].ing_color
+	
+	fire_break.modulate = ingredient.ing_color 
+	fire_break.is_trail = true
+	
+	if $UI.is_whistle:
+		whistle_arr.shuffle()
+		$Whistle.stream = whistle_arr[0]
+		$Whistle.play()
+	else:
+		lift_arr.shuffle()
+		$Whistle.stream = lift_arr[0]
+		$Whistle.play()
 
 
 func _on_star_finished() -> void:

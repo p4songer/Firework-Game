@@ -28,15 +28,6 @@ var fx_dict = {
 const CHEM_BOX = preload("uid://dfo8q7vyrt5g0")
 
 ## TODO make fish effect
-#var FX_METHODS : Dictionary = {
-	#BREAK_PATTERN.FLOWER: _flower,
-	#BREAK_PATTERN.CRACKLE: _crackle,
-	#BREAK_PATTERN.BROCADE: _brocade,
-	#BREAK_PATTERN.PALM: _palm,
-#}
-#
-#func _process(delta: float) -> void:
-	#self.offset = color_drawer_offset
 
 func _ready() -> void:
 	EventBus.request_ingredient.connect(_on_request_ingredient)
@@ -46,10 +37,6 @@ func _ready() -> void:
 		var new_button = CHEM_BOX.instantiate()
 		var ing_res = Global.FIRE_RESOURCES[idx]
 		new_button.data = ing_res
-		#new_button.icon = ing_res.ing_sprite
-		#new_button.text = ing_res.ing_name
-		#new_button.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		#new_button.vertical_icon_alignment = VERTICAL_ALIGNMENT_BOTTOM
 		$Drawer/GridContainer.add_child(new_button)
 	
 		item_indexes[idx] = ing_res
@@ -72,6 +59,7 @@ func _ready() -> void:
 
 
 func _on_color_button_pressed() -> void:
+	Global.play_sfx()
 	if color_tween: color_tween.kill()
 	color_tween = create_tween()
 	color_tween.set_ease(Tween.EASE_IN_OUT)
@@ -86,6 +74,7 @@ func _on_color_button_pressed() -> void:
 
 
 func _on_effect_button_pressed() -> void:
+	Global.play_sfx()
 	if fx_tween: fx_tween.kill()
 	fx_tween = create_tween()
 	fx_tween.set_ease(Tween.EASE_IN_OUT)
@@ -101,10 +90,16 @@ func _on_effect_button_pressed() -> void:
 
 func _on_ingredient_pressed(index : int) -> void:
 	ing_in_hand = item_indexes[index]
+	_on_color_button_pressed()
+	if not fx_drawer_out:
+		_on_effect_button_pressed()
 
 
 func _on_effect_pressed(index : int) -> void:
 	fx_in_hand = index
+	_on_effect_button_pressed()
+	if not color_drawer_out:
+		_on_color_button_pressed()
 
 
 func _on_request_ingredient(requestor: Node2D) -> void:
@@ -114,16 +109,3 @@ func _on_request_ingredient(requestor: Node2D) -> void:
 		#requestor.ingredient.ing_color = ing_in_hand.ing_color
 		ing_in_hand = null
 	requestor.ingredient.effect = fx_in_hand
-#
-#
-#func _flower():
-	#pass
-#
-#func _crackle():
-	#pass
-#
-#func _brocade():
-	#pass
-#
-#func _palm():
-	#pass

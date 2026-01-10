@@ -51,3 +51,6 @@ lifetime = 0.75
 gravity = Vector2(0, 0)
 scale_amount_max = 1.5
 scale_amount_curve = ExtResource("2_cbmfh")
+
+[node name="SFX" type="AudioStreamPlayer" parent="."]
+bus = &"SFX"

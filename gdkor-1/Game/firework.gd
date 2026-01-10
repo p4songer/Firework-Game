@@ -10,7 +10,11 @@ const STAR = preload("uid://c6fgnywnyo63w")
 var last_area_clicked : Area2D
 var active_area : Area2D
 
-@export var is_trail : bool = false
+@export var is_trail : bool = false:
+	set(new):
+		is_trail = new
+		if is_trail: 
+			trail.emitting = true
 @export var is_mine : bool = false
 
 @onready var trail: CPUParticles2D = $Trail
@@ -23,10 +27,10 @@ var F_METHODS : Dictionary = {
 	BREAK_PATTERN.PALM: _palm,
 }
 
-func _ready() -> void:
-	if is_trail:
-		trail.emitting = true
-
+var exp_array : Array = [
+	preload("uid://cjag0mx15yque"), preload("uid://d2e2mc78eobpi"), preload("uid://bhn67hnt0je65"),
+	preload("uid://bw2y274anh3we"), preload("uid://miqxy0fsxpdh")
+]
 
 func display(data : IngredientResource) -> void:
 	(F_METHODS[data.effect]).call(data.ing_color)
@@ -58,6 +62,8 @@ func _palm(color_ref: Color) -> void:
 		var direction = Vector2(x_dir, y_dir).rotated(self.rotation).normalized() * 1000
 		new_star.apply_central_impulse(direction)
 		new_star.modulate = color_ref
+		
+		_play_random()
 
 
 func _crackle(color_ref : Color) -> void:
@@ -66,3 +72,12 @@ func _crackle(color_ref : Color) -> void:
 		self.lifetime_randomness = 1
 		self.self_modulate = color_ref
 		self.emitting = true
+		
+		$SFX.stream = preload("uid://chtil3nern5rp")
+		$SFX.play()
+
+
+func _play_random() -> void:
+	exp_array.shuffle()
+	$SFX.stream = exp_array[0]
+	$SFX.play()

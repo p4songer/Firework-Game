@@ -25,14 +25,17 @@ func _gui_input(event: InputEvent) -> void:
 
 
 func _on_start_game_pressed() -> void:
+	Global.play_sfx()
 	Global.start_transition(GAME_2D, Global.TRANSITIONS.DEFAULT)
 
 
 func _on_options_pressed() -> void:
+	Global.play_sfx()
 	Global.start_transition(OPTIONS_SCENE, Global.TRANSITIONS.DEFAULT)
 
 
 func _on_quit_pressed() -> void:
+	Global.play_sfx()
 	get_tree().quit()
 
 
