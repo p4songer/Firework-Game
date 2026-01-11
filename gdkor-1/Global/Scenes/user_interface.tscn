@@ -96,6 +96,7 @@ theme = ExtResource("2_nkuyb")
 layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="."]
+visible = false
 z_index = -2
 offset_right = 40.0
 offset_bottom = 40.0
@@ -111,13 +112,13 @@ offset_bottom = 40.0
 [node name="Button" type="Button" parent="VBox"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
-text = "Launch!"
+text = "Next Part"
 
 [node name="CheckBox" type="CheckBox" parent="VBox"]
 layout_mode = 2
 theme_override_constants/h_separation = 15
 theme_override_font_sizes/font_size = 40
-text = "Whistle"
+text = "Pthalate Ingredients"
 
 [connection signal="pressed" from="VBox/Button" to="." method="_on_button_pressed"]
 [connection signal="toggled" from="VBox/CheckBox" to="." method="_on_check_box_toggled"]

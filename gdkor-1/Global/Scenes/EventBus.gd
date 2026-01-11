@@ -10,3 +10,9 @@ signal launch_firework
 signal request_ingredient(requestor: Node2D)
 @warning_ignore("unused_signal")
 signal part_finished
+@warning_ignore("unused_signal")
+signal color_button_pressed
+@warning_ignore("unused_signal")
+signal effect_button_pressed
+@warning_ignore("unused_signal")
+signal prepare_launch

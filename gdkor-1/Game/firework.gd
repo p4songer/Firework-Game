@@ -38,22 +38,30 @@ func display(data : IngredientResource) -> void:
 
 
 func _flower(color_ref : Color) -> void:
+	_play_random()
+	if is_mine:
+		self.direction = Vector2(0, -1)
+		self.spread = 15.0
 	self.emitting = true
 	self.self_modulate = color_ref
 
 
 func _brocade(color_ref: Color) -> void:
-	for i in 30:
+	_play_random()
+	var num = 10 if is_mine else 30
+	self.rotation_degrees = -5 
+	for i in num:
 		var new_star : RigidBody2D = STAR.instantiate()
 		self.add_child(new_star)
 		new_star.apply_central_impulse(Vector2.UP.rotated(self.rotation) * 1000)
 		new_star.modulate = color_ref
-		self.rotate(randf_range(0.75, 2.5))
+		self.rotate(randf_range(0.5, 3.0))
 
 
 func _palm(color_ref: Color) -> void:
-	self.rotation_degrees = randf_range(-60, 60)
-	#TODO Make number variable
+	_play_random()
+	self.rotation_degrees = randf_range(-60, 60) if not is_mine else 0.0
+
 	for i in 10:
 		var new_star : RigidBody2D = STAR.instantiate()
 		self.add_child(new_star)
@@ -62,19 +70,20 @@ func _palm(color_ref: Color) -> void:
 		var direction = Vector2(x_dir, y_dir).rotated(self.rotation).normalized() * 1000
 		new_star.apply_central_impulse(direction)
 		new_star.modulate = color_ref
-		
-		_play_random()
 
 
 func _crackle(color_ref : Color) -> void:
-		self.color_ramp = CRACKLE_EFFECT
-		self.lifetime = 2.0
-		self.lifetime_randomness = 1
-		self.self_modulate = color_ref
-		self.emitting = true
-		
-		$SFX.stream = preload("uid://chtil3nern5rp")
-		$SFX.play()
+	if is_mine:
+		self.direction = Vector2(0, -1)
+		self.spread = 15.0
+	self.color_ramp = CRACKLE_EFFECT
+	self.lifetime = 2.0
+	self.lifetime_randomness = 1
+	self.self_modulate = color_ref
+	self.emitting = true
+	
+	$SFX.stream = preload("uid://chtil3nern5rp")
+	$SFX.play()
 
 
 func _play_random() -> void:

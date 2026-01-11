@@ -16,6 +16,9 @@ const OPTIONS = preload("uid://dcdf81eayjyro")
 
 signal pause_menu_changed
 
+func _ready() -> void:
+	EventBus.launch_firework.connect(_on_prepare_launch)
+
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause"):
 		if not pausing:
@@ -38,6 +41,9 @@ func _on_button_pressed() -> void:
 	if counter == 3:
 		$VBox/Button.pressed.disconnect(_on_button_pressed)
 		$VBox/Button.pressed.connect(_launch_button_pressed)
+		$VBox/Button.text = "Launch"
+		
+		EventBus.prepare_launch.emit()
 
 
 func _launch_button_pressed() -> void:
@@ -47,3 +53,14 @@ func _launch_button_pressed() -> void:
 
 func _on_check_box_toggled(toggled_on: bool) -> void:
 	is_whistle = toggled_on
+
+
+func _on_prepare_launch() -> void:
+	counter = 0
+	$VBox/Button.pressed.disconnect(_launch_button_pressed)
+	$VBox/Button.pressed.connect(_reset_button_pressed)
+	$VBox/Button.text = "Restart"
+
+
+func _reset_button_pressed() -> void:
+	get_tree().reload_current_scene()

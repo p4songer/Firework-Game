@@ -53,4 +53,5 @@ scale_amount_max = 1.5
 scale_amount_curve = ExtResource("2_cbmfh")
 
 [node name="SFX" type="AudioStreamPlayer" parent="."]
+max_polyphony = 3
 bus = &"SFX"

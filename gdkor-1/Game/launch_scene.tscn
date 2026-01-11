@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dmlsjsr8rfh1"]
+
+[ext_resource type="Script" uid="uid://cdsg82fsm0pdy" path="res://launch_scene.gd" id="1_diak1"]
+[ext_resource type="Texture2D" uid="uid://be6ekjt8xxlgo" path="res://Game/Assets/SkyBackground.png" id="2_3pum5"]
+[ext_resource type="Texture2D" uid="uid://bi56x6d7p0e7k" path="res://Game/Assets/LiftSprite.png" id="3_6v7us"]
+
+[node name="LaunchScene" type="Node2D"]
+script = ExtResource("1_diak1")
+
+[node name="Background" type="Sprite2D" parent="."]
+z_index = -1
+texture = ExtResource("2_3pum5")
+
+[node name="Tube" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(0, 256)
+rotation = 1.5707964
+texture = ExtResource("3_6v7us")
+offset = Vector2(128, 0)

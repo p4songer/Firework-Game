@@ -17,10 +17,14 @@ alignment = 2
 
 [node name="TextureButton" type="TextureButton" parent="Drawer"]
 layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
 texture_normal = ExtResource("2_6vhx2")
 
 [node name="GridContainer" type="GridContainer" parent="Drawer"]
 layout_mode = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
 columns = 3
 
 [node name="Effects" type="CanvasLayer" parent="."]
@@ -47,6 +51,9 @@ texture_normal = ExtResource("2_6vhx2")
 
 [node name="Grid" type="GridContainer" parent="Effects/Drawer"]
 layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
 columns = 3
 
 [connection signal="pressed" from="Drawer/TextureButton" to="." method="_on_color_button_pressed"]

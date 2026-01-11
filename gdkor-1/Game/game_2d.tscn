@@ -1,12 +1,15 @@
-[gd_scene load_steps=8 format=3 uid="uid://dydw0o4rwye4u"]
+[gd_scene load_steps=11 format=3 uid="uid://dydw0o4rwye4u"]
 
 [ext_resource type="Script" uid="uid://cj4hbwmb0tjvx" path="res://Game/game_2d.gd" id="1_ipvn0"]
 [ext_resource type="PackedScene" uid="uid://cbjctmxdlnhod" path="res://Global/Scenes/user_interface.tscn" id="2_lbxe4"]
 [ext_resource type="PackedScene" uid="uid://bxnuykamvq5wl" path="res://Game/firework.tscn" id="3_xji1t"]
-[ext_resource type="Script" uid="uid://b46oym1crodrq" path="res://Game/firework_part.gd" id="6_3re1x"]
 [ext_resource type="Script" uid="uid://c004wbgk1e1ir" path="res://Game/camera_2d.gd" id="6_51wm4"]
+[ext_resource type="PackedScene" uid="uid://ba436vkby6t28" path="res://Game/firework_part.tscn" id="6_xji1t"]
 [ext_resource type="Texture2D" uid="uid://bi56x6d7p0e7k" path="res://Game/Assets/LiftSprite.png" id="7_b5134"]
 [ext_resource type="PackedScene" uid="uid://46aqa6oxsn0e" path="res://Game/UI/drawer.tscn" id="8_3re1x"]
+[ext_resource type="Texture2D" uid="uid://5dt85ktdw43q" path="res://Game/Assets/BallSprite.png" id="8_b5134"]
+[ext_resource type="Texture2D" uid="uid://c4o26idv257oq" path="res://Game/Assets/Chem.png" id="9_u35he"]
+[ext_resource type="PackedScene" uid="uid://dmlsjsr8rfh1" path="res://Game/launch_scene.tscn" id="10_u35he"]
 
 [node name="Game2D" type="Node2D"]
 script = ExtResource("1_ipvn0")
@@ -32,15 +35,6 @@ zoom = Vector2(0.4, 0.4)
 position_smoothing_enabled = true
 script = ExtResource("6_51wm4")
 
-[node name="FireworkPart" type="Area2D" parent="."]
-position = Vector2(-512, 0)
-script = ExtResource("6_3re1x")
-part_texture = ExtResource("7_b5134")
-
-[node name="Sprite2D" type="Sprite2D" parent="FireworkPart"]
-z_index = 1
-centered = false
-
 [node name="DelayTimer" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
@@ -51,6 +45,22 @@ one_shot = true
 
 [node name="Whistle" type="AudioStreamPlayer" parent="."]
 bus = &"SFX"
+
+[node name="Parts" type="Parallax2D" parent="."]
+
+[node name="Lift" parent="Parts" instance=ExtResource("6_xji1t")]
+texture = ExtResource("7_b5134")
+
+[node name="Break" parent="Parts" instance=ExtResource("6_xji1t")]
+position = Vector2(0, -1080)
+texture = ExtResource("8_b5134")
+
+[node name="Filler" parent="Parts" instance=ExtResource("6_xji1t")]
+position = Vector2(0, -2160)
+texture = ExtResource("9_u35he")
+
+[node name="LaunchScene" parent="Parts" instance=ExtResource("10_u35he")]
+position = Vector2(0, -3240)
 
 [connection signal="timeout" from="DelayTimer" to="." method="_on_delay_timer_timeout"]
 [connection signal="timeout" from="LaunchTimer" to="." method="_on_launch_timer_timeout"]

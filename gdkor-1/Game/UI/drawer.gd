@@ -31,6 +31,7 @@ const CHEM_BOX = preload("uid://dfo8q7vyrt5g0")
 
 func _ready() -> void:
 	EventBus.request_ingredient.connect(_on_request_ingredient)
+	EventBus.prepare_launch.connect(_on_prepare_launch)
 	
 	# populate color drawer
 	for idx in Global.FIRE_RESOURCES.size():
@@ -44,12 +45,10 @@ func _ready() -> void:
 	
 	# populate effects drawer
 	for fx in fx_dict.keys():
-		var new_button = Button.new()
+		var new_button = CHEM_BOX.instantiate()
 		var ing_res = Global.EFFECT_RESOURCES[fx]
-		new_button.icon = ing_res.ing_sprite
-		new_button.text = ing_res.ing_name
-		new_button.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		new_button.vertical_icon_alignment = VERTICAL_ALIGNMENT_BOTTOM
+		new_button.data = ing_res
+		new_button.is_effect = true
 		$Effects/Drawer/Grid.add_child(new_button)
 		
 		new_button.pressed.connect(_on_effect_pressed.bind(fx))
@@ -81,7 +80,7 @@ func _on_effect_button_pressed() -> void:
 	fx_tween.set_trans(Tween.TRANS_BACK)
 	var final = fx_drawer_offset if fx_drawer_out else Vector2(
 		#halve it because our scale is 0.5
-		fx_drawer_offset.x - ($Effects/Drawer.size.x / 2), fx_drawer_offset.y
+		fx_drawer_offset.x - ($Effects/Drawer.size.x / 2.75), fx_drawer_offset.y
 		)
 	fx_tween.tween_property($Effects, "offset", final, 0.5)
 	
@@ -90,6 +89,7 @@ func _on_effect_button_pressed() -> void:
 
 func _on_ingredient_pressed(index : int) -> void:
 	ing_in_hand = item_indexes[index]
+	EventBus.color_button_pressed.emit()
 	_on_color_button_pressed()
 	if not fx_drawer_out:
 		_on_effect_button_pressed()
@@ -97,6 +97,7 @@ func _on_ingredient_pressed(index : int) -> void:
 
 func _on_effect_pressed(index : int) -> void:
 	fx_in_hand = index
+	EventBus.effect_button_pressed.emit()
 	_on_effect_button_pressed()
 	if not color_drawer_out:
 		_on_color_button_pressed()
@@ -109,3 +110,8 @@ func _on_request_ingredient(requestor: Node2D) -> void:
 		#requestor.ingredient.ing_color = ing_in_hand.ing_color
 		ing_in_hand = null
 	requestor.ingredient.effect = fx_in_hand
+
+
+func _on_prepare_launch() -> void:
+	self.hide()
+	$Effects.hide()

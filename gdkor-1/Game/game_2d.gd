@@ -50,10 +50,12 @@ customize lift charge
 func _ready() -> void:
 	EventBus.launch_firework.connect(launch_firework)
 	EventBus.star_finished_emitting.connect(_on_star_finished)
+	EventBus.part_finished.connect(_on_part_finished)
 
 
 func launch_firework() -> void:
 	$LaunchTimer.start()
+	fire_break.global_position = $Parts/LaunchScene.get_launch_pos()
 	var ingredient = Global.active_fireworks.pop_front()
 	mine.display(ingredient)
 	
@@ -86,8 +88,8 @@ func _on_star_finished() -> void:
 
 
 func _on_delay_timer_timeout() -> void:
-	var rand_x = randf_range(fire_break.global_position.x - 100, fire_break.global_position.x + 100)
-	var rand_y = randf_range(fire_break.global_position.y - 250, fire_break.global_position.y + 250)
+	var rand_x = randf_range(fire_break.global_position.x - 500, fire_break.global_position.x + 500)
+	var rand_y = randf_range(fire_break.global_position.y - 750, fire_break.global_position.y + 750)
 	effect.global_position = Vector2(rand_x, rand_y)
 	effect.display(Global.active_fireworks.pop_front())
 	
@@ -96,3 +98,10 @@ func _on_delay_timer_timeout() -> void:
 
 func _on_launch_timer_timeout() -> void:
 	$Camera2D.target = fire_break
+
+
+func _on_part_finished() -> void:
+	#$Parts.scroll_offset.y += 1080
+	var tween = create_tween()
+	tween.set_trans(Tween.TRANS_SPRING)
+	tween.tween_property($Parts, "scroll_offset", Vector2(0, $Parts.scroll_offset.y + 1080), 0.5)
