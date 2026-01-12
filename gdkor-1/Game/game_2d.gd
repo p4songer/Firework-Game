@@ -13,8 +13,12 @@ var whistle_arr : Array = [preload("uid://dd52q34uq2f1"), preload("uid://fb5jjrp
 var lift_arr : Array = [
 	preload("uid://dcc1xeh8vjkj0"), preload("uid://bg2rgv8001u0n")
 ]
+var anim_arr : Array = ["lift", "break", "filler"]
+
+var item_tracker : int = 0
 
 const STAR = preload("uid://c6fgnywnyo63w")
+const LAUNCH_SCENE = preload("uid://dmlsjsr8rfh1")
 
 """
 DUPLICATE COLORS ARE DIFFERENT SPRITES.
@@ -101,7 +105,18 @@ func _on_launch_timer_timeout() -> void:
 
 
 func _on_part_finished() -> void:
-	#$Parts.scroll_offset.y += 1080
+	item_tracker += 1
+	$UI.button_toggle()
+	$WrapAnim.play(anim_arr.pop_front())
+	await $WrapAnim.animation_finished
+	
 	var tween = create_tween()
+	tween.finished.connect(_trans_tween_finished)
 	tween.set_trans(Tween.TRANS_SPRING)
 	tween.tween_property($Parts, "scroll_offset", Vector2(0, $Parts.scroll_offset.y + 1080), 0.5)
+
+
+func _trans_tween_finished() -> void:
+	if item_tracker == 3:
+		Global.start_transition(LAUNCH_SCENE, Global.TRANSITIONS.DEFAULT)
+	$UI.button_toggle()

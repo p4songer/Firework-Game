@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://dydw0o4rwye4u"]
+[gd_scene load_steps=16 format=3 uid="uid://dydw0o4rwye4u"]
 
 [ext_resource type="Script" uid="uid://cj4hbwmb0tjvx" path="res://Game/game_2d.gd" id="1_ipvn0"]
+[ext_resource type="Texture2D" uid="uid://c1wm1es7i8bop" path="res://Game/Assets/Table.png" id="2_7pf0l"]
 [ext_resource type="PackedScene" uid="uid://cbjctmxdlnhod" path="res://Global/Scenes/user_interface.tscn" id="2_lbxe4"]
 [ext_resource type="PackedScene" uid="uid://bxnuykamvq5wl" path="res://Game/firework.tscn" id="3_xji1t"]
 [ext_resource type="Script" uid="uid://c004wbgk1e1ir" path="res://Game/camera_2d.gd" id="6_51wm4"]
@@ -9,10 +10,112 @@
 [ext_resource type="PackedScene" uid="uid://46aqa6oxsn0e" path="res://Game/UI/drawer.tscn" id="8_3re1x"]
 [ext_resource type="Texture2D" uid="uid://5dt85ktdw43q" path="res://Game/Assets/BallSprite.png" id="8_b5134"]
 [ext_resource type="Texture2D" uid="uid://c4o26idv257oq" path="res://Game/Assets/Chem.png" id="9_u35he"]
-[ext_resource type="PackedScene" uid="uid://dmlsjsr8rfh1" path="res://Game/launch_scene.tscn" id="10_u35he"]
+
+[sub_resource type="Animation" id="Animation_u35he"]
+resource_name = "lift"
+length = 0.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Parts/Lift:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.5, 1.5), Vector2(0.75, 0.75)]
+}
+
+[sub_resource type="Animation" id="Animation_7pf0l"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Parts/Lift:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Parts/Break:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Parts/Filler:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_rjk74"]
+resource_name = "break"
+length = 0.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Parts/Break:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.5, 1.5), Vector2(0.7, 0.7)]
+}
+
+[sub_resource type="Animation" id="Animation_rm2y8"]
+resource_name = "filler"
+length = 0.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Parts/Filler:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.5, 1.5), Vector2(0.7, 0.7)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_m71kv"]
+_data = {
+&"RESET": SubResource("Animation_7pf0l"),
+&"break": SubResource("Animation_rjk74"),
+&"filler": SubResource("Animation_rm2y8"),
+&"lift": SubResource("Animation_u35he")
+}
 
 [node name="Game2D" type="Node2D"]
 script = ExtResource("1_ipvn0")
+
+[node name="TableBackground" type="Sprite2D" parent="."]
+z_index = -2
+scale = Vector2(1.1, 1.1)
+texture = ExtResource("2_7pf0l")
 
 [node name="UI" parent="." instance=ExtResource("2_lbxe4")]
 
@@ -59,8 +162,10 @@ texture = ExtResource("8_b5134")
 position = Vector2(0, -2160)
 texture = ExtResource("9_u35he")
 
-[node name="LaunchScene" parent="Parts" instance=ExtResource("10_u35he")]
-position = Vector2(0, -3240)
+[node name="WrapAnim" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_m71kv")
+}
 
 [connection signal="timeout" from="DelayTimer" to="." method="_on_delay_timer_timeout"]
 [connection signal="timeout" from="LaunchTimer" to="." method="_on_launch_timer_timeout"]

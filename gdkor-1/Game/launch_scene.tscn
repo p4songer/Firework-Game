@@ -1,19 +1,56 @@
-[gd_scene load_steps=4 format=3 uid="uid://dmlsjsr8rfh1"]
+[gd_scene load_steps=7 format=3 uid="uid://dmlsjsr8rfh1"]
 
 [ext_resource type="Script" uid="uid://cdsg82fsm0pdy" path="res://launch_scene.gd" id="1_diak1"]
 [ext_resource type="Texture2D" uid="uid://be6ekjt8xxlgo" path="res://Game/Assets/SkyBackground.png" id="2_3pum5"]
 [ext_resource type="Texture2D" uid="uid://bi56x6d7p0e7k" path="res://Game/Assets/LiftSprite.png" id="3_6v7us"]
 
+[sub_resource type="Gradient" id="Gradient_3pum5"]
+interpolation_mode = 1
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6v7us"]
+gradient = SubResource("Gradient_3pum5")
+width = 16
+height = 16
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.8271028, 0.8271028)
+
+[sub_resource type="Gradient" id="Gradient_ejv5c"]
+offsets = PackedFloat32Array(0, 0.32876712, 0.7328767, 1)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
 [node name="LaunchScene" type="Node2D"]
 script = ExtResource("1_diak1")
 
 [node name="Background" type="Sprite2D" parent="."]
-z_index = -1
+z_index = -2
+scale = Vector2(1.2, 1.2)
 texture = ExtResource("2_3pum5")
 
 [node name="Tube" type="Sprite2D" parent="."]
 z_index = 2
-position = Vector2(0, 256)
+position = Vector2(0, 258)
 rotation = 1.5707964
 texture = ExtResource("3_6v7us")
 offset = Vector2(128, 0)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.5, 0.5)
+
+[node name="Stars" type="CPUParticles2D" parent="."]
+position = Vector2(0, -1310)
+amount = 50
+texture = SubResource("GradientTexture2D_6v7us")
+lifetime = 3.0
+randomness = 1.0
+fract_delta = false
+gravity = Vector2(0, 0)
+color_ramp = SubResource("Gradient_ejv5c")
+
+[node name="LaunchUI" type="CanvasLayer" parent="."]
+
+[node name="Button" type="Button" parent="LaunchUI"]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Return"

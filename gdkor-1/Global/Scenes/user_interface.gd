@@ -64,3 +64,7 @@ func _on_prepare_launch() -> void:
 
 func _reset_button_pressed() -> void:
 	get_tree().reload_current_scene()
+
+
+func button_toggle() -> void:
+	$VBox/Button.disabled = not $VBox/Button.disabled

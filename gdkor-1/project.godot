@@ -13,6 +13,7 @@ config_version=5
 config/name="GDKOR1"
 run/main_scene="uid://brvhnlnuddexr"
 config/features=PackedStringArray("4.5", "GL Compatibility")
+boot_splash/bg_color=Color(0, 0, 0, 1)
 config/icon="res://icon.svg"
 
 [audio]
@@ -23,6 +24,10 @@ buses/default_bus_layout="uid://bnbkp503g7fw8"
 
 Global="*res://Global/Scenes/Global.tscn"
 EventBus="*res://Global/Scenes/EventBus.gd"
+
+[display]
+
+window/stretch/mode="canvas_items"
 
 [editor_plugins]
 
@@ -41,3 +46,4 @@ pause={
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0, 0, 0, 1)

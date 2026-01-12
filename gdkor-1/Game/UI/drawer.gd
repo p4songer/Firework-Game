@@ -27,18 +27,23 @@ var fx_dict = {
 
 const CHEM_BOX = preload("uid://dfo8q7vyrt5g0")
 
+@onready var color_drawer: HBoxContainer = $ColorDrawer
+@onready var fx_drawer: HBoxContainer = $FxDrawer
+
 ## TODO make fish effect
 
 func _ready() -> void:
 	EventBus.request_ingredient.connect(_on_request_ingredient)
 	EventBus.prepare_launch.connect(_on_prepare_launch)
+	fx_drawer_offset.x = get_viewport().get_visible_rect().size.x
+	
 	
 	# populate color drawer
 	for idx in Global.FIRE_RESOURCES.size():
 		var new_button = CHEM_BOX.instantiate()
 		var ing_res = Global.FIRE_RESOURCES[idx]
 		new_button.data = ing_res
-		$Drawer/GridContainer.add_child(new_button)
+		$ColorDrawer/Grid.add_child(new_button)
 	
 		item_indexes[idx] = ing_res
 		new_button.pressed.connect(_on_ingredient_pressed.bind(idx))
@@ -49,13 +54,14 @@ func _ready() -> void:
 		var ing_res = Global.EFFECT_RESOURCES[fx]
 		new_button.data = ing_res
 		new_button.is_effect = true
-		$Effects/Drawer/Grid.add_child(new_button)
-		
+		$FxDrawer/Grid.add_child(new_button)
 		new_button.pressed.connect(_on_effect_pressed.bind(fx))
-	
-	self.offset = color_drawer_offset
-	$Effects.offset = fx_drawer_offset
 
+	color_drawer.position.x = $ColorDrawer/Grid.size.x + ($ColorDrawer/Grid.size.x / 3)
+	fx_drawer.position.x = $FxDrawer/Grid.size.x + ($FxDrawer/Grid.size.x / 3)
+	fx_drawer.position.y = 384
+	color_drawer_offset = color_drawer.position
+	fx_drawer_offset = fx_drawer.position
 
 func _on_color_button_pressed() -> void:
 	Global.play_sfx()
@@ -64,10 +70,9 @@ func _on_color_button_pressed() -> void:
 	color_tween.set_ease(Tween.EASE_IN_OUT)
 	color_tween.set_trans(Tween.TRANS_BACK)
 	var final = color_drawer_offset if color_drawer_out else Vector2(
-		#halve it because our scale is 0.5
-		color_drawer_offset.x - ($Drawer.size.x / 2.75), color_drawer_offset.y
+		color_drawer.size.x / 1.65, color_drawer_offset.y
 		)
-	color_tween.tween_property(self, "offset", final, 0.5)
+	color_tween.tween_property($ColorDrawer, "position", final, 0.5)
 	
 	color_drawer_out = not color_drawer_out
 
@@ -79,10 +84,9 @@ func _on_effect_button_pressed() -> void:
 	fx_tween.set_ease(Tween.EASE_IN_OUT)
 	fx_tween.set_trans(Tween.TRANS_BACK)
 	var final = fx_drawer_offset if fx_drawer_out else Vector2(
-		#halve it because our scale is 0.5
-		fx_drawer_offset.x - ($Effects/Drawer.size.x / 2.75), fx_drawer_offset.y
+		fx_drawer.size.x / 1.65, fx_drawer_offset.y
 		)
-	fx_tween.tween_property($Effects, "offset", final, 0.5)
+	fx_tween.tween_property(fx_drawer, "position", final, 0.5)
 	
 	fx_drawer_out = not fx_drawer_out
 
@@ -114,4 +118,3 @@ func _on_request_ingredient(requestor: Node2D) -> void:
 
 func _on_prepare_launch() -> void:
 	self.hide()
-	$Effects.hide()
