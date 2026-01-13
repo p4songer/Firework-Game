@@ -52,6 +52,7 @@ func _ready() -> void:
 
 
 func _on_part_finished() -> void:
+	print("Path is: ", get_path(), " Self is: ", self)
 	item_tracker += 1
 	$UI.button_toggle()
 	$WrapAnim.play(array_copy.pop_front())

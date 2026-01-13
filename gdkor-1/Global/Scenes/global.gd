@@ -28,7 +28,10 @@ var _transition_dict : Dictionary = {
 
 @onready var anims: AnimationPlayer = $Transitions
 var _next_scene : Node
-var _previous_scene : Node
+var _previous_scene : Node:
+	set(new):
+		_previous_scene = new
+		print("Set previous to ", new)
 
 func get_end_anim(prefix: String) -> void:
 	_change_scene()
@@ -45,6 +48,7 @@ func start_transition(next_scene: PackedScene, transition: TRANSITIONS) -> void:
 func _change_scene() -> void:
 	var tree = get_tree()
 	tree.get_root().add_child(_next_scene)
-	tree.get_root().remove_child(_previous_scene)
+	_previous_scene.queue_free()
+	#tree.get_root().remove_child(_previous_scene)
 	tree.set_current_scene(_next_scene)
 #endregion
