@@ -35,6 +35,7 @@ var exp_array : Array = [
 func display(data : IngredientResource) -> void:
 	(F_METHODS[data.effect]).call(data.ing_color)
 	if is_trail : trail.emitting = false
+	EventBus.firework_finished.emit()
 
 
 func _flower(color_ref : Color) -> void:

@@ -16,3 +16,5 @@ signal color_button_pressed
 signal effect_button_pressed
 @warning_ignore("unused_signal")
 signal prepare_launch
+@warning_ignore("unused_signal")
+signal firework_finished

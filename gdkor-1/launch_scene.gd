@@ -1,59 +1,68 @@
 extends Node2D
 
-var fuse_lit : bool = false
+var fuse_lit : bool = false:
+	set(lit):
+		fuse_lit = lit
+		$FuseAnim.play("launch")
+		$Tube/Path2D/PathFollow2D/FuseParticles.emitting = true
+		var tween = create_tween()
+		tween.tween_property($Tube/Path2D/PathFollow2D, "progress_ratio", 1.0, 0.75)
+		await get_tree().create_timer(1.25).timeout
+		launch_firework()
 
 @onready var mine: CPUParticles2D = $FireworkStages/Mine
 @onready var fire_break: CPUParticles2D = $FireworkStages/Break
 @onready var effect: CPUParticles2D = $FireworkStages/Effect
 
+@onready var sfx: AudioStreamPlayer = $SFX
+
 @export var destination : Vector2
 
+
+var whistle_arr : Array = [preload("uid://dd52q34uq2f1"), preload("uid://fb5jjrpt00tk")]
+var lift_arr : Array = [
+	preload("uid://dcc1xeh8vjkj0"), preload("uid://bg2rgv8001u0n")
+]
+
+var game = load("uid://dydw0o4rwye4u")
+
 #FIXME Make this work
-#TODO maybe use a video recording for star animation?
 #TODO Make star effects available and work.
+#TODO Add the other particle effects.
 
 func _ready() -> void:
 	EventBus.launch_firework.connect(launch_firework)
 	EventBus.star_finished_emitting.connect(_on_star_finished)
-
-
-func _process(delta: float) -> void:
-	if fuse_lit:
-		$Tube/Path2D/PathFollow2D.progress_ratio += 0.75 * delta
-		if is_equal_approx(1.0, $Tube/Path2D/PathFollow2D.progress_ratio):
-			await get_tree().create_timer(1.0).timeout
-			$Tube/Path2D/PathFollow2D/FuseParticles.emitting = false
-			fuse_lit = false
-			launch_firework()
-
+	EventBus.firework_finished.connect(_on_firework_finished)
 
 
 func launch_firework() -> void:
+	$Tube/Path2D/PathFollow2D/FuseParticles.emitting = false
 	$LaunchTimer.start()
 	fire_break.global_position = get_launch_pos()
 	var ingredient = Global.active_fireworks.pop_front()
 	mine.display(ingredient)
 	
 	var tween = create_tween()
-	tween.tween_property(fire_break, "global_position", destination, 1.5)
+	tween.tween_property(fire_break, "global_position", destination, 1.2)
 	tween.finished.connect(_on_star_finished)
 	effect.global_position = destination
 	
 	fire_break.modulate = ingredient.ing_color 
 	fire_break.is_trail = true
 	
-	#if $UI.is_whistle:
-		#whistle_arr.shuffle()
-		#$Whistle.stream = whistle_arr[0]
-		#$Whistle.play()
-	#else:
-		#lift_arr.shuffle()
-		#$Whistle.stream = lift_arr[0]
-		#$Whistle.play()
+	if Global.is_whistle:
+		whistle_arr.shuffle()
+		sfx.stream = whistle_arr[0]
+		sfx.play()
+	else:
+		lift_arr.shuffle()
+		sfx.stream = lift_arr[0]
+		sfx.play()
 
 
 func get_launch_pos() -> Vector2:
-	return $Tube.position
+	return $Tube.global_position
 
 
 func _on_texture_button_pressed() -> void:
@@ -63,10 +72,27 @@ func _on_texture_button_pressed() -> void:
 
 
 func _on_star_finished() -> void:
-	# stop moving camera
-	#$Camera2D.target = null
-	#
-	#firework.global_position = $Camera2D.global_position
 	fire_break.display(Global.active_fireworks.pop_front())
 	$DelayTimer.start()
 	$Camera2D.target = effect
+
+
+func _on_delay_timer_timeout() -> void:
+	var rand_x = randf_range(fire_break.global_position.x - 1500, fire_break.global_position.x + 1500)
+	var rand_y = randf_range(fire_break.global_position.y - 1750, fire_break.global_position.y + 1750)
+	effect.global_position = Vector2(rand_x, rand_y)
+	effect.display(Global.active_fireworks.pop_front())
+
+
+func _on_launch_timer_timeout() -> void:
+	$Camera2D.target = fire_break
+
+
+func _on_firework_finished() -> void:
+	if Global.active_fireworks.is_empty():
+		$LaunchUI.show()
+
+
+func _on_return_pressed() -> void:
+	print(game)
+	Global.start_transition(game, Global.TRANSITIONS.DEFAULT)

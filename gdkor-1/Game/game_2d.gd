@@ -1,19 +1,14 @@
 extends Node2D
 
-@onready var mine: CPUParticles2D = $Mine
-@onready var fire_break: CPUParticles2D = $Break
-@onready var effect: CPUParticles2D = $Effect
-
-@export var destination = Vector2.UP * 5000
-
 var is_crackle : bool = false
 var active_color : Color
 
-var whistle_arr : Array = [preload("uid://dd52q34uq2f1"), preload("uid://fb5jjrpt00tk")]
-var lift_arr : Array = [
-	preload("uid://dcc1xeh8vjkj0"), preload("uid://bg2rgv8001u0n")
-]
-var anim_arr : Array = ["lift", "break", "filler"]
+#var whistle_arr : Array = [preload("uid://dd52q34uq2f1"), preload("uid://fb5jjrpt00tk")]
+#var lift_arr : Array = [
+	#preload("uid://dcc1xeh8vjkj0"), preload("uid://bg2rgv8001u0n")
+#]
+@onready var anim_arr : Array = ["lift", "break", "filler"]
+var array_copy : Array
 
 var item_tracker : int = 0
 
@@ -52,62 +47,14 @@ customize lift charge
 """
 
 func _ready() -> void:
-	#EventBus.launch_firework.connect(launch_firework)
-	#EventBus.star_finished_emitting.connect(_on_star_finished)
 	EventBus.part_finished.connect(_on_part_finished)
-
-#
-#func launch_firework() -> void:
-	#$LaunchTimer.start()
-	#fire_break.global_position = $Parts/LaunchScene.get_launch_pos()
-	#var ingredient = Global.active_fireworks.pop_front()
-	#mine.display(ingredient)
-	#
-	#var tween = create_tween()
-	#tween.tween_property(fire_break, "global_position", destination, 1.35)
-	#tween.finished.connect(_on_star_finished)
-	#effect.global_position = destination
-	#
-	#fire_break.modulate = ingredient.ing_color 
-	#fire_break.is_trail = true
-	#
-	#if $UI.is_whistle:
-		#whistle_arr.shuffle()
-		#$Whistle.stream = whistle_arr[0]
-		#$Whistle.play()
-	#else:
-		#lift_arr.shuffle()
-		#$Whistle.stream = lift_arr[0]
-		#$Whistle.play()
-
-
-#func _on_star_finished() -> void:
-	## stop moving camera
-	##$Camera2D.target = null
-	##
-	##firework.global_position = $Camera2D.global_position
-	#fire_break.display(Global.active_fireworks.pop_front())
-	#$DelayTimer.start()
-	#$Camera2D.target = effect
-
-
-func _on_delay_timer_timeout() -> void:
-	var rand_x = randf_range(fire_break.global_position.x - 500, fire_break.global_position.x + 500)
-	var rand_y = randf_range(fire_break.global_position.y - 750, fire_break.global_position.y + 750)
-	effect.global_position = Vector2(rand_x, rand_y)
-	effect.display(Global.active_fireworks.pop_front())
-	
-	#$Camera2D.target = firework
-
-
-func _on_launch_timer_timeout() -> void:
-	$Camera2D.target = fire_break
+	array_copy = anim_arr.duplicate()
 
 
 func _on_part_finished() -> void:
 	item_tracker += 1
 	$UI.button_toggle()
-	$WrapAnim.play(anim_arr.pop_front())
+	$WrapAnim.play(array_copy.pop_front())
 	await $WrapAnim.animation_finished
 	
 	var tween = create_tween()

@@ -1,6 +1,6 @@
 extends Camera2D
 
-@export var speed : float = 20.0
+@export var speed : float = 2.5
 
 var active_tween : Tween
 var target : Node2D#:

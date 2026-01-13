@@ -1,9 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://dmlsjsr8rfh1"]
+[gd_scene load_steps=18 format=3 uid="uid://dmlsjsr8rfh1"]
 
 [ext_resource type="Script" uid="uid://cdsg82fsm0pdy" path="res://launch_scene.gd" id="1_diak1"]
 [ext_resource type="Texture2D" uid="uid://be6ekjt8xxlgo" path="res://Game/Assets/SkyBackground.png" id="2_3pum5"]
 [ext_resource type="Texture2D" uid="uid://bi56x6d7p0e7k" path="res://Game/Assets/LiftSprite.png" id="3_6v7us"]
 [ext_resource type="PackedScene" uid="uid://bxnuykamvq5wl" path="res://Game/firework.tscn" id="4_6v7us"]
+[ext_resource type="Script" uid="uid://c004wbgk1e1ir" path="res://Game/camera_2d.gd" id="4_ejv5c"]
 
 [sub_resource type="Curve2D" id="Curve2D_3pum5"]
 _data = {
@@ -36,6 +37,61 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.8613861, 0.87623763)
 
+[sub_resource type="Gradient" id="Gradient_3pum5"]
+interpolation_mode = 1
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6v7us"]
+gradient = SubResource("Gradient_3pum5")
+width = 16
+height = 16
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.8271028, 0.8271028)
+
+[sub_resource type="Gradient" id="Gradient_ejv5c"]
+offsets = PackedFloat32Array(0, 0.32876712, 0.7328767, 1)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Animation" id="Animation_6v7us"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureButton:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../../Camera2D:zoom")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.7, 0.7)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../../../Camera2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 384)]
+}
+
 [sub_resource type="Animation" id="Animation_3pum5"]
 resource_name = "flash"
 length = 0.2
@@ -54,55 +110,53 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_6v7us"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_xgsrl"]
+resource_name = "launch"
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("TextureButton:self_modulate")
+tracks/0/path = NodePath("../../../Camera2D:zoom")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 1)]
+"values": [Vector2(0.7, 0.7), Vector2(0.35, 0.35)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../../Camera2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 384), Vector2(0, -128)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ejv5c"]
 _data = {
 &"RESET": SubResource("Animation_6v7us"),
-&"flash": SubResource("Animation_3pum5")
+&"flash": SubResource("Animation_3pum5"),
+&"launch": SubResource("Animation_xgsrl")
 }
-
-[sub_resource type="Gradient" id="Gradient_3pum5"]
-interpolation_mode = 1
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_6v7us"]
-gradient = SubResource("Gradient_3pum5")
-width = 16
-height = 16
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(0.8271028, 0.8271028)
-
-[sub_resource type="Gradient" id="Gradient_ejv5c"]
-offsets = PackedFloat32Array(0, 0.32876712, 0.7328767, 1)
-colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 
 [node name="LaunchScene" type="Node2D"]
 script = ExtResource("1_diak1")
-destination = Vector2(0, -5750)
+destination = Vector2(0, -5000)
 
 [node name="Background" type="Sprite2D" parent="."]
 z_index = -2
-scale = Vector2(1.2, 1.2)
+scale = Vector2(1.75, 1.75)
 texture = ExtResource("2_3pum5")
 
 [node name="Tube" type="Sprite2D" parent="."]
 z_index = 2
-position = Vector2(0, 258)
+position = Vector2(0, 512)
 rotation = 1.5707964
 texture = ExtResource("3_6v7us")
 offset = Vector2(128, 0)
@@ -142,29 +196,24 @@ grow_horizontal = 2
 grow_vertical = 2
 texture_normal = SubResource("GradientTexture2D_4htul")
 
-[node name="FuseAnim" type="AnimationPlayer" parent="Tube/Path2D/PathFollow2D"]
-libraries = {
-&"": SubResource("AnimationLibrary_ejv5c")
-}
-autoplay = "flash"
-
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.5, 0.5)
+position = Vector2(0, 384)
+zoom = Vector2(0.7, 0.7)
+script = ExtResource("4_ejv5c")
 
 [node name="Stars" type="CPUParticles2D" parent="."]
-position = Vector2(0, -1310)
-amount = 50
+position = Vector2(0, -3500)
+amount = 150
 texture = SubResource("GradientTexture2D_6v7us")
 lifetime = 3.0
 randomness = 1.0
 fract_delta = false
 emission_shape = 3
-emission_rect_extents = Vector2(1080, 720)
+emission_rect_extents = Vector2(2475, 2475)
 gravity = Vector2(0, 0)
 color_ramp = SubResource("Gradient_ejv5c")
 
 [node name="LaunchUI" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="Return" type="Button" parent="LaunchUI"]
 anchors_preset = 4
@@ -189,11 +238,24 @@ position = Vector2(0, 540)
 position = Vector2(0, 540)
 
 [node name="DelayTimer" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 1.25
 one_shot = true
 
 [node name="LaunchTimer" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
 
+[node name="FuseAnim" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Tube/Path2D/PathFollow2D")
+libraries = {
+&"": SubResource("AnimationLibrary_ejv5c")
+}
+autoplay = "flash"
+
+[node name="SFX" type="AudioStreamPlayer" parent="."]
+bus = &"SFX"
+
 [connection signal="pressed" from="Tube/Path2D/PathFollow2D/TextureButton" to="." method="_on_texture_button_pressed"]
+[connection signal="pressed" from="LaunchUI/Return" to="." method="_on_return_pressed"]
+[connection signal="timeout" from="DelayTimer" to="." method="_on_delay_timer_timeout"]
+[connection signal="timeout" from="LaunchTimer" to="." method="_on_launch_timer_timeout"]

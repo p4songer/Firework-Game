@@ -11,6 +11,7 @@ const EFFECT_RESOURCES : Array = [
 	preload("uid://p8bqtov2wh0x"),
 ]
 var active_fireworks : Array = []
+var is_whistle : bool = false
 
 func play_sfx() -> void:
 	$GlobalSFX.play()

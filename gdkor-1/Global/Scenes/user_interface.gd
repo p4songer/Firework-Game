@@ -52,7 +52,7 @@ func _launch_button_pressed() -> void:
 
 
 func _on_check_box_toggled(toggled_on: bool) -> void:
-	is_whistle = toggled_on
+	Global.is_whistle = toggled_on
 
 
 func _on_prepare_launch() -> void:
