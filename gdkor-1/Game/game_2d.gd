@@ -52,43 +52,43 @@ customize lift charge
 """
 
 func _ready() -> void:
-	EventBus.launch_firework.connect(launch_firework)
-	EventBus.star_finished_emitting.connect(_on_star_finished)
+	#EventBus.launch_firework.connect(launch_firework)
+	#EventBus.star_finished_emitting.connect(_on_star_finished)
 	EventBus.part_finished.connect(_on_part_finished)
 
-
-func launch_firework() -> void:
-	$LaunchTimer.start()
-	fire_break.global_position = $Parts/LaunchScene.get_launch_pos()
-	var ingredient = Global.active_fireworks.pop_front()
-	mine.display(ingredient)
-	
-	var tween = create_tween()
-	tween.tween_property(fire_break, "global_position", destination, 1.35)
-	tween.finished.connect(_on_star_finished)
-	effect.global_position = destination
-	
-	fire_break.modulate = ingredient.ing_color 
-	fire_break.is_trail = true
-	
-	if $UI.is_whistle:
-		whistle_arr.shuffle()
-		$Whistle.stream = whistle_arr[0]
-		$Whistle.play()
-	else:
-		lift_arr.shuffle()
-		$Whistle.stream = lift_arr[0]
-		$Whistle.play()
-
-
-func _on_star_finished() -> void:
-	# stop moving camera
-	#$Camera2D.target = null
+#
+#func launch_firework() -> void:
+	#$LaunchTimer.start()
+	#fire_break.global_position = $Parts/LaunchScene.get_launch_pos()
+	#var ingredient = Global.active_fireworks.pop_front()
+	#mine.display(ingredient)
 	#
-	#firework.global_position = $Camera2D.global_position
-	fire_break.display(Global.active_fireworks.pop_front())
-	$DelayTimer.start()
-	$Camera2D.target = effect
+	#var tween = create_tween()
+	#tween.tween_property(fire_break, "global_position", destination, 1.35)
+	#tween.finished.connect(_on_star_finished)
+	#effect.global_position = destination
+	#
+	#fire_break.modulate = ingredient.ing_color 
+	#fire_break.is_trail = true
+	#
+	#if $UI.is_whistle:
+		#whistle_arr.shuffle()
+		#$Whistle.stream = whistle_arr[0]
+		#$Whistle.play()
+	#else:
+		#lift_arr.shuffle()
+		#$Whistle.stream = lift_arr[0]
+		#$Whistle.play()
+
+
+#func _on_star_finished() -> void:
+	## stop moving camera
+	##$Camera2D.target = null
+	##
+	##firework.global_position = $Camera2D.global_position
+	#fire_break.display(Global.active_fireworks.pop_front())
+	#$DelayTimer.start()
+	#$Camera2D.target = effect
 
 
 func _on_delay_timer_timeout() -> void:
