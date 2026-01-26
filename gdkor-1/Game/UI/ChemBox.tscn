@@ -1,10 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://dfo8q7vyrt5g0"]
+[gd_scene load_steps=5 format=3 uid="uid://dfo8q7vyrt5g0"]
 
 [ext_resource type="Texture2D" uid="uid://c1e55awbdmy2h" path="res://Game/Assets/ChemBox.png" id="1_2ihlu"]
 [ext_resource type="Script" uid="uid://uq44gjfskuxi" path="res://Game/UI/chem_box.gd" id="1_ar6xj"]
 [ext_resource type="Theme" uid="uid://s8eqo3epuhi7" path="res://Global/MainTheme.tres" id="2_ar6xj"]
 [ext_resource type="Texture2D" uid="uid://c4o26idv257oq" path="res://Game/Assets/Chem.png" id="3_m12b8"]
-[ext_resource type="Texture2D" uid="uid://c5uvgy5r4c0s3" path="res://Game/Assets/ChemHover.png" id="4_7l6lw"]
 
 [node name="Box" type="Control"]
 custom_minimum_size = Vector2(256, 256)
@@ -35,10 +34,16 @@ text = "Strontium + Sodium"
 horizontal_alignment = 1
 
 [node name="TextureButton" type="TextureButton" parent="."]
-layout_mode = 0
-offset_right = 256.0
-offset_bottom = 256.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
 texture_normal = ExtResource("3_m12b8")
-texture_hover = ExtResource("4_7l6lw")
 
+[connection signal="mouse_entered" from="TextureButton" to="." method="_on_texture_button_mouse_entered"]
+[connection signal="mouse_exited" from="TextureButton" to="." method="_on_texture_button_mouse_exited"]
 [connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]

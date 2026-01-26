@@ -48,11 +48,11 @@ customize lift charge
 
 func _ready() -> void:
 	EventBus.part_finished.connect(_on_part_finished)
+	EventBus.request_ingredient.connect(_on_request_ingredient)
 	array_copy = anim_arr.duplicate()
 
 
 func _on_part_finished() -> void:
-	print("Path is: ", get_path(), " Self is: ", self)
 	item_tracker += 1
 	$UI.button_toggle()
 	$WrapAnim.play(array_copy.pop_front())
@@ -67,4 +67,10 @@ func _on_part_finished() -> void:
 func _trans_tween_finished() -> void:
 	if item_tracker == 3:
 		Global.start_transition(LAUNCH_SCENE, Global.TRANSITIONS.DEFAULT)
-	$UI.button_toggle()
+		$UI.hide()
+	else: $UI.button_toggle()
+
+
+func _on_request_ingredient(part) -> void:
+	await get_tree().create_timer(0.1).timeout
+	part.update_display()

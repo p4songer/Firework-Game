@@ -9,6 +9,7 @@ const STAR = preload("uid://c6fgnywnyo63w")
 
 var last_area_clicked : Area2D
 var active_area : Area2D
+var star : Texture2D
 
 @export var is_trail : bool = false:
 	set(new):
@@ -33,6 +34,7 @@ var exp_array : Array = [
 ]
 
 func display(data : IngredientResource) -> void:
+	star = data.star_sprite
 	(F_METHODS[data.effect]).call(data.ing_color)
 	if is_trail : trail.emitting = false
 	EventBus.firework_finished.emit()
@@ -40,6 +42,7 @@ func display(data : IngredientResource) -> void:
 
 func _flower(color_ref : Color) -> void:
 	_play_random()
+	self.texture = star
 	if is_mine:
 		self.direction = Vector2(0, -1)
 		self.spread = 15.0
@@ -49,6 +52,7 @@ func _flower(color_ref : Color) -> void:
 
 func _brocade(color_ref: Color) -> void:
 	_play_random()
+	self.texture = star
 	var num = 10 if is_mine else 30
 	self.rotation_degrees = -5 
 	for i in num:
@@ -56,6 +60,7 @@ func _brocade(color_ref: Color) -> void:
 		self.add_child(new_star)
 		new_star.apply_central_impulse(Vector2.UP.rotated(self.rotation) * 1000)
 		new_star.modulate = color_ref
+		new_star.trail.texture = star
 		self.rotate(randf_range(0.5, 3.0))
 
 
@@ -71,9 +76,11 @@ func _palm(color_ref: Color) -> void:
 		var direction = Vector2(x_dir, y_dir).rotated(self.rotation).normalized() * 1000
 		new_star.apply_central_impulse(direction)
 		new_star.modulate = color_ref
+		new_star.trail.texture = star
 
 
 func _crackle(color_ref : Color) -> void:
+	self.texture = star
 	if is_mine:
 		self.direction = Vector2(0, -1)
 		self.spread = 15.0

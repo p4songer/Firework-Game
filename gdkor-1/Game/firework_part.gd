@@ -45,13 +45,12 @@ func _on_part_finished() -> void:
 func _on_color_button_pressed() -> void:
 	if is_onscreen:
 		EventBus.request_ingredient.emit(self)
-		print(self.name, " has color ", ingredient.ing_name, " has effect ", ingredient.effect)
 
 
 func _on_effect_button_pressed() -> void:
 	if is_onscreen:
 		EventBus.request_ingredient.emit(self)
-		print(self.name, " has color ", ingredient.ing_name, " has effect ", ingredient.effect)
+		print(self.name, " has color ", ingredient.ing_name, " has effect ", ingredient.effect, " with star ", ingredient.star_sprite)
 
 
 func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
@@ -60,3 +59,15 @@ func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	is_onscreen = false
+
+
+func update_display() -> void:
+	$Display.texture = Global.EFFECT_RESOURCES[ingredient.effect].ing_sprite
+	$Display.modulate = ingredient.ing_color
+	$Indicator.modulate = ingredient.ing_color
+	$Indicator.restart()
+	$Indicator.emitting = true
+
+
+func _hide_display() -> void:
+	$Display.hide()

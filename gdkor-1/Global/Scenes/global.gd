@@ -1,5 +1,21 @@
 extends Node
 
+"""
+Stirring moves a potion along a path. Path collects levels. Once reached, billows are used to add the destinations's effect. Then UI for name, ingredient, save recipie etc. Ingredients change the direction of the path.
+Mortar and Pestle optionally doubles ingredients ground. Also extends path. Potions can be created through ingredient book.
+Rooms are navigated with WASD.
+To sell, you place potion on a scale. You have the option to haggle. Costs reputation. Reputation affects the type (good or bad) of customers in shop each day. Haggle either increases or decreases price sold. Haggling brings up a sliding arrow minigame. You can only haggle once.
+Customers don't leave. There's a set amount each day, and day ends when all customers are finished. Bedroom room with bed to end day. Extra decoration.
+Additional features: Skill tree (things like speed up garden, more harvest) Alchemy Machine (broken thing you need to repair)
+
+Maybe sourcing ingredients / components?
+Sodium / Potassium Benzoate (whistle) - Domestic
+Aluminum - Canada
+Barium - India, China, Domestic
+Copper - Chile (U), Domestic (U), China (R)
+
+"""
+
 const FIRE_RESOURCES : Array = [
 	preload("uid://chs5icc2rx3w7"), preload("uid://bxkbhs08v5r6r"), preload("uid://7jjmoa7qa28y"),
 	preload("uid://dgdvg4kucekux"), preload("uid://cqkcjrv1kywv0"), preload("uid://yh4cpjejnkb2"),
@@ -28,10 +44,7 @@ var _transition_dict : Dictionary = {
 
 @onready var anims: AnimationPlayer = $Transitions
 var _next_scene : Node
-var _previous_scene : Node:
-	set(new):
-		_previous_scene = new
-		print("Set previous to ", new)
+var _previous_scene : Node
 
 func get_end_anim(prefix: String) -> void:
 	_change_scene()

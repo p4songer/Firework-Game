@@ -16,6 +16,7 @@ var fx_tween : Tween
 var item_indexes : Dictionary = {}
 var ing_in_hand : IngredientResource = null
 var fx_in_hand : int = 0
+var star_in_hand : Texture2D
 
 # effects stuff
 var fx_dict = {
@@ -26,6 +27,11 @@ var fx_dict = {
 }
 
 const CHEM_BOX = preload("uid://dfo8q7vyrt5g0")
+
+var star_array : Array = [
+	preload("uid://cwtfh7cjvrsoj"), preload("uid://dhjm0mv6od403"), preload("uid://bdql4f8kmscm2"), 
+	preload("uid://caaxpsg6sd8ho"), preload("uid://b8bioafvnu7m3"),
+	]
 
 @onready var color_drawer: HBoxContainer = $ColorDrawer
 @onready var fx_drawer: HBoxContainer = $FxDrawer
@@ -56,10 +62,20 @@ func _ready() -> void:
 		new_button.is_effect = true
 		$FxDrawer/Grid.add_child(new_button)
 		new_button.pressed.connect(_on_effect_pressed.bind(fx))
-
+	# Add stars to effects drawer.
+	for star in star_array:
+		var new_button = CHEM_BOX.instantiate()
+		var ing_res = IngredientResource.new()
+		ing_res.star_sprite = star; ing_res.ing_sprite = star; ing_res.ing_name = "Star Variation"
+		new_button.data = ing_res; new_button.is_effect = true
+		$FxDrawer/Grid.add_child(new_button)
+		new_button.scale_button(Vector2(2, 2))
+		new_button.pressed.connect(_on_star_pressed.bind(star))
+		
+	# Position drawer stuff.
 	color_drawer.position.x = $ColorDrawer/Grid.size.x + ($ColorDrawer/Grid.size.x / 3)
 	fx_drawer.position.x = $FxDrawer/Grid.size.x + ($FxDrawer/Grid.size.x / 3)
-	fx_drawer.position.y = 384
+	fx_drawer.position.y = fx_drawer_offset.y
 	color_drawer_offset = color_drawer.position
 	fx_drawer_offset = fx_drawer.position
 
@@ -94,17 +110,22 @@ func _on_effect_button_pressed() -> void:
 func _on_ingredient_pressed(index : int) -> void:
 	ing_in_hand = item_indexes[index]
 	EventBus.color_button_pressed.emit()
-	_on_color_button_pressed()
-	if not fx_drawer_out:
-		_on_effect_button_pressed()
+	#_on_color_button_pressed()
+	#if not fx_drawer_out:
+		#_on_effect_button_pressed()
 
 
 func _on_effect_pressed(index : int) -> void:
 	fx_in_hand = index
 	EventBus.effect_button_pressed.emit()
-	_on_effect_button_pressed()
-	if not color_drawer_out:
-		_on_color_button_pressed()
+	#_on_effect_button_pressed()
+	#if not color_drawer_out:
+		#_on_color_button_pressed()
+
+
+func _on_star_pressed(star : Texture2D) -> void:
+	star_in_hand = star
+	EventBus.effect_button_pressed.emit()
 
 
 func _on_request_ingredient(requestor: Node2D) -> void:
@@ -113,6 +134,9 @@ func _on_request_ingredient(requestor: Node2D) -> void:
 		#requestor.ingredient.ing_name = ing_in_hand.ing_name
 		#requestor.ingredient.ing_color = ing_in_hand.ing_color
 		ing_in_hand = null
+	if star_in_hand:
+		requestor.ingredient.star_sprite = star_in_hand
+		star_in_hand = null
 	requestor.ingredient.effect = fx_in_hand
 
 

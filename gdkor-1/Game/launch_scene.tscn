@@ -1,10 +1,11 @@
-[gd_scene load_steps=18 format=3 uid="uid://dmlsjsr8rfh1"]
+[gd_scene load_steps=19 format=3 uid="uid://dmlsjsr8rfh1"]
 
-[ext_resource type="Script" uid="uid://cdsg82fsm0pdy" path="res://launch_scene.gd" id="1_diak1"]
+[ext_resource type="Script" uid="uid://cdsg82fsm0pdy" path="res://Game/launch_scene.gd" id="1_diak1"]
 [ext_resource type="Texture2D" uid="uid://be6ekjt8xxlgo" path="res://Game/Assets/SkyBackground.png" id="2_3pum5"]
 [ext_resource type="Texture2D" uid="uid://bi56x6d7p0e7k" path="res://Game/Assets/LiftSprite.png" id="3_6v7us"]
 [ext_resource type="PackedScene" uid="uid://bxnuykamvq5wl" path="res://Game/firework.tscn" id="4_6v7us"]
 [ext_resource type="Script" uid="uid://c004wbgk1e1ir" path="res://Game/camera_2d.gd" id="4_ejv5c"]
+[ext_resource type="Theme" uid="uid://s8eqo3epuhi7" path="res://Global/MainTheme.tres" id="4_xgsrl"]
 
 [sub_resource type="Curve2D" id="Curve2D_3pum5"]
 _data = {
@@ -37,12 +38,12 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.8613861, 0.87623763)
 
-[sub_resource type="Gradient" id="Gradient_3pum5"]
+[sub_resource type="Gradient" id="Gradient_4htul"]
 interpolation_mode = 1
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_6v7us"]
-gradient = SubResource("Gradient_3pum5")
+gradient = SubResource("Gradient_4htul")
 width = 16
 height = 16
 fill = 1
@@ -58,38 +59,38 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("TextureButton:self_modulate")
+tracks/0/path = NodePath("../../../Camera2D:zoom")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 1)]
+"values": [Vector2(0.7, 0.7)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../../../Camera2D:zoom")
+tracks/1/path = NodePath("../../../Camera2D:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0.7, 0.7)]
+"values": [Vector2(0, 384)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../../../Camera2D:position")
+tracks/2/path = NodePath("TextureButton:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 384)]
+"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_3pum5"]
@@ -100,7 +101,7 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("TextureButton:self_modulate")
+tracks/0/path = NodePath("TextureButton:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -196,6 +197,16 @@ grow_horizontal = 2
 grow_vertical = 2
 texture_normal = SubResource("GradientTexture2D_4htul")
 
+[node name="Label" type="Label" parent="Tube/Path2D/PathFollow2D/TextureButton"]
+layout_mode = 0
+offset_left = 132.32962
+offset_top = 161.33995
+offset_right = 198.32962
+offset_bottom = 192.33995
+scale = Vector2(-2, -2)
+theme = ExtResource("4_xgsrl")
+text = "CLICK"
+
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, 384)
 zoom = Vector2(0.7, 0.7)
@@ -214,15 +225,14 @@ gravity = Vector2(0, 0)
 color_ramp = SubResource("Gradient_ejv5c")
 
 [node name="LaunchUI" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="Return" type="Button" parent="LaunchUI"]
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -15.5
-offset_right = 61.0
-offset_bottom = 15.5
-grow_vertical = 2
+offset_left = 39.0
+offset_top = 39.0
+offset_right = 234.0
+offset_bottom = 138.0
+theme = ExtResource("4_xgsrl")
 text = "Return"
 
 [node name="FireworkStages" type="Node2D" parent="."]

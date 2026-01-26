@@ -37,11 +37,13 @@ func _ready() -> void:
 
 
 func launch_firework() -> void:
+	#FIXME Global array isn't working now.
 	$Tube/Path2D/PathFollow2D/FuseParticles.emitting = false
 	$LaunchTimer.start()
 	fire_break.global_position = get_launch_pos()
 	var ingredient = Global.active_fireworks.pop_front()
 	mine.display(ingredient)
+	fire_break.trail.texture = ingredient.star_sprite
 	
 	var tween = create_tween()
 	tween.tween_property(fire_break, "global_position", destination, 1.2)
@@ -94,5 +96,4 @@ func _on_firework_finished() -> void:
 
 
 func _on_return_pressed() -> void:
-	print(game)
 	Global.start_transition(game, Global.TRANSITIONS.DEFAULT)

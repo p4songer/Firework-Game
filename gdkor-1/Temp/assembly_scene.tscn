@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://frb0kgooe3y8"]
+
+[ext_resource type="Script" uid="uid://clom47uvj7jsn" path="res://Temp/assembly_scene.gd" id="1_b5bxf"]
+
+[node name="AssemblyScene" type="Node2D"]
+script = ExtResource("1_b5bxf")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+horizontal_scroll_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+
+[node name="StarType" type="Button" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "TYPE 1"
+
+[node name="StarType2" type="Button" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "TYPE 2"
+
+[node name="StarType3" type="Button" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "TYPE 3"

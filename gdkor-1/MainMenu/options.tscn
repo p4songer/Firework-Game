@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dcdf81eayjyro"]
+[gd_scene load_steps=8 format=3 uid="uid://dcdf81eayjyro"]
 
 [ext_resource type="Script" uid="uid://dau0wb7wpmxhh" path="res://MainMenu/options.gd" id="1_1cv0g"]
 [ext_resource type="PackedScene" uid="uid://cmnjedqmptyeh" path="res://MainMenu/audio_slider.tscn" id="2_c0v11"]
@@ -14,6 +14,8 @@ colors = PackedColorArray(4.3317675e-07, 0.13606212, 0.33160415, 1, 0, 0.2579966
 gradient = SubResource("Gradient_nhkf3")
 fill_from = Vector2(0, 0.65384614)
 fill_to = Vector2(0, 0)
+
+[sub_resource type="SystemFont" id="SystemFont_0lrlo"]
 
 [node name="Options" type="Control"]
 process_mode = 3
@@ -61,6 +63,10 @@ text = "RETURN TO MENU"
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("2_fsaj3")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.05882353, 0.17254902, 0.30980393, 1)
+theme_override_constants/outline_size = 25
+theme_override_fonts/font = SubResource("SystemFont_0lrlo")
 theme_override_font_sizes/font_size = 50
 text = "Music"
 
@@ -74,6 +80,10 @@ bus_name = "Music"
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("2_fsaj3")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.05882353, 0.17254902, 0.30980393, 1)
+theme_override_constants/outline_size = 25
+theme_override_fonts/font = SubResource("SystemFont_0lrlo")
 theme_override_font_sizes/font_size = 50
 text = "SFX"
 
@@ -87,6 +97,10 @@ bus_name = "SFX"
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("2_fsaj3")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.05882353, 0.17254902, 0.30980393, 1)
+theme_override_constants/outline_size = 25
+theme_override_fonts/font = SubResource("SystemFont_0lrlo")
 theme_override_font_sizes/font_size = 50
 text = "Dialogue"
 

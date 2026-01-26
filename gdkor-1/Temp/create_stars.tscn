@@ -1,0 +1,105 @@
+[gd_scene load_steps=3 format=3 uid="uid://cppthrbnf2emu"]
+
+[ext_resource type="Script" uid="uid://c8hg6jj8vyjcj" path="res://Temp/create_stars.gd" id="1_54lex"]
+[ext_resource type="Texture2D" uid="uid://c4o26idv257oq" path="res://Game/Assets/Chem.png" id="2_blla8"]
+
+[node name="CreateStars" type="Node2D"]
+script = ExtResource("1_54lex")
+
+[node name="ColorPicker" type="ColorPicker" parent="."]
+offset_right = 298.0
+offset_bottom = 607.0
+edit_alpha = false
+edit_intensity = false
+color_mode = 1
+picker_shape = 2
+color_modes_visible = false
+sliders_visible = false
+hex_visible = false
+
+[node name="Chem" type="Sprite2D" parent="."]
+position = Vector2(593, 257)
+texture = ExtResource("2_blla8")
+
+[node name="Labels" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Strontium" type="Label" parent="Labels"]
+layout_mode = 0
+offset_left = 175.0
+offset_top = 483.0
+offset_right = 285.0
+offset_bottom = 506.0
+text = "Strontium (g): "
+
+[node name="Barium" type="Label" parent="Labels"]
+layout_mode = 0
+offset_left = 856.0
+offset_top = 477.0
+offset_right = 966.0
+offset_bottom = 500.0
+text = "Strontium (g): "
+
+[node name="Copper" type="Label" parent="Labels"]
+layout_mode = 0
+offset_left = 508.0
+offset_top = 483.0
+offset_right = 618.0
+offset_bottom = 506.0
+text = "Strontium (g): "
+
+[node name="Vbox" type="VBoxContainer" parent="."]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 1050.0
+offset_top = 38.0
+offset_right = 1113.0
+offset_bottom = 174.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Select" type="Button" parent="Vbox"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "SELECT"
+
+[node name="Brocade" type="Button" parent="Vbox"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+toggle_mode = true
+text = "SELECT"
+
+[node name="Crackle" type="Button" parent="Vbox"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+toggle_mode = true
+text = "SELECT"
+
+[node name="Palm" type="Button" parent="Vbox"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+toggle_mode = true
+text = "SELECT"
+
+[node name="Weight" type="Label" parent="."]
+offset_left = 548.0
+offset_top = 91.0
+offset_right = 588.0
+offset_bottom = 114.0
+text = "TOTAL WEIGHT: "
+
+[connection signal="color_changed" from="ColorPicker" to="." method="_on_color_picker_color_changed"]
+[connection signal="pressed" from="Vbox/Select" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Vbox/Brocade" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Vbox/Crackle" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Vbox/Palm" to="." method="_on_button_pressed"]
