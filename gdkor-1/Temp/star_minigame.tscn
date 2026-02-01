@@ -38,6 +38,12 @@ ing_text = "ACETONE"
 ing_name = "acetone"
 sprite = SubResource("CompressedTexture2D_rbv71")
 
+[node name="TextureButton6" parent="WetVbox" unique_id=74157540 instance=ExtResource("2_4gvii")]
+layout_mode = 2
+ing_text = "OXIDIZER"
+ing_name = "oxidizer"
+sprite = SubResource("CompressedTexture2D_rbv71")
+
 [node name="DryVbox" type="VBoxContainer" parent="." unique_id=985942603]
 offset_left = 1005.0
 offset_right = 1261.0
