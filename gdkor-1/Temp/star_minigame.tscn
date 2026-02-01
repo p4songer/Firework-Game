@@ -1,13 +1,12 @@
 [gd_scene format=3 uid="uid://7c0nt2ewvbfx"]
 
-[ext_resource type="Texture2D" uid="uid://xigrea6kwh44" path="res://Temp/assets/Glue.png" id="1_vont8"]
 [ext_resource type="Script" uid="uid://dh3gffbcl0apr" path="res://Temp/star_minigame.gd" id="1_xmyfd"]
 [ext_resource type="PackedScene" uid="uid://cctpygcdw38xd" path="res://Temp/ing_button.tscn" id="2_4gvii"]
 [ext_resource type="Texture2D" uid="uid://eauved75drq3" path="res://Temp/assets/Mix.png" id="2_s5j57"]
 [ext_resource type="Texture2D" uid="uid://bv4viluirxsok" path="res://Global/Sprites/icon.svg" id="5_podmp"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_svvd8"]
-radius = 120.0
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_rbv71"]
+load_path = "res://.godot/imported/Glue.png-44441dc5031d91b5c9dc97d199728307.ctex"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_d34rt"]
 radius = 32.0
@@ -21,64 +20,23 @@ offset_right = 270.0
 offset_bottom = 803.0
 scale = Vector2(0.5, 0.5)
 
-[node name="Label" type="Label" parent="WetVbox" unique_id=1925185563]
-layout_mode = 2
-text = "Wets"
-
 [node name="TextureButton" parent="WetVbox" unique_id=608418819 instance=ExtResource("2_4gvii")]
 layout_mode = 2
+ing_text = "GLUE"
+ing_name = "glue"
+sprite = SubResource("CompressedTexture2D_rbv71")
 
-[node name="TextureButton2" type="TextureButton" parent="WetVbox" unique_id=311338122]
+[node name="TextureButton4" parent="WetVbox" unique_id=1449204856 instance=ExtResource("2_4gvii")]
 layout_mode = 2
-texture_normal = ExtResource("1_vont8")
+ing_text = "WATER"
+ing_name = "water"
+sprite = SubResource("CompressedTexture2D_rbv71")
 
-[node name="Label" type="Label" parent="WetVbox/TextureButton2" unique_id=820884845]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 50
-text = "WATER"
-
-[node name="Area2D" type="Area2D" parent="WetVbox/TextureButton2" unique_id=1404181435]
-position = Vector2(124, 123)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="WetVbox/TextureButton2/Area2D" unique_id=41760993]
-shape = SubResource("CircleShape2D_svvd8")
-
-[node name="TextureButton3" type="TextureButton" parent="WetVbox" unique_id=591125369]
+[node name="TextureButton5" parent="WetVbox" unique_id=1414509076 instance=ExtResource("2_4gvii")]
 layout_mode = 2
-texture_normal = ExtResource("1_vont8")
-
-[node name="Label" type="Label" parent="WetVbox/TextureButton3" unique_id=296865487]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 50
-text = "ACETONE"
-
-[node name="Area2D" type="Area2D" parent="WetVbox/TextureButton3" unique_id=2022694052]
-position = Vector2(124, 123)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="WetVbox/TextureButton3/Area2D" unique_id=1257719115]
-shape = SubResource("CircleShape2D_svvd8")
+ing_text = "ACETONE"
+ing_name = "acetone"
+sprite = SubResource("CompressedTexture2D_rbv71")
 
 [node name="DryVbox" type="VBoxContainer" parent="." unique_id=985942603]
 offset_left = 1005.0
@@ -87,165 +45,47 @@ offset_bottom = 803.0
 scale = Vector2(0.5, 0.5)
 theme_override_constants/separation = -11
 
-[node name="Label" type="Label" parent="DryVbox" unique_id=766760446]
+[node name="TextureButton6" parent="DryVbox" unique_id=2143277018 instance=ExtResource("2_4gvii")]
 layout_mode = 2
-text = "Drys"
-
-[node name="TextureButton" type="TextureButton" parent="DryVbox" unique_id=1204269769]
-layout_mode = 2
-texture_normal = ExtResource("2_s5j57")
-
-[node name="Label" type="Label" parent="DryVbox/TextureButton" unique_id=1124299580]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 10
-theme_override_font_sizes/font_size = 50
-text = "Color
+ing_text = "Color
 Mix"
+ing_name = "color_mix"
+sprite = ExtResource("2_s5j57")
 
-[node name="Area2D" type="Area2D" parent="DryVbox/TextureButton" unique_id=518502446]
-position = Vector2(124, 123)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DryVbox/TextureButton/Area2D" unique_id=656705826]
-shape = SubResource("CircleShape2D_svvd8")
-
-[node name="TextureButton2" type="TextureButton" parent="DryVbox" unique_id=780076999]
+[node name="TextureButton7" parent="DryVbox" unique_id=455565283 instance=ExtResource("2_4gvii")]
 layout_mode = 2
-texture_normal = ExtResource("2_s5j57")
-
-[node name="Label" type="Label" parent="DryVbox/TextureButton2" unique_id=1750166421]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 10
-theme_override_font_sizes/font_size = 50
-text = "Dextrin
+ing_text = "Dextrin
 (binder)"
+ing_name = "dextrin"
+sprite = ExtResource("2_s5j57")
 
-[node name="Area2D" type="Area2D" parent="DryVbox/TextureButton2" unique_id=1779133674]
-position = Vector2(124, 123)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DryVbox/TextureButton2/Area2D" unique_id=637128276]
-shape = SubResource("CircleShape2D_svvd8")
-
-[node name="TextureButton3" type="TextureButton" parent="DryVbox" unique_id=1677864911]
+[node name="TextureButton8" parent="DryVbox" unique_id=1137508198 instance=ExtResource("2_4gvii")]
 layout_mode = 2
-texture_normal = ExtResource("2_s5j57")
+ing_text = "Charcoal
+(slow burn)"
+ing_name = "charcoal"
+sprite = ExtResource("2_s5j57")
 
-[node name="Label" type="Label" parent="DryVbox/TextureButton3" unique_id=305072139]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 10
-theme_override_font_sizes/font_size = 50
-text = "Charcoal
-(slowburn)"
-
-[node name="Area2D" type="Area2D" parent="DryVbox/TextureButton3" unique_id=639783603]
-position = Vector2(124, 123)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DryVbox/TextureButton3/Area2D" unique_id=196550023]
-shape = SubResource("CircleShape2D_svvd8")
-
-[node name="TextureButton4" type="TextureButton" parent="DryVbox" unique_id=303634057]
+[node name="TextureButton9" parent="DryVbox" unique_id=1248879453 instance=ExtResource("2_4gvii")]
 layout_mode = 2
-texture_normal = ExtResource("2_s5j57")
-
-[node name="Label" type="Label" parent="DryVbox/TextureButton4" unique_id=1704393809]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 10
-theme_override_font_sizes/font_size = 50
-text = "Paper
+ing_text = "Paper
 Wrap"
+ing_name = "wrap"
+sprite = ExtResource("2_s5j57")
 
-[node name="Area2D" type="Area2D" parent="DryVbox/TextureButton4" unique_id=713341672]
-position = Vector2(124, 123)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DryVbox/TextureButton4/Area2D" unique_id=1979339433]
-shape = SubResource("CircleShape2D_svvd8")
-
-[node name="TextureButton5" type="TextureButton" parent="DryVbox" unique_id=930106398]
+[node name="TextureButton10" parent="DryVbox" unique_id=830507646 instance=ExtResource("2_4gvii")]
 layout_mode = 2
-texture_normal = ExtResource("2_s5j57")
-
-[node name="Label" type="Label" parent="DryVbox/TextureButton5" unique_id=1531098157]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 10
-theme_override_font_sizes/font_size = 50
-text = "Paper
+ing_text = "Paper
 Divider"
+ing_name = "divider"
+sprite = ExtResource("2_s5j57")
 
-[node name="Area2D" type="Area2D" parent="DryVbox/TextureButton5" unique_id=920985704]
-position = Vector2(124, 123)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DryVbox/TextureButton5/Area2D" unique_id=495193345]
-shape = SubResource("CircleShape2D_svvd8")
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=333326094]
+[node name="IngArea" type="Sprite2D" parent="." unique_id=333326094]
+z_index = -1
 position = Vector2(561, 271)
 texture = ExtResource("5_podmp")
 
-[node name="Area2D" type="Area2D" parent="Sprite2D" unique_id=104131642]
+[node name="Area2D" type="Area2D" parent="IngArea" unique_id=104131642 groups=["ing_area"]]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Area2D" unique_id=1455236019]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="IngArea/Area2D" unique_id=1455236019]
 shape = SubResource("CircleShape2D_d34rt")
