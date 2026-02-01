@@ -18,3 +18,5 @@ signal effect_button_pressed
 signal prepare_launch
 @warning_ignore("unused_signal")
 signal firework_finished
+@warning_ignore("unused_signal")
+signal qte_clicked(dollars: float)
