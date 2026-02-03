@@ -22,3 +22,5 @@ signal firework_finished
 signal qte_clicked(dollars: float)
 @warning_ignore("unused_signal")
 signal spin_finished
+@warning_ignore("unused_signal")
+signal attempt_ingredient(ing_name : String)

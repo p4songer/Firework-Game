@@ -3,13 +3,77 @@
 [ext_resource type="Script" uid="uid://dh3gffbcl0apr" path="res://Temp/star_minigame.gd" id="1_xmyfd"]
 [ext_resource type="PackedScene" uid="uid://cctpygcdw38xd" path="res://Temp/ing_button.tscn" id="2_4gvii"]
 [ext_resource type="Texture2D" uid="uid://eauved75drq3" path="res://Temp/assets/Mix.png" id="2_s5j57"]
+[ext_resource type="Texture2D" uid="uid://c7ffjftp4te07" path="res://Temp/assets/keyboard_space.png" id="5_4gvii"]
 [ext_resource type="Texture2D" uid="uid://bv4viluirxsok" path="res://Global/Sprites/icon.svg" id="5_podmp"]
+[ext_resource type="Texture2D" uid="uid://bqw82r5wfpnbo" path="res://Temp/assets/keyboard_space_outline.png" id="6_podmp"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_rbv71"]
 load_path = "res://.godot/imported/Glue.png-44441dc5031d91b5c9dc97d199728307.ctex"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_d34rt"]
 radius = 32.0
+
+[sub_resource type="Animation" id="Animation_d34rt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/Mash1:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/Mash2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_klg8q"]
+resource_name = "mash"
+length = 0.3
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/Mash1:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.14955255, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/Mash2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.14955255, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4tj6a"]
+_data = {
+&"RESET": SubResource("Animation_d34rt"),
+&"mash": SubResource("Animation_klg8q")
+}
 
 [node name="StarMinigame" type="Node2D" unique_id=948536394]
 script = ExtResource("1_xmyfd")
@@ -55,7 +119,7 @@ theme_override_constants/separation = -11
 layout_mode = 2
 ing_text = "Color
 Mix"
-ing_name = "color_mix"
+ing_name = "color"
 sprite = ExtResource("2_s5j57")
 
 [node name="TextureButton7" parent="DryVbox" unique_id=455565283 instance=ExtResource("2_4gvii")]
@@ -103,3 +167,16 @@ offset_right = 652.0
 offset_bottom = 110.0
 theme_override_font_sizes/font_size = 50
 text = "current"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=66959843]
+libraries/ = SubResource("AnimationLibrary_4tj6a")
+
+[node name="Mash1" type="Sprite2D" parent="AnimationPlayer" unique_id=727612154]
+visible = false
+position = Vector2(556, 140)
+texture = ExtResource("5_4gvii")
+
+[node name="Mash2" type="Sprite2D" parent="AnimationPlayer" unique_id=2048157308]
+visible = false
+position = Vector2(556, 140)
+texture = ExtResource("6_podmp")
