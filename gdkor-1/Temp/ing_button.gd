@@ -39,4 +39,4 @@ func detect_areas() -> void:
 	if $Area2D.has_overlapping_areas():
 		for a in $Area2D.get_overlapping_areas():
 			if a.is_in_group("ing_area"):
-				print("Added %s" % ing_name)
+				EventBus.part_finished.emit()

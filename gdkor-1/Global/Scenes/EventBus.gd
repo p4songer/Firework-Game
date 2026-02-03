@@ -20,3 +20,5 @@ signal prepare_launch
 signal firework_finished
 @warning_ignore("unused_signal")
 signal qte_clicked(dollars: float)
+@warning_ignore("unused_signal")
+signal spin_finished

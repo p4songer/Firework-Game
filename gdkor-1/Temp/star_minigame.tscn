@@ -95,3 +95,11 @@ texture = ExtResource("5_podmp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="IngArea/Area2D" unique_id=1455236019]
 shape = SubResource("CircleShape2D_d34rt")
+
+[node name="CurrentInstruction" type="Label" parent="." unique_id=1991750438]
+offset_left = 472.0
+offset_top = 41.0
+offset_right = 652.0
+offset_bottom = 110.0
+theme_override_font_sizes/font_size = 50
+text = "current"

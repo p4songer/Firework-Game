@@ -9,11 +9,10 @@ radius = 64.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_t110c"]
 radius = 32.0
 
-[node name="Node2D" type="Node2D" unique_id=605854739]
+[node name="TestRotate" type="Node2D" unique_id=605854739]
 script = ExtResource("1_l5t03")
 
 [node name="obj" type="Node2D" parent="." unique_id=1699741278]
-position = Vector2(596, 283)
 
 [node name="Sprite2D" type="Sprite2D" parent="obj" unique_id=1212214515]
 position = Vector2(185, 0)
@@ -26,7 +25,6 @@ texture = ExtResource("1_2c6tv")
 shape = SubResource("CircleShape2D_l5t03")
 
 [node name="points" type="Node2D" parent="." unique_id=143544169]
-position = Vector2(596, 283)
 
 [node name="Area2D" type="Area2D" parent="points" unique_id=132138431]
 position = Vector2(185, 0)

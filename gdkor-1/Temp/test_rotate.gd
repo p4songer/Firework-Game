@@ -1,5 +1,6 @@
 extends Node2D
 
+@export var spin_count : int = 3
 @onready var obj: Node2D = $obj
 var dir_array : Array
 
@@ -23,6 +24,8 @@ func _on_point_entered(_area : Area2D, idx: int) -> void:
 	for i in dir_array:
 		total += i
 	if total == 6:
-		print("correct")
+		spin_count -= 1
+		if spin_count == 0:
+			EventBus.spin_finished.emit()
 		#TODO emit signal here.
 		dir_array.clear()
