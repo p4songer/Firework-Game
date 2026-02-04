@@ -1,6 +1,12 @@
 extends Node2D
 
-@export var current_build : String
+@onready var parts: CPUParticles2D = $IngArea/Parts
+
+@export var current_build : String:
+	set(new):
+		current_build = new
+		selected_array = build_dict[current_build]
+@export var active : bool = false
 
 var default_sequence : Array = [
 	"dextrin", "water", "color", "mix", "oxidizer", "mix", "press"
@@ -33,13 +39,13 @@ const TEST_ROTATE = preload("uid://qut0nlt30vsl")
 func _ready() -> void:
 	EventBus.spin_finished.connect(_on_spin_finished)
 	EventBus.attempt_ingredient.connect(_on_attempt_ingredient)
-	
-	if current_build and current_build in build_dict.keys():
-		selected_array = build_dict[current_build]
-	else:
-		selected_array = default_sequence
-	
-	_parse_build()
+	#
+	#if current_build and current_build in build_dict.keys():
+		#selected_array = build_dict[current_build]
+	#else:
+		#selected_array = default_sequence
+	#
+	#_parse_build()
 
 
 func _process(_delta: float) -> void:
@@ -51,6 +57,8 @@ func _process(_delta: float) -> void:
 			$AnimationPlayer.play("RESET")
 
 func _parse_build():
+	parts.restart()
+	parts.emitting = true
 	if selected_array.is_empty(): 
 		$CurrentInstruction.text = "Done. Good job."
 		return
@@ -60,7 +68,6 @@ func _parse_build():
 		var new_spin = TEST_ROTATE.instantiate()
 		$IngArea.add_child(new_spin)
 	elif active_element == "press":
-		$AnimationPlayer.play("mash")
 		activate_mash()
 
 
@@ -75,5 +82,6 @@ func _on_attempt_ingredient(ing_name : String) -> void:
 
 
 func activate_mash() -> void:
+	$AnimationPlayer.play("mash")
 	is_mashing = true
 	mash_counter = 10

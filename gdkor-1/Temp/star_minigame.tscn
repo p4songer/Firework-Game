@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cctpygcdw38xd" path="res://Temp/ing_button.tscn" id="2_4gvii"]
 [ext_resource type="Texture2D" uid="uid://eauved75drq3" path="res://Temp/assets/Mix.png" id="2_s5j57"]
 [ext_resource type="Texture2D" uid="uid://c7ffjftp4te07" path="res://Temp/assets/keyboard_space.png" id="5_4gvii"]
+[ext_resource type="Texture2D" uid="uid://b8bioafvnu7m3" path="res://Game/Assets/Star5.png" id="5_d34rt"]
 [ext_resource type="Texture2D" uid="uid://bv4viluirxsok" path="res://Global/Sprites/icon.svg" id="5_podmp"]
 [ext_resource type="Texture2D" uid="uid://bqw82r5wfpnbo" path="res://Temp/assets/keyboard_space_outline.png" id="6_podmp"]
 
@@ -12,6 +13,10 @@ load_path = "res://.godot/imported/Glue.png-44441dc5031d91b5c9dc97d199728307.cte
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_d34rt"]
 radius = 32.0
+
+[sub_resource type="Gradient" id="Gradient_klg8q"]
+offsets = PackedFloat32Array(0.4547619, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.19, 0.19, 0.19, 0)
 
 [sub_resource type="Animation" id="Animation_d34rt"]
 length = 0.001
@@ -77,11 +82,13 @@ _data = {
 
 [node name="StarMinigame" type="Node2D" unique_id=948536394]
 script = ExtResource("1_xmyfd")
+current_build = "crackle"
 
 [node name="WetVbox" type="VBoxContainer" parent="." unique_id=85555655]
-offset_left = 14.0
-offset_right = 270.0
-offset_bottom = 803.0
+offset_left = -575.0
+offset_top = -325.0
+offset_right = -319.0
+offset_bottom = 711.0
 scale = Vector2(0.5, 0.5)
 
 [node name="TextureButton" parent="WetVbox" unique_id=608418819 instance=ExtResource("2_4gvii")]
@@ -109,9 +116,10 @@ ing_name = "oxidizer"
 sprite = SubResource("CompressedTexture2D_rbv71")
 
 [node name="DryVbox" type="VBoxContainer" parent="." unique_id=985942603]
-offset_left = 1005.0
-offset_right = 1261.0
-offset_bottom = 803.0
+offset_left = 575.0
+offset_top = -325.0
+offset_right = 831.0
+offset_bottom = 911.0
 scale = Vector2(0.5, 0.5)
 theme_override_constants/separation = -11
 
@@ -152,7 +160,6 @@ sprite = ExtResource("2_s5j57")
 
 [node name="IngArea" type="Sprite2D" parent="." unique_id=333326094]
 z_index = -1
-position = Vector2(561, 271)
 texture = ExtResource("5_podmp")
 
 [node name="Area2D" type="Area2D" parent="IngArea" unique_id=104131642 groups=["ing_area"]]
@@ -160,11 +167,28 @@ texture = ExtResource("5_podmp")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="IngArea/Area2D" unique_id=1455236019]
 shape = SubResource("CircleShape2D_d34rt")
 
+[node name="Parts" type="CPUParticles2D" parent="IngArea" unique_id=402147985]
+emitting = false
+amount = 25
+texture = ExtResource("5_d34rt")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+direction = Vector2(0, -1)
+spread = 90.0
+initial_velocity_min = 100.0
+initial_velocity_max = 500.0
+angular_velocity_min = -360.0
+angular_velocity_max = 360.0
+scale_amount_min = 0.1
+scale_amount_max = 0.5
+color_ramp = SubResource("Gradient_klg8q")
+
 [node name="CurrentInstruction" type="Label" parent="." unique_id=1991750438]
-offset_left = 472.0
-offset_top = 41.0
-offset_right = 652.0
-offset_bottom = 110.0
+offset_left = -94.0
+offset_top = -305.0
+offset_right = 86.0
+offset_bottom = -236.0
 theme_override_font_sizes/font_size = 50
 text = "current"
 
@@ -173,10 +197,10 @@ libraries/ = SubResource("AnimationLibrary_4tj6a")
 
 [node name="Mash1" type="Sprite2D" parent="AnimationPlayer" unique_id=727612154]
 visible = false
-position = Vector2(556, 140)
+position = Vector2(0, -207)
 texture = ExtResource("5_4gvii")
 
 [node name="Mash2" type="Sprite2D" parent="AnimationPlayer" unique_id=2048157308]
 visible = false
-position = Vector2(556, 140)
+position = Vector2(0, -207)
 texture = ExtResource("6_podmp")

@@ -4,7 +4,8 @@ extends Node2D
 """
 Make stars -> sequence -> package -> take bids -> <-
 """
-
+var final_color : Color
+var final_effect : int
 var total_weight : float = 0.0:
 	set(new):
 		total_weight = new
@@ -63,14 +64,26 @@ func _effect_button_pressed(button: String) -> void:
 	match button:
 		"Select":
 			print("You can make up to %s stars." % str(30 / total_weight))
+			final_color = $ColorPicker.color
+			
+			EventBus.room_completed.emit()
 		"Brocade":
-			#effects["Brocade"].active = $Vbox/Brocade.button_pressed
+			final_effect = 2
+			for b in $Vbox.get_children():
+				if b.name == "Brocade" or b is Label: continue
+				b.button_pressed = false
 			print("press with charcoal to add a slow-burning effect")
 		"Crackle":
-			#effects["Crackle"].active = $Vbox/Crackle.button_pressed
+			final_effect = 1
+			for b in $Vbox.get_children():
+				if b.name == "Crackle" or b is Label: continue
+				b.button_pressed = false
 			print("a mixture of different metals that burn at different speeds, creating the sparatic effect.")
 		"Palm":
-			#effects["Palm"].active = $Vbox/Palm.button_pressed
+			final_effect = 3
+			for b in $Vbox.get_children():
+				if b.name == "Palm" or b is Label: continue
+				b.button_pressed = false
 			print("wrap with paper that will fall more slowly")
 		_:
 			print("Button not assigned.")

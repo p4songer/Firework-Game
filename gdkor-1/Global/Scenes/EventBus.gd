@@ -19,8 +19,10 @@ signal prepare_launch
 @warning_ignore("unused_signal")
 signal firework_finished
 @warning_ignore("unused_signal")
-signal qte_clicked(dollars: float)
+signal qte_clicked(data : NPC_Resource)
 @warning_ignore("unused_signal")
 signal spin_finished
 @warning_ignore("unused_signal")
 signal attempt_ingredient(ing_name : String)
+@warning_ignore("unused_signal")
+signal room_completed

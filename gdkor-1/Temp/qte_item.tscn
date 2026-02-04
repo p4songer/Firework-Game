@@ -6,6 +6,8 @@
 
 [node name="QteItem" type="Node2D" unique_id=342933844]
 script = ExtResource("1_pqtkm")
+time = null
+money = null
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=521188817]
 offset_right = 256.0

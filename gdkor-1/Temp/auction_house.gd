@@ -2,8 +2,20 @@ extends Node2D
 
 @onready var bids: Node2D = $Bids
 @onready var cam: Camera2D = $Camera2D
-@onready var money: Label = $UI/Money
+#@onready var money: Label = $UI/Money
 @onready var delay: Timer = $Delay
+
+
+@export var active : bool = false:
+	set(new):
+		active = new
+		if active:
+			delay.start()
+			$Camera2D.enabled = true
+		else:
+			delay.stop()
+			$Camera2D.enabled = false
+
 
 var current_money : float = 0.0
 
@@ -18,7 +30,10 @@ func _ready() -> void:
 	for i in 25:
 		var new_item = QTE_ITEM.instantiate()
 		new_item.time = randf_range(0.1, 0.5)
-		new_item.money = randf_range(5.0, 500.0)
+		var new_npc = NPC_Resource.new()
+		new_npc.build_random()
+		new_item.npc_data = new_npc
+		#new_item.money = randf_range(5.0, 500.0)
 		new_item.scale = Vector2(0.75, 0.75)
 		var rand_x = randf_range(-900, 900)
 		var rand_y = randf_range(-450, 450)
@@ -31,9 +46,8 @@ func _process(_delta: float) -> void:
 	cam.global_position = get_global_mouse_position()
 
 
-func _on_qte_click(dollars: float) -> void:
-	current_money += dollars
-	money.text = "%0.2f" % current_money
+func _on_qte_click(_dollars) -> void:
+	pass
 
 
 func _on_delay_timeout() -> void:

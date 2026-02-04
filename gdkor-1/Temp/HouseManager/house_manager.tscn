@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://cj73xl2uujryc"]
+
+[ext_resource type="Script" uid="uid://4rgt3vs3nupo" path="res://Temp/HouseManager/house_manager.gd" id="1_6you1"]
+[ext_resource type="PackedScene" uid="uid://d0r1ikl3flsxy" path="res://Temp/auction_house.tscn" id="2_6wiyr"]
+[ext_resource type="PackedScene" uid="uid://cppthrbnf2emu" path="res://Temp/create_stars.tscn" id="3_4dcq3"]
+[ext_resource type="PackedScene" uid="uid://7c0nt2ewvbfx" path="res://Temp/star_minigame.tscn" id="4_y3hmn"]
+[ext_resource type="PackedScene" uid="uid://dmlsjsr8rfh1" path="res://Game/launch_scene.tscn" id="5_6wiyr"]
+
+[node name="HouseManager" type="Node2D" unique_id=466819776]
+script = ExtResource("1_6you1")
+
+[node name="FocusCam" type="Camera2D" parent="." unique_id=1457486742]
+zoom = Vector2(0.6, 0.6)
+
+[node name="AuctionHouse" parent="." unique_id=852820366 instance=ExtResource("2_6wiyr")]
+
+[node name="CreateStars" parent="." unique_id=1232134199 instance=ExtResource("3_4dcq3")]
+position = Vector2(1920, 0)
+
+[node name="StarMinigame" parent="." unique_id=948536394 instance=ExtResource("4_y3hmn")]
+position = Vector2(3840, 0)
+
+[node name="LaunchScene" parent="." unique_id=679610553 instance=ExtResource("5_6wiyr")]
+position = Vector2(7680, 0)

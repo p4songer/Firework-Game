@@ -10,6 +10,7 @@ var tween_dict: Dictionary
 
 const OPTIONS_SCENE = preload("uid://dcdf81eayjyro")
 const GAME_2D = preload("uid://dydw0o4rwye4u")
+const HOUSE_MANAGER = preload("uid://cj73xl2uujryc")
 
 func _ready() -> void:
 	for button in $MarginContainer/VBoxContainer.get_children():
@@ -26,7 +27,7 @@ func _gui_input(event: InputEvent) -> void:
 
 func _on_start_game_pressed() -> void:
 	Global.play_sfx()
-	Global.start_transition(GAME_2D, Global.TRANSITIONS.DEFAULT)
+	Global.start_transition(HOUSE_MANAGER, Global.TRANSITIONS.DEFAULT)
 
 
 func _on_options_pressed() -> void:

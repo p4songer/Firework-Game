@@ -41,16 +41,16 @@ func launch_firework() -> void:
 	$Tube/Path2D/PathFollow2D/FuseParticles.emitting = false
 	$LaunchTimer.start()
 	fire_break.global_position = get_launch_pos()
-	var ingredient = Global.active_fireworks.pop_front()
-	mine.display(ingredient)
-	fire_break.trail.texture = ingredient.star_sprite
+	#var ingredient = Global.active_fireworks.pop_front()
+	#mine.display(ingredient)
+	#fire_break.trail.texture = ingredient.star_sprite
 	
 	var tween = create_tween()
 	tween.tween_property(fire_break, "global_position", destination, 1.2)
 	tween.finished.connect(_on_star_finished)
 	effect.global_position = destination
 	
-	fire_break.modulate = ingredient.ing_color 
+	#fire_break.modulate = ingredient.ing_color 
 	fire_break.is_trail = true
 	
 	if Global.is_whistle:
@@ -83,7 +83,7 @@ func _on_delay_timer_timeout() -> void:
 	var rand_x = randf_range(fire_break.global_position.x - 1500, fire_break.global_position.x + 1500)
 	var rand_y = randf_range(fire_break.global_position.y - 1750, fire_break.global_position.y + 1750)
 	effect.global_position = Vector2(rand_x, rand_y)
-	effect.display(Global.active_fireworks.pop_front())
+	#effect.display(Global.active_fireworks.pop_front())
 
 
 func _on_launch_timer_timeout() -> void:
@@ -97,3 +97,7 @@ func _on_firework_finished() -> void:
 
 func _on_return_pressed() -> void:
 	Global.start_transition(game, Global.TRANSITIONS.DEFAULT)
+
+
+func temp_display(thingy) -> void:
+	$FireworkStages/Break.display(thingy)

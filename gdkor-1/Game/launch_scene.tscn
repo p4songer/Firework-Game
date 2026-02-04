@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dmlsjsr8rfh1"]
+[gd_scene format=3 uid="uid://dmlsjsr8rfh1"]
 
 [ext_resource type="Script" uid="uid://cdsg82fsm0pdy" path="res://Game/launch_scene.gd" id="1_diak1"]
 [ext_resource type="Texture2D" uid="uid://be6ekjt8xxlgo" path="res://Game/Assets/SkyBackground.png" id="2_3pum5"]
@@ -146,36 +146,36 @@ _data = {
 &"launch": SubResource("Animation_xgsrl")
 }
 
-[node name="LaunchScene" type="Node2D"]
+[node name="LaunchScene" type="Node2D" unique_id=1449793172]
 script = ExtResource("1_diak1")
 destination = Vector2(0, -5000)
 
-[node name="Background" type="Sprite2D" parent="."]
+[node name="Background" type="Sprite2D" parent="." unique_id=422711967]
 z_index = -2
 scale = Vector2(1.75, 1.75)
 texture = ExtResource("2_3pum5")
 
-[node name="Tube" type="Sprite2D" parent="."]
+[node name="Tube" type="Sprite2D" parent="." unique_id=2017185910]
 z_index = 2
 position = Vector2(0, 512)
 rotation = 1.5707964
 texture = ExtResource("3_6v7us")
 offset = Vector2(128, 0)
 
-[node name="Line2D" type="Line2D" parent="Tube"]
+[node name="Line2D" type="Line2D" parent="Tube" unique_id=1267073029]
 points = PackedVector2Array(0, 0, -46, -49.999996, 3, -124, 69, -110.00001, 124, -153, 190, -134, 213, -209, 201, -304.00003)
 width = 25.0
 default_color = Color(0, 0.47, 0.1175, 1)
 
-[node name="Path2D" type="Path2D" parent="Tube"]
+[node name="Path2D" type="Path2D" parent="Tube" unique_id=954912273]
 curve = SubResource("Curve2D_3pum5")
 
-[node name="PathFollow2D" type="PathFollow2D" parent="Tube/Path2D"]
+[node name="PathFollow2D" type="PathFollow2D" parent="Tube/Path2D" unique_id=936641043]
 position = Vector2(203, -297.00003)
 rotation = 1.445027
 loop = false
 
-[node name="FuseParticles" type="CPUParticles2D" parent="Tube/Path2D/PathFollow2D"]
+[node name="FuseParticles" type="CPUParticles2D" parent="Tube/Path2D/PathFollow2D" unique_id=1984842326]
 emitting = false
 amount = 200
 texture = SubResource("GradientTexture2D_ejv5c")
@@ -183,7 +183,7 @@ direction = Vector2(-1, 1)
 initial_velocity_min = 100.0
 initial_velocity_max = 500.0
 
-[node name="TextureButton" type="TextureButton" parent="Tube/Path2D/PathFollow2D"]
+[node name="TextureButton" type="TextureButton" parent="Tube/Path2D/PathFollow2D" unique_id=1165894588]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -197,7 +197,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture_normal = SubResource("GradientTexture2D_4htul")
 
-[node name="Label" type="Label" parent="Tube/Path2D/PathFollow2D/TextureButton"]
+[node name="Label" type="Label" parent="Tube/Path2D/PathFollow2D/TextureButton" unique_id=881685988]
 layout_mode = 0
 offset_left = 132.32962
 offset_top = 161.33995
@@ -207,12 +207,13 @@ scale = Vector2(-2, -2)
 theme = ExtResource("4_xgsrl")
 text = "CLICK"
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1235780617]
 position = Vector2(0, 384)
+enabled = false
 zoom = Vector2(0.7, 0.7)
 script = ExtResource("4_ejv5c")
 
-[node name="Stars" type="CPUParticles2D" parent="."]
+[node name="Stars" type="CPUParticles2D" parent="." unique_id=1567793527]
 position = Vector2(0, -3500)
 amount = 150
 texture = SubResource("GradientTexture2D_6v7us")
@@ -224,10 +225,10 @@ emission_rect_extents = Vector2(2475, 2475)
 gravity = Vector2(0, 0)
 color_ramp = SubResource("Gradient_ejv5c")
 
-[node name="LaunchUI" type="CanvasLayer" parent="."]
+[node name="LaunchUI" type="CanvasLayer" parent="." unique_id=357605387]
 visible = false
 
-[node name="Return" type="Button" parent="LaunchUI"]
+[node name="Return" type="Button" parent="LaunchUI" unique_id=1426615398]
 offset_left = 39.0
 offset_top = 39.0
 offset_right = 234.0
@@ -235,34 +236,32 @@ offset_bottom = 138.0
 theme = ExtResource("4_xgsrl")
 text = "Return"
 
-[node name="FireworkStages" type="Node2D" parent="."]
+[node name="FireworkStages" type="Node2D" parent="." unique_id=1910271577]
 
-[node name="Mine" parent="FireworkStages" instance=ExtResource("4_6v7us")]
+[node name="Mine" parent="FireworkStages" unique_id=1874939595 instance=ExtResource("4_6v7us")]
 position = Vector2(0, 540)
 is_mine = true
 
-[node name="Break" parent="FireworkStages" instance=ExtResource("4_6v7us")]
+[node name="Break" parent="FireworkStages" unique_id=1011673113 instance=ExtResource("4_6v7us")]
 position = Vector2(0, 540)
 
-[node name="Effect" parent="FireworkStages" instance=ExtResource("4_6v7us")]
+[node name="Effect" parent="FireworkStages" unique_id=1075743374 instance=ExtResource("4_6v7us")]
 position = Vector2(0, 540)
 
-[node name="DelayTimer" type="Timer" parent="."]
+[node name="DelayTimer" type="Timer" parent="." unique_id=1204741444]
 wait_time = 1.25
 one_shot = true
 
-[node name="LaunchTimer" type="Timer" parent="."]
+[node name="LaunchTimer" type="Timer" parent="." unique_id=136637819]
 wait_time = 0.5
 one_shot = true
 
-[node name="FuseAnim" type="AnimationPlayer" parent="."]
+[node name="FuseAnim" type="AnimationPlayer" parent="." unique_id=94545286]
 root_node = NodePath("../Tube/Path2D/PathFollow2D")
-libraries = {
-&"": SubResource("AnimationLibrary_ejv5c")
-}
-autoplay = "flash"
+libraries/ = SubResource("AnimationLibrary_ejv5c")
+autoplay = &"flash"
 
-[node name="SFX" type="AudioStreamPlayer" parent="."]
+[node name="SFX" type="AudioStreamPlayer" parent="." unique_id=1564650297]
 bus = &"SFX"
 
 [connection signal="pressed" from="Tube/Path2D/PathFollow2D/TextureButton" to="." method="_on_texture_button_pressed"]

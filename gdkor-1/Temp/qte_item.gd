@@ -1,7 +1,8 @@
 extends Node2D
 
 @export var time: float 
-@export var money : float
+@export var npc_data : NPC_Resource
+var text_display : float
 
 @onready var progress: TextureProgressBar = $TextureProgressBar
 @onready var display: Label = $TextureProgressBar/TimeDisplay
@@ -12,10 +13,9 @@ var complete : bool = false
 func _ready() -> void:
 	if not time:
 		push_error("No time set for %s. Double check this code." % self.name)
-	if not money:
-		push_error("No money set for %s. Double check this code." % self.name)
-	
-	display.text = str("%0.2f" % money)
+	if not npc_data:
+		push_error("NPC data is empty.")
+	display.text = npc_data.npc_name
 	timer.wait_time = time
 	timer.start()
 
@@ -35,4 +35,4 @@ func _on_texture_progress_bar_gui_input(event: InputEvent) -> void:
 		progress.self_modulate = Color(0.0, 0.5, 0.192, 1.0)
 		timer.stop()
 		
-		EventBus.qte_clicked.emit(money)
+		EventBus.qte_clicked.emit(npc_data)
