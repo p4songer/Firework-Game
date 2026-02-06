@@ -1,23 +1,29 @@
-extends Node2D
+extends TextureProgressBar
 
 @export var time: float 
 @export var npc_data : NPC_Resource
 var text_display : float
 
-@onready var progress: TextureProgressBar = $TextureProgressBar
-@onready var display: Label = $TextureProgressBar/TimeDisplay
+var display_info : bool = false
+@onready var display: Label = $TimeDisplay
 @onready var timer: Timer = $Timer
+@onready var info: RichTextLabel = $Vbox/InfoBlock
 
 var complete : bool = false
+signal hovered
+signal unhovered
 
 func _ready() -> void:
-	if not time:
-		push_error("No time set for %s. Double check this code." % self.name)
+	if time:
+		timer.wait_time = time
+		timer.start()
+	else:
+		push_error("No time set for %s. Make sure this is an NPC." % self.name)
 	if not npc_data:
 		push_error("NPC data is empty.")
-	display.text = npc_data.npc_name
-	timer.wait_time = time
-	timer.start()
+	else:
+		display.text = npc_data.npc_name
+		info.text = npc_data.npc_statement
 
 
 func _on_timer_timeout() -> void:
@@ -25,14 +31,26 @@ func _on_timer_timeout() -> void:
 		self.queue_free()
 		return
 	
-	progress.value = max(0, progress.value - 1)
-	if progress.value == 0:
+	self.value = max(0, self.value - 1)
+	if self.value == 0:
 		complete = true
 
 
-func _on_texture_progress_bar_gui_input(event: InputEvent) -> void:
+func _on_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-		progress.self_modulate = Color(0.0, 0.5, 0.192, 1.0)
+		self.self_modulate = Color(0.0, 0.5, 0.192, 1.0)
 		timer.stop()
 		
 		EventBus.qte_clicked.emit(npc_data)
+
+
+func _on_mouse_entered() -> void:
+	if display_info : 
+		info.show()
+		hovered.emit()
+
+
+func _on_mouse_exited() -> void:
+	if display_info : 
+		info.hide()
+		unhovered.emit()

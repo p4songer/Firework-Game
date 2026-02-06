@@ -33,6 +33,13 @@ var exp_array : Array = [
 	preload("uid://bw2y274anh3we"), preload("uid://miqxy0fsxpdh")
 ]
 
+func launch(data : IngredientResource) -> void:
+	if is_trail: 
+		trail.emitting = true
+		trail.self_modulate = data.ing_color
+		trail.texture = data.star_sprite
+
+
 func display(data : IngredientResource) -> void:
 	star = data.star_sprite
 	(F_METHODS[data.effect]).call(data.ing_color)

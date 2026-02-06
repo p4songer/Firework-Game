@@ -51,9 +51,9 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("ui_accept") and is_mashing:
 		mash_counter -= 1
-		if mash_counter < 0:
-			_parse_build()
+		if mash_counter == 0:
 			is_mashing = false
+			_parse_build()
 			$AnimationPlayer.play("RESET")
 
 func _parse_build():
@@ -61,6 +61,7 @@ func _parse_build():
 	parts.emitting = true
 	if selected_array.is_empty(): 
 		$CurrentInstruction.text = "Done. Good job."
+		EventBus.room_completed.emit()
 		return
 	active_element = selected_array.pop_front()
 	$CurrentInstruction.text = active_element

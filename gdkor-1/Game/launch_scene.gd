@@ -1,5 +1,6 @@
 extends Node2D
 
+var ingredient : IngredientResource
 var fuse_lit : bool = false:
 	set(lit):
 		fuse_lit = lit
@@ -13,7 +14,7 @@ var fuse_lit : bool = false:
 @onready var mine: CPUParticles2D = $FireworkStages/Mine
 @onready var fire_break: CPUParticles2D = $FireworkStages/Break
 @onready var effect: CPUParticles2D = $FireworkStages/Effect
-
+@onready var cam: Camera2D = $Camera2D
 @onready var sfx: AudioStreamPlayer = $SFX
 
 @export var destination : Vector2
@@ -36,6 +37,11 @@ func _ready() -> void:
 	EventBus.firework_finished.connect(_on_firework_finished)
 
 
+func make_active() -> void:
+	cam.enabled = true
+
+
+
 func launch_firework() -> void:
 	#FIXME Global array isn't working now.
 	$Tube/Path2D/PathFollow2D/FuseParticles.emitting = false
@@ -46,12 +52,11 @@ func launch_firework() -> void:
 	#fire_break.trail.texture = ingredient.star_sprite
 	
 	var tween = create_tween()
-	tween.tween_property(fire_break, "global_position", destination, 1.2)
+	tween.tween_property(fire_break, "position", destination, 1.2)
 	tween.finished.connect(_on_star_finished)
-	effect.global_position = destination
-	
-	#fire_break.modulate = ingredient.ing_color 
+	#effect.global_position = destination
 	fire_break.is_trail = true
+	fire_break.launch(ingredient)
 	
 	if Global.is_whistle:
 		whistle_arr.shuffle()
@@ -74,9 +79,9 @@ func _on_texture_button_pressed() -> void:
 
 
 func _on_star_finished() -> void:
-	fire_break.display(Global.active_fireworks.pop_front())
-	$DelayTimer.start()
-	$Camera2D.target = effect
+	fire_break.display(ingredient)
+	#$DelayTimer.start()
+	#$Camera2D.target = effect
 
 
 func _on_delay_timer_timeout() -> void:

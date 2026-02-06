@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://pmisojk3kuhk"]
+[gd_scene format=3 uid="uid://pmisojk3kuhk"]
 
 [ext_resource type="Script" uid="uid://c1yxvx2f70gy5" path="res://Global/Scenes/global.gd" id="1_n8fn5"]
 [ext_resource type="Shader" uid="uid://8ofnbwix6jjk" path="res://Global/Scenes/Transitions.gdshader" id="2_u0kcs"]
@@ -138,19 +138,17 @@ colors = PackedColorArray(4.3317675e-07, 0.13606212, 0.33160415, 1, 0, 0.2579966
 gradient = SubResource("Gradient_n8fn5")
 fill_to = Vector2(0, 1)
 
-[node name="Global" type="Node"]
+[node name="Global" type="Node" unique_id=1579336217]
 process_mode = 3
 script = ExtResource("1_n8fn5")
 
-[node name="Transitions" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_a7wdd")
-}
+[node name="Transitions" type="AnimationPlayer" parent="." unique_id=949977780]
+libraries/ = SubResource("AnimationLibrary_a7wdd")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2102668133]
 layer = 5
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer" unique_id=1342637020]
 material = SubResource("ShaderMaterial_17vvb")
 anchors_preset = 15
 anchor_right = 1.0
@@ -160,11 +158,10 @@ grow_vertical = 2
 mouse_filter = 2
 texture = SubResource("GradientTexture2D_u0kcs")
 
-[node name="GlobalMusic" type="AudioStreamPlayer" parent="."]
+[node name="GlobalMusic" type="AudioStreamPlayer" parent="." unique_id=579506847]
 stream = ExtResource("3_avv5p")
-autoplay = true
 bus = &"Music"
 
-[node name="GlobalSFX" type="AudioStreamPlayer" parent="."]
+[node name="GlobalSFX" type="AudioStreamPlayer" parent="." unique_id=719940181]
 stream = ExtResource("4_y8e5j")
 bus = &"SFX"

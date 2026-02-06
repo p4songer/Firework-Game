@@ -14,6 +14,11 @@ Aluminum - Canada
 Barium - India, China, Domestic
 Copper - Chile (U), Domestic (U), China (R)
 
+
+
+Story beats about life milestones. Fireworks don't celebrate overall holidays, but individuals as a community event.
+Fireworks are a special rare thing, making it something for deep personal events. As such, the firework crafters are artisans,
+working closely with the clientelle to fit their exact situation.
 """
 
 const FIRE_RESOURCES : Array = [
@@ -45,6 +50,9 @@ var _transition_dict : Dictionary = {
 @onready var anims: AnimationPlayer = $Transitions
 var _next_scene : Node
 var _previous_scene : Node
+
+func _ready() -> void:
+	push_error("MUSIC IS NOT AUTOPLAY")
 
 func get_end_anim(prefix: String) -> void:
 	_change_scene()

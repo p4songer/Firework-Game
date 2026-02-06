@@ -22,3 +22,21 @@ position = Vector2(3840, 0)
 
 [node name="LaunchScene" parent="." unique_id=679610553 instance=ExtResource("5_6wiyr")]
 position = Vector2(7680, 0)
+
+[node name="CustomerUI" type="CanvasLayer" parent="." unique_id=543081015]
+offset = Vector2(0, 150)
+transform = Transform2D(1, 0, 0, 1, 0, 150)
+
+[node name="Hbox" type="HBoxContainer" parent="CustomerUI" unique_id=1399060320]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.5, 0.5)
+alignment = 1

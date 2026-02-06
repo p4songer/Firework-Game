@@ -2,9 +2,7 @@ extends Node2D
 
 @onready var bids: Node2D = $Bids
 @onready var cam: Camera2D = $Camera2D
-#@onready var money: Label = $UI/Money
 @onready var delay: Timer = $Delay
-
 
 @export var active : bool = false:
 	set(new):
@@ -58,3 +56,10 @@ func _on_delay_timeout() -> void:
 	# Check to spawn bid
 	if bids.get_child_count() < 5 and not bid_array.is_empty():
 		bids.add_child(bid_array.pop_front())
+
+
+func clear_house() -> void:
+	for i in $Bids.get_children():
+		i.queue_free()
+	
+	EventBus.room_completed.emit()

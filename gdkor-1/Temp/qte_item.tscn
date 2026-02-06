@@ -4,12 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://br5b4kkgf6nnl" path="res://Global/Sprites/QteBarBG.png" id="2_le2ta"]
 [ext_resource type="Texture2D" uid="uid://baqde38mo875y" path="res://Global/Sprites/QteBarPG.png" id="3_ueyka"]
 
-[node name="QteItem" type="Node2D" unique_id=342933844]
-script = ExtResource("1_pqtkm")
-time = null
-money = null
-
-[node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=521188817]
+[node name="QteItem" type="TextureProgressBar" unique_id=521188817]
 offset_right = 256.0
 offset_bottom = 256.0
 max_value = 10.0
@@ -17,8 +12,9 @@ value = 10.0
 fill_mode = 5
 texture_under = ExtResource("2_le2ta")
 texture_progress = ExtResource("3_ueyka")
+script = ExtResource("1_pqtkm")
 
-[node name="TimeDisplay" type="Label" parent="TextureProgressBar" unique_id=1309489262]
+[node name="TimeDisplay" type="Label" parent="." unique_id=1309489262]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -36,5 +32,28 @@ vertical_alignment = 1
 [node name="Timer" type="Timer" parent="." unique_id=1041802604]
 wait_time = 0.2
 
-[connection signal="gui_input" from="TextureProgressBar" to="." method="_on_texture_progress_bar_gui_input"]
+[node name="Vbox" type="VBoxContainer" parent="." unique_id=457007360]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -258.0
+offset_bottom = -258.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 2
+
+[node name="InfoBlock" type="RichTextLabel" parent="Vbox" unique_id=1816821553]
+visible = false
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/normal_font_size = 25
+text = "test
+text"
+fit_content = true
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -239,6 +239,7 @@ text = "Return"
 [node name="FireworkStages" type="Node2D" parent="." unique_id=1910271577]
 
 [node name="Mine" parent="FireworkStages" unique_id=1874939595 instance=ExtResource("4_6v7us")]
+visible = false
 position = Vector2(0, 540)
 is_mine = true
 
@@ -246,6 +247,7 @@ is_mine = true
 position = Vector2(0, 540)
 
 [node name="Effect" parent="FireworkStages" unique_id=1075743374 instance=ExtResource("4_6v7us")]
+visible = false
 position = Vector2(0, 540)
 
 [node name="DelayTimer" type="Timer" parent="." unique_id=1204741444]
@@ -253,7 +255,7 @@ wait_time = 1.25
 one_shot = true
 
 [node name="LaunchTimer" type="Timer" parent="." unique_id=136637819]
-wait_time = 0.5
+wait_time = 0.3
 one_shot = true
 
 [node name="FuseAnim" type="AnimationPlayer" parent="." unique_id=94545286]

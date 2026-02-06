@@ -12,6 +12,7 @@ texture = ExtResource("1_eahnl")
 [node name="Bids" type="Node2D" parent="." unique_id=1931468117]
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1011504554]
+zoom = Vector2(0.75, 0.75)
 limit_left = -960
 limit_top = -540
 limit_right = 960
