@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://d0r1ikl3flsxy"]
 
 [ext_resource type="Texture2D" uid="uid://be6ekjt8xxlgo" path="res://Game/Assets/SkyBackground.png" id="1_eahnl"]
-[ext_resource type="Script" uid="uid://dqybkh1enoqvu" path="res://Temp/auction_house.gd" id="1_k07re"]
+[ext_resource type="Script" uid="uid://dqybkh1enoqvu" path="res://Temp/House Scenes/Auction/auction_house.gd" id="1_k07re"]
 
 [node name="AuctionHouse" type="Node2D" unique_id=852820366]
 script = ExtResource("1_k07re")

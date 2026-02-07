@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://b1hymvl04w807"]
+
+[ext_resource type="Texture2D" uid="uid://xigrea6kwh44" path="res://Temp/assets/Glue.png" id="1_k5mt2"]
+[ext_resource type="Script" uid="uid://c5nkd4k1bmqtq" path="res://Temp/House Scenes/Craft Stars/pitcher.gd" id="2_2jak4"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hycgp"]
+radius = 120.0
+
+[node name="Pitcher" type="Sprite2D" unique_id=1064967711]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_k5mt2")
+script = ExtResource("2_2jak4")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1690629397 groups=["pitcher"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=235559489]
+shape = SubResource("CircleShape2D_hycgp")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_exited"]
+[connection signal="input_event" from="Area2D" to="." method="_on_area_input_event"]

@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://bvjnv5efn6c7f"]
+
+[ext_resource type="Texture2D" uid="uid://c4o26idv257oq" path="res://Game/Assets/Chem.png" id="1_6iltu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4tx6t"]
+radius = 4.0
+
+[node name="Grain" type="RigidBody2D" unique_id=1167622594]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=134018625]
+shape = SubResource("CircleShape2D_4tx6t")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=970595625]
+position = Vector2(0, -1.9999999)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_6iltu")
