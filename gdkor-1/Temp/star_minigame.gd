@@ -1,11 +1,12 @@
 extends Node2D
 
 @onready var parts: CPUParticles2D = $IngArea/Parts
+@onready var instruction: Label = $Instructions/Vbox/CurrentInstruction
 
-@export var current_build : String:
-	set(new):
-		current_build = new
-		selected_array = build_dict[current_build]
+@export var current_build : String#:
+	#set(new):
+		#current_build = new
+		#selected_array = build_dict[current_build]
 @export var active : bool = false
 
 var default_sequence : Array = [
@@ -28,7 +29,11 @@ var build_dict : Dictionary = {
 	"crackle" : crackle_sequence,
 	"default" : default_sequence
 }
-var selected_array : Array
+var selection_array : Array =[
+	"Default Star", "Palm Star", "Brocade Star", "Crackle Star", 
+]
+var selection_index : int = 0
+var active_array : Array
 var active_element : String
 
 var is_mashing : bool = false
@@ -39,13 +44,11 @@ const TEST_ROTATE = preload("uid://qut0nlt30vsl")
 func _ready() -> void:
 	EventBus.spin_finished.connect(_on_spin_finished)
 	EventBus.attempt_ingredient.connect(_on_attempt_ingredient)
-	#
-	#if current_build and current_build in build_dict.keys():
-		#selected_array = build_dict[current_build]
-	#else:
-		#selected_array = default_sequence
-	#
-	#_parse_build()
+	
+	for b in $Instructions.get_children():
+		if b is Button:
+			b.pressed.connect(_on_selector_pressed.bind(b.name))
+	instruction.text = selection_array[0]
 
 
 func _process(_delta: float) -> void:
@@ -56,15 +59,16 @@ func _process(_delta: float) -> void:
 			_parse_build()
 			$AnimationPlayer.play("RESET")
 
+
 func _parse_build():
 	parts.restart()
 	parts.emitting = true
-	if selected_array.is_empty(): 
-		$CurrentInstruction.text = "Done. Good job."
-		EventBus.room_completed.emit()
+	if active_array.is_empty(): 
+		instruction.text = "Done. Good job."
+		#EventBus.room_completed.emit()
 		return
-	active_element = selected_array.pop_front()
-	$CurrentInstruction.text = active_element
+	active_element = active_array.pop_front()
+	instruction.text = active_element.to_upper()
 	if active_element == "mix":
 		var new_spin = TEST_ROTATE.instantiate()
 		$IngArea.add_child(new_spin)
@@ -81,8 +85,19 @@ func _on_attempt_ingredient(ing_name : String) -> void:
 	if ing_name == active_element:
 		_parse_build()
 
+func _on_selector_pressed(direction: String) -> void:
+	selection_index = wrap(selection_index + int(direction), 0, selection_array.size())
+	instruction.text = selection_array[selection_index]
+
 
 func activate_mash() -> void:
 	$AnimationPlayer.play("mash")
 	is_mashing = true
 	mash_counter = 10
+
+
+func _on_craft_pressed() -> void:
+	var choice = build_dict.keys()[selection_index]
+	active_array = build_dict[choice]
+	$"Instructions/-1".hide(); $"Instructions/1".hide(); $Instructions/Vbox/Craft.hide()
+	_parse_build()

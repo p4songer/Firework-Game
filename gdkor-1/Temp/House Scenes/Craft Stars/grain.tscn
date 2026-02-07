@@ -1,11 +1,13 @@
 [gd_scene format=3 uid="uid://bvjnv5efn6c7f"]
 
+[ext_resource type="Script" uid="uid://co01ju2up8xau" path="res://Temp/House Scenes/Craft Stars/grain.gd" id="1_4tx6t"]
 [ext_resource type="Texture2D" uid="uid://c4o26idv257oq" path="res://Game/Assets/Chem.png" id="1_6iltu"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4tx6t"]
 radius = 4.0
 
 [node name="Grain" type="RigidBody2D" unique_id=1167622594]
+script = ExtResource("1_4tx6t")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=134018625]
 shape = SubResource("CircleShape2D_4tx6t")
@@ -14,3 +16,7 @@ shape = SubResource("CircleShape2D_4tx6t")
 position = Vector2(0, -1.9999999)
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("1_6iltu")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1331510809]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_screen_exited"]

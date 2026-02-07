@@ -22,7 +22,8 @@ func _ready() -> void:
 	auction_house.active = true
 	$FocusCam.enabled = false
 
-
+#TODO UPDATE THIS
+#FIXME UPDATE THIS
 func _on_qte_click(npc : NPC_Resource) -> void:
 	customer_array.append(npc)
 	

@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://db0s7yp7pd4vd" path="res://Temp/House Scenes/Craft Stars/craft_stars.gd" id="1_1tsey"]
 [ext_resource type="PackedScene" uid="uid://b1hymvl04w807" path="res://Temp/House Scenes/Craft Stars/pitcher.tscn" id="2_1tsey"]
+[ext_resource type="Texture2D" uid="uid://c4o26idv257oq" path="res://Game/Assets/Chem.png" id="4_get26"]
 [ext_resource type="Texture2D" uid="uid://eauved75drq3" path="res://Temp/assets/Mix.png" id="4_iva4e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pmw3i"]
@@ -22,14 +23,17 @@ script = ExtResource("1_1tsey")
 
 [node name="Pitcher" parent="." unique_id=1064967711 instance=ExtResource("2_1tsey")]
 color = Color(1, 0, 0, 1)
+color_name = "Strontium"
 
 [node name="Pitcher2" parent="." unique_id=201100778 instance=ExtResource("2_1tsey")]
 position = Vector2(465, 226)
 color = Color(0, 0, 1, 1)
+color_name = "Copper"
 
 [node name="Pitcher3" parent="." unique_id=897557840 instance=ExtResource("2_1tsey")]
 position = Vector2(440, -191)
 color = Color(0, 1, 0, 1)
+color_name = "Barium"
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=286150403]
 z_index = -1
@@ -58,5 +62,9 @@ position = Vector2(0, 52)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Area2D" unique_id=581283985]
 position = Vector2(-11.999992, -30)
 shape = SubResource("RectangleShape2D_af870")
+
+[node name="Chem" type="Sprite2D" parent="." unique_id=800438201]
+position = Vector2(-364, -219)
+texture = ExtResource("4_get26")
 
 [connection signal="area_exited" from="Sprite2D/Area2D" to="." method="_on_area_2d_area_exited"]

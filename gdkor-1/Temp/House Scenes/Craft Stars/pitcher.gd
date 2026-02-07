@@ -1,11 +1,16 @@
 extends Sprite2D
 
 @export var color : Color
+@export var color_name : String
 
 var dragging : bool = false
 var pouring : bool = false
 
 const GRAIN = preload("uid://bvjnv5efn6c7f")
+
+func _ready() -> void:
+	$Label.text = color_name
+
 
 func _process(_delta: float) -> void:
 	if dragging:
@@ -15,7 +20,7 @@ func _process(_delta: float) -> void:
 		var new_g = GRAIN.instantiate()
 		new_g.global_position = self.global_position
 		new_g.modulate = color
-		get_parent().get_child(0).add_child(new_g)
+		get_parent().add_grain(new_g)
 
 
 func _on_area_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:

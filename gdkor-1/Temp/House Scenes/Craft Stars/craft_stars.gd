@@ -1,9 +1,28 @@
 extends Node2D
 
+@onready var grain_holder: Node2D = $GrainHolder
+@onready var jar_area: Area2D = $Sprite2D/Area2D
 
+func _process(_delta: float) -> void:
+	if grain_holder.get_child_count() > 765:
+		grain_holder.get_child(0).queue_free()
+
+
+func add_grain(new_grain) -> void:
+	grain_holder.add_child(new_grain)
 
 
 func _on_area_2d_area_exited(area: Area2D) -> void:
 	if area.is_in_group("pitcher"):
-		print("area ", $Sprite2D/Area2D.get_overlapping_bodies().size())
-		print("GH: ", $GrainHolder.get_child_count())
+		await get_tree().create_timer(0.1).timeout
+		print("area ", jar_area.get_overlapping_bodies().size())
+		
+		var new_color : Color
+		for g in jar_area.get_overlapping_bodies():
+			@warning_ignore("narrowing_conversion")
+			new_color.r8 += g.modulate.r
+			@warning_ignore("narrowing_conversion")
+			new_color.b8 += g.modulate.b
+			@warning_ignore("narrowing_conversion")
+			new_color.g8 += g.modulate.g
+		$Chem.modulate = new_color
