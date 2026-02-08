@@ -56,23 +56,30 @@ func tween_cam(destination = null) -> void:
 func _on_room_complete() -> void:
 	room_index += 1
 	match room_index:
+		1:
+			# if next room is craft stars.
+			tween_cam()
+			await transition_tween.finished
+			$CraftStars.toggle_camera(true)
 		2:
 			# if next room is star creator
-			ingredient.effect = $CreateStars.final_effect
-			ingredient.ing_color = $CreateStars.final_color
-			match ingredient.effect:
-				0:
-					$StarMinigame.current_build = "default"
-				1:
-					$StarMinigame.current_build = "crackle"
-				2:
-					$StarMinigame.current_build = "brocade"
-				3:
-					$StarMinigame.current_build = "palm"
+			$CraftStars.toggle_camera(false)
 			
-			#FIXME This is broke
-			#TODO Fix this thing
-			$StarMinigame._parse_build()
+			#ingredient.effect = $CreateStars.final_effect
+			#ingredient.ing_color = $CreateStars.final_color
+			#match ingredient.effect:
+				#0:
+					#$StarMinigame.current_build = "default"
+				#1:
+					#$StarMinigame.current_build = "crackle"
+				#2:
+					#$StarMinigame.current_build = "brocade"
+				#3:
+					#$StarMinigame.current_build = "palm"
+			#
+			##FIXME This is broke
+			##TODO Fix this thing
+			#$StarMinigame._parse_build()
 			tween_cam()
 		
 		3:

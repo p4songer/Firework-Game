@@ -22,7 +22,6 @@ var bid_array : Array
 const QTE_ITEM = preload("uid://l2s6ioimdxc")
 
 func _ready() -> void:
-	EventBus.qte_clicked.connect(_on_qte_click)
 	
 	# TODO make this work for each item made eventually.
 	for i in 25:
@@ -42,10 +41,6 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	cam.global_position = get_global_mouse_position()
-
-
-func _on_qte_click(_dollars) -> void:
-	pass
 
 
 func _on_delay_timeout() -> void:

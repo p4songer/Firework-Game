@@ -26,3 +26,5 @@ signal spin_finished
 signal attempt_ingredient(ing_name : String)
 @warning_ignore("unused_signal")
 signal room_completed
+@warning_ignore("unused_signal")
+signal new_grain(grain)

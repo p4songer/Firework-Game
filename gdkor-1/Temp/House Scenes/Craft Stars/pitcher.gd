@@ -1,12 +1,15 @@
-extends Sprite2D
+extends TextureRect
 
 @export var color : Color
 @export var color_name : String
 
+var origin : Vector2
+var drag_origin : Vector2
 var dragging : bool = false
-var pouring : bool = false
 
 const GRAIN = preload("uid://bvjnv5efn6c7f")
+
+var active_tween : Tween
 
 func _ready() -> void:
 	$Label.text = color_name
@@ -14,28 +17,38 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if dragging:
-		self.global_position = get_global_mouse_position()
-	if pouring:
-		await get_tree().create_timer(0.1).timeout
-		var new_g = GRAIN.instantiate()
-		new_g.global_position = self.global_position
-		new_g.modulate = color
-		get_parent().add_grain(new_g)
+		self.position = get_global_mouse_position() + drag_origin
 
 
 func _on_area_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and Input.is_action_just_pressed("click"):
 		dragging = true
+		origin = self.position
+		drag_origin = self.position - get_global_mouse_position()
 	if event is InputEventMouseButton and Input.is_action_just_released("click"):
 		dragging = false
+		self.position = origin
 
 
 func _on_area_entered(area: Area2D) -> void:
 	if not area.is_in_group("pitcher"):
-		pouring = true
-
+		if active_tween: active_tween.kill()
+		active_tween = create_tween().set_parallel()
+		active_tween.tween_property(self, "rotation_degrees", -115, 0.3)
+		await active_tween.finished
+		$Delay.start()
 
 
 func _on_area_exited(area: Area2D) -> void:
 	if not area.is_in_group("pitcher"):
-		pouring = false
+		$Delay.stop()
+		if active_tween: active_tween.kill()
+		active_tween = create_tween().set_parallel()
+		active_tween.tween_property(self, "rotation_degrees", 0, 0.3)
+
+
+func _on_delay_timeout() -> void:
+	var new_g = GRAIN.instantiate()
+	new_g.global_position = $Marker2D.global_position
+	new_g.modulate = color
+	EventBus.new_grain.emit(new_g)
