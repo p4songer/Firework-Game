@@ -60,36 +60,19 @@ func _on_room_complete() -> void:
 	room_index += 1
 	match room_index:
 		1:
-			# if next room is craft stars.
-			#await transition_tween.finished
-			await get_tree().create_timer(1.0).timeout
+			#await get_tree().create_timer(1.0).timeout
+			await tween_cam()
 			$CraftStars.toggle_camera(true)
 			$FocusCam.enabled = false
 		2:
-			# if next room is star creator
-			#$CraftStars.toggle_camera(false)
-			
-			#ingredient.effect = $CreateStars.final_effect
-			#ingredient.ing_color = $CreateStars.final_color
-			#match ingredient.effect:
-				#0:
-					#$StarMinigame.current_build = "default"
-				#1:
-					#$StarMinigame.current_build = "crackle"
-				#2:
-					#$StarMinigame.current_build = "brocade"
-				#3:
-					#$StarMinigame.current_build = "palm"
-			#
-			##FIXME This is broke
-			##TODO Fix this thing
-			#$StarMinigame._parse_build()
+			ingredient.ing_color = $CraftStars.final_color
 			$CraftStars.toggle_camera(false)
 			$FocusCam.enabled = true
 			tween_cam()
 		
 		3:
 			# if next room is launch
+			ingredient.effect = $StarMinigame.selection_index
 			tween_cam(launch.get_launch_pos())
 			launch.ingredient = ingredient
 		

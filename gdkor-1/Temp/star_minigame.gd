@@ -24,13 +24,13 @@ var palm_sequence : Array = [
 ]
 
 var build_dict : Dictionary = {
-	"palm": palm_sequence,
-	"brocade" : brocade_sequence,
+	"default" : default_sequence,
 	"crackle" : crackle_sequence,
-	"default" : default_sequence
+	"brocade" : brocade_sequence,
+	"palm": palm_sequence,
 }
 var selection_array : Array =[
-	"Default Star", "Palm Star", "Brocade Star", "Crackle Star", 
+	"Default Star", "Crackle Star", "Brocade Star", "Palm Star", 
 ]
 var selection_index : int = 0
 var active_array : Array
@@ -92,6 +92,7 @@ func _on_spin_finished() -> void:
 func _on_attempt_ingredient(ing_name : String) -> void:
 	if ing_name == active_element:
 		_parse_build()
+
 
 func _on_selector_pressed(direction: String) -> void:
 	selection_index = wrap(selection_index + int(direction), 0, selection_array.size())

@@ -25,7 +25,7 @@ var lift_arr : Array = [
 	preload("uid://dcc1xeh8vjkj0"), preload("uid://bg2rgv8001u0n")
 ]
 
-var game = load("uid://dydw0o4rwye4u")
+var HOUSE_MANAGER = load("uid://cj73xl2uujryc")
 
 #FIXME Make this work
 #TODO Make star effects available and work.
@@ -101,7 +101,7 @@ func _on_firework_finished() -> void:
 
 
 func _on_return_pressed() -> void:
-	Global.start_transition(game, Global.TRANSITIONS.DEFAULT)
+	Global.start_transition(HOUSE_MANAGER, Global.TRANSITIONS.DEFAULT)
 
 
 func temp_display(thingy) -> void:
