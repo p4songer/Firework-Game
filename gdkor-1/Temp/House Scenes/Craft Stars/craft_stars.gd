@@ -3,10 +3,15 @@ extends Node2D
 @onready var grain_holder: Node2D = $GrainHolder
 @onready var jar_area: Area2D = $Sprite2D/Area2D
 
+@export var pitcher_array : Array[Array]
+
 var final_color : Color
 
 func _ready() -> void:
 	EventBus.new_grain.connect(_on_new_grain)
+	
+	for i in pitcher_array.size():
+		$Vbox/Hbox.get_child(i).set_data(pitcher_array[i])
 
 
 func _process(_delta: float) -> void:
@@ -39,8 +44,10 @@ func _on_area_2d_area_exited(area: Area2D) -> void:
 
 
 func _on_new_grain(grain) -> void:
+	grain.global_position -= self.global_position
 	grain_holder.add_child(grain)
 
 
 func _on_button_pressed() -> void:
 	final_color = $Chem.modulate
+	EventBus.room_completed.emit()

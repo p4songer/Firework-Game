@@ -16,10 +16,12 @@ size = Vector2(280, 168)
 
 [node name="CraftStars" type="Node2D" unique_id=1554626229]
 script = ExtResource("1_1tsey")
+pitcher_array = Array[Array]([[Color(1, 0, 0, 1), "Strontium"], [Color(0, 1, 0, 1), "Barium"], [Color(0, 0, 1, 1), "Copper"]])
 
 [node name="GrainHolder" type="Node2D" parent="." unique_id=1794749120]
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1837525126]
+enabled = false
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=286150403]
 z_index = -1
@@ -73,18 +75,12 @@ mouse_filter = 2
 
 [node name="Pitcher" parent="Vbox/Hbox" unique_id=1064967711 instance=ExtResource("2_1tsey")]
 layout_mode = 2
-color = Color(1, 0, 0, 1)
-color_name = "Strontium"
 
 [node name="Pitcher2" parent="Vbox/Hbox" unique_id=201100778 instance=ExtResource("2_1tsey")]
 layout_mode = 2
-color = Color(0, 0, 1, 1)
-color_name = "Copper"
 
 [node name="Pitcher3" parent="Vbox/Hbox" unique_id=897557840 instance=ExtResource("2_1tsey")]
 layout_mode = 2
-color = Color(0, 1, 0, 1)
-color_name = "Barium"
 
 [connection signal="area_exited" from="Sprite2D/Area2D" to="." method="_on_area_2d_area_exited"]
 [connection signal="pressed" from="Vbox/Button" to="." method="_on_button_pressed"]

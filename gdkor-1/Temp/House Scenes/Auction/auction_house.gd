@@ -35,6 +35,7 @@ func _ready() -> void:
 		var rand_x = randf_range(-900, 900)
 		var rand_y = randf_range(-450, 450)
 		new_item.global_position = Vector2(rand_x, rand_y)
+		new_item.dying.connect(_on_qte_dying)
 		
 		bid_array.append(new_item)
 
@@ -51,6 +52,7 @@ func _on_delay_timeout() -> void:
 	# Check to spawn bid
 	if bids.get_child_count() < 5 and not bid_array.is_empty():
 		bids.add_child(bid_array.pop_front())
+		bids.get_child(-1).start()
 
 
 func clear_house() -> void:
@@ -58,3 +60,7 @@ func clear_house() -> void:
 		i.queue_free()
 	
 	EventBus.room_completed.emit()
+
+
+func _on_qte_dying(which) -> void:
+	which.queue_free()

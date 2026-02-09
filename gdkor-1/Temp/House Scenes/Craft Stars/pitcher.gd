@@ -11,7 +11,9 @@ const GRAIN = preload("uid://bvjnv5efn6c7f")
 
 var active_tween : Tween
 
-func _ready() -> void:
+func set_data(arr : Array) -> void:
+	color = arr[0]
+	color_name = arr[1]
 	$Label.text = color_name
 
 
@@ -49,6 +51,6 @@ func _on_area_exited(area: Area2D) -> void:
 
 func _on_delay_timeout() -> void:
 	var new_g = GRAIN.instantiate()
-	new_g.global_position = $Marker2D.global_position
+	new_g.position = $Marker2D.global_position
 	new_g.modulate = color
 	EventBus.new_grain.emit(new_g)

@@ -5,6 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://eauved75drq3" path="res://Temp/assets/Mix.png" id="2_s5j57"]
 [ext_resource type="Texture2D" uid="uid://b8bioafvnu7m3" path="res://Game/Assets/Star5.png" id="5_d34rt"]
 [ext_resource type="Texture2D" uid="uid://bv4viluirxsok" path="res://Global/Sprites/icon.svg" id="5_podmp"]
+[ext_resource type="PackedScene" uid="uid://l2s6ioimdxc" path="res://Temp/qte_item.tscn" id="6_4gvii"]
+[ext_resource type="Script" uid="uid://banl78w28ejtn" path="res://Game/Resources/NPC.gd" id="7_podmp"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_rbv71"]
 load_path = "res://.godot/imported/Glue.png-44441dc5031d91b5c9dc97d199728307.ctex"
@@ -83,6 +85,10 @@ _data = {
 &"RESET": SubResource("Animation_d34rt"),
 &"mash": SubResource("Animation_klg8q")
 }
+
+[sub_resource type="Resource" id="Resource_d34rt"]
+script = ExtResource("7_podmp")
+metadata/_custom_type_script = "uid://banl78w28ejtn"
 
 [node name="StarMinigame" type="Node2D" unique_id=948536394]
 script = ExtResource("1_xmyfd")
@@ -242,4 +248,14 @@ color_ramp = SubResource("Gradient_klg8q")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=66959843]
 libraries/ = SubResource("AnimationLibrary_4tj6a")
 
+[node name="QteItem" parent="." unique_id=521188817 instance=ExtResource("6_4gvii")]
+visible = false
+offset_left = -124.0
+offset_top = 140.0
+offset_right = 132.0
+offset_bottom = 396.0
+time = 1.0
+npc_data = SubResource("Resource_d34rt")
+
 [connection signal="pressed" from="Instructions/Vbox/Craft" to="." method="_on_craft_pressed"]
+[connection signal="dying" from="QteItem" to="." method="_on_qte_item_dying"]

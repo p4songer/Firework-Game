@@ -30,6 +30,7 @@ func _on_qte_click(npc : NPC_Resource) -> void:
 	var new_cust = QTE_ITEM.instantiate()
 	new_cust.npc_data = npc
 	new_cust.display_info = true
+	new_cust.active = false
 	$CustomerUI/Hbox.add_child(new_cust)
 	new_cust.scale = Vector2(0.5, 0.5)
 	new_cust.hovered.connect(_ui_view)
@@ -51,6 +52,8 @@ func tween_cam(destination = null) -> void:
 	var new_pos = destination if destination else $FocusCam.position + Vector2(1920, 0)
 	transition_tween.tween_property($FocusCam, "position", new_pos, 1.0)
 	transition_tween.finished.connect(_transition_finished)
+	await transition_tween.finished
+	return
 
 
 func _on_room_complete() -> void:
@@ -58,12 +61,13 @@ func _on_room_complete() -> void:
 	match room_index:
 		1:
 			# if next room is craft stars.
-			tween_cam()
-			await transition_tween.finished
+			#await transition_tween.finished
+			await get_tree().create_timer(1.0).timeout
 			$CraftStars.toggle_camera(true)
+			$FocusCam.enabled = false
 		2:
 			# if next room is star creator
-			$CraftStars.toggle_camera(false)
+			#$CraftStars.toggle_camera(false)
 			
 			#ingredient.effect = $CreateStars.final_effect
 			#ingredient.ing_color = $CreateStars.final_color
@@ -80,6 +84,8 @@ func _on_room_complete() -> void:
 			##FIXME This is broke
 			##TODO Fix this thing
 			#$StarMinigame._parse_build()
+			$CraftStars.toggle_camera(false)
+			$FocusCam.enabled = true
 			tween_cam()
 		
 		3:

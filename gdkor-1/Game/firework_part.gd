@@ -30,10 +30,10 @@ func _mouse_exit() -> void:
 	mouse_active = false
 
 
-func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-		if mouse_active:
-			print("clicked part")
+#func _unhandled_input(event: InputEvent) -> void:
+	#if event is InputEventMouseButton and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+		#if mouse_active:
+			#print("clicked part")
 
 
 func _on_part_finished() -> void:
@@ -50,7 +50,7 @@ func _on_color_button_pressed() -> void:
 func _on_effect_button_pressed() -> void:
 	if is_onscreen:
 		EventBus.request_ingredient.emit(self)
-		print(self.name, " has color ", ingredient.ing_name, " has effect ", ingredient.effect, " with star ", ingredient.star_sprite)
+		#print(self.name, " has color ", ingredient.ing_name, " has effect ", ingredient.effect, " with star ", ingredient.star_sprite)
 
 
 func _on_visible_on_screen_notifier_2d_screen_entered() -> void:

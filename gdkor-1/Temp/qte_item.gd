@@ -10,15 +10,12 @@ var display_info : bool = false
 @onready var info: RichTextLabel = $Vbox/InfoBlock
 
 var complete : bool = false
+var active : bool = true
 signal hovered
 signal unhovered
+signal dying(which)
 
 func _ready() -> void:
-	if time:
-		timer.wait_time = time
-		timer.start()
-	else:
-		push_error("No time set for %s. Make sure this is an NPC." % self.name)
 	if not npc_data:
 		push_error("NPC data is empty.")
 	else:
@@ -28,7 +25,7 @@ func _ready() -> void:
 
 func _on_timer_timeout() -> void:
 	if complete: 
-		self.queue_free()
+		dying.emit(self)
 		return
 	
 	self.value = max(0, self.value - 1)
@@ -38,10 +35,11 @@ func _on_timer_timeout() -> void:
 
 func _on_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-		self.self_modulate = Color(0.0, 0.5, 0.192, 1.0)
 		timer.stop()
 		
-		EventBus.qte_clicked.emit(npc_data)
+		if active:
+			EventBus.qte_clicked.emit(npc_data)
+			self.self_modulate = Color(0.0, 0.5, 0.192, 1.0)
 
 
 func _on_mouse_entered() -> void:
@@ -54,3 +52,11 @@ func _on_mouse_exited() -> void:
 	if display_info : 
 		info.hide()
 		unhovered.emit()
+
+
+func start() -> void:
+	if time:
+		timer.wait_time = time
+		timer.start()
+	else:
+		push_error("No time set for %s. Make sure this is an NPC." % self.name)

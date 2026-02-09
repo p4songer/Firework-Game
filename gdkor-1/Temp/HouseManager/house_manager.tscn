@@ -13,7 +13,6 @@ script = ExtResource("1_6you1")
 zoom = Vector2(0.6, 0.6)
 
 [node name="AuctionHouse" parent="." unique_id=852820366 instance=ExtResource("2_6wiyr")]
-active = null
 
 [node name="CraftStars" parent="." unique_id=1554626229 instance=ExtResource("3_6wiyr")]
 position = Vector2(1920, 0)
