@@ -1,13 +1,13 @@
 [gd_scene format=3 uid="uid://d0r1ikl3flsxy"]
 
-[ext_resource type="Texture2D" uid="uid://be6ekjt8xxlgo" path="res://Game/Assets/SkyBackground.png" id="1_eahnl"]
 [ext_resource type="Script" uid="uid://dqybkh1enoqvu" path="res://Temp/House Scenes/Auction/auction_house.gd" id="1_k07re"]
+[ext_resource type="Texture2D" uid="uid://ewu4h123dkd5" path="res://Temp/assets/Tent.png" id="2_3o510"]
 
 [node name="AuctionHouse" type="Node2D" unique_id=852820366]
 script = ExtResource("1_k07re")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1697832432]
-texture = ExtResource("1_eahnl")
+texture = ExtResource("2_3o510")
 
 [node name="Bids" type="Node2D" parent="." unique_id=1931468117]
 

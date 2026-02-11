@@ -36,8 +36,6 @@ var star_array : Array = [
 @onready var color_drawer: HBoxContainer = $ColorDrawer
 @onready var fx_drawer: HBoxContainer = $FxDrawer
 
-## TODO make fish effect
-
 func _ready() -> void:
 	EventBus.request_ingredient.connect(_on_request_ingredient)
 	EventBus.prepare_launch.connect(_on_prepare_launch)

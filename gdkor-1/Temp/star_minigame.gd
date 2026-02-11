@@ -1,5 +1,8 @@
 extends Node2D
 
+#FIXME acetone is cheap alternative to water, but faster timer.
+#FIXME Water should be a slower timer.
+
 @onready var parts: CPUParticles2D = $IngArea/Parts
 @onready var instruction: Label = $Instructions/Vbox/CurrentInstruction
 

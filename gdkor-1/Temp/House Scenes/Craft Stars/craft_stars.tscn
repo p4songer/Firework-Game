@@ -2,17 +2,18 @@
 
 [ext_resource type="Script" uid="uid://db0s7yp7pd4vd" path="res://Temp/House Scenes/Craft Stars/craft_stars.gd" id="1_1tsey"]
 [ext_resource type="PackedScene" uid="uid://b1hymvl04w807" path="res://Temp/House Scenes/Craft Stars/pitcher.tscn" id="2_1tsey"]
+[ext_resource type="Texture2D" uid="uid://cmjnulxho5dha" path="res://Temp/assets/Jar.png" id="2_iva4e"]
 [ext_resource type="Texture2D" uid="uid://c4o26idv257oq" path="res://Game/Assets/Chem.png" id="4_get26"]
-[ext_resource type="Texture2D" uid="uid://eauved75drq3" path="res://Temp/assets/Mix.png" id="4_iva4e"]
+[ext_resource type="Texture2D" uid="uid://byvd3ofh0padg" path="res://Temp/assets/WeighStation.png" id="5_af870"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pmw3i"]
-size = Vector2(301.5, 29.5)
+size = Vector2(14.833359, 241.37502)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iva4e"]
-size = Vector2(27.000015, 178)
+size = Vector2(174.66667, 14.000008)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_af870"]
-size = Vector2(280, 168)
+size = Vector2(139.33331, 226.66669)
 
 [node name="CraftStars" type="Node2D" unique_id=1554626229]
 script = ExtResource("1_1tsey")
@@ -22,44 +23,45 @@ pitcher_array = Array[Array]([[Color(1, 0, 0, 1), "Strontium"], [Color(0, 1, 0, 
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1837525126]
 enabled = false
+zoom = Vector2(0.6, 0.6)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=286150403]
 z_index = -1
-position = Vector2(-341, 83)
-rotation = 1.5707964
-texture = ExtResource("4_iva4e")
+position = Vector2(-573, 163)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_iva4e")
 
 [node name="Jar" type="StaticBody2D" parent="Sprite2D" unique_id=214892822]
 position = Vector2(0, 52)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Jar" unique_id=1824789380]
-position = Vector2(6, 76)
+position = Vector2(-80, -55)
 shape = SubResource("RectangleShape2D_pmw3i")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Sprite2D/Jar" unique_id=1673287478]
-position = Vector2(5.9999924, -134.99998)
+position = Vector2(80, -55)
 shape = SubResource("RectangleShape2D_pmw3i")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Sprite2D/Jar" unique_id=638892320]
-position = Vector2(143.5, -30)
+position = Vector2(0, 59)
 shape = SubResource("RectangleShape2D_iva4e")
 
 [node name="Area2D" type="Area2D" parent="Sprite2D" unique_id=1158681850]
 position = Vector2(0, 52)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Area2D" unique_id=581283985]
-position = Vector2(-11.999992, -30)
+position = Vector2(-0.3333435, -62.66667)
 shape = SubResource("RectangleShape2D_af870")
 
 [node name="Chem" type="Sprite2D" parent="." unique_id=800438201]
-position = Vector2(-364, -219)
+position = Vector2(-573, -160)
 texture = ExtResource("4_get26")
 
 [node name="Vbox" type="VBoxContainer" parent="." unique_id=243471164]
-offset_left = -221.0
-offset_top = -130.0
-offset_right = 555.0
-offset_bottom = 262.0
+offset_left = -35.0
+offset_top = 19.0
+offset_right = 741.0
+offset_bottom = 411.0
 theme_override_constants/separation = 25
 alignment = 2
 
@@ -81,6 +83,10 @@ layout_mode = 2
 
 [node name="Pitcher3" parent="Vbox/Hbox" unique_id=897557840 instance=ExtResource("2_1tsey")]
 layout_mode = 2
+
+[node name="BG" type="Sprite2D" parent="." unique_id=809101333]
+z_index = -2
+texture = ExtResource("5_af870")
 
 [connection signal="area_exited" from="Sprite2D/Area2D" to="." method="_on_area_2d_area_exited"]
 [connection signal="pressed" from="Vbox/Button" to="." method="_on_button_pressed"]

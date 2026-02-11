@@ -40,3 +40,16 @@ grow_horizontal = 2
 grow_vertical = 0
 scale = Vector2(0.5, 0.5)
 alignment = 1
+
+[node name="Label" type="Label" parent="CustomerUI" unique_id=1796776543]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -104.0
+offset_right = 104.0
+offset_bottom = 42.0
+grow_horizontal = 2
+theme_override_constants/outline_size = 30
+theme_override_font_sizes/font_size = 30
+text = "Firework Cost:"

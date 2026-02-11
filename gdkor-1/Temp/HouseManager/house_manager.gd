@@ -1,5 +1,8 @@
 extends Node2D
 
+#TODO Money should be a global var that is updated with cost and customer payments.
+#TODO Make StarMinigame, CraftStars, and AssembleFirework an interchangable stack
+
 @onready var auction_house: Node2D = $AuctionHouse
 @onready var create_stars: Node2D = $CreateStars
 @onready var star_minigame: Node2D = $StarMinigame
@@ -22,8 +25,7 @@ func _ready() -> void:
 	auction_house.active = true
 	$FocusCam.enabled = false
 
-#TODO UPDATE THIS
-#FIXME UPDATE THIS
+
 func _on_qte_click(npc : NPC_Resource) -> void:
 	customer_array.append(npc)
 	

@@ -55,7 +55,6 @@ Fiberglass tubes cost $6 for 1.75
 Mortar sets must come with 1 tube per 6 shots.
 """
 # TODO Make it so we can check this value to determine if the customer likes it. EG they like blue
-# TODO Make little drop animation for updating colors.
 # TODO Make tabs for order of creation. 
 # TODO Make delivery system. Cake, Tube, Cardboard, Fiberglass
 # TODO Make variable lift size, Shell size, Ounces etc. 60 Gram legal limit 1-2" ball, 1-4" canister

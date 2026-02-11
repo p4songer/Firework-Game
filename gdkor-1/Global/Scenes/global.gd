@@ -1,5 +1,9 @@
 extends Node
 
+# TODO Make a dict to hold color mixes. Name of a mix, and the cost, with the associated color.
+# TODO Make customer reviews that can populate after launch.
+# Extendable so that users don't have to mix a new color every time.
+
 """
 Stirring moves a potion along a path. Path collects levels. Once reached, billows are used to add the destinations's effect. Then UI for name, ingredient, save recipie etc. Ingredients change the direction of the path.
 Mortar and Pestle optionally doubles ingredients ground. Also extends path. Potions can be created through ingredient book.
@@ -53,6 +57,7 @@ var _previous_scene : Node
 
 func _ready() -> void:
 	push_error("MUSIC IS NOT AUTOPLAY")
+	
 
 func get_end_anim(prefix: String) -> void:
 	_change_scene()

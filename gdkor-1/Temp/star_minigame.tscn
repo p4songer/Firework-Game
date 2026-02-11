@@ -3,10 +3,11 @@
 [ext_resource type="Script" uid="uid://dh3gffbcl0apr" path="res://Temp/star_minigame.gd" id="1_xmyfd"]
 [ext_resource type="PackedScene" uid="uid://cctpygcdw38xd" path="res://Temp/ing_button.tscn" id="2_4gvii"]
 [ext_resource type="Texture2D" uid="uid://eauved75drq3" path="res://Temp/assets/Mix.png" id="2_s5j57"]
+[ext_resource type="Texture2D" uid="uid://b3h5eop3kaydj" path="res://Temp/assets/MixChem.png" id="4_d34rt"]
 [ext_resource type="Texture2D" uid="uid://b8bioafvnu7m3" path="res://Game/Assets/Star5.png" id="5_d34rt"]
-[ext_resource type="Texture2D" uid="uid://bv4viluirxsok" path="res://Global/Sprites/icon.svg" id="5_podmp"]
 [ext_resource type="PackedScene" uid="uid://l2s6ioimdxc" path="res://Temp/qte_item.tscn" id="6_4gvii"]
 [ext_resource type="Script" uid="uid://banl78w28ejtn" path="res://Game/Resources/NPC.gd" id="7_podmp"]
+[ext_resource type="Texture2D" uid="uid://dgpkswr3jkp86" path="res://Temp/assets/MixStation.png" id="8_klg8q"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_rbv71"]
 load_path = "res://.godot/imported/Glue.png-44441dc5031d91b5c9dc97d199728307.ctex"
@@ -18,7 +19,7 @@ load_path = "res://.godot/imported/keyboard_space.png-5bf9925fd81e10865fc85b0589
 load_path = "res://.godot/imported/keyboard_space_outline.png-2e31cf1745d65d852dc7c1bf4c338656.ctex"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_d34rt"]
-radius = 48.0
+radius = 64.0
 
 [sub_resource type="Gradient" id="Gradient_klg8q"]
 offsets = PackedFloat32Array(0.4547619, 1)
@@ -95,11 +96,12 @@ script = ExtResource("1_xmyfd")
 current_build = "crackle"
 
 [node name="WetVbox" type="VBoxContainer" parent="." unique_id=85555655]
-offset_left = -575.0
-offset_top = -325.0
-offset_right = -319.0
-offset_bottom = 711.0
-scale = Vector2(0.5, 0.5)
+offset_left = -914.00006
+offset_top = -535.0
+offset_right = -658.00006
+offset_bottom = 624.0
+scale = Vector2(0.75, 0.75)
+theme_override_constants/separation = 45
 
 [node name="TextureButton" parent="WetVbox" unique_id=608418819 instance=ExtResource("2_4gvii")]
 layout_mode = 2
@@ -126,12 +128,12 @@ ing_name = "oxidizer"
 sprite = SubResource("CompressedTexture2D_rbv71")
 
 [node name="DryVbox" type="VBoxContainer" parent="." unique_id=985942603]
-offset_left = 575.0
-offset_top = -325.0
-offset_right = 831.0
-offset_bottom = 911.0
-scale = Vector2(0.5, 0.5)
-theme_override_constants/separation = -11
+offset_left = 733.0
+offset_top = -510.0
+offset_right = 989.0
+offset_bottom = 950.0
+scale = Vector2(0.75, 0.75)
+theme_override_constants/separation = 30
 
 [node name="TextureButton6" parent="DryVbox" unique_id=2143277018 instance=ExtResource("2_4gvii")]
 layout_mode = 2
@@ -221,7 +223,8 @@ text = ">"
 
 [node name="IngArea" type="Sprite2D" parent="." unique_id=333326094]
 z_index = -1
-texture = ExtResource("5_podmp")
+position = Vector2(0, -59)
+texture = ExtResource("4_d34rt")
 
 [node name="Area2D" type="Area2D" parent="IngArea" unique_id=104131642 groups=["ing_area"]]
 
@@ -256,6 +259,10 @@ offset_right = 132.0
 offset_bottom = 396.0
 time = 1.0
 npc_data = SubResource("Resource_d34rt")
+
+[node name="BG" type="Sprite2D" parent="." unique_id=989318547]
+z_index = -2
+texture = ExtResource("8_klg8q")
 
 [connection signal="pressed" from="Instructions/Vbox/Craft" to="." method="_on_craft_pressed"]
 [connection signal="dying" from="QteItem" to="." method="_on_qte_item_dying"]

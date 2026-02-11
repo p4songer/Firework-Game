@@ -22,8 +22,6 @@ var bid_array : Array
 const QTE_ITEM = preload("uid://l2s6ioimdxc")
 
 func _ready() -> void:
-	
-	# TODO make this work for each item made eventually.
 	for i in 25:
 		var new_item = QTE_ITEM.instantiate()
 		new_item.time = randf_range(0.1, 0.5)

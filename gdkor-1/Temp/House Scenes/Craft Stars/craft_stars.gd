@@ -1,5 +1,7 @@
 extends Node2D
 
+#TODO Make color update live.
+
 @onready var grain_holder: Node2D = $GrainHolder
 @onready var jar_area: Area2D = $Sprite2D/Area2D
 
@@ -49,5 +51,6 @@ func _on_new_grain(grain) -> void:
 
 
 func _on_button_pressed() -> void:
+	$Vbox/Button.disabled = true
 	final_color = $Chem.modulate
 	EventBus.room_completed.emit()

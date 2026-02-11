@@ -27,10 +27,6 @@ var lift_arr : Array = [
 
 var HOUSE_MANAGER = load("uid://cj73xl2uujryc")
 
-#FIXME Make this work
-#TODO Make star effects available and work.
-#TODO Add the other particle effects.
-
 func _ready() -> void:
 	EventBus.launch_firework.connect(launch_firework)
 	EventBus.star_finished_emitting.connect(_on_star_finished)
@@ -43,10 +39,10 @@ func make_active() -> void:
 
 
 func launch_firework() -> void:
-	#FIXME Global array isn't working now.
 	$Tube/Path2D/PathFollow2D/FuseParticles.emitting = false
 	$LaunchTimer.start()
 	fire_break.global_position = get_launch_pos()
+	#TODO Make sure this isn't reusable for later.
 	#var ingredient = Global.active_fireworks.pop_front()
 	#mine.display(ingredient)
 	#fire_break.trail.texture = ingredient.star_sprite

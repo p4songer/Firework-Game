@@ -160,6 +160,7 @@ texture = SubResource("GradientTexture2D_u0kcs")
 
 [node name="GlobalMusic" type="AudioStreamPlayer" parent="." unique_id=579506847]
 stream = ExtResource("3_avv5p")
+autoplay = true
 bus = &"Music"
 
 [node name="GlobalSFX" type="AudioStreamPlayer" parent="." unique_id=719940181]

@@ -20,11 +20,23 @@ const _name_array : Array = [
 	"Quentin", "Rebecca", "Samuel", "Theodore", "Urbaiden", "Victoria", "William", "Xander",
 	"Yasmin", "Zachary",
 ]
-#TODO use these to make statements about what the firework looks like.
+#TODO Use a spreadsheet for these statements.
 const _color_statements : Dictionary = {
-	Color(1.0, 0.0, 0.0, 1.0): ["I like red fireworks"],
-	Color(0.0, 0.0, 1.0, 1.0): ["I like blue fireworks"],
-	Color(0.0, 1.0, 0.0, 1.0): ["I like green fireworks"],
+	Color(1.0, 0.0, 0.0, 1.0): [
+		"I like red fireworks", 
+		"My grandmother's favorite flower was a rose. Due to her recent passing, I want to
+		remember her with a firework display."
+		],
+	Color(0.0, 0.0, 1.0, 1.0): [
+		"I like blue fireworks",
+		"After our vacation to the ocean, we've decided to live by the beach. 
+		We want to annouce our move to our family through a firework display."
+		],
+	Color(0.0, 1.0, 0.0, 1.0): [
+		"I like green fireworks",
+		"My girlfriend's eyes are the most beautiful shade of green I've seen.
+		She means the world to me, and I can't wait to propose to her. ",
+		],
 	Color(1.0, 0.4, 0.0, 1.0): ["I like green fireworks"],
 	Color(0.7, 0.0, 0.7, 1.0): ["I like purple fireworks"],
 	Color(1.0, 1.0, 1.0, 1.0): ["I like white fireworks"],
