@@ -15,10 +15,10 @@ const _effect_array : Array = [
 	"crackle", "default", "brocade", "palm",
 ]
 const _name_array : Array = [
-	"Alice", "Benjamin", "Charlotte", "Daniel", "Evengy", " Frederick", "Guntah", "Henry",
-	"Isabella", "Jamie", "Katherine", "Lucas", "Mooshroom", "Nathan", "Olivia", "Peter",
-	"Quentin", "Rebecca", "Samuel", "Theodore", "Urbaiden", "Victoria", "William", "Xander",
-	"Yasmin", "Zachary",
+	"Alice", "Benim", "Crude Forge", "Dugong", "Evengy", " Frederick", "Guntah", "Henry",
+	"Scarlet", "Jamie", "Katherine", "Loten", "Mooshroom", "Moonfall", "Olivia", "Paintsimmon",
+	"Quentin", "Spoonsweet", "Sqlpy", "Phrog", "Urbandrei", "Victoria", "William", "Xander",
+	"Yolo", "Hermes",
 ]
 #TODO Use a spreadsheet for these statements.
 const _color_statements : Dictionary = {

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cppthrbnf2emu"]
 
-[ext_resource type="Script" uid="uid://c8hg6jj8vyjcj" path="res://Temp/create_stars.gd" id="1_54lex"]
+[ext_resource type="Script" uid="uid://c8hg6jj8vyjcj" path="res://Temp/Maybe Trash/create_stars.gd" id="1_54lex"]
 [ext_resource type="Texture2D" uid="uid://c4o26idv257oq" path="res://Game/Assets/Chem.png" id="2_blla8"]
 
 [node name="CreateStars" type="Node2D" unique_id=1232134199]

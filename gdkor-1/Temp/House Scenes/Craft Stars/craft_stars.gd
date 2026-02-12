@@ -19,6 +19,15 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if grain_holder.get_child_count() > 765:
 		grain_holder.get_child(0).queue_free()
+	var new_color : Color
+	for g in jar_area.get_overlapping_bodies():
+		@warning_ignore("narrowing_conversion")
+		new_color.r8 += g.modulate.r
+		@warning_ignore("narrowing_conversion")
+		new_color.b8 += g.modulate.b
+		@warning_ignore("narrowing_conversion")
+		new_color.g8 += g.modulate.g
+	$Chem.modulate = new_color
 
 
 func add_grain(new_grain) -> void:
@@ -34,15 +43,6 @@ func _on_area_2d_area_exited(area: Area2D) -> void:
 		await get_tree().create_timer(0.1).timeout
 		print("area ", jar_area.get_overlapping_bodies().size())
 		
-		var new_color : Color
-		for g in jar_area.get_overlapping_bodies():
-			@warning_ignore("narrowing_conversion")
-			new_color.r8 += g.modulate.r
-			@warning_ignore("narrowing_conversion")
-			new_color.b8 += g.modulate.b
-			@warning_ignore("narrowing_conversion")
-			new_color.g8 += g.modulate.g
-		$Chem.modulate = new_color
 
 
 func _on_new_grain(grain) -> void:

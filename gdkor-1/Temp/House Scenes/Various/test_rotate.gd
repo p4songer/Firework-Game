@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var spin_count : int = 3
+@export var spin_count : int = 5
 @onready var obj: Node2D = $obj
 var dir_array : Array
 

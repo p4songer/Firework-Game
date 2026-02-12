@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://drq4tuq8bw3k6"]
+
+[ext_resource type="Texture2D" uid="uid://c23fleix3rgh3" path="res://icon.svg" id="1_87kjp"]
+[ext_resource type="Script" uid="uid://bfveihhr66750" path="res://Temp/HouseManager/review.gd" id="1_j1676"]
+
+[node name="Review" type="HBoxContainer" unique_id=1845403112]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -278.5
+offset_top = -64.0
+offset_right = 278.5
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_j1676")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=792497787]
+layout_mode = 2
+texture = ExtResource("1_87kjp")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=582934191]
+layout_mode = 2
+size_flags_horizontal = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer" unique_id=67115123]
+custom_minimum_size = Vector2(425, 0)
+layout_mode = 2
+text = "This is a really long Review to test the limits of the new  ahh  like container. I wonder if the scroll bar will automatically populate if I make this thing long enough.
+ It's doin
+g a good
+ job
+ of wrapping the t
+ext, so 
+I think it will."

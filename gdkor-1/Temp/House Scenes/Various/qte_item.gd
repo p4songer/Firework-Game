@@ -2,6 +2,7 @@ extends TextureProgressBar
 
 @export var time: float 
 @export var npc_data : NPC_Resource
+@export var active : bool = true
 var text_display : float
 
 var display_info : bool = false
@@ -10,7 +11,7 @@ var display_info : bool = false
 @onready var info: RichTextLabel = $Vbox/InfoBlock
 
 var complete : bool = false
-var active : bool = true
+
 signal hovered
 signal unhovered
 signal dying(which)

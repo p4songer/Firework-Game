@@ -7,9 +7,6 @@ extends Node2D
 @onready var instruction: Label = $Instructions/Vbox/CurrentInstruction
 
 @export var current_build : String#:
-	#set(new):
-		#current_build = new
-		#selected_array = build_dict[current_build]
 @export var active : bool = false
 
 var default_sequence : Array = [
@@ -23,7 +20,7 @@ var brocade_sequence : Array = [
 	"dextrin", "water", "color", "charcoal", "oxidizer", "mix", "charcoal", "mix", "press"
 ]
 var palm_sequence : Array = [
-	"dextrin", "water", "color", "oxidizer", "mix", "wrap", "glue", "mix"
+	"dextrin", "water", "color", "oxidizer", "mix", "wrap", "glue", "mix", "mix"
 ]
 
 var build_dict : Dictionary = {
@@ -40,9 +37,10 @@ var active_array : Array
 var active_element : String
 
 var start_qte : bool = false
-
 var is_mashing : bool = false
 var mash_counter : int = 0
+
+var is_game_over : bool = false
 
 const TEST_ROTATE = preload("uid://qut0nlt30vsl")
 
@@ -57,6 +55,8 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
+	if is_game_over: return
+	
 	if Input.is_action_just_pressed("ui_accept") and is_mashing:
 		mash_counter -= 1
 		if mash_counter == 0:
@@ -73,7 +73,7 @@ func _parse_build():
 	parts.emitting = true
 	if active_array.is_empty(): 
 		instruction.text = "Done. Good job."
-		await get_tree().create_timer(1.0).timeout
+		await get_tree().create_timer(0.75).timeout
 		EventBus.room_completed.emit()
 		return
 	active_element = active_array.pop_front()
@@ -88,6 +88,7 @@ func _parse_build():
 
 
 func _on_spin_finished() -> void:
+	if is_game_over: return
 	$IngArea.get_child(-1).queue_free()
 	_parse_build()
 
@@ -116,5 +117,8 @@ func _on_craft_pressed() -> void:
 
 
 func _on_qte_item_dying(_which: Variant) -> void:
+	is_game_over = true
+	$AnimationPlayer.play("RESET")
 	$IngArea/Area2D/CollisionShape2D.disabled = true
+	await $AnimationPlayer.animation_finished
 	instruction.text = "You didn't finish in time. Try again."

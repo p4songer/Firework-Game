@@ -97,6 +97,7 @@ func _on_firework_finished() -> void:
 
 
 func _on_return_pressed() -> void:
+	EventBus.room_completed.emit()
 	Global.start_transition(HOUSE_MANAGER, Global.TRANSITIONS.DEFAULT)
 
 

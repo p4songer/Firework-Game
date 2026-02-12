@@ -151,6 +151,7 @@ script = ExtResource("1_diak1")
 destination = Vector2(0, -5000)
 
 [node name="Background" type="Sprite2D" parent="." unique_id=422711967]
+self_modulate = Color(0.79999995, 0.76, 1, 1)
 z_index = -2
 scale = Vector2(1.75, 1.75)
 texture = ExtResource("2_3pum5")

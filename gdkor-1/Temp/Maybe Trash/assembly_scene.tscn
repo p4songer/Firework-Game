@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://frb0kgooe3y8"]
+[gd_scene format=3 uid="uid://frb0kgooe3y8"]
 
-[ext_resource type="Script" uid="uid://clom47uvj7jsn" path="res://Temp/assembly_scene.gd" id="1_b5bxf"]
+[ext_resource type="Script" uid="uid://clom47uvj7jsn" path="res://Temp/Maybe Trash/assembly_scene.gd" id="1_b5bxf"]
 
 [node name="AssemblyScene" type="Node2D"]
 script = ExtResource("1_b5bxf")

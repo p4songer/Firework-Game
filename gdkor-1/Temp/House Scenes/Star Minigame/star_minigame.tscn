@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://7c0nt2ewvbfx"]
 
-[ext_resource type="Script" uid="uid://dh3gffbcl0apr" path="res://Temp/star_minigame.gd" id="1_xmyfd"]
-[ext_resource type="PackedScene" uid="uid://cctpygcdw38xd" path="res://Temp/ing_button.tscn" id="2_4gvii"]
+[ext_resource type="Script" uid="uid://dh3gffbcl0apr" path="res://Temp/House Scenes/Star Minigame/star_minigame.gd" id="1_xmyfd"]
+[ext_resource type="PackedScene" uid="uid://cctpygcdw38xd" path="res://Temp/House Scenes/Various/ing_button.tscn" id="2_4gvii"]
 [ext_resource type="Texture2D" uid="uid://eauved75drq3" path="res://Temp/assets/Mix.png" id="2_s5j57"]
 [ext_resource type="Texture2D" uid="uid://b3h5eop3kaydj" path="res://Temp/assets/MixChem.png" id="4_d34rt"]
 [ext_resource type="Texture2D" uid="uid://b8bioafvnu7m3" path="res://Game/Assets/Star5.png" id="5_d34rt"]
-[ext_resource type="PackedScene" uid="uid://l2s6ioimdxc" path="res://Temp/qte_item.tscn" id="6_4gvii"]
+[ext_resource type="PackedScene" uid="uid://l2s6ioimdxc" path="res://Temp/House Scenes/Various/qte_item.tscn" id="6_4gvii"]
 [ext_resource type="Script" uid="uid://banl78w28ejtn" path="res://Game/Resources/NPC.gd" id="7_podmp"]
 [ext_resource type="Texture2D" uid="uid://dgpkswr3jkp86" path="res://Temp/assets/MixStation.png" id="8_klg8q"]
 
@@ -259,6 +259,7 @@ offset_right = 132.0
 offset_bottom = 396.0
 time = 1.0
 npc_data = SubResource("Resource_d34rt")
+active = false
 
 [node name="BG" type="Sprite2D" parent="." unique_id=989318547]
 z_index = -2
