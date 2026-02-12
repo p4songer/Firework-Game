@@ -55,8 +55,8 @@ var _transition_dict : Dictionary = {
 var _next_scene : Node
 var _previous_scene : Node
 
-func _ready() -> void:
-	push_error("MUSIC IS NOT AUTOPLAY")
+#func _ready() -> void:
+	#push_error("MUSIC IS NOT AUTOPLAY")
 	
 
 func get_end_anim(prefix: String) -> void:

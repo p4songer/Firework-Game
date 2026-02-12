@@ -44,6 +44,8 @@ var is_game_over : bool = false
 
 const TEST_ROTATE = preload("uid://qut0nlt30vsl")
 
+signal start_game
+
 func _ready() -> void:
 	EventBus.spin_finished.connect(_on_spin_finished)
 	EventBus.attempt_ingredient.connect(_on_attempt_ingredient)
@@ -114,6 +116,7 @@ func _on_craft_pressed() -> void:
 	active_array = build_dict[choice]
 	$"Instructions/-1".hide(); $"Instructions/1".hide(); $Instructions/Vbox/Craft.hide()
 	_parse_build()
+	start_game.emit()
 
 
 func _on_qte_item_dying(_which: Variant) -> void:

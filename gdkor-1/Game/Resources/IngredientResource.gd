@@ -1,5 +1,9 @@
 class_name IngredientResource extends Resource
 
+enum EFFECTS {
+	FLOWER, CRACKLE, BROCADE, PALM
+}
+
 @export var ing_name : String
 @export var ing_color : Color = Color(1.0, 1.0, 1.0, 1.0)
 @export var ing_sprite : CompressedTexture2D

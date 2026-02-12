@@ -4,13 +4,16 @@ extends Node2D
 #TODO Make StarMinigame, CraftStars, and AssembleFirework an interchangable stack
 
 @onready var auction_house: Node2D = $AuctionHouse
-@onready var create_stars: Node2D = $CreateStars
+@onready var craft_stars: Node2D = $CraftStars
 @onready var star_minigame: Node2D = $StarMinigame
 @onready var launch: Node2D = $LaunchScene
-@onready var customers: HBoxContainer = $CustomerUI/TabContainer/Customers
+@onready var customers: GridContainer = $CustomerUI/TabContainer/Customers
 @onready var reviews: GridContainer = $CustomerUI/TabContainer/Reviews/GridContainer
 
-
+var ui_active : bool = true:
+	set(new):
+		ui_active = new
+		$CustomerUI.visible = ui_active
 var customer_array : Array
 var transition_tween : Tween
 var ui_tween : Tween
@@ -18,6 +21,13 @@ var ui_tween : Tween
 var ingredient = IngredientResource.new()
 
 var room_index : int = 0
+
+var effect_translator : Dictionary = {
+	IngredientResource.EFFECTS.FLOWER : "default", 
+	IngredientResource.EFFECTS.CRACKLE : "crackle",
+	IngredientResource.EFFECTS.BROCADE : "brocade",
+	IngredientResource.EFFECTS.PALM : "palm"
+}
 
 const QTE_ITEM = preload("uid://l2s6ioimdxc")
 
@@ -68,17 +78,17 @@ func _on_room_complete() -> void:
 		1:
 			#await get_tree().create_timer(1.0).timeout
 			await tween_cam()
-			$CraftStars.toggle_camera(true)
+			craft_stars.toggle_camera(true)
 			$FocusCam.enabled = false
 		2:
-			ingredient.ing_color = $CraftStars.final_color
-			$CraftStars.toggle_camera(false)
+			ingredient.ing_color = craft_stars.final_color
+			craft_stars.toggle_camera(false)
 			$FocusCam.enabled = true
 			tween_cam()
 		
 		3:
 			# if next room is launch
-			ingredient.effect = $StarMinigame.selection_index
+			ingredient.effect = star_minigame.selection_index
 			tween_cam(launch.get_launch_pos())
 			launch.ingredient = ingredient
 		4:
@@ -88,7 +98,7 @@ func _on_room_complete() -> void:
 			tween_cam()
 
 
-func _ui_view() -> void:
+func _ui_view() -> void:	
 	if ui_tween: ui_tween.kill()
 	ui_tween = create_tween().set_parallel(true)
 	ui_tween.tween_property($CustomerUI, "offset", Vector2(0, 0), 0.3)
@@ -123,7 +133,34 @@ func _on_tab_hovered(_tab: int) -> void:
 
 func _get_customer_review() -> Variant:
 	#FIXME Super temporary.
+	var color_threshold = 0.25
+	var fail_threshold = 0.35
 	var cus : NPC_Resource = customers.get_child(0).npc_data
 	print(cus.npc_name, " likes the color ", cus.fav_color, " with ", cus.fav_effect)
-	
+	print("we got ", ingredient.ing_color, " with effect ", effect_translator[ingredient.effect])
+	var color_dif = cus.fav_color - ingredient.ing_color
+	var color_good_enough : int = 6 if not ingredient.ing_color.is_equal_approx(Color()) else 0
+	for i in 3:
+		match i:
+			0:
+				if abs(color_dif.r) > color_threshold:
+					color_good_enough -= 1
+				if abs(color_dif.r) > fail_threshold:
+					color_good_enough -= 1
+			1:
+				if abs(color_dif.g) > color_threshold:
+					color_good_enough -= 1
+				if abs(color_dif.g) > fail_threshold:
+					color_good_enough -= 1
+			2:
+				if abs(color_dif.b) > color_threshold:
+					color_good_enough -= 1
+				if abs(color_dif.b) > fail_threshold:
+					color_good_enough -= 1
+	print("color good? ", color_good_enough, color_good_enough >= 4)
+	print("effecdt good? ", cus.fav_effect == effect_translator[ingredient.effect])
 	return false
+
+
+func _on_star_minigame_start_game() -> void:
+	ui_active = false

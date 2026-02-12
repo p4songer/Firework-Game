@@ -34,19 +34,20 @@ anchor_bottom = 1.0
 offset_top = -31.0
 grow_horizontal = 2
 grow_vertical = 0
-current_tab = 1
+current_tab = 0
 
 [node name="Customers" type="GridContainer" parent="CustomerUI/TabContainer" unique_id=622559427]
-visible = false
 layout_mode = 2
 columns = 5
 metadata/_tab_index = 0
 
 [node name="Reviews" type="GridContainer" parent="CustomerUI/TabContainer" unique_id=491286279]
+visible = false
 layout_mode = 2
 columns = 2
 metadata/_tab_index = 1
 
+[connection signal="start_game" from="StarMinigame" to="." method="_on_star_minigame_start_game"]
 [connection signal="mouse_entered" from="CustomerUI/TabContainer" to="." method="_on_ui_mouse_entered"]
 [connection signal="mouse_exited" from="CustomerUI/TabContainer" to="." method="_on_ui_mouse_exited"]
 [connection signal="tab_hovered" from="CustomerUI/TabContainer" to="." method="_on_tab_hovered"]
