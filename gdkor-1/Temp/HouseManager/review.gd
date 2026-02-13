@@ -8,4 +8,5 @@ class_name Review extends HBoxContainer
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	rtl.text = data.given_review
+	$TextureRect.texture = data.npc_sprite
 	self.custom_minimum_size = $TextureRect.size + $PanelContainer.size
