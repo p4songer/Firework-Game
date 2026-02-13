@@ -14,6 +14,14 @@ const _color_array : Array = [
 	Color(1.0, 0.0, 0.0, 1.0), Color(0.0, 0.0, 1.0, 1.0), Color(0.0, 1.0, 0.0, 1.0),
 	Color(1.0, 1.0, 1.0, 1.0), Color(0.7, 0.0, 0.7, 1.0), Color(1.0, 0.4, 0.0, 1.0)
 ]
+const _color_translator : Dictionary = {
+	Color(1.0, 0.0, 0.0, 1.0): "red",
+	Color(0.0, 0.0, 1.0, 1.0): "blue",
+	Color(0.0, 1.0, 0.0, 1.0): "green",
+	Color(1.0, 1.0, 1.0, 1.0): "white",
+	Color(0.7, 0.0, 0.7, 1.0): "purple",
+	Color(1.0, 0.4, 0.0, 1.0): "orange",
+}
 
 const _effect_array : Array = [
 	"crackle", "default", "brocade", "palm",
@@ -72,7 +80,48 @@ const _color_statements : Dictionary = {
 "I’m opening my own bakery. I want to set off fireworks after cutting the opening ribbon. Something to match the frosting maybe?",
 ],
 }
-
+const bad_color: Array = [
+	"Ummm, I don’t know if that was the %s I was looking for. Did it explode correctly?",
+	"Hello? I said %s. What was that?",
+	"I’m sorry.... is the color I asked for puke? That's definitely not %s.",
+	"I could pretend I like that color %s. I’d be lying.",
+	"I think you’re colorblind. Have you ever seen the color %s before?"
+]
+const okay_color : Array = [
+	"Oh, that was pretty. Really nice. I wish you had listened a little better to get closer to the %s I wanted.",
+	"It definitely fit the function even though it wasn’t quite what I wanted. The %s was cute but I wish it had been brighter",
+	"My friends and family really loved that. I’m not sure the %s was exactly what I wanted but decent job.",
+	"That %s feels adjacent to what I asked for.",
+	
+]
+const good_color: Array = [
+	"That was 10/10 amazing! I feel like you captured exactly the %s I wanted.",
+	"Did I just fall in love with a firework? I think so. That %s was speaking the language of my heart. The vibrant %s gave the exact energy I needed.",
+	"That ate and left no crumbs. Literally, the best %s.",
+	"Totally tubular dude. That %s was.. Wow."
+]
+const bad_effect : Array = [
+	"Oh that was pretty. Really nice. I wish you had listened a little better for the effect I was hoping for.",
+	"Too small. Not what I wanted for the effect, won’t buy again.",
+	"It did the job. I received a colorful firework with an effect. That’s technically what I asked for.",
+	"Did a five year old make this effect though?",
+	
+]
+const good_effect : Array = [
+	" You don’t even understand how perfect that effect was.",
+	" The effect is just as beautiful as I thought.",
+	" My kid said, “That was amazing!” Good job!",
+	" I’m so over the moon! You have no idea how much that checked all my boxes! It’s rare to have someone meet my expectations on effects.",
+	" This firework changed my life. CHANGED MY LIIIIFFFFEEE",
+	" I cried. Seeing this firework healed me a little bit."
+]
+const bad_mix : Array = [
+	" I paid for something that felt like it could be made in my backyard. At least this way I didn’t have to build it myself. Thanks for saving time with a decent firework.",
+	" I should mention that the firework was falling apart. I'm surprised it didn't kill someone.",
+	" This feels like the idea of a firework more than a legit firework.",
+	" You did a thing. That thing did a thing. That’s what matters. Thanks for a good effort.",
+	
+]
 func build_random() -> void:
 	npc_name = _name_array.pick_random()
 	fav_color = _color_array.pick_random()
@@ -110,17 +159,16 @@ func get_review(given_firework: IngredientResource) -> void:
 				if abs(color_dif.b) > fail_threshold:
 					color_good_enough -= 1
 	var color_rev = ""
-	print(color_good_enough)
 	if color_good_enough >= 4:
-		color_rev = "The color was perfect!"
+		color_rev = good_color.pick_random() % _color_translator[fav_color]
 	elif color_good_enough > 2:
-		color_rev = "The color was good, but could have been better."
+		color_rev = okay_color.pick_random() % _color_translator[fav_color]
 	else:
-		color_rev = "That was the wrong color."
+		color_rev = bad_color.pick_random() % _color_translator[fav_color]
 	
-	var eff_rev = " And the effect was amazing!" if _effect_array[
-		given_firework.effect] == self.fav_effect else " And the effect was okay, but not what I asked for."
+	var eff_rev = good_effect.pick_random() if _effect_array[
+		given_firework.effect] == self.fav_effect else bad_effect.pick_random()
 	
 	given_review = color_rev + eff_rev
 	if dud_firework:
-		given_review += "Not to mention that the firework was falling apart. I'm surprised it didn't kill someone."
+		given_review += bad_mix.pick_random()

@@ -75,6 +75,7 @@ func _parse_build():
 	parts.emitting = true
 	if active_array.is_empty(): 
 		instruction.text = "Done. Good job."
+		is_game_over = true
 		await get_tree().create_timer(0.75).timeout
 		EventBus.room_completed.emit()
 		return
@@ -120,6 +121,8 @@ func _on_craft_pressed() -> void:
 
 
 func _on_qte_item_dying(_which: Variant) -> void:
+	if is_game_over: return
+
 	is_game_over = true
 	$AnimationPlayer.play("RESET")
 	$IngArea/Area2D/CollisionShape2D.disabled = true

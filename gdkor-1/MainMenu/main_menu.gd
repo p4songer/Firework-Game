@@ -16,6 +16,8 @@ func _ready() -> void:
 	for button in $MarginContainer/VBoxContainer.get_children():
 		button.mouse_entered.connect(_on_button_hovered.bind(button))
 		button.mouse_exited.connect(_on_button_unhovered.bind(button))
+	for bus in AudioServer.bus_count:
+		AudioServer.set_bus_volume_db(bus, linear_to_db(0.5))
 
 
 func _gui_input(event: InputEvent) -> void:
