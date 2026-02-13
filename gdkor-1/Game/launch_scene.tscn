@@ -229,11 +229,14 @@ color_ramp = SubResource("Gradient_ejv5c")
 [node name="LaunchUI" type="CanvasLayer" parent="." unique_id=357605387]
 visible = false
 
-[node name="Return" type="Button" parent="LaunchUI" unique_id=1426615398]
-offset_left = 39.0
-offset_top = 39.0
-offset_right = 234.0
-offset_bottom = 138.0
+[node name="Vbox" type="VBoxContainer" parent="LaunchUI" unique_id=661711485]
+offset_left = 42.0
+offset_top = 36.0
+offset_right = 238.0
+offset_bottom = 135.0
+
+[node name="Return" type="Button" parent="LaunchUI/Vbox" unique_id=1426615398]
+layout_mode = 2
 theme = ExtResource("4_xgsrl")
 text = "Return"
 
@@ -268,6 +271,6 @@ autoplay = &"flash"
 bus = &"SFX"
 
 [connection signal="pressed" from="Tube/Path2D/PathFollow2D/TextureButton" to="." method="_on_texture_button_pressed"]
-[connection signal="pressed" from="LaunchUI/Return" to="." method="_on_return_pressed"]
+[connection signal="pressed" from="LaunchUI/Vbox/Return" to="." method="_on_return_pressed"]
 [connection signal="timeout" from="DelayTimer" to="." method="_on_delay_timer_timeout"]
 [connection signal="timeout" from="LaunchTimer" to="." method="_on_launch_timer_timeout"]

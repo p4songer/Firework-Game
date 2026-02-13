@@ -51,6 +51,9 @@ func _on_area_exited(area: Area2D) -> void:
 
 func _on_delay_timeout() -> void:
 	var new_g = GRAIN.instantiate()
-	new_g.position = $Marker2D.global_position
+	var rand_x = randf_range(-3, 3)
+	var rand_y = randf_range(-3, 3)
+	var rand_vec = Vector2(rand_x, rand_y)
+	new_g.position = $Marker2D.global_position + rand_vec
 	new_g.modulate = color
 	EventBus.new_grain.emit(new_g)

@@ -26,6 +26,11 @@ var lift_arr : Array = [
 ]
 
 var HOUSE_MANAGER = load("uid://cj73xl2uujryc")
+var star_array : Array = [
+	preload("uid://cwtfh7cjvrsoj"), preload("uid://dhjm0mv6od403"), preload("uid://bdql4f8kmscm2"),
+	preload("uid://caaxpsg6sd8ho"), preload("uid://b8bioafvnu7m3")
+]
+const REVIEW = preload("uid://drq4tuq8bw3k6")
 
 func _ready() -> void:
 	EventBus.launch_firework.connect(launch_firework)
@@ -92,8 +97,14 @@ func _on_launch_timer_timeout() -> void:
 
 
 func _on_firework_finished() -> void:
-	if Global.active_fireworks.is_empty():
-		$LaunchUI.show()
+	var new = REVIEW.instantiate()
+	new.data = Global.review_array[-1]
+	new.data.get_review(ingredient)
+	new.data.npc_sprite = star_array.pick_random()
+	$LaunchUI/Vbox.add_child(new)
+	
+	await get_tree().create_timer(1.5).timeout
+	$LaunchUI.show()
 
 
 func _on_return_pressed() -> void:

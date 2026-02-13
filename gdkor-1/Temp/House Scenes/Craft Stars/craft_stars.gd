@@ -41,8 +41,6 @@ func toggle_camera(active : bool) -> void:
 func _on_area_2d_area_exited(area: Area2D) -> void:
 	if area.is_in_group("pitcher"):
 		await get_tree().create_timer(0.1).timeout
-		print("area ", jar_area.get_overlapping_bodies().size())
-		
 
 
 func _on_new_grain(grain) -> void:

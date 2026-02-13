@@ -124,4 +124,8 @@ func _on_qte_item_dying(_which: Variant) -> void:
 	$AnimationPlayer.play("RESET")
 	$IngArea/Area2D/CollisionShape2D.disabled = true
 	await $AnimationPlayer.animation_finished
-	instruction.text = "You didn't finish in time. Try again."
+	instruction.text = "You didn't finish in time. Dud firework."
+	
+	Global.review_array[-1].dud_firework = true
+	await get_tree().create_timer(1.0).timeout
+	EventBus.room_completed.emit()

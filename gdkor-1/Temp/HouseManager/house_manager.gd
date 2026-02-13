@@ -33,7 +33,6 @@ const QTE_ITEM = preload("uid://l2s6ioimdxc")
 const REVIEW = preload("uid://drq4tuq8bw3k6")
 
 func _ready() -> void:
-	print("loaded")
 	EventBus.qte_clicked.connect(_on_qte_click)
 	EventBus.room_completed.connect(_on_room_complete)
 	
@@ -42,12 +41,15 @@ func _ready() -> void:
 	
 	if not Global.review_array.is_empty():
 		$CustomerUI/TabContainer.set_tab_hidden(1, false)
-		for rev in Global.review_array:
-			reviews.add_child(rev)
+		for npc in Global.review_array:
+			var new = REVIEW.instantiate()
+			new.data = npc
+			reviews.add_child(new)
 
 
 func _on_qte_click(npc : NPC_Resource) -> void:
 	customer_array.append(npc)
+	Global.review_array.append(npc)
 	
 	var new_cust = QTE_ITEM.instantiate()
 	new_cust.npc_data = npc
@@ -55,8 +57,6 @@ func _on_qte_click(npc : NPC_Resource) -> void:
 	new_cust.active = false
 	customers.add_child(new_cust)
 	new_cust.scale = Vector2(0.5, 0.5)
-	#new_cust.hovered.connect(_ui_view)
-	#new_cust.unhovered.connect(_ui_hide)
 	customers.pivot_offset = customers.size / 2
 	
 	# if auction house complete
@@ -99,11 +99,8 @@ func _on_room_complete() -> void:
 			launch.ingredient = ingredient
 		4:
 			# if prev room was launch:
-			var review_string = _get_customer_review()
-			var new_rev = REVIEW.instantiate()
-			new_rev.text_data = review_string
-			Global.review_array.append(new_rev)
-			print("added to array")
+			#_get_customer_review()
+			pass
 		_:
 			tween_cam()
 
@@ -142,44 +139,9 @@ func _on_tab_hovered(_tab: int) -> void:
 	_ui_view()
 
 
-func _get_customer_review() -> Variant:
-	#FIXME Super temporary.
-	var color_threshold = 0.25
-	var fail_threshold = 0.35
-	var cus : NPC_Resource = customers.get_child(0).npc_data
-	var color_dif = cus.fav_color - ingredient.ing_color
-	var color_good_enough : int = 6 if not ingredient.ing_color.is_equal_approx(Color()) else 0
-	for i in 3:
-		match i:
-			0:
-				if abs(color_dif.r) > color_threshold:
-					color_good_enough -= 1
-				if abs(color_dif.r) > fail_threshold:
-					color_good_enough -= 1
-			1:
-				if abs(color_dif.g) > color_threshold:
-					color_good_enough -= 1
-				if abs(color_dif.g) > fail_threshold:
-					color_good_enough -= 1
-			2:
-				if abs(color_dif.b) > color_threshold:
-					color_good_enough -= 1
-				if abs(color_dif.b) > fail_threshold:
-					color_good_enough -= 1
-	print("color good? ", color_good_enough, color_good_enough >= 4)
-	print("effecdt good? ", cus.fav_effect == effect_translator[ingredient.effect])
-	var color_rev = ""
-	if color_good_enough >= 4:
-		color_rev = "The color was perfect!"
-	elif color_good_enough < 2:
-		color_rev = "The color was good, but could have been better."
-	else:
-		color_rev = "That was the wrong color."
-	
-	var eff_rev = " And the effect was amazing!" if effect_translator[
-		ingredient.effect] == cus.fav_effect else " And the effect was okay, but not what I asked for."
-	
-	return color_rev + eff_rev
+#func _get_customer_review() -> void:
+	#var customer : NPC_Resource = Global.review_array[-1]
+	#customer.get_review(ingredient)
 
 
 func _on_star_minigame_start_game() -> void:

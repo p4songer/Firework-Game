@@ -5,6 +5,10 @@ class_name NPC_Resource extends Resource
 @export var fav_color : Color
 @export var fav_effect : String
 @export var npc_request : String
+@export var npc_sprite : CompressedTexture2D
+
+var given_review : String
+var dud_firework : bool = false
 
 const _color_array : Array = [
 	Color(1.0, 0.0, 0.0, 1.0), Color(0.0, 0.0, 1.0, 1.0), Color(0.0, 1.0, 0.0, 1.0),
@@ -50,6 +54,42 @@ func build_random() -> void:
 	npc_request = _color_statements[fav_color][0] + " with the %s effect."% fav_effect
 
 
-func get_review() -> String:
+func get_review(given_firework: IngredientResource) -> void:
+	#FIXME Super temporary.
+	var color_threshold = 0.25
+	var fail_threshold = 0.35
 	
-	return ""
+	var color_dif = self.fav_color - given_firework.ing_color
+	var color_good_enough : int = 6 if not given_firework.ing_color.is_equal_approx(Color()) else 0
+	for i in 3:
+		match i:
+			0:
+				if abs(color_dif.r) > color_threshold:
+					color_good_enough -= 1
+				if abs(color_dif.r) > fail_threshold:
+					color_good_enough -= 1
+			1:
+				if abs(color_dif.g) > color_threshold:
+					color_good_enough -= 1
+				if abs(color_dif.g) > fail_threshold:
+					color_good_enough -= 1
+			2:
+				if abs(color_dif.b) > color_threshold:
+					color_good_enough -= 1
+				if abs(color_dif.b) > fail_threshold:
+					color_good_enough -= 1
+	var color_rev = ""
+	print(color_good_enough)
+	if color_good_enough >= 4:
+		color_rev = "The color was perfect!"
+	elif color_good_enough > 2:
+		color_rev = "The color was good, but could have been better."
+	else:
+		color_rev = "That was the wrong color."
+	
+	var eff_rev = " And the effect was amazing!" if _effect_array[
+		given_firework.effect] == self.fav_effect else " And the effect was okay, but not what I asked for."
+	
+	given_review = color_rev + eff_rev
+	if dud_firework:
+		given_review += "Not to mention that the firework was falling apart. I'm surprised it didn't kill someone."

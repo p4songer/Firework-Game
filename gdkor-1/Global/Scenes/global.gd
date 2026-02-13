@@ -37,7 +37,7 @@ const EFFECT_RESOURCES : Array = [
 ]
 var active_fireworks : Array = []
 var is_whistle : bool = false
-var review_array : Array[Review]
+var review_array : Array[NPC_Resource]
 
 func play_sfx() -> void:
 	$GlobalSFX.play()
