@@ -8,7 +8,7 @@ extends Node2D
 @onready var star_minigame: Node2D = $StarMinigame
 @onready var launch: Node2D = $LaunchScene
 @onready var customers: GridContainer = $CustomerUI/TabContainer/Customers
-@onready var reviews: GridContainer = $CustomerUI/TabContainer/Reviews/GridContainer
+@onready var reviews: GridContainer = $CustomerUI/TabContainer/Reviews
 
 var ui_active : bool = true:
 	set(new):
@@ -30,14 +30,20 @@ var effect_translator : Dictionary = {
 }
 
 const QTE_ITEM = preload("uid://l2s6ioimdxc")
+const REVIEW = preload("uid://drq4tuq8bw3k6")
 
 func _ready() -> void:
+	print("loaded")
 	EventBus.qte_clicked.connect(_on_qte_click)
 	EventBus.room_completed.connect(_on_room_complete)
 	
 	auction_house.active = true
 	$FocusCam.enabled = false
-	#_ui_hide()
+	
+	if not Global.review_array.is_empty():
+		$CustomerUI/TabContainer.set_tab_hidden(1, false)
+		for rev in Global.review_array:
+			reviews.add_child(rev)
 
 
 func _on_qte_click(npc : NPC_Resource) -> void:
@@ -93,7 +99,11 @@ func _on_room_complete() -> void:
 			launch.ingredient = ingredient
 		4:
 			# if prev room was launch:
-			var review = _get_customer_review()
+			var review_string = _get_customer_review()
+			var new_rev = REVIEW.instantiate()
+			new_rev.text_data = review_string
+			Global.review_array.append(new_rev)
+			print("added to array")
 		_:
 			tween_cam()
 
@@ -106,6 +116,7 @@ func _ui_view() -> void:
 
 
 func _ui_hide() -> void:
+	$CustomerUI/TabContainer.current_tab = 0
 	if ui_tween: ui_tween.kill()
 	ui_tween = create_tween().set_parallel(true)
 	ui_tween.tween_property($CustomerUI, "offset", Vector2(0, 250), 0.3)
@@ -136,8 +147,6 @@ func _get_customer_review() -> Variant:
 	var color_threshold = 0.25
 	var fail_threshold = 0.35
 	var cus : NPC_Resource = customers.get_child(0).npc_data
-	print(cus.npc_name, " likes the color ", cus.fav_color, " with ", cus.fav_effect)
-	print("we got ", ingredient.ing_color, " with effect ", effect_translator[ingredient.effect])
 	var color_dif = cus.fav_color - ingredient.ing_color
 	var color_good_enough : int = 6 if not ingredient.ing_color.is_equal_approx(Color()) else 0
 	for i in 3:
@@ -159,7 +168,18 @@ func _get_customer_review() -> Variant:
 					color_good_enough -= 1
 	print("color good? ", color_good_enough, color_good_enough >= 4)
 	print("effecdt good? ", cus.fav_effect == effect_translator[ingredient.effect])
-	return false
+	var color_rev = ""
+	if color_good_enough >= 4:
+		color_rev = "The color was perfect!"
+	elif color_good_enough < 2:
+		color_rev = "The color was good, but could have been better."
+	else:
+		color_rev = "That was the wrong color."
+	
+	var eff_rev = " And the effect was amazing!" if effect_translator[
+		ingredient.effect] == cus.fav_effect else " And the effect was okay, but not what I asked for."
+	
+	return color_rev + eff_rev
 
 
 func _on_star_minigame_start_game() -> void:

@@ -21,7 +21,7 @@ func _ready() -> void:
 		push_error("NPC data is empty.")
 	else:
 		display.text = npc_data.npc_name
-		info.text = npc_data.npc_statement
+		info.text = npc_data.npc_request
 
 
 func _on_timer_timeout() -> void:
