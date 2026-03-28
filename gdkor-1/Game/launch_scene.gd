@@ -1,5 +1,8 @@
 extends Node2D
 
+#TODO Make it so that all fireworks bought in a day can be launched simultaniously
+#or at least in a sequence. Customer reviews should populate around the spot they are located.
+
 var ingredient : IngredientResource
 var fuse_lit : bool = false:
 	set(lit):
@@ -33,7 +36,7 @@ var star_array : Array = [
 const REVIEW = preload("uid://drq4tuq8bw3k6")
 
 func _ready() -> void:
-	EventBus.launch_firework.connect(launch_firework)
+	#EventBus.launch_firework.connect(launch_firework)
 	EventBus.star_finished_emitting.connect(_on_star_finished)
 	EventBus.firework_finished.connect(_on_firework_finished)
 

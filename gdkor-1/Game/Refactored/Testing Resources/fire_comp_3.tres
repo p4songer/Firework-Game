@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="FireworkComponent" format=3 uid="uid://cmk61malskffn"]
+
+[ext_resource type="Script" uid="uid://cna124i1fi236" path="res://Game/Resources/IngredientResource.gd" id="1_i2sfh"]
+[ext_resource type="Texture2D" uid="uid://cwtfh7cjvrsoj" path="res://Game/Assets/Star1.png" id="2_sccd3"]
+[ext_resource type="Script" uid="uid://4d8egr2h1mmu" path="res://Game/Resources/FireworkComponent.gd" id="3_wak2f"]
+
+[sub_resource type="Resource" id="Resource_i2sfh"]
+script = ExtResource("1_i2sfh")
+ing_color = Color(0, 0.084724426, 1, 1)
+star_sprite = ExtResource("2_sccd3")
+effect = 2
+metadata/_custom_type_script = "uid://cna124i1fi236"
+
+[resource]
+script = ExtResource("3_wak2f")
+fuse_length = 4.0
+ingredient = SubResource("Resource_i2sfh")
+metadata/_custom_type_script = "uid://4d8egr2h1mmu"

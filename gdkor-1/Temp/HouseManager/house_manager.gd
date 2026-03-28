@@ -1,7 +1,8 @@
 extends Node2D
 
 #TODO Money should be a global var that is updated with cost and customer payments.
-#TODO Make StarMinigame, CraftStars, and AssembleFirework an interchangable stack
+#TODO Refactor House Manager to be open ended.
+#TODO Make a UI for inventory that is visible at all times.
 
 @onready var auction_house: Node2D = $AuctionHouse
 @onready var craft_stars: Node2D = $CraftStars
@@ -18,6 +19,7 @@ var customer_array : Array
 var transition_tween : Tween
 var ui_tween : Tween
 
+# Make ingredients save to filesystem to reference when creating fireworks.
 var ingredient = IngredientResource.new()
 
 var room_index : int = 0
@@ -33,7 +35,9 @@ const QTE_ITEM = preload("uid://l2s6ioimdxc")
 const REVIEW = preload("uid://drq4tuq8bw3k6")
 
 func _ready() -> void:
+	#for the customers.
 	EventBus.qte_clicked.connect(_on_qte_click)
+	#for updating room position.
 	EventBus.room_completed.connect(_on_room_complete)
 	
 	auction_house.active = true

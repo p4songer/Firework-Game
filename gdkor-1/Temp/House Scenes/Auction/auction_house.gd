@@ -1,5 +1,8 @@
 extends Node2D
 
+#TODO Completely remove the camera/auction funcitonality in favor of customer lineups.
+# includes this is where all customer UI should live.
+
 @onready var bids: Node2D = $Bids
 @onready var cam: Camera2D = $Camera2D
 @onready var delay: Timer = $Delay
@@ -15,6 +18,7 @@ extends Node2D
 			$Camera2D.enabled = false
 
 
+# TODO Might need to keep.
 var current_money : float = 0.0
 
 var bid_array : Array
@@ -28,7 +32,6 @@ func _ready() -> void:
 		var new_npc = NPC_Resource.new()
 		new_npc.build_random()
 		new_item.npc_data = new_npc
-		#new_item.money = randf_range(5.0, 500.0)
 		new_item.scale = Vector2(0.75, 0.75)
 		var rand_x = randf_range(-900, 900)
 		var rand_y = randf_range(-450, 450)

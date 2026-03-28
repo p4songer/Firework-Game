@@ -28,6 +28,7 @@ buses/default_bus_layout="uid://bnbkp503g7fw8"
 
 Global="*res://Global/Scenes/Global.tscn"
 EventBus="*res://Global/Scenes/EventBus.gd"
+GlobalRef="*uid://d4c0x3f5m1xkl"
 
 [display]
 

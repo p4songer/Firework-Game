@@ -1,12 +1,13 @@
 extends Node2D
 
-#TODO Make color update live.
+#TODO Make black not ugly
 
 @onready var grain_holder: Node2D = $GrainHolder
 @onready var jar_area: Area2D = $Sprite2D/Area2D
 
 @export var pitcher_array : Array[Array]
 
+#TODO make it so that House manager doesn't grab this. 
 var final_color : Color
 
 func _ready() -> void:
@@ -31,6 +32,7 @@ func _process(_delta: float) -> void:
 
 
 func add_grain(new_grain) -> void:
+	#TODO Make it so that adding grains is restricted to inventory.
 	grain_holder.add_child(new_grain)
 
 

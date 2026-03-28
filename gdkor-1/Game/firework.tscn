@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bxnuykamvq5wl"]
+[gd_scene format=3 uid="uid://bxnuykamvq5wl"]
 
 [ext_resource type="Texture2D" uid="uid://ubw2obtraius" path="res://Global/Resources/default_star.tres" id="1_qed3c"]
 [ext_resource type="Curve" uid="uid://ccpya8254nelx" path="res://Game/Resources/BrocadeStar.tres" id="2_cbmfh"]
@@ -8,7 +8,7 @@
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.72674423, 0.7415731), -1.0610263, -1.0610263, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[node name="Firework" type="CPUParticles2D"]
+[node name="Firework" type="CPUParticles2D" unique_id=131589071]
 scale = Vector2(1.4480197, 1.4575758)
 emitting = false
 amount = 120
@@ -26,7 +26,7 @@ angle_max = 360.0
 scale_amount_curve = SubResource("Curve_qed3c")
 script = ExtResource("2_qed3c")
 
-[node name="Trail" type="CPUParticles2D" parent="."]
+[node name="Trail" type="CPUParticles2D" parent="." unique_id=1134015211]
 emitting = false
 amount = 150
 texture = ExtResource("1_qed3c")
@@ -35,6 +35,6 @@ gravity = Vector2(0, 0)
 scale_amount_max = 1.5
 scale_amount_curve = ExtResource("2_cbmfh")
 
-[node name="SFX" type="AudioStreamPlayer" parent="."]
+[node name="SFX" type="AudioStreamPlayer" parent="." unique_id=38290806]
 max_polyphony = 3
 bus = &"SFX"
