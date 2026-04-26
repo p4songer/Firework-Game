@@ -1,0 +1,16 @@
+{
+  "res://Global/Scenes/global.gd": null,
+  "justification_source": "global_justification.txt",
+  "status": "MISSING",
+  "notes": "The global_justification.txt input file was not provided in the repository. Per prompt specifications, global_justification is set to null and marked as 'requires justification'. The autoload modification at res://Global/Scenes/global.gd includes TODO-0001 and TODO-0002, which require explicit justification before Vesper changes can be validated as safe. Autoload changes impact startup order and must be minimal. See scan_report.txt for full validation details.",
+  "global_autoloads": [
+    {
+      "path": "res://Global/Scenes/global.gd",
+      "registered_in_project_godot": true,
+      "scene_wrapper": "res://Global/Scenes/Global.tscn",
+      "autoload_name": "Global",
+      "potential_impact": "HIGH - Autoload initialization affects all scene startup and global state",
+      "required_justification": "Why is this autoload necessary? What is the minimal set of code needed at startup? Are any I/O operations blocking?"
+    }
+  ]
+}

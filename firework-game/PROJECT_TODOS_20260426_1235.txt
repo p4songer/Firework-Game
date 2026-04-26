@@ -1,0 +1,387 @@
+PROJECT TODOS - consolidated
+Scanned at: 2026-04-26T12:35:00Z
+Root path: c:\Users\Admin\Desktop\Projects\FireworkGame\firework-game
+Total TODOs: 21
+
+=== TIER 1: Foundational Data Models ===
+
+--- TODO #1 ---
+ID: TODO-0001
+File: res://Global/Scenes/global.gd
+Line: 3
+Marker: TODO
+Reachable: YES
+Type: comment
+Issue: COLOR_MIX_REGISTRY
+Text:
+Make a dict to hold color mixes. Name of a mix, and the cost, with the associated color.
+Context:
+extends Node
+
+# TODO Make a dict to hold color mixes. Name of a mix, and the cost, with the associated color.
+var active_fireworks : Array = []
+Notes: VESPER: Expected to be replaced by Color Mix Registry. Not yet implemented in repository.
+---
+
+--- TODO #2 ---
+ID: TODO-0003
+File: res://Main/Resources/NPC.gd
+Line: 3
+Marker: TODO
+Reachable: YES
+Type: comment
+Issue: CUSTOMER_DATA_MODEL
+Text:
+Notepad for customer preferences.
+Context:
+class_name NPC_Resource extends Resource
+
+#TODO Notepad for customer preferences.
+@export var npc_name : String
+---
+
+=== TIER 2: Notebook / Global Systems ===
+
+--- TODO #3 ---
+ID: TODO-0002
+File: res://Global/Scenes/global.gd
+Line: 4
+Marker: TODO
+Reachable: YES
+Type: comment
+Issue: INVENTORY_SYSTEM
+Text:
+Make customer reviews that can populate after launch.
+Context:
+# TODO Make a dict to hold color mixes. Name of a mix, and the cost, with the associated color.
+# TODO Make customer reviews that can populate after launch.
+var active_fireworks : Array = []
+Notes: Related to autoload Global state management.
+---
+
+--- TODO #4 ---
+ID: TODO-0004
+File: res://Main/Resources/NPC.gd
+Line: 35
+Marker: TODO
+Reachable: YES
+Type: comment
+Issue: DATA_SOURCE
+Text:
+Use a spreadsheet for these statements.
+Context:
+]
+#TODO Use a spreadsheet for these statements.
+const _color_statements : Dictionary = {
+---
+
+--- TODO #5 ---
+ID: TODO-0005
+File: res://Main/Resources/NPC.gd
+Line: 138
+Marker: FIXME
+Reachable: YES
+Type: comment
+Issue: REVIEW_LOGIC
+Text:
+Super temporary.
+Context:
+func get_review(given_firework: IngredientResource) -> void:
+#FIXME Super temporary.
+var color_threshold = 0.25
+Priority: HIGH (FIXME marker - affects game logic)
+---
+
+=== TIER 3: House Manager Architecture ===
+
+--- TODO #6 ---
+ID: TODO-0019
+File: res://Main/HouseManager/house_manager.gd
+Line: 3
+Marker: TODO
+Reachable: YES
+Type: comment
+Issue: GLOBAL_STATE
+Text:
+Money should be a global var that is updated with cost and customer payments.
+Context:
+class_name HouseManager extends Node2D
+
+#TODO Money should be a global var that is updated with cost and customer payments.
+---
+
+--- TODO #7 ---
+ID: TODO-0020
+File: res://Main/HouseManager/house_manager.gd
+Line: 4
+Marker: TODO
+Reachable: YES
+Type: comment
+Issue: ARCHITECTURE
+Text:
+Refactor House Manager to be open ended.
+Context:
+#TODO Money should be a global var that is updated with cost and customer payments.
+#TODO Refactor House Manager to be open ended.
+---
+
+--- TODO #8 ---
+ID: TODO-0021
+File: res://Main/HouseManager/house_manager.gd
+Line: 5
+Marker: TODO
+Reachable: YES
+Type: comment
+Issue: UI_VISIBILITY
+Text:
+Make a UI for inventory that is visible at all times.
+Context:
+#TODO Refactor House Manager to be open ended.
+#TODO Make a UI for inventory that is visible at all times.
+---
+
+=== TIER 4: Customer / NPC Systems ===
+
+--- TODO #9 ---
+ID: TODO-0009
+File: res://Main/House Scenes/Auction/auction_house.gd
+Line: 3
+Marker: TODO
+Reachable: YES
+Type: comment
+Issue: AUCTION_REFACTOR
+Text:
+Completely remove the camera/auction funcitonality in favor of customer lineups.
+Context:
+class_name AuctionHouse extends Control
+
+#TODO Completely remove the camera/auction funcitonality in favor of customer lineups.
+---
+
+--- TODO #10 ---
+ID: TODO-0010
+File: res://Main/House Scenes/Auction/auction_house.gd
+Line: 21
+Marker: TODO
+Reachable: YES
+Type: comment
+Issue: AMBIGUOUS
+Text:
+Might need to keep.
+Context:
+var grid_positions : Array[Vector2] = []
+# TODO Might need to keep.
+var start_grid_x : float = 0
+Notes: AMBIGUOUS - Clarification needed on intent.
+---
+
+=== TIER 5: Scene Responsibilities & New Scenes ===
+
+--- TODO #11 ---
+ID: TODO-0011
+File: res://Main/House Scenes/Craft Stars/craft_stars.gd
+Line: 3
+Marker: TODO
+Reachable: YES
+Type: comment
+Issue: UI_POLISH
+Text:
+Make black not ugly
+Context:
+extends Node2D
+
+#TODO Make black not ugly
+@onready var grain_holder: Node2D = $GrainHolder
+---
+
+--- TODO #12 ---
+ID: TODO-0012
+File: res://Main/House Scenes/Craft Stars/craft_stars.gd
+Line: 10
+Marker: TODO
+Reachable: YES
+Type: comment
+Issue: VESPER_UPDATE
+Text:
+Decouple from house manager.
+Context:
+@export var pitcher_array : Array[Array]
+
+#TODO Decouple from house manager.
+Notes: VESPER: craft_stars.gd should integrate with Color Mix Registry. Not yet implemented.
+---
+
+--- TODO #13 ---
+ID: TODO-0013
+File: res://Main/House Scenes/Craft Stars/craft_stars.gd
+Line: 35
+Marker: TODO
+Reachable: YES
+Type: comment
+Issue: INVENTORY_GATE
+Text:
+Make it so that adding grains is restricted to inventory.
+Context:
+#TODO Make it so that adding grains is restricted to inventory.
+grain_holder.add_child(new_grain)
+---
+
+--- TODO #14 ---
+ID: TODO-0008
+File: res://Main/House Scenes/Star Minigame/star_minigame.gd
+Line: 5
+Marker: TODO
+Reachable: YES
+Type: comment
+Issue: FEATURE_EXPANSION
+Text:
+This should also be the station for making tubes and cakes and such.
+Context:
+#FIXME Water should be a slower timer.
+#TODO This should also be the station for making tubes and cakes and such.
+---
+
+=== TIER 6: Day Progression & End-of-Day ===
+
+--- TODO #15 ---
+ID: TODO-0016
+File: res://Main/House Scenes/Launch/launch_scene.gd
+Line: 3
+Marker: TODO
+Reachable: YES
+Type: comment
+Issue: GAMEPLAY_FEATURE
+Text:
+Make it so that all fireworks bought in a day can be launched simultaniously or at least in a sequence.
+Context:
+class_name LaunchScene extends Control
+
+#TODO Make it so that all fireworks bought in a day can be launched simultaniously
+#or at least in a sequence. Customer reviews should populate around the spot they are located.
+Notes: IN PROGRESS (listed for exclusion per Vesper updates).
+---
+
+--- TODO #16 ---
+ID: TODO-0017
+File: res://Main/House Scenes/Launch/launch_scene.gd
+Line: 54
+Marker: TODO
+Reachable: YES
+Type: comment
+Issue: AMBIGUOUS
+Text:
+Make sure this isn't reusable for later.
+Context:
+func launch_firework() -> void:
+#TODO Make sure this isn't reusable for later.
+Notes: AMBIGUOUS - Clarify what "reusable for later" means in context.
+---
+
+=== TIER 7: Firework Behavior ===
+
+--- TODO #17 ---
+ID: TODO-0014
+File: res://Main/House Scenes/Launch/firework.gd
+Line: 23
+Marker: TODO
+Reachable: YES
+Type: comment
+Issue: MISSING_FEATURE
+Text:
+Make fish effect
+Context:
+var color_value : Color
+# TODO make fish effect
+func _ready() -> void:
+---
+
+--- TODO #18 ---
+ID: TODO-0015
+File: res://Main/House Scenes/Launch/firework.gd
+Line: 36
+Marker: TODO
+Reachable: YES
+Type: comment
+Issue: INCOMPLETE_MECHANIC
+Text:
+Make directionality work internally here. Decouple from launch scenes
+Context:
+func _process(delta: float) -> void:
+# TODO make directionality work internally here. Decouple from launch scenes
+---
+
+--- TODO #19 ---
+ID: TODO-0018
+File: res://Main/House Scenes/Various/mixing_game.gd
+Line: 30
+Marker: TODO
+Reachable: YES
+Type: comment
+Issue: MIXING_GAME
+Text:
+Emit signal here.
+Context:
+if spin_count == 0:
+EventBus.spin_finished.emit()
+#TODO emit signal here.
+---
+
+=== TIER 8: Design & Balance ===
+
+--- TODO #20 ---
+ID: TODO-0006
+File: res://Main/House Scenes/Star Minigame/star_minigame.gd
+Line: 3
+Marker: FIXME
+Reachable: YES
+Type: comment
+Issue: TIMER_BALANCE
+Text:
+Acetone is cheap alternative to water, but faster timer.
+Context:
+extends Node2D
+
+#FIXME acetone is cheap alternative to water, but faster timer.
+#FIXME Water should be a slower timer.
+---
+
+--- TODO #21 ---
+ID: TODO-0007
+File: res://Main/House Scenes/Star Minigame/star_minigame.gd
+Line: 4
+Marker: FIXME
+Reachable: YES
+Type: comment
+Issue: TIMER_BALANCE
+Text:
+Water should be a slower timer.
+Context:
+#FIXME acetone is cheap alternative to water, but faster timer.
+#FIXME Water should be a slower timer.
+---
+
+--- End of list ---
+
+SUMMARY BY TIER:
+- Tier 1 (Foundational Data Models): 2 items
+- Tier 2 (Notebook / Global Systems): 3 items
+- Tier 3 (House Manager Architecture): 3 items
+- Tier 4 (Customer / NPC Systems): 2 items
+- Tier 5 (Scene Responsibilities): 4 items
+- Tier 6 (Day Progression & End-of-Day): 2 items
+- Tier 7 (Firework Behavior): 3 items
+- Tier 8 (Design & Balance): 2 items
+Total: 21 actionable items (100% reachable)
+
+EXCLUDED TODOs (Per Arbiter):
+- TODO-0031, TODO-0032, TODO-0033, TODO-0034 (Tier 1 - addressed by Vesper patch) [NOT FOUND IN REPO]
+- TODO-0022, TODO-0016 (Tier 3 - in progress) [TODO-0016 included, TODO-0022 NOT FOUND]
+- TODO-0025 (Tier 4 - addressed) [NOT FOUND IN REPO]
+- TODO-0029 (Tier 5 - addressed) [NOT FOUND IN REPO]
+
+NOTE: Only TODO-0016 was found and included as it remains actionable until closure confirmed.
+
+SPECIAL NOTES FOR NEXT SCAN:
+- Vesper Color Mix Registry integration NOT yet implemented in repository
+- Input justification files required: manual_test_checklist.txt, global_justification.txt, implementation_notes.txt
+- See scan_report.txt for full validation details and recommendations
