@@ -25,16 +25,16 @@ Fireworks are a special rare thing, making it something for deep personal events
 working closely with the clientelle to fit their exact situation.
 """
 
-const FIRE_RESOURCES : Array = [
-	preload("uid://chs5icc2rx3w7"), preload("uid://bxkbhs08v5r6r"), preload("uid://7jjmoa7qa28y"),
-	preload("uid://dgdvg4kucekux"), preload("uid://cqkcjrv1kywv0"), preload("uid://yh4cpjejnkb2"),
-	preload("uid://dic88j7pevp7"), preload("uid://chpyavxb1yn04"), preload("uid://wmuthliqpv3m"),
-	preload("uid://dfop8tbeeruhd"), preload("uid://iw02skqqsv1e"), preload("uid://dp7b46nggluhg"),
-]
-const EFFECT_RESOURCES : Array = [
-	preload("uid://betka3xy08pd8"), preload("uid://ba8pex888vrj8"), preload("uid://dqn1ei0yfg4xk"),
-	preload("uid://p8bqtov2wh0x"),
-]
+# const FIRE_RESOURCES : Array = [
+# 	preload("uid://chs5icc2rx3w7"), preload("uid://bxkbhs08v5r6r"), preload("uid://7jjmoa7qa28y"),
+# 	preload("uid://dgdvg4kucekux"), preload("uid://cqkcjrv1kywv0"), preload("uid://yh4cpjejnkb2"),
+# 	preload("uid://dic88j7pevp7"), preload("uid://chpyavxb1yn04"), preload("uid://wmuthliqpv3m"),
+# 	preload("uid://dfop8tbeeruhd"), preload("uid://iw02skqqsv1e"), preload("uid://dp7b46nggluhg"),
+# ]
+# const EFFECT_RESOURCES : Array = [
+# 	preload("uid://betka3xy08pd8"), preload("uid://ba8pex888vrj8"), preload("uid://dqn1ei0yfg4xk"),
+# 	preload("uid://p8bqtov2wh0x"),
+# ]
 var active_fireworks : Array = []
 var is_whistle : bool = false
 var review_array : Array[NPC_Resource]

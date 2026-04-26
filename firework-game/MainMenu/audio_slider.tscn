@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://cmnjedqmptyeh"]
+[gd_scene format=3 uid="uid://cmnjedqmptyeh"]
 
-[ext_resource type="Script" path="res://MainMenu/audio_slider.gd" id="1_tugsv"]
+[ext_resource type="Script" uid="uid://dngcvd71t7veq" path="res://MainMenu/audio_slider.gd" id="1_tugsv"]
 
 [node name="AudioSlider" type="HSlider"]
 offset_right = 8.0

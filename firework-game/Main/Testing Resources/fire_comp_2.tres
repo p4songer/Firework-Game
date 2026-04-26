@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="FireworkComponent" format=3 uid="uid://bko7fuxtg5pbr"]
+
+[ext_resource type="Script" uid="uid://cna124i1fi236" path="res://Main/Resources/IngredientResource.gd" id="1_ayyma"]
+[ext_resource type="Texture2D" uid="uid://cwtfh7cjvrsoj" path="res://Main/Assets/Star1.png" id="2_cak86"]
+[ext_resource type="Script" uid="uid://4d8egr2h1mmu" path="res://Main/Resources/FireworkComponent.gd" id="3_di0il"]
+
+[sub_resource type="Resource" id="Resource_ayyma"]
+script = ExtResource("1_ayyma")
+ing_color = Color(0.42199254, 1, 0, 1)
+star_sprite = ExtResource("2_cak86")
+effect = 3
+metadata/_custom_type_script = "uid://cna124i1fi236"
+
+[resource]
+script = ExtResource("3_di0il")
+fuse_length = 0.25
+ingredient = SubResource("Resource_ayyma")
+metadata/_custom_type_script = "uid://4d8egr2h1mmu"

@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://bctn68bmta4ju"]
+
+[ext_resource type="Script" uid="uid://cwoh0ap7mhhd7" path="res://Main/House Scenes/Launch/new_launch.gd" id="1_jgj3w"]
+
+[node name="NewLaunch" type="Node2D" unique_id=312980518]
+script = ExtResource("1_jgj3w")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=121297523]
+zoom = Vector2(0.2, 0.2)
+
+[node name="LaunchPos" type="Node2D" parent="." unique_id=740359659]
+position = Vector2(0, 850)
+
+[node name="SequenceDelay" type="Timer" parent="." unique_id=1459460222]
+one_shot = true
+
+[connection signal="timeout" from="SequenceDelay" to="." method="_on_sequence_delay_timeout"]

@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="IngredientResource" load_steps=2 format=3 uid="uid://ctmod83ijfuqm"]
+[gd_resource type="Resource" script_class="IngredientResource" format=3 uid="uid://ctmod83ijfuqm"]
 
-[ext_resource type="Script" uid="uid://cna124i1fi236" path="res://Game/Resources/IngredientResource.gd" id="1_mcjh0"]
+[ext_resource type="Script" uid="uid://cna124i1fi236" path="res://Main/Resources/IngredientResource.gd" id="1_mcjh0"]
 
 [resource]
 script = ExtResource("1_mcjh0")

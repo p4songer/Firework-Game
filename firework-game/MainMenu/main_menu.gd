@@ -9,7 +9,6 @@ var viewport_limits : Vector2
 var tween_dict: Dictionary 
 
 const OPTIONS_SCENE = preload("uid://dcdf81eayjyro")
-const GAME_2D = preload("uid://dydw0o4rwye4u")
 const HOUSE_MANAGER = preload("uid://cj73xl2uujryc")
 
 func _ready() -> void:

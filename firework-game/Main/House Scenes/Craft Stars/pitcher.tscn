@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://b1hymvl04w807"]
+
+[ext_resource type="Script" uid="uid://c5nkd4k1bmqtq" path="res://Main/House Scenes/Craft Stars/pitcher.gd" id="2_2jak4"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_rmhko"]
+load_path = "res://.godot/imported/Glue.png-44441dc5031d91b5c9dc97d199728307.ctex"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hycgp"]
+radius = 256.0
+
+[node name="Pitcher" type="TextureRect" unique_id=840077195]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -128.0
+offset_right = 128.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+texture = SubResource("CompressedTexture2D_rmhko")
+script = ExtResource("2_2jak4")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1690629397 groups=["pitcher"]]
+position = Vector2(128, 128)
+scale = Vector2(0.5, 0.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=235559489]
+shape = SubResource("CircleShape2D_hycgp")
+
+[node name="Label" type="Label" parent="." unique_id=1971751025]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 30
+text = "TEST"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Delay" type="Timer" parent="." unique_id=1211579854]
+wait_time = 0.00999999999999999
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=250580351]
+position = Vector2(128, 0)
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_exited"]
+[connection signal="input_event" from="Area2D" to="." method="_on_area_input_event"]
+[connection signal="timeout" from="Delay" to="." method="_on_delay_timeout"]

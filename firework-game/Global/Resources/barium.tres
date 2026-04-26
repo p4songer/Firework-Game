@@ -1,11 +1,9 @@
-[gd_resource type="Resource" script_class="IngredientResource" load_steps=3 format=3 uid="uid://bxkbhs08v5r6r"]
+[gd_resource type="Resource" script_class="IngredientResource" format=3 uid="uid://bxkbhs08v5r6r"]
 
-[ext_resource type="Texture2D" uid="uid://c23fleix3rgh3" path="res://icon.svg" id="1_dclqg"]
-[ext_resource type="Script" uid="uid://cna124i1fi236" path="res://Game/Resources/IngredientResource.gd" id="2_slhyo"]
+[ext_resource type="Script" uid="uid://cna124i1fi236" path="res://Main/Resources/IngredientResource.gd" id="2_slhyo"]
 
 [resource]
 script = ExtResource("2_slhyo")
 ing_name = "Barium"
 ing_color = Color(0, 0.7137255, 0.09803922, 1)
-ing_sprite = ExtResource("1_dclqg")
 metadata/_custom_type_script = "uid://cna124i1fi236"

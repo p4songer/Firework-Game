@@ -1,0 +1,453 @@
+﻿PROJECT TODOS - consolidated
+Scanned at: 2026-04-25T19:15:00
+Root path: /
+Total TODOs: 36
+
+=== TIER 1: FOUNDATIONAL DATA MODELS ===
+These must exist before any system that depends on them can be built or debugged.
+
+--- TODO #1 ---
+ID: TODO-0031
+File: Global/Scenes/global.gd
+Line: N/A
+Marker: TODO
+Reachable: YES
+Type: comment
+Issue: NONE
+Text:
+Inventory category: Color mixes — store name, cost, and color data structure; expose add/remove/save recipe.
+Context:
+Global resource: color mix registry; UI hooks for "save recipe".
+---
+
+--- TODO #2 ---
+ID: TODO-0032
+File: Global/Scenes/global.gd
+Line: N/A
+Marker: TODO
+Reachable: YES
+Type: comment
+Issue: NONE
+Text:
+Inventory category: Stars — require color, effect, and rank (dud/success) before adding to inventory.
+Context:
+Star creation flow: validate color + effect + rank; persist star item in inventory.
+---
+
+--- TODO #3 ---
+ID: TODO-0033
+File: Main/House Scenes/Sequence/sequence_creator.gd
+Line: N/A
+Marker: TODO
+Reachable: YES
+Type: comment
+Issue: NONE
+Text:
+Inventory category: Sequence — new scene to order and time stars into a sequence item that can be given to customers.
+Context:
+Create new scene "Sequence" with drag/drop ordering, timing controls, and "save sequence" action.
+---
+
+--- TODO #4 ---
+ID: TODO-0034
+File: Global/Scenes/global.gd
+Line: N/A
+Marker: TODO
+Reachable: YES
+Type: comment
+Issue: NONE
+Text:
+Inventory category: Resources (future) — track craftable resources that gate crafting options.
+Context:
+Data model placeholder for resources; no immediate UI required.
+---
+
+=== TIER 2: NOTEBOOK SYSTEM ===
+New global system. Must be stable before customer and end-of-day flows can write to it.
+
+--- TODO #5 ---
+ID: TODO-0040
+File: Global/Scenes/notebook.gd
+Line: N/A
+Marker: TODO
+Reachable: YES
+Type: comment
+Issue: NONE
+Text:
+Notebook: implement pages — Customer Requests, Customer Reviews, Player Notes.
+Context:
+Notebook service should support multiple pages/tabs and persistent entries across scenes.
+---
+
+--- TODO #6 ---
+ID: TODO-0041
+File: Global/Scenes/notebook.gd
+Line: N/A
+Marker: TODO
+Reachable: YES
+Type: comment
+Issue: NONE
+Text:
+Notebook: Customer Requests page — list active customer requests and quick-jump links to relevant scenes.
+Context:
+Requests page shows customer summary and "go to" action.
+---
+
+--- TODO #7 ---
+ID: TODO-0042
+File: Global/Scenes/notebook.gd
+Line: N/A
+Marker: TODO
+Reachable: YES
+Type: comment
+Issue: NONE
+Text:
+Notebook: Customer Reviews page — show reviews collected at end-of-day.
+Context:
+Reviews page is read-only during day; appended at end-of-day.
+---
+
+=== TIER 3: HOUSE MANAGER ARCHITECTURE REFACTOR ===
+Core loop must be refactored before dependent scenes can be updated cleanly.
+
+--- TODO #8 ---
+ID: TODO-0022
+File: Main/HouseManager/house_manager.gd
+Line: N/A
+Marker: TODO
+Reachable: YES
+Type: comment
+Issue: NONE
+Text:
+Refactor House Manager to free-flow (no turns): convert core loop from turn-based to continuous update loop.
+Context:
+Design task: replace turn tick logic with free-flow state machine; update input handling and timers.
+---
+
+--- TODO #9 ---
+ID: TODO-0016
+File: Main/House Scenes/Craft Stars/craft_stars.gd
+Line: 10
+Marker: TODO
+Reachable: YES
+Type: comment
+Issue: NONE
+Text:
+Decouple from house manager
+Context:
+# TODO: make it so that House manager doesn't grab this.
+---
+
+--- TODO #10 ---
+ID: TODO-0023
+File: Main/HouseManager/house_manager.gd
+Line: N/A
+Marker: TODO
+Reachable: YES
+Type: comment
+Issue: NONE
+Text:
+Prepare all "house" scenes for free-flow: ensure scene entry/exit, persistent UI, and non-blocking interactions.
+Context:
+Action items per scene: remove blocking modal flows; expose hooks for start/stop of interactions.
+---
+
+--- TODO #11 ---
+ID: TODO-0024
+File: Main/HouseManager/house_manager.gd
+Line: N/A
+Marker: TODO
+Reachable: YES
+Type: comment
+Issue: NONE
+Text:
+Update House Manager UI to support continuous inventory visibility and quick-interact affordances.
+Context:
+UI change: persistent inventory panel; quick-give button; non-modal dialogs.
+---
+
+--- TODO #12 ---
+ID: TODO-0007
+File: Main/HouseManager/house_manager.gd
+Line: 3
+Marker: TODO
+Reachable: YES
+Type: comment
+Issue: NONE
+Text:
+Create economy for buying ingredients, and selling fireworks.
+Context:
+# TODO: Money should be a global var that is updated with cost and customer payments.
+---
+
+=== TIER 4: CUSTOMER / NPC SYSTEMS ===
+Persistent customers and NPC rework. Depends on notebook and free-flow architecture being stable.
+
+--- TODO #13 ---
+ID: TODO-0025
+File: Main/House Scenes/Auction/auction_house.gd
+Line: N/A
+Marker: TODO
+Reachable: YES
+Type: comment
+Issue: NONE
+Text:
+Auction House: do not populate temporary customers; customers persist while they have outstanding orders.
+Context:
+Replace ephemeral customer generation with persistent customer objects tracked by ID and order state.
+---
+
+--- TODO #14 ---
+ID: TODO-0026
+File: Main/House Scenes/Auction/auction_house.gd
+Line: N/A
+Marker: TODO
+Reachable: YES
+Type: comment
+Issue: NONE
+Text:
+Auction House: stop moving camera or triggering global updates when a customer is selected.
+Context:
+Remove camera control calls and selection-triggered global events; selection should only open customer UI.
+---
+
+--- TODO #15 ---
+ID: TODO-0027
+File: Main/House Scenes/Auction/auction_house.gd
+Line: N/A
+Marker: TODO
+Reachable: YES
+Type: comment
+Issue: NONE
+Text:
+Auction House: if no existing customers, populate a new persistent customer.
+Context:
+On load, ensure at least one customer exists; create persistent customer object if queue empty.
+---
+
+--- TODO #16 ---
+ID: TODO-0028
+File: Main/Resources/NPC.gd
+Line: N/A
+Marker: TODO
+Reachable: YES
+Type: comment
+Issue: NONE
+Text:
+Customers rework: clicking a customer shows dialogue and appends dialogue to the notebook/notepad for cross-scene reference.
+Context:
+Implement customer click handler that opens dialogue and writes an entry to Notebook service.
+---
+
+--- TODO #17 ---
+ID: TODO-0029
+File: Main/Resources/NPC.gd
+Line: N/A
+Marker: TODO
+Reachable: YES
+Type: comment
+Issue: NONE
+Text:
+Customers: if player has matching inventory, present an option to give an item; on give, customer leaves and will produce a review at end of day.
+Context:
+Add inventory-check UI flow and customer state transitions: waiting -> served -> left; record review data.
+---
+
+--- TODO #18 ---
+ID: TODO-0030
+File: Main/Resources/NPC.gd
+Line: N/A
+Marker: TODO
+Reachable: YES
+Type: comment
+Issue: NONE
+Text:
+Customers: last existing customer processed should queue end-of-day logic.
+Context:
+When customer count reaches zero after serving, trigger end-of-day sequence (deferred to day progression system).
+---
+
+--- TODO #19 ---
+ID: TODO-0004
+File: Main/Resources/NPC.gd
+Line: 35
+Marker: TODO
+Reachable: YES
+Type: comment
+Issue: NONE
+Text:
+Integrate a spreadsheet to control dialogue instead of hardcoding it here.
+Context:
+# TODO: Use a spreadsheet for these statements.
+---
+
+--- TODO #20 ---
+ID: TODO-0005
+File: Main/Resources/NPC.gd
+Line: 138
+Marker: FIXME
+Reachable: YES
+Type: comment
+Issue: NONE
+Text:
+Review how a given firework is scored. This works, but needs refactoring with the rest of the NPC.
+Context:
+# FIXME: Super temporary.
+---
+
+=== TIER 5: SCENE RESPONSIBILITIES & NEW SCENES ===
+Save recipe hooks and sequence scene creation. Depends on inventory data models being defined.
+
+--- TODO #21 ---
+ID: TODO-0029
+File: Main/House Scenes/* (various)
+Line: N/A
+Marker: TODO
+Reachable: YES
+Type: comment
+Issue: NONE
+Text:
+Scene responsibility: add "save recipe" option for Color, Stars, and Sequence in their respective scenes.
+Context:
+Each crafting scene should expose a "Save Recipe" button that writes to global registries.
+---
+
+--- TODO #22 ---
+ID: TODO-0036
+File: Main/House Scenes/Sequence/sequence_creator.gd
+Line: N/A
+Marker: TODO
+Reachable: YES
+Type: comment
+Issue: NONE
+Text:
+Scene responsibility: create new scene to handle sequence creation and saving.
+Context:
+New scene file required; integrate with inventory and customer-give flows.
+---
+
+=== TIER 6: DAY PROGRESSION & END-OF-DAY ===
+Depends on customer state transitions and notebook being functional.
+
+--- TODO #23 ---
+ID: TODO-0037
+File: Main/HouseManager/house_manager.gd
+Line: N/A
+Marker: TODO
+Reachable: YES
+Type: comment
+Issue: NONE
+Text:
+Day progression: after free-flow gameplay is stable, implement day incrementing and customer scaling (day 1 = 1 customer; later days scale).
+Context:
+Design day progression system and parameters; defer to balancing pass.
+---
+
+--- TODO #24 ---
+ID: TODO-0038
+File: Main/House Scenes/Launch/launch_scene.gd
+Line: N/A
+Marker: TODO
+Reachable: YES
+Type: comment
+Issue: NONE
+Text:
+Move launch scene to end-of-day: launching sequences should occur at end-of-day rather than inside house loop.
+Context:
+Adjust flow so launch_scene is triggered by end-of-day event; preserve existing launch logic.
+---
+
+--- TODO #25 ---
+ID: TODO-0039
+File: Main/HouseManager/house_manager.gd
+Line: N/A
+Marker: TODO
+Reachable: YES
+Type: comment
+Issue: NONE
+Text:
+Add reviews to notebook at end-of-day based on served customers' recorded reviews.
+Context:
+Collect review entries during day; append to Notebook on end-of-day trigger.
+---
+
+=== TIER 7: FIREWORK BEHAVIOR ===
+Launch scene and firework internals. Depends on launch scene flow being finalized.
+
+--- TODO #26 ---
+ID: TODO-0019
+File: Main/House Scenes/Launch/firework.gd
+Line: 36
+Marker: TODO
+Reachable: YES
+Type: comment
+Issue: NONE
+Text:
+Make directionality work internally here. Decouple from launch scenes
+Context:
+# TODO: make directionality work internally here.
+---
+
+--- TODO #27 ---
+ID: TODO-0018
+File: Main/House Scenes/Launch/firework.gd
+Line: 23
+Marker: TODO
+Reachable: YES
+Type: comment
+Issue: NONE
+Text:
+Make fish effect
+Context:
+# TODO: make fish effect
+---
+
+=== TIER 8: DESIGN & BALANCE DECISIONS ===
+Requires stable resources and crafting systems before these decisions can be implemented well.
+
+--- TODO #28 ---
+ID: TODO-0012
+File: Main/House Scenes/Star Minigame/star_minigame.gd
+Line: 5
+Marker: TODO
+Reachable: YES
+Type: comment
+Issue: NONE
+Text:
+This should be the workstation for every firework part. Not just stars.
+Context:
+# TODO: This should also be the station for making tubes and cakes and such.
+---
+
+--- TODO #29 ---
+ID: TODO-0010
+File: Main/House Scenes/Star Minigame/star_minigame.gd
+Line: 3
+Marker: FIXME
+Reachable: YES
+Type: comment
+Issue: NONE
+Text:
+Acetone is a cheap alternative to water, but has a faster timer.
+Context:
+# FIXME: acetone is cheap alternative to water, but faster timer.
+---
+
+=== TIER 9: COSMETIC ===
+Visual polish. No systematic dependencies.
+
+--- TODO #30 ---
+ID: TODO-0015
+File: Main/House Scenes/Craft Stars/craft_stars.gd
+Line: 3
+Marker: TODO
+Reachable: YES
+Type: comment
+Issue: NONE
+Text:
+Make black not ugly
+Context:
+# TODO: Make black not ugly
+---
+
+--- End of list ---

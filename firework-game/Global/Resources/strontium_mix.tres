@@ -1,11 +1,9 @@
-[gd_resource type="Resource" script_class="IngredientResource" load_steps=3 format=3 uid="uid://iw02skqqsv1e"]
+[gd_resource type="Resource" script_class="IngredientResource" format=3 uid="uid://iw02skqqsv1e"]
 
-[ext_resource type="Texture2D" uid="uid://c23fleix3rgh3" path="res://icon.svg" id="1_hpww8"]
-[ext_resource type="Script" uid="uid://cna124i1fi236" path="res://Game/Resources/IngredientResource.gd" id="2_o3clj"]
+[ext_resource type="Script" uid="uid://cna124i1fi236" path="res://Main/Resources/IngredientResource.gd" id="2_o3clj"]
 
 [resource]
 script = ExtResource("2_o3clj")
 ing_name = "Strontium + Sodium"
 ing_color = Color(0.9887417, 0.42812264, 1.92523e-07, 1)
-ing_sprite = ExtResource("1_hpww8")
 metadata/_custom_type_script = "uid://cna124i1fi236"
