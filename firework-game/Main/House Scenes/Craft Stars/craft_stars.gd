@@ -7,7 +7,7 @@ extends Node2D
 
 @export var pitcher_array : Array[Array]
 
-#TODO make it so that House manager doesn't grab this. 
+#TODO Decouple from house manager. 
 var final_color : Color
 
 func _ready() -> void:

@@ -1,8 +1,7 @@
 extends Node2D
 
-#FIXME acetone is cheap alternative to water, but faster timer.
-#FIXME Water should be a slower timer.
-#TODO This should also be the station for making tubes and cakes and such.
+#TODO Acetone is a cheap alternative to water, but has a faster timer.
+#TODO This should be the workstation for every firework part. Not just stars.
 
 @onready var parts: CPUParticles2D = $IngArea/Parts
 @onready var instruction: Label = $Instructions/Vbox/CurrentInstruction

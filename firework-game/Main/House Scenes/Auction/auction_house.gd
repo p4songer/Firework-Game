@@ -17,9 +17,7 @@ extends Node2D
 			delay.stop()
 			$Camera2D.enabled = false
 
-
-# TODO Might need to keep.
-var current_money : float = 0.0
+# var current_money : float = 0.0
 
 var bid_array : Array
 

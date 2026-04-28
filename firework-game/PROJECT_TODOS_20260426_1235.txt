@@ -385,3 +385,25 @@ SPECIAL NOTES FOR NEXT SCAN:
 - Vesper Color Mix Registry integration NOT yet implemented in repository
 - Input justification files required: manual_test_checklist.txt, global_justification.txt, implementation_notes.txt
 - See scan_report.txt for full validation details and recommendations
+
+
+DEVELOPER NOTES FOR LATER REFERENCE:
+
+Stirring moves a potion along a path. Path collects levels. Once reached, billows are used to add the destinations's effect. Then UI for name, ingredient, save recipie etc. Ingredients change the direction of the path.
+Mortar and Pestle optionally doubles ingredients ground. Also extends path. Potions can be created through ingredient book.
+Rooms are navigated with WASD.
+To sell, you place potion on a scale. You have the option to haggle. Costs reputation. Reputation affects the type (good or bad) of customers in shop each day. Haggle either increases or decreases price sold. Haggling brings up a sliding arrow minigame. You can only haggle once.
+Customers don't leave. There's a set amount each day, and day ends when all customers are finished. Bedroom room with bed to end day. Extra decoration.
+Additional features: Skill tree (things like speed up garden, more harvest) Alchemy Machine (broken thing you need to repair)
+
+Maybe sourcing ingredients / components?
+Sodium / Potassium Benzoate (whistle) - Domestic
+Aluminum - Canada
+Barium - India, China, Domestic
+Copper - Chile (U), Domestic (U), China (R)
+
+
+
+Story beats about life milestones. Fireworks don't celebrate overall holidays, but individuals as a community event.
+Fireworks are a special rare thing, making it something for deep personal events. As such, the firework crafters are artisans,
+working closely with the clientelle to fit their exact situation.

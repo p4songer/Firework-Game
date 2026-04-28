@@ -1,0 +1,325 @@
+###
+Name: EventBus.gd
+Path: C:\Users\Admin\Desktop\Projects\FireworkGame\firework-game\Global\Scenes\EventBus.gd
+Type: script
+Summary: Provides a centralized event hub by declaring project-wide signals that decouple systems and allow scenes and scripts to communicate without direct references. The file contains only signal declarations and exposes no exported variables or public methods.
+Contents:
+Signals:
+color_changed(new_color: Color)
+star_finished_emitting()
+launch_firework()
+request_ingredient(requestor: Node2D)
+part_finished()
+color_button_pressed()
+effect_button_pressed()
+prepare_launch()
+firework_finished()
+qte_clicked(data: NPC_Resource)
+spin_finished()
+attempt_ingredient(ing_name: String)
+room_completed()
+new_grain(grain)
+Exported_variables: null
+Public_methods: null
+###
+###
+Name: global.gd
+Path: C:\Users\Admin\Desktop\Projects\FireworkGame\firework-game\Global\Scenes\global.gd
+Type: script
+Summary: Manages global game state and utilities, including tracking active fireworks, playing global SFX, and maintaining a Color Mix Registry. Provides a scene transition system that instantiates the next scene, plays transition animations, and swaps the current scene. The Color Mix Registry stores named color mixes with associated cost and color data, initializes with three default mixes (CrimsonBurst, OceanBlue, Sunflare) during startup, and emits color_changed signals to notify UI systems of mix changes.
+Contents:
+Signals:
+null
+Exported_variables:
+null
+Public_methods:
+play_sfx() -> void
+add_mix(mix_name: String, cost: float, color: Color) -> void
+get_mix(mix_name: String) -> Dictionary
+remove_mix(mix_name: String) -> void
+mix_exists(mix_name: String) -> bool
+list_mixes() -> Array[String]
+get_end_anim(prefix: String) -> void
+start_transition(next_scene: PackedScene, transition: TRANSITIONS) -> void
+###
+###
+Name: GlobalRef.gd
+Path: C:\Users\Admin\Desktop\Projects\FireworkGame\firework-game\Global\Scenes\GlobalRef.gd
+Type: script
+Summary: Provides a small centralized registry that maps symbolic indexes to preloaded resource references for use across the project. Defines an INDEX enum and a DICT mapping that exposes a preloaded FIREWORK_REF so other scripts can look up shared resources without hardcoding paths.
+Contents:
+Signals:
+null
+Exported_variables:
+null
+Public_methods:
+null
+###
+###
+Name: auction_house.gd
+Path: Main\House Scenes\Auction\auction_house.gd
+Type: script
+Summary: Manages the auction house scene by spawning QTE items, controlling the camera and bid flow, and handling cleanup. The exported **active** property toggles the camera and spawn timer; a Timer controls random bid spawns and items are instantiated from a preloaded QTE_ITEM. Clearing the house frees bid children and emits **EventBus.room_completed**.
+Contents:
+Signals: null
+Exported_variables: active: bool
+Public_methods: clear_house() -> void
+###
+###
+Name: craft_stars.gd
+Path: Main\House Scenes\Craft Stars\craft_stars.gd
+Type: script
+Summary: Manages grain collection and pitcher UI for the crafting stars scene. Listens for global new_grain events and adds grain nodes to an internal holder; provides methods to add grains and toggle the scene camera. Triggers room completion when the craft action is finalized.
+Contents:
+Signals:
+null
+Exported_variables:
+pitcher_array: Array[Array]
+Public_methods:
+add_grain(new_grain) -> void
+toggle_camera(active: bool) -> void
+###
+###
+Name: pitcher.gd
+Path: Main\House Scenes\Craft Stars\pitcher.gd
+Type: script
+Summary: Represents a draggable pitcher UI element used in the crafting scene. It provides a public setter to initialize its displayed color and name, handles drag/hover interactions and spawns colored grain instances which are emitted to the global EventBus.
+Contents:
+Signals:
+null
+Exported_variables:
+color: Color
+color_name: String
+Public_methods:
+set_data(arr: Array) -> void
+###
+###
+Name: firework.gd
+Path: Main\House Scenes\Launch\firework.gd
+Type: script
+Summary: Handles visual and audio presentation of a single firework effect, including spawning particle stars and applying different break patterns. It exposes methods to launch a trail and to display the final effect, and emits a global event when the display completes.
+Contents:
+Signals:
+null
+Exported_variables:
+is_trail: bool
+is_mine: bool
+Public_methods:
+launch(data: IngredientResource) -> void
+display(data: IngredientResource) -> void
+###
+###
+Name: launch_scene.gd
+Path: Main\House Scenes\Launch\launch_scene.gd
+Type: script
+Summary: Controls a single firework launch sequence within the launch scene: manages fuse ignition, starts launch timers and tweens, moves particle stages to the launch destination, plays appropriate SFX, and creates a review UI entry when the firework completes. Integrates with global systems via EventBus and Global to coordinate transitions and room completion.
+Contents:
+Signals: null
+Exported_variables:
+destination: Vector2
+Public_methods:
+make_active() -> void
+launch_firework() -> void
+get_launch_pos() -> Vector2
+temp_display(thingy) -> void
+###
+###
+Name: new_launch.gd
+Path: Main\House Scenes\Launch\new_launch.gd
+Type: script
+Summary: Provides a refactored launch tester that loads test firework resources, instantiates firework prefabs from a global reference, and sequences launches with tweens and a timer. It is intended to replace the older launch_scene.gd as the new launch flow, but it is not yet ready for full replacement and remains part of an ongoing refactor.
+Contents:
+Signals: null
+Exported_variables:
+testing_firework: IngredientResource; testing_array: Array
+Public_methods:
+begin_launch_sequence() -> void
+launch_new() -> void
+###
+###
+Name: star.gd
+Path: Main\House Scenes\Launch\star.gd
+Type: script
+Summary: Represents a single star fragment used in firework effects; it controls its trail and break particle emission lifecycle. When the trail finishes it activates the break particles and, if enabled, emits the global EventBus.star_finished_emitting signal to notify the system.
+Contents:
+Signals:
+null
+Exported_variables:
+null
+Public_methods:
+null
+###
+###
+Name: star_minigame.gd
+Path: Main\House Scenes\Star Minigame\star_minigame.gd
+Type: script
+Summary: Controls the star crafting minigame: it manages star type selection, sequences the build steps for each star, and runs associated QTE and mash mechanics. It updates UI instructions, responds to spin and ingredient events, and emits room completion when a build finishes or fails.
+Contents:
+Signals:
+start_game()
+Exported_variables:
+current_build: String
+active: bool
+Public_methods:
+activate_mash() -> void
+###
+###
+Name: grain.gd
+Path: Main\House Scenes\Various\grain.gd
+Type: script
+Summary: Represents a single grain instance used in crafting and particle effects. Its sole responsibility is to remove itself from the scene when it leaves the playable area or screen, keeping the scene clean of offscreen grains.
+Contents:
+Signals: null
+Exported_variables: null
+Public_methods: null
+###
+###
+Name: ing_button.gd
+Path: Main\House Scenes\Various\ing_button.gd
+Type: script
+Summary: UI component representing an ingredient button that displays a sprite and text, supports click-and-drag interaction, and notifies the global EventBus when dropped onto an ingredient area. It validates its exported data on ready, follows the mouse while clicked, and emits an attempt_ingredient event when placed over a valid ing_area.
+Contents:
+Signals:
+null
+Exported_variables:
+ing_text: String; ing_name: String; sprite: CompressedTexture2D
+Public_methods:
+detect_areas() -> void
+###
+###
+Name: mixing_game.gd
+Path: Main\House Scenes\Various\mixing_game.gd
+Type: script
+Summary: Detects directional spins by tracking area enter events and counts successful spin sequences; it orients an object toward the mouse and decrements a spin counter until the spin minigame completes and emits a global spin_finished event.
+Contents:
+Signals:
+null
+Exported_variables:
+spin_count: int
+Public_methods:
+null
+###
+###
+Name: qte_item.gd
+Path: Main\House Scenes\Various\qte_item.gd
+Type: script
+Summary: A timed QTE UI component representing an NPC request. It displays NPC info, runs a countdown timer, emits hover and dying signals, and notifies the global EventBus when clicked or when the timer completes.
+Contents:
+Signals:
+hovered()
+unhovered()
+dying(which)
+Exported_variables:
+time: float
+npc_data: NPC_Resource
+active: bool
+Public_methods:
+start() -> void
+###
+###
+Name: house_manager.gd
+Path: Main\HouseManager/house_manager.gd
+Type: script
+Summary: Coordinates the house gameplay flow and UI: it manages transitions between auction, crafting, star minigame, and launch scenes, collects customer QTEs and reviews, and assembles an IngredientResource from crafting results to hand off to the launch system. It also controls camera and customer UI tweens and wires EventBus events to advance room progression.
+Contents:
+Signals: null
+Exported_variables: null
+Public_methods: tween_cam(destination = null) -> void
+###
+###
+Name: review.gd
+Path: Main\HouseManager/review.gd
+Type: script
+Summary: UI component (HBoxContainer) that renders a customer's review entry. It assigns the NPC resource's review text to a RichTextLabel, sets the NPC sprite on a TextureRect, and adjusts its minimum size to fit the content.
+Contents:
+Signals: null
+Exported_variables: data: NPC_Resource; sprite: CompressedTexture2D
+Public_methods: null
+###
+###
+Name: house_manager.gd
+Path: Main\HouseManager/house_manager.gd
+Type: script
+Summary: Coordinates the house gameplay flow and UI transitions between auction, crafting, the star minigame, and the launch scene. Collects customer QTEs and reviews, assembles an IngredientResource from crafting results, and hands that ingredient to the launch system. Controls camera and customer UI tweens and wires EventBus events to advance room progression.
+Contents:
+Signals: null
+Exported_variables: null
+Public_methods:
+tween_cam(destination = null) -> void
+###
+###
+Name: FireworkResource.gd
+Path: Main\Resources\FireworkResource.gd
+Type: script
+Summary: Defines a reusable Resource that describes a firework asset: its style, the sequence of construction/display steps, and presentation metadata. Used to configure different firework types for crafting, preview, and launch systems across the project.
+Contents:
+Signals: null
+Exported_variables: firework_style: STYLE; sequence: Array; display_name: String; display_sprite: String
+Public_methods: null
+###
+###
+Name: IngredientResource.gd
+Path: Main\Resources\IngredientResource.gd
+Type: script
+Summary: Defines a reusable Resource that represents an ingredient used in crafting and fireworks. It stores display metadata (name, color, sprites), the chosen star effect, and a flag for whistle behavior so crafting and launch systems can read ingredient properties consistently.
+Contents:
+Signals: null
+Exported_variables:
+ing_name: String
+ing_color: Color
+ing_sprite: CompressedTexture2D
+star_sprite: Texture2D
+effect: int (enum EFFECTS)
+is_whistle: bool
+Public_methods: null
+###
+###
+Name: NPC.gd
+Path: Main\Resources\NPC.gd
+Type: script
+Summary: Resource representing a non-player customer with preferences and request text; it can generate randomized NPC data and produce a textual review based on a provided IngredientResource. TODO Notepad for customer preferences.
+Contents:
+Signals: null
+Exported_variables: npc_name: String; fav_color: Color; fav_effect: String; npc_request: String; npc_sprite: CompressedTexture2D
+Public_methods: build_random() -> void; get_review(given_firework: IngredientResource) -> void
+###
+###
+Name: audio_slider.gd
+Path: MainMenu/audio_slider.gd
+Type: script
+Summary: A UI HSlider that binds to an AudioServer bus and synchronizes the slider value with the bus volume. It converts between linear slider values and decibels, initializing from the bus and updating the bus when the slider changes.
+Contents:
+Signals: null
+Exported_variables: bus_name: String
+Public_methods: null
+###
+###
+Name: main_menu.gd
+Path: MainMenu\main_menu.gd
+Type: script
+Summary: Manages the main menu UI: it applies a subtle parallax to the menu container based on mouse motion, initializes audio bus volumes, and handles button interactions (start, options, quit). It animates button hover states with tweens and triggers scene transitions via global helpers.
+Contents:
+Signals: null
+Exported_variables: speed: float; max_scale: Vector2; min_scale: Vector2
+Public_methods: null
+###
+###
+Name: options.gd
+Path: MainMenu/options.gd
+Type: script
+Summary: Controls the options menu behavior: tracks whether SFX settings changed, plays a random preview SFX when the user applies changes, and navigates back to the main menu while unpausing the tree. It also exposes a small SFX pool for randomized playback and initializes a changed flag on ready.
+Contents:
+Signals: null
+Exported_variables: null
+Public_methods: null
+###
+###
+Name: FireworkComponent.gd
+Path: Main\Resources\FireworkComponent.gd
+Type: script
+Summary: Small Resource representing a timed component of a firework sequence; it specifies a fuse delay before activation and a reference to an IngredientResource that defines the visual/effect payload. Intended to be used as elements in a FireworkResource.sequence or by launch controllers to schedule staged visual effects.
+Contents:
+Signals: null
+Exported_variables: fuse_length: float; ingredient: IngredientResource
+Public_methods: null
+###

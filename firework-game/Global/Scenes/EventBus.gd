@@ -28,3 +28,7 @@ signal attempt_ingredient(ing_name : String)
 signal room_completed
 @warning_ignore("unused_signal")
 signal new_grain(grain)
+@warning_ignore("unused_signal")
+signal notebook_updated(npc: NPC_Resource)
+@warning_ignore("unused_signal")
+signal customer_selected(npc: NPC_Resource)
