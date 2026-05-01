@@ -1,30 +1,36 @@
 extends Node
 
 @warning_ignore("unused_signal")
-signal color_changed(new_color : Color)
+signal color_changed(new_color: Color)
 @warning_ignore("unused_signal")
-signal star_finished_emitting
+signal star_finished_emitting()
 @warning_ignore("unused_signal")
-signal launch_firework
+signal launch_firework()
 @warning_ignore("unused_signal")
 signal request_ingredient(requestor: Node2D)
 @warning_ignore("unused_signal")
-signal part_finished
+signal part_finished()
 @warning_ignore("unused_signal")
-signal color_button_pressed
+signal color_button_pressed()
 @warning_ignore("unused_signal")
-signal effect_button_pressed
+signal effect_button_pressed()
 @warning_ignore("unused_signal")
-signal prepare_launch
+signal prepare_launch()
 @warning_ignore("unused_signal")
-signal firework_finished
+signal firework_finished()
 @warning_ignore("unused_signal")
-signal qte_clicked(data : NPC_Resource)
+signal qte_clicked(data: NPC_Resource)
 @warning_ignore("unused_signal")
-signal spin_finished
+signal spin_finished()
 @warning_ignore("unused_signal")
-signal attempt_ingredient(ing_name : String)
+signal attempt_ingredient(ing_name: String)
 @warning_ignore("unused_signal")
-signal room_completed
+signal room_completed()
 @warning_ignore("unused_signal")
-signal new_grain(grain)
+signal new_grain(grain: Node2D)
+@warning_ignore("unused_signal")
+signal notebook_updated(npc: NPC_Resource)
+@warning_ignore("unused_signal")
+signal customer_selected(npc: NPC_Resource)
+@warning_ignore("unused_signal")
+signal craft_stars_completed(final_color: Color)

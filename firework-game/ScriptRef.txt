@@ -18,7 +18,10 @@ qte_clicked(data: NPC_Resource)
 spin_finished()
 attempt_ingredient(ing_name: String)
 room_completed()
-new_grain(grain)
+new_grain(grain: Node2D)
+notebook_updated(npc: NPC_Resource)
+customer_selected(npc: NPC_Resource)
+craft_stars_completed(final_color: Color)
 Exported_variables: null
 Public_methods: null
 ###
@@ -69,14 +72,14 @@ Public_methods: clear_house() -> void
 Name: craft_stars.gd
 Path: Main\House Scenes\Craft Stars\craft_stars.gd
 Type: script
-Summary: Manages grain collection and pitcher UI for the crafting stars scene. Listens for global new_grain events and adds grain nodes to an internal holder; provides methods to add grains and toggle the scene camera. Triggers room completion when the craft action is finalized.
+Summary: Manages grain collection and pitcher UI for the crafting stars scene. Listens for global new_grain events and adds grain nodes to an internal holder; provides methods to add grains and toggle the scene camera. Emits craft_stars_completed with the final computed color when crafting finishes, allowing HouseManager and other systems to receive the result without direct scene references.
 Contents:
 Signals:
 null
 Exported_variables:
 pitcher_array: Array[Array]
 Public_methods:
-add_grain(new_grain) -> void
+add_grain(new_grain: Node2D) -> void
 toggle_camera(active: bool) -> void
 ###
 ###
@@ -271,7 +274,7 @@ null
 Name: house_manager.gd
 Path: Main\HouseManager\house_manager.gd
 Type: script
-Summary: Master controller for the main game flow that sequences five house scenes (auction, craft stars, star minigame, launch, and customer review). Manages camera transitions between scenes, assembles ingredients from user choices, handles customer QTE selection, and generates automated reviews based on ingredient match to customer preferences.
+Summary: Master controller for the main game flow that sequences five house scenes (auction, craft stars, star minigame, launch, and customer review). Manages camera transitions between scenes, assembles ingredients from user choices, handles customer QTE selection, and generates automated reviews based on ingredient match to customer preferences. Subscribes to craft_stars_completed signal to receive the computed color rather than reading craft_stars.final_color directly.
 Contents:
 Signals:
 null
