@@ -11,6 +11,8 @@ extends Node2D
 @onready var customers: GridContainer = $CustomerUI/TabContainer/Customers
 @onready var reviews: GridContainer = $CustomerUI/TabContainer/Reviews
 
+var customer_detail = NPC_Resource.new() #FIXME This is a broken reference from a conflict merge. Make sure it's properly replaced.
+
 var ui_active : bool = true:
 	set(new):
 		ui_active = new
@@ -109,8 +111,29 @@ func _on_room_complete() -> void:
 			tween_cam()
 
 
-func _ui_view() -> void:	
-	if ui_tween: ui_tween.kill()
+## Generates a structured review for the most recently active customer using the assembled
+## ingredient, appends it to the NPC's notepad, and instantiates a Review UI node.
+func _generate_customer_review() -> void:
+	if customer_array.is_empty():
+		return
+	var customer: NPC_Resource = customer_array[-1]
+	customer.generate_and_append_review(ingredient, 0.0)
+	var new_review: Node = REVIEW.instantiate()
+	new_review.data = customer
+	reviews.add_child(new_review)
+	$CustomerUI/TabContainer.set_tab_hidden(1, false)
+
+
+## Opens the CustomerDetail panel for the selected NPC.
+## npc: The NPC_Resource to display in the detail view.
+func _on_customer_selected(npc: NPC_Resource) -> void:
+	customer_detail.load_npc(npc)
+	customer_detail.visible = true
+
+
+func _ui_view() -> void:
+	if ui_tween:
+		ui_tween.kill()
 	ui_tween = create_tween().set_parallel(true)
 	ui_tween.tween_property($CustomerUI, "offset", Vector2(0, 0), 0.3)
 	#ui_tween.tween_property($CustomerUI/Hbox, "scale", Vector2.ONE, 0.3)

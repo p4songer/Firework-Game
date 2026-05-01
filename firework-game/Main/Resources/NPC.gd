@@ -7,10 +7,17 @@ class_name NPC_Resource extends Resource
 @export var npc_request : String
 @export var npc_sprite : CompressedTexture2D
 
-var given_review : String
-var dud_firework : bool = false
+## Runtime notepad entries for this NPC. Each entry is a Dictionary with keys:
+## "id" (String), "timestamp" (int), "author" (String), "content" (String),
+## "type" (String: "player_note" or "auto_review"), "rating" (int),
+## "score" (float), "flags" (Array[Dictionary]), "hint_key" (String).
+@export var notepad_entries: Array = []
 
-const _color_array : Array = [
+## Retained for external compatibility. Populated by generate_and_append_review.
+var given_review: String = ""
+var dud_firework: bool = false
+
+const _color_array: Array[Color] = [
 	Color(1.0, 0.0, 0.0, 1.0), Color(0.0, 0.0, 1.0, 1.0), Color(0.0, 1.0, 0.0, 1.0),
 	Color(1.0, 1.0, 1.0, 1.0), Color(0.7, 0.0, 0.7, 1.0), Color(1.0, 0.4, 0.0, 1.0)
 ]
@@ -122,53 +129,134 @@ const bad_mix : Array = [
 	" You did a thing. That thing did a thing. That’s what matters. Thanks for a good effort.",
 	
 ]
+
+## Scoring weights for review generation. Must sum to 1.0.
+const REVIEW_WEIGHT_COLOR: float = 0.60
+const REVIEW_WEIGHT_EFFECT: float = 0.30
+const REVIEW_WEIGHT_PRICE: float = 0.10
+
+## Maximum possible RGB distance between two colors, used for normalization.
+const MAX_COLOR_DIST: float = 1.732
+
+## Populates this NPC_Resource with randomized data drawn from the internal name, color,
+## and effect pools. Also generates a randomized npc_request string.
 func build_random() -> void:
 	npc_name = _name_array.pick_random()
-	fav_color = _color_array.pick_random()
-	fav_effect = _effect_array.pick_random()
-	
-	npc_request = _color_statements[fav_color].pick_random()
-	npc_request += [
-		" for the effect, I was thinking maybe... %s", " I've always liked the %s effect",
-		" %s should be fine.", " Oooh, how about %s?"
-	].pick_random() % fav_effect
+	# faReturns a normalized color match score in the range 0.0 to 1.0.
+## A score of 1.0 indicates a perfect color match. Uses Color.distance_to normalized
+## by the maximum possible RGB distance.
+## ing_color: The color of the launched firework ingredient.
+## target_color: The NPC's preferred color.
+func _color_score(ing_color: Color, target_color: Color) -> float:
+	var dr: float = ing_color.r - target_color.r
+	var dg: float = ing_color.g - target_color.g
+	var db: float = ing_color.b - target_color.b
+	var dist: float = sqrt(dr * dr + dg * dg + db * db)
+	return 1.0 - clamp(dist / MAX_COLOR_DIST, 0.0, 1.0)
 
+## Maps a weighted aggregate score to a 1 to 5 star rating.
+## score: The aggregate review score.
+func _map_score_to_rating(score: float) -> int:
+	if score >= 0.75:
+		return 5
+	elif score >= 0.50:
+		return 4
+	elif score >= 0.25:
+		return 3
+	elif score >= 0.0:
+		return 2
+	return 1
 
-func get_review(given_firework: IngredientResource) -> void:
-	#FIXME Super temporary.
-	var color_threshold = 0.25
-	var fail_threshold = 0.35
-	
-	var color_dif = self.fav_color - given_firework.ing_color
-	var color_good_enough : int = 6 if not given_firework.ing_color.is_equal_approx(Color()) else 0
-	for i in 3:
-		match i:
-			0:
-				if abs(color_dif.r) > color_threshold:
-					color_good_enough -= 1
-				if abs(color_dif.r) > fail_threshold:
-					color_good_enough -= 1
-			1:
-				if abs(color_dif.g) > color_threshold:
-					color_good_enough -= 1
-				if abs(color_dif.g) > fail_threshold:
-					color_good_enough -= 1
-			2:
-				if abs(color_dif.b) > color_threshold:
-					color_good_enough -= 1
-				if abs(color_dif.b) > fail_threshold:
-					color_good_enough -= 1
-	var color_rev = ""
-	if color_good_enough >= 4:
-		color_rev = good_color.pick_random() % _color_translator[fav_color]
-	elif color_good_enough > 2:
-		color_rev = okay_color.pick_random() % _color_translator[fav_color]
+## Generates a review for the given ingredient, appends it to notepad_entries,
+## and emits EventBus.notebook_updated. Uses weighted scoring across color match,
+## effect match, and price to select flavor text pools and build structured entry data.
+## ingredient: The IngredientResource representing the launched firework.
+## observed_price: The price the player charged for this firework.
+## expected_price: The baseline price for this firework. Defaults to 0.0 (price contribution neutral).
+## price_tolerance: Multiplier threshold before a price penalty is applied. Defaults to 1.0.
+func generate_and_append_review(ingredient: IngredientResource, observed_price: float, expected_price: float = 0.0, price_tolerance: float = 1.0) -> void:
+	var color_score: float = _color_score(ingredient.ing_color, fav_color)
+	var effect_match: bool = _effect_array[ingredient.effect] == self.fav_effect
+
+	var price_score: float = 1.0
+	if expected_price > 0.0:
+		price_score = clamp(1.0 - (observed_price - expected_price) / max(expected_price, 1.0), 0.0, 1.0)
+
+	var score: float = (REVIEW_WEIGHT_COLOR * color_score) + (REVIEW_WEIGHT_EFFECT * (1.0 if effect_match else 0.0)) + (REVIEW_WEIGHT_PRICE * price_score)
+
+	var flags: Array[Dictionary] = []
+	if color_score < 0.7:
+		var color_severity: String = "major" if color_score < 0.4 else "minor"
+		flags.append({"type": "color_mismatch", "severity": color_severity, "value": color_score})
+	if not effect_match:
+		flags.append({"type": "effect_mismatch", "severity": "major"})
+	if expected_price > 0.0 and observed_price > expected_price * price_tolerance:
+		var ratio: float = observed_price / expected_price
+		var price_severity: String = "major" if ratio > 1.25 else "minor"
+		flags.append({"type": "price_mismatch", "severity": price_severity, "value": ratio})
+
+	var hint_key: String = ""
+	if not flags.is_empty():
+		hint_key = flags[randi() % flags.size()].get("type", "")
+
+	var color_label: String = _color_translator.get(fav_color, "colorful")
+	var color_rev: String = ""
+	if color_score >= 0.7:
+		color_rev = good_color.pick_random() % color_label
+	elif color_score >= 0.4:
+		color_rev = okay_color.pick_random() % color_label
 	else:
-		color_rev = bad_color.pick_random() % _color_translator[fav_color]
-	
-	var eff_rev = good_effect.pick_random() if _effect_array[
-		given_firework.effect] == self.fav_effect else bad_effect.pick_random()
-	
-	given_review = color_rev + eff_rev
+		color_rev = bad_color.pick_random() % color_label
+
+	var eff_rev: String = good_effect.pick_random() if effect_match else bad_effect.pick_random()
+
+	var content: String = color_rev + eff_rev
 	if dud_firework:
-		given_review += bad_mix.pick_random()
+		content += bad_mix.pick_random()
+
+	given_review = content
+
+	var entry: Dictionary = {
+		"id": str(Time.get_unix_time_from_system()) + "_" + str(randi()),
+		"timestamp": int(Time.get_unix_time_from_system()),
+		"author": "System",
+		"content": content,
+		"type": "auto_review",
+		"rating": _map_score_to_rating(score),
+		"firework_name": ingredient.ing_name,
+		"flags": flags,
+		"hint_key": hint_key,
+		"score": score
+	}
+	notepad_entries.append(entry)
+	EventBus.notebook_updated.emit(self)
+
+## Appends a player-authored note to this NPC's notepad_entries array.
+## content: The text the player has written.
+## author: Display name for the note author. Defaults to "Player".
+func add_player_note(content: String, author: String = "Player") -> void:
+	var note_entry: Dictionary = {
+		"id": str(Time.get_unix_time_from_system()) + "_" + str(randi()),
+		"timestamp": int(Time.get_unix_time_from_system()),
+		"author": author,
+		"content": content,
+		"type": "player_note"
+	}
+	notepad_entries.append(note_entry)
+	EventBus.notebook_updated.emit(self)
+
+## Appends an auto-generated review to notepad_entries using a pre-built review string.
+## Retained for external callers. New internal code should use generate_and_append_review.
+## review_text: The review string to store.
+## rating: An optional integer score accompanying the review.
+func add_auto_review(review_text: String, rating: int = 0) -> void:
+	var review_entry: Dictionary = {
+		"id": str(Time.get_unix_time_from_system()) + "_" + str(randi()),
+		"timestamp": int(Time.get_unix_time_from_system()),
+		"author": "System",
+		"content": review_text,
+		"type": "auto_review",
+		"rating": rating
+	}
+	notepad_entries.append(review_entry)
+	EventBus.notebook_updated.emit(self)
