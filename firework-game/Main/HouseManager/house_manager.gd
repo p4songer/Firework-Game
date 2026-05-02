@@ -38,7 +38,7 @@ func _ready() -> void:
 	EventBus.customer_selected.connect(_on_customer_selected)
 	EventBus.craft_stars_completed.connect(_on_craft_stars_completed)
 
-	auction_house.active = true
+	auction_house.spawn_lineup(5)
 	$FocusCam.enabled = false
 
 	if not Global.review_array.is_empty():
@@ -49,9 +49,9 @@ func _ready() -> void:
 			reviews.add_child(new_review)
 
 
-## Handles a customer accepting a QTE. Adds the NPC to the active customer list,
-## instantiates a display card in the UI, and triggers the transition out of the auction room
-## when the first customer is collected.
+## Handles a customer accepting a QTE. Adds the NPC to the active customer list
+## and instantiates a display card in the UI. Triggers camera transition on first
+## customer collected.
 ## npc: The NPC_Resource of the customer who clicked the QTE.
 func _on_qte_click(npc: NPC_Resource) -> void:
 	customer_array.append(npc)
@@ -66,8 +66,6 @@ func _on_qte_click(npc: NPC_Resource) -> void:
 	customers.pivot_offset = customers.size / 2
 
 	if customer_array.size() == 1:
-		auction_house.clear_house()
-		auction_house.active = false
 		$FocusCam.enabled = true
 		tween_cam()
 

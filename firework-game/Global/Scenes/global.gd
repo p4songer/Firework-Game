@@ -1,81 +1,103 @@
 extends Node
 
-# TODO Make a dict to hold color mixes. Name of a mix, and the cost, with the associated color.
-# TODO Make customer reviews that can populate after launch.
-# Extendable so that users don't have to mix a new color every time.
+var active_fireworks: Array = []
+var is_whistle: bool = false
+var review_array: Array[NPC_Resource] = []
 
-"""
-Stirring moves a potion along a path. Path collects levels. Once reached, billows are used to add the destinations's effect. Then UI for name, ingredient, save recipie etc. Ingredients change the direction of the path.
-Mortar and Pestle optionally doubles ingredients ground. Also extends path. Potions can be created through ingredient book.
-Rooms are navigated with WASD.
-To sell, you place potion on a scale. You have the option to haggle. Costs reputation. Reputation affects the type (good or bad) of customers in shop each day. Haggle either increases or decreases price sold. Haggling brings up a sliding arrow minigame. You can only haggle once.
-Customers don't leave. There's a set amount each day, and day ends when all customers are finished. Bedroom room with bed to end day. Extra decoration.
-Additional features: Skill tree (things like speed up garden, more harvest) Alchemy Machine (broken thing you need to repair)
+## All unique NPC_Resource instances the player has encountered across sessions.
+var customers_seen: Array[NPC_Resource] = []
 
-Maybe sourcing ingredients / components?
-Sodium / Potassium Benzoate (whistle) - Domestic
-Aluminum - Canada
-Barium - India, China, Domestic
-Copper - Chile (U), Domestic (U), China (R)
+## Appends unique NPC_Resource instances to customers_seen.
+## Deduplication is performed by object reference identity.
+## customers: The array of NPC_Resource instances to register.
+func register_customers(customers: Array[NPC_Resource]) -> void:
+	for customer: NPC_Resource in customers:
+		if not customers_seen.has(customer):
+			customers_seen.append(customer)
 
-
-
-Story beats about life milestones. Fireworks don't celebrate overall holidays, but individuals as a community event.
-Fireworks are a special rare thing, making it something for deep personal events. As such, the firework crafters are artisans,
-working closely with the clientelle to fit their exact situation.
-"""
-
-# const FIRE_RESOURCES : Array = [
-# 	preload("uid://chs5icc2rx3w7"), preload("uid://bxkbhs08v5r6r"), preload("uid://7jjmoa7qa28y"),
-# 	preload("uid://dgdvg4kucekux"), preload("uid://cqkcjrv1kywv0"), preload("uid://yh4cpjejnkb2"),
-# 	preload("uid://dic88j7pevp7"), preload("uid://chpyavxb1yn04"), preload("uid://wmuthliqpv3m"),
-# 	preload("uid://dfop8tbeeruhd"), preload("uid://iw02skqqsv1e"), preload("uid://dp7b46nggluhg"),
-# ]
-# const EFFECT_RESOURCES : Array = [
-# 	preload("uid://betka3xy08pd8"), preload("uid://ba8pex888vrj8"), preload("uid://dqn1ei0yfg4xk"),
-# 	preload("uid://p8bqtov2wh0x"),
-# ]
-var active_fireworks : Array = []
-var is_whistle : bool = false
-var review_array : Array[NPC_Resource]
-
+## Plays a one-shot SFX through the global audio player.
 func play_sfx() -> void:
 	$GlobalSFX.play()
 
+#region Color Mix Registry
+
+var _color_mix_registry: Dictionary = {}
+
+## Initializes the registry with a set of default color mixes.
+func _ready() -> void:
+	add_mix("CrimsonBurst", 10.0, Color8(220, 20, 60))
+	add_mix("OceanBlue", 8.0, Color8(30, 144, 255))
+	add_mix("Sunflare", 12.5, Color8(255, 180, 25))
+
+## Registers a new color mix. Emits EventBus.color_changed to notify UI systems.
+## mix_name: The identifier for this mix.
+## cost: The purchase cost of the mix.
+## color: The Color value associated with this mix.
+func add_mix(mix_name: String, cost: float, color: Color) -> void:
+	_color_mix_registry[mix_name] = {"cost": cost, "color": color}
+	EventBus.color_changed.emit(color)
+
+## Returns the data Dictionary for a mix, or an empty Dictionary if not found.
+## The returned Dictionary contains keys "cost" (float) and "color" (Color).
+## mix_name: The identifier of the mix to look up.
+func get_mix(mix_name: String) -> Dictionary:
+	return _color_mix_registry.get(mix_name, {})
+
+## Removes a mix from the registry by name. Does nothing if the name is not found.
+## mix_name: The identifier of the mix to remove.
+func remove_mix(mix_name: String) -> void:
+	_color_mix_registry.erase(mix_name)
+
+## Returns true if a mix with the given name exists in the registry.
+## mix_name: The identifier to check.
+func mix_exists(mix_name: String) -> bool:
+	return _color_mix_registry.has(mix_name)
+
+## Returns all registered mix names as an Array of Strings.
+func list_mixes() -> Array[String]:
+	var keys: Array[String] = []
+	for key: String in _color_mix_registry.keys():
+		keys.append(key)
+	return keys
+
+#endregion
+
 #region Transition Functionality
+
 enum TRANSITIONS {
 	DEFAULT
 }
-var RNG = RandomNumberGenerator.new()
 
-var _transition_dict : Dictionary = {
+var RNG: RandomNumberGenerator = RandomNumberGenerator.new()
+
+var _transition_dict: Dictionary = {
 	TRANSITIONS.DEFAULT: "default"
 }
 
 @onready var anims: AnimationPlayer = $Transitions
-var _next_scene : Node
-var _previous_scene : Node
+var _next_scene: Node
+var _previous_scene: Node
 
-#func _ready() -> void:
-	#push_error("MUSIC IS NOT AUTOPLAY")
-	
-
+## Plays the end animation for the given transition prefix and finalizes the scene change.
+## prefix: The transition name prefix matching a key in _transition_dict.
 func get_end_anim(prefix: String) -> void:
 	_change_scene()
 	anims.play(prefix + "_end")
 	await anims.animation_finished
 
-
+## Begins a scene transition by instantiating the next scene and playing the opening animation.
+## next_scene: The PackedScene to transition into.
+## transition: The TRANSITIONS enum value selecting the animation style.
 func start_transition(next_scene: PackedScene, transition: TRANSITIONS) -> void:
 	_next_scene = next_scene.instantiate()
 	_previous_scene = get_tree().get_current_scene()
 	anims.play(_transition_dict[transition] + "_begin")
 
-
+## Adds the next scene to the tree, removes the previous scene, and sets the current scene.
 func _change_scene() -> void:
-	var tree = get_tree()
+	var tree: SceneTree = get_tree()
 	tree.get_root().add_child(_next_scene)
 	_previous_scene.queue_free()
-	#tree.get_root().remove_child(_previous_scene)
 	tree.set_current_scene(_next_scene)
+
 #endregion

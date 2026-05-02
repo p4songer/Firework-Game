@@ -2,7 +2,7 @@
 Name: EventBus.gd
 Path: C:\Users\Admin\Desktop\Projects\FireworkGame\firework-game\Global\Scenes\EventBus.gd
 Type: script
-Summary: Provides a centralized event hub by declaring project-wide signals that decouple systems and allow scenes and scripts to communicate without direct references. The file contains only signal declarations and exposes no exported variables or public methods.
+Summary: Provides a centralized event hub by declaring project-wide signals that decouple systems and allow scenes and scripts to communicate without direct references. The file contains only signal declarations and exposes no exported variables or public methods. Includes customers_cleared signal for systems that respond to lineup completion.
 Contents:
 Signals:
 color_changed(new_color: Color)
@@ -22,6 +22,7 @@ new_grain(grain: Node2D)
 notebook_updated(npc: NPC_Resource)
 customer_selected(npc: NPC_Resource)
 craft_stars_completed(final_color: Color)
+customers_cleared()
 Exported_variables: null
 Public_methods: null
 ###
@@ -29,13 +30,14 @@ Public_methods: null
 Name: global.gd
 Path: C:\Users\Admin\Desktop\Projects\FireworkGame\firework-game\Global\Scenes\global.gd
 Type: script
-Summary: Manages global game state and utilities, including tracking active fireworks, playing global SFX, and maintaining a Color Mix Registry. Provides a scene transition system that instantiates the next scene, plays transition animations, and swaps the current scene. The Color Mix Registry stores named color mixes with associated cost and color data, initializes with three default mixes (CrimsonBurst, OceanBlue, Sunflare) during startup, and emits color_changed signals to notify UI systems of mix changes.
+Summary: Manages global game state and utilities, including tracking active fireworks, playing global SFX, and maintaining a Color Mix Registry. Provides a scene transition system that instantiates the next scene, plays transition animations, and swaps the current scene. Tracks all unique customers encountered in customers_seen and provides register_customers for deduplicating NPC instances. The Color Mix Registry stores named color mixes with associated cost and color data, initializes with three default mixes (CrimsonBurst, OceanBlue, Sunflare) during startup, and emits color_changed signals to notify UI systems of mix changes.
 Contents:
 Signals:
 null
 Exported_variables:
 null
 Public_methods:
+register_customers(customers: Array[NPC_Resource]) -> void
 play_sfx() -> void
 add_mix(mix_name: String, cost: float, color: Color) -> void
 get_mix(mix_name: String) -> Dictionary
@@ -62,11 +64,12 @@ null
 Name: auction_house.gd
 Path: Main\House Scenes\Auction\auction_house.gd
 Type: script
-Summary: Manages the auction house scene by spawning QTE items, controlling the camera and bid flow, and handling cleanup. The exported **active** property toggles the camera and spawn timer; a Timer controls random bid spawns and items are instantiated from a preloaded QTE_ITEM. Clearing the house frees bid children and emits **EventBus.room_completed**.
+Summary: Renders a static clickable customer lineup. Generates randomized NPC_Resource instances, displays them as interactive QTE items, and registers them with Global.customers_seen. When the player clicks a lineup entry, emits qte_clicked, removes the entry, and when the last entry is removed emits customers_cleared and room_completed to drive room progression.
 Contents:
 Signals: null
-Exported_variables: active: bool
-Public_methods: clear_house() -> void
+Exported_variables: null
+Public_methods:
+spawn_lineup(count: int) -> void
 ###
 ###
 Name: craft_stars.gd
@@ -274,7 +277,7 @@ null
 Name: house_manager.gd
 Path: Main\HouseManager\house_manager.gd
 Type: script
-Summary: Master controller for the main game flow that sequences five house scenes (auction, craft stars, star minigame, launch, and customer review). Manages camera transitions between scenes, assembles ingredients from user choices, handles customer QTE selection, and generates automated reviews based on ingredient match to customer preferences. Subscribes to craft_stars_completed signal to receive the computed color rather than reading craft_stars.final_color directly.
+Summary: Master controller for the main game flow that sequences five house scenes (auction, craft stars, star minigame, launch, and customer review). Manages camera transitions between scenes, assembles ingredients from user choices, handles customer QTE selection via qte_clicked signal, and generates automated reviews based on ingredient match to customer preferences. Spawns the auction house lineup via spawn_lineup and listens for room_completed to advance the flow.
 Contents:
 Signals:
 null

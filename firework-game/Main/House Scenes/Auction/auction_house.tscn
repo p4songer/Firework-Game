@@ -9,19 +9,4 @@ script = ExtResource("1_k07re")
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1697832432]
 texture = ExtResource("2_3o510")
 
-[node name="Bids" type="Node2D" parent="." unique_id=1931468117]
-
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1011504554]
-zoom = Vector2(0.75, 0.75)
-limit_left = -960
-limit_top = -540
-limit_right = 960
-limit_bottom = 540
-limit_smoothed = true
-position_smoothing_enabled = true
-position_smoothing_speed = 3.5
-
-[node name="Delay" type="Timer" parent="." unique_id=1060039538]
-one_shot = true
-
-[connection signal="timeout" from="Delay" to="." method="_on_delay_timeout"]
+[node name="LineupContainer" type="Node2D" parent="."]
