@@ -21,7 +21,7 @@ They must not be re-tasked to Lumen until Forge confirms application and Lens is
 These items must be addressed before any HouseManager refactor begins.
 Decoupling scenes first ensures the refactor has clean signal boundaries to consume.
 
---- TODO #1 ---
+--- TODO #1 --- COMPLETE
 ID: TODO-0012
 File: res://Main/House Scenes/Craft Stars/craft_stars.gd
 Issue: VESPER_UPDATE / Decouple from house manager
@@ -29,7 +29,7 @@ Status: OPEN
 Action: Replace any direct HouseManager references in craft_stars.gd with EventBus emits. Identify what craft_stars currently calls or reads from HouseManager directly and emit intent signals instead.
 Notes: Lens summary confirms craft_stars has no public signals. New signals will need to be added to EventBus as part of this task. Request craft_stars.gd contents before tasking Lumen.
 
---- TODO #2 ---
+--- TODO #2 --- SKIP FOR NOW
 ID: TODO-0013
 File: res://Main/House Scenes/Craft Stars/craft_stars.gd
 Issue: INVENTORY_GATE / Restrict grain adding to inventory

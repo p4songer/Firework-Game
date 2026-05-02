@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://b1ftf4dw2ox35" path="res://Main/House Scenes/Craft Stars/craft_stars.tscn" id="3_6wiyr"]
 [ext_resource type="PackedScene" uid="uid://7c0nt2ewvbfx" path="res://Main/House Scenes/Star Minigame/star_minigame.tscn" id="4_y3hmn"]
 [ext_resource type="PackedScene" uid="uid://dmlsjsr8rfh1" path="res://Main/House Scenes/Launch/launch_scene.tscn" id="5_6wiyr"]
+[ext_resource type="PackedScene" uid="uid://ctjb54lph47ca" path="res://Main/House Scenes/Assemble/assemble_scene.tscn" id="5_35rxw"]
 
 [node name="HouseManager" type="Node2D" unique_id=466819776]
 script = ExtResource("1_6you1")
@@ -20,8 +21,11 @@ position = Vector2(1920, 0)
 [node name="StarMinigame" parent="." unique_id=948536394 instance=ExtResource("4_y3hmn")]
 position = Vector2(3840, 0)
 
+[node name="AssembleScene" parent="." unique_id=2018367091 instance=ExtResource("5_35rxw")]
+position = Vector2(5760, 0)
+
 [node name="LaunchScene" parent="." unique_id=679610553 instance=ExtResource("5_6wiyr")]
-position = Vector2(6480, 0)
+position = Vector2(7680, 0)
 
 [node name="CustomerUI" type="CanvasLayer" parent="." unique_id=543081015]
 layer = 2

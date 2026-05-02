@@ -1,13 +1,11 @@
 class_name AuctionHouse extends Node2D
 
 ## Listens to: none
-## Emits: EventBus.qte_clicked(npc), EventBus.customers_cleared(), EventBus.room_completed()
+## Emits: EventBus.qte_clicked(npc), EventBus.customers_cleared()
 ## Contract: Renders a static clickable customer lineup. Does not control any camera.
 ## NPC generation and lineup display are self-contained. HouseManager drives flow
-## via room_completed.
 
-#TODO Completely remove the camera/auction functionality in favor of customer lineups.
-# includes this is where all customer UI should live.
+#TODO Update Customer UI to live here.
 
 @onready var lineup_container: Node2D = $LineupContainer
 
@@ -50,4 +48,3 @@ func _on_item_gui_input(event: InputEvent, npc: NPC_Resource, item: Node) -> voi
 		await get_tree().process_frame
 		if lineup_container.get_child_count() == 0:
 			EventBus.customers_cleared.emit()
-			EventBus.room_completed.emit()

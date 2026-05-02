@@ -104,12 +104,11 @@ destination = Vector2(0, -5000)
 [node name="Background" type="Sprite2D" parent="." unique_id=422711967]
 self_modulate = Color(0.79999995, 0.76, 1, 1)
 z_index = -2
-scale = Vector2(1.75, 1.75)
 texture = ExtResource("2_3pum5")
 
 [node name="Tube" type="Sprite2D" parent="." unique_id=2017185910]
 z_index = 2
-position = Vector2(0, 512)
+position = Vector2(0, 154)
 rotation = 1.5707964
 texture = ExtResource("3_6v7us")
 offset = Vector2(128, 0)

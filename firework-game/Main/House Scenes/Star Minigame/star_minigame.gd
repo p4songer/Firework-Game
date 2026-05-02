@@ -7,7 +7,7 @@ extends Node2D
 @onready var parts: CPUParticles2D = $IngArea/Parts
 @onready var instruction: Label = $Instructions/Vbox/CurrentInstruction
 
-@export var current_build : String#:
+@export var current_build : String
 @export var active : bool = false
 
 var default_sequence : Array = [
@@ -77,8 +77,9 @@ func _parse_build():
 	if active_array.is_empty(): 
 		instruction.text = "Done. Good job."
 		is_game_over = true
+		EventBus.star_minigame_completed.emit(selection_index, true)
 		await get_tree().create_timer(0.75).timeout
-		EventBus.room_completed.emit()
+		# FIXME Reset game here.
 		return
 	active_element = active_array.pop_front()
 	instruction.text = active_element.to_upper()
@@ -132,4 +133,5 @@ func _on_qte_item_dying(_which: Variant) -> void:
 	
 	Global.review_array[-1].dud_firework = true
 	await get_tree().create_timer(1.0).timeout
-	EventBus.room_completed.emit()
+	EventBus.star_minigame_completed.emit(selection_index, false)
+	#FIXME Reset game here.

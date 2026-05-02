@@ -1,7 +1,9 @@
 extends Node
 
-var active_fireworks: Array = []
+# var active_fireworks: Array = [] This should be safe to delete
 var is_whistle: bool = false
+
+## All NPC reviews collected across sessions. Each entry is an NPC_Resource instance representing a unique customer.
 var review_array: Array[NPC_Resource] = []
 
 ## All unique NPC_Resource instances the player has encountered across sessions.
@@ -22,12 +24,6 @@ func play_sfx() -> void:
 #region Color Mix Registry
 
 var _color_mix_registry: Dictionary = {}
-
-## Initializes the registry with a set of default color mixes.
-func _ready() -> void:
-	add_mix("CrimsonBurst", 10.0, Color8(220, 20, 60))
-	add_mix("OceanBlue", 8.0, Color8(30, 144, 255))
-	add_mix("Sunflare", 12.5, Color8(255, 180, 25))
 
 ## Registers a new color mix. Emits EventBus.color_changed to notify UI systems.
 ## mix_name: The identifier for this mix.
@@ -60,6 +56,26 @@ func list_mixes() -> Array[String]:
 		keys.append(key)
 	return keys
 
+#endregion
+
+#region Effect Registry
+var _effect_registry: Dictionary = {}
+
+func add_effect(effect_type: int, is_dud: bool) -> void:
+	_effect_registry[effect_type] = is_dud
+
+
+func get_effect(effect_type: int) -> bool:
+	return _effect_registry.get(effect_type, false)
+
+
+func remove_effect(effect_type: int) -> void:
+	_effect_registry.erase(effect_type)
+
+## Returns true if an effect with the given type exists in the registry.
+## effect_type: The identifier to check.
+func effect_exists(effect_type: int) -> bool:
+	return _effect_registry.has(effect_type)
 #endregion
 
 #region Transition Functionality
@@ -101,3 +117,18 @@ func _change_scene() -> void:
 	tree.set_current_scene(_next_scene)
 
 #endregion
+
+func _ready() -> void:
+	add_mix("CrimsonBurst", 10.0, Color8(220, 20, 60))
+	add_mix("OceanBlue", 8.0, Color8(30, 144, 255))
+	add_mix("Sunflare", 12.5, Color8(255, 180, 25))
+
+
+func get_random_ingredient() -> IngredientResource:
+	var effect = _effect_registry.keys().pick_random()
+	var color = _color_mix_registry.keys().pick_random()
+	var ingredient = IngredientResource.new()
+	ingredient.effect = effect
+	ingredient.is_dud = _effect_registry[effect]
+	ingredient.ing_color = _color_mix_registry[color]["color"]
+	return ingredient

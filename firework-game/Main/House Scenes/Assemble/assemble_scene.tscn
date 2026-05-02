@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://ctjb54lph47ca"]
+
+[ext_resource type="Script" uid="uid://b3u4mypsrnmac" path="res://Main/House Scenes/Assemble/assemble_scene.gd" id="1_0ydme"]
+[ext_resource type="Texture2D" uid="uid://be6ekjt8xxlgo" path="res://Main/Assets/SkyBackground.png" id="1_s4bf0"]
+
+[node name="AssembleScene" type="Node2D" unique_id=2018367091]
+script = ExtResource("1_0ydme")
+
+[node name="SkyBackground" type="Sprite2D" parent="." unique_id=62179151]
+self_modulate = Color(1, 1, 1, 0.34117648)
+texture = ExtResource("1_s4bf0")
+
+[node name="GenFirework" type="Button" parent="." unique_id=666884244]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "GET RANDOM FIREWORK"
+
+[connection signal="pressed" from="GenFirework" to="." method="_on_gen_firework_pressed"]

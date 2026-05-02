@@ -113,7 +113,7 @@ func _on_firework_finished() -> void:
 
 
 func _on_return_pressed() -> void:
-	EventBus.room_completed.emit()
+	# TODO Trigger end of day logic here.
 	Global.start_transition(HOUSE_MANAGER, Global.TRANSITIONS.DEFAULT)
 
 

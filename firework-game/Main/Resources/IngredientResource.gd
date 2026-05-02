@@ -10,3 +10,4 @@ enum EFFECTS {
 @export var star_sprite : Texture2D = load("uid://ubw2obtraius") # Default star
 @export var effect : int = 0 ## Should be an enum to indicate what effect is.
 @export var is_whistle : bool = false
+@export var is_dud : bool = false

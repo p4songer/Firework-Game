@@ -1,5 +1,7 @@
 extends Node2D
 
+#TODO Make this scene visible at all times, but inactive until end of day.
+
 @onready var sequence_delay: Timer = $SequenceDelay
 @onready var launch_pos: Node2D = $LaunchPos
 

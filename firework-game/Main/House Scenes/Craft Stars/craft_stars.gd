@@ -1,7 +1,7 @@
 extends Node2D
 
 ## Listens to: EventBus.new_grain
-## Emits: EventBus.room_completed, EventBus.craft_stars_completed(final_color: Color)
+## Emits: EventBus.craft_stars_completed(final_color: Color)
 ## Contract: This scene manages grain collection and pitcher UI locally.
 ## It emits its computed final color when crafting completes and does not
 ## reference HouseManager or any external scene directly.
@@ -44,8 +44,8 @@ func add_grain(new_grain: Node2D) -> void:
 
 ## Enables or disables this scene's Camera2D.
 ## active: If true, enables the camera.
-func toggle_camera(active: bool) -> void:
-	$Camera2D.enabled = active
+# func toggle_camera(active: bool) -> void:
+# 	$Camera2D.enabled = active
 
 
 func _on_area_2d_area_exited(area: Area2D) -> void:
@@ -65,4 +65,4 @@ func _on_button_pressed() -> void:
 	$Vbox/Button.disabled = true
 	final_color = $Chem.modulate
 	EventBus.craft_stars_completed.emit(final_color)
-	EventBus.room_completed.emit()
+	#TODO Reset the scene here.

@@ -21,10 +21,6 @@ pitcher_array = Array[Array]([[Color(1, 0, 0, 1), "Strontium"], [Color(0, 1, 0, 
 
 [node name="GrainHolder" type="Node2D" parent="." unique_id=1794749120]
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1837525126]
-enabled = false
-zoom = Vector2(0.6, 0.6)
-
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=286150403]
 z_index = -1
 position = Vector2(-573, 163)
