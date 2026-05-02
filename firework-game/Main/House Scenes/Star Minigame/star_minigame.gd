@@ -120,6 +120,9 @@ func _on_craft_pressed() -> void:
 	$"Instructions/-1".hide(); $"Instructions/1".hide(); $Instructions/Vbox/Craft.hide()
 	_parse_build()
 	start_game.emit()
+	#TODO REMOVE THIS LATER. THIS IS FOR TESTING
+	print_debug("emitting signal for testing")
+	EventBus.star_minigame_completed.emit(selection_index, true)
 
 
 func _on_qte_item_dying(_which: Variant) -> void:

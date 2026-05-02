@@ -42,6 +42,7 @@ func launch(data : IngredientResource) -> void:
 
 
 func display(data : IngredientResource) -> void:
+	print("DISPLAYING")
 	star = data.star_sprite
 	(F_METHODS[data.effect]).call(data.ing_color)
 	if is_trail : trail.emitting = false

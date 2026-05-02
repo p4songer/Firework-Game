@@ -128,7 +128,8 @@ func get_random_ingredient() -> IngredientResource:
 	var effect = _effect_registry.keys().pick_random()
 	var color = _color_mix_registry.keys().pick_random()
 	var ingredient = IngredientResource.new()
+	var is_dud = get_effect(effect)
 	ingredient.effect = effect
-	ingredient.is_dud = _effect_registry[effect]
-	ingredient.ing_color = _color_mix_registry[color]["color"]
+	ingredient.is_dud = is_dud
+	ingredient.ing_color = get_mix(color)["color"]
 	return ingredient

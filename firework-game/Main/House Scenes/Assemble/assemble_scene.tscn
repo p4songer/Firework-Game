@@ -15,4 +15,8 @@ offset_right = 8.0
 offset_bottom = 8.0
 text = "GET RANDOM FIREWORK"
 
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1510013053]
+
 [connection signal="pressed" from="GenFirework" to="." method="_on_gen_firework_pressed"]
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_screen_exited"]

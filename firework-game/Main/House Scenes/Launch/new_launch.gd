@@ -6,44 +6,63 @@ extends Node2D
 @onready var launch_pos: Node2D = $LaunchPos
 
 @export var testing_firework : IngredientResource
-@export var testing_array : Array
+@export var testing_array : Array[FireworkComponent]
 
+var launching_active: bool = false
+var is_on_screen : bool = false
 var currently_launching : bool = false
+var launch_queue : Array[FireworkResource] = []
+var firework_queue : Array[FireworkComponent] = []
 var active_tween : Tween
 var active_firework : CPUParticles2D
- 
+
+signal firework_complete()
+
 func _ready() -> void:
-	var path = "res://Game/Refactored/Testing Resources/"
+	firework_complete.connect(_on_firework_complete)
+	var path = "Main/Testing Resources/"
 	var dir = ResourceLoader.list_directory(path)
 	for data in dir:
 		var inst = load(path + data)
 		testing_array.append(inst)
+	var fire = FireworkResource.new()
+	fire.sequence = testing_array
+	set_active([fire])
 
 
 func _input(_event: InputEvent) -> void:
+	if not is_on_screen: return
+
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and not currently_launching:
-		begin_launch_sequence()
+		EventBus.display_started.emit()
 
 
-func begin_launch_sequence() -> void:
+func begin_launch_sequence(firework: FireworkResource) -> void:
+	print_debug("BEGIN SEQUENCE: ", launch_queue)
 	currently_launching = true
+	firework_queue = firework.sequence.duplicate()
+
 	launch_new()
 
 
 func _on_sequence_delay_timeout() -> void:
-	if testing_array.is_empty():
-		print("EMPTY")
-		currently_launching = false
-		sequence_delay.stop()
+	if firework_queue.is_empty():
+		firework_complete.emit()
 		return
+	# if testing_array.is_empty():
+	# 	print_debug("EMPTY")
+	# 	currently_launching = false
+	# 	sequence_delay.stop()
+	# 	return
 	launch_new()
 
 
 func launch_new() -> void:
-	print("LAUNCH")
+	print_debug("LAUNCH")
 	var fire_inst = GlobalRef.DICT[GlobalRef.INDEX.FIREWORK].instantiate()
 	launch_pos.add_child(fire_inst)
-	var component = testing_array[0]
+	# var component = testing_array[0]
+	var component = firework_queue[0]
 	fire_inst.launch(component.ingredient)
 	if active_tween: active_tween.kill()
 	active_tween = create_tween()
@@ -56,4 +75,35 @@ func launch_new() -> void:
 
 
 func _lift_finished() -> void:
-	active_firework.display(testing_array.pop_front().ingredient)
+	print("LIFT FINISHED")
+	active_firework.display(firework_queue.pop_front().ingredient)
+	# active_firework.display(testing_array.pop_front().ingredient)
+
+
+func _on_firework_complete() -> void:
+	print_debug("FIREWORK COMPLETE.")
+	if launch_queue.is_empty():
+		print_debug("LAUNCH QUEUE EMPTY")
+		currently_launching = false
+		sequence_delay.stop()
+	else:
+		print_debug("LAUNCH NEXT")
+		begin_launch_sequence(launch_queue.pop_front())
+
+
+func set_active(fireworks: Array[FireworkResource]) -> void:
+	if fireworks.is_empty():
+		print_debug("NO FIREWORKS TO LAUNCH")
+		return
+	print_debug("SETTING ACTIVE: ", fireworks)
+	launch_queue = fireworks
+	launching_active = true
+	$Camera2D.enabled = true
+	begin_launch_sequence(launch_queue.pop_front())
+
+
+func _on_screen_exited() -> void:
+	is_on_screen = false
+
+func _on_screen_entered() -> void:
+	is_on_screen = true

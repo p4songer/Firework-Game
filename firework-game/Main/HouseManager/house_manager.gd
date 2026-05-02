@@ -5,7 +5,8 @@ extends Node2D
 @onready var auction_house: Node2D = $AuctionHouse
 @onready var craft_stars: Node2D = $CraftStars
 @onready var star_minigame: Node2D = $StarMinigame
-@onready var launch: Node2D = $LaunchScene
+# @onready var launch: Node2D = $LaunchScene
+@onready var launch: Node2D = $NewLaunch
 @onready var customers: GridContainer = $CustomerUI/TabContainer/Customers
 @onready var reviews: GridContainer = $CustomerUI/TabContainer/Reviews
 @onready var customer_detail: Control = $CustomerUI/CustomerDetail
@@ -28,6 +29,8 @@ var effect_translator: Dictionary = {
 	IngredientResource.EFFECTS.PALM: "palm"
 }
 
+var fireworks: Array[FireworkResource] = []
+
 const QTE_ITEM: PackedScene = preload("uid://l2s6ioimdxc")
 const REVIEW: PackedScene = preload("uid://drq4tuq8bw3k6")
 
@@ -40,6 +43,10 @@ func _ready() -> void:
 	EventBus.craft_stars_completed.connect(_on_craft_stars_completed)
 	#gets effect from star minigame to global effect registry.
 	EventBus.star_minigame_completed.connect(_on_star_minigame_completed)
+	#gets the firework resource when assembly is complete.
+	EventBus.firework_assembled.connect(_on_firework_assembled)
+	#triggers start of firework display
+	EventBus.display_started.connect(_on_display_started)
 
 	auction_house.spawn_lineup(5)
 
@@ -49,7 +56,6 @@ func _ready() -> void:
 			var new_review: Node = REVIEW.instantiate()
 			new_review.data = npc
 			reviews.add_child(new_review)
-
 
 
 func _input(event: InputEvent) -> void:
@@ -83,6 +89,7 @@ func _on_qte_click(npc: NPC_Resource) -> void:
 ## one screen width to the right. Awaitable.
 ## destination: Optional target position for the camera. Defaults to null.
 func tween_cam(destination: int = 1) -> void:
+	EventBus.room_changed.emit()
 	if transition_tween:
 		transition_tween.kill()
 	transition_tween = create_tween()
@@ -102,25 +109,15 @@ func _on_craft_stars_completed(final_color: Color) -> void:
 func _on_star_minigame_completed(effect_index: int, success: bool) -> void:
 	Global.add_effect(effect_index, success)
 
-# FIXME THIS SHOULD BE A DEAD FUNCTION. ENSURE ALL ROOMS WORK INDEPENDENTLY WITHOUT THIS. 
-# func _on_room_complete(payload: Variant) -> void:
-# 	print(payload)
-# 	room_index += 1
-# 	match room_index:
-# 		1:
-# 			await tween_cam()
-# 			# craft_stars.toggle_camera(true)
-# 		2:
-# 			tween_cam()
-# 		3:
-# 			ingredient.effect = star_minigame.selection_index
-# 			tween_cam(launch.get_launch_pos())
-# 			launch.ingredient = ingredient
-# 		4:
-# 			_generate_customer_review()
-# 		_:
-# 			tween_cam()
 
+func _on_firework_assembled(firework_resource: FireworkResource) -> void:
+	print_debug("ASSEMBLED")
+	fireworks.append(firework_resource)
+
+
+func _on_display_started() -> void:
+	print_debug("START DISPLAY")
+	launch.set_active(fireworks)
 
 ## Generates a structured review for the most recently active customer using the assembled
 ## ingredient, appends it to the NPC's notepad, and instantiates a Review UI node.

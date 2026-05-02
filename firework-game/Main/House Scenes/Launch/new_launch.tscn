@@ -6,6 +6,7 @@
 script = ExtResource("1_jgj3w")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=121297523]
+enabled = false
 zoom = Vector2(0.2, 0.2)
 
 [node name="LaunchPos" type="Node2D" parent="." unique_id=740359659]
@@ -14,4 +15,8 @@ position = Vector2(0, 850)
 [node name="SequenceDelay" type="Timer" parent="." unique_id=1459460222]
 one_shot = true
 
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=436575995]
+
 [connection signal="timeout" from="SequenceDelay" to="." method="_on_sequence_delay_timeout"]
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_screen_exited"]
