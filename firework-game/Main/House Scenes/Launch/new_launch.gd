@@ -1,7 +1,7 @@
 extends Node2D
 
 #TODO Make this scene visible at all times, but inactive until end of day.
-
+@onready var cam: Camera2D = $Camera2D
 @onready var sequence_delay: Timer = $SequenceDelay
 @onready var launch_pos: Node2D = $LaunchPos
 
@@ -18,16 +18,16 @@ var active_firework : CPUParticles2D
 
 signal firework_complete()
 
-func _ready() -> void:
-	firework_complete.connect(_on_firework_complete)
-	var path = "Main/Testing Resources/"
-	var dir = ResourceLoader.list_directory(path)
-	for data in dir:
-		var inst = load(path + data)
-		testing_array.append(inst)
-	var fire = FireworkResource.new()
-	fire.sequence = testing_array
-	set_active([fire])
+# func _ready() -> void:
+# 	firework_complete.connect(_on_firework_complete)
+# 	var path = "Main/Testing Resources/"
+# 	var dir = ResourceLoader.list_directory(path)
+# 	for data in dir:
+# 		var inst = load(path + data)
+# 		testing_array.append(inst)
+# 	var fire = FireworkResource.new()
+# 	fire.sequence = testing_array
+# 	set_active([fire])
 
 
 func _input(_event: InputEvent) -> void:
@@ -38,9 +38,9 @@ func _input(_event: InputEvent) -> void:
 
 
 func begin_launch_sequence(firework: FireworkResource) -> void:
-	print_debug("BEGIN SEQUENCE: ", launch_queue)
 	currently_launching = true
 	firework_queue = firework.sequence.duplicate()
+	print_debug("BEGIN SEQUENCE: ", firework_queue)
 
 	launch_new()
 
@@ -66,7 +66,7 @@ func launch_new() -> void:
 	fire_inst.launch(component.ingredient)
 	if active_tween: active_tween.kill()
 	active_tween = create_tween()
-	active_tween.tween_property(fire_inst, "global_position", Vector2(0, 0), component.fuse_length)
+	active_tween.tween_property(fire_inst, "position", Vector2(0, - 1920), component.fuse_length)
 	active_tween.finished.connect(_lift_finished)
 	active_firework = fire_inst
 	
@@ -96,6 +96,7 @@ func set_active(fireworks: Array[FireworkResource]) -> void:
 		print_debug("NO FIREWORKS TO LAUNCH")
 		return
 	print_debug("SETTING ACTIVE: ", fireworks)
+	cam.enabled = true
 	launch_queue = fireworks
 	launching_active = true
 	$Camera2D.enabled = true

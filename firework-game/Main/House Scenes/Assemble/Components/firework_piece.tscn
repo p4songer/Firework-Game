@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://cngaxyt3toqcf"]
+
+[ext_resource type="Texture2D" uid="uid://5dt85ktdw43q" path="res://Main/Assets/BallSprite.png" id="1_sqna0"]
+[ext_resource type="Script" uid="uid://cgcc1ftwuxavd" path="res://Main/House Scenes/Assemble/Components/firework_piece.gd" id="2_r4loi"]
+[ext_resource type="Texture2D" uid="uid://ubw2obtraius" path="res://Main/Assets/default_star.tres" id="3_ytc0w"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_r4loi"]
+radius = 120.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ytc0w"]
+radius = 64.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_28ace"]
+radius = 64.0
+
+[node name="FireworkPiece" type="Control" unique_id=33343092]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -576.0
+offset_top = -324.0
+offset_right = -320.0
+offset_bottom = -68.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("2_r4loi")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1642474602]
+texture = ExtResource("1_sqna0")
+centered = false
+
+[node name="OverlapArea" type="Area2D" parent="." unique_id=2039846360]
+position = Vector2(128, 128)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OverlapArea" unique_id=32862573]
+shape = SubResource("CircleShape2D_r4loi")
+
+[node name="FuseOut" type="Line2D" parent="." unique_id=863864777]
+z_index = 2
+position = Vector2(128, 320)
+points = PackedVector2Array(0, 0)
+
+[node name="FuseOutArea" type="Area2D" parent="FuseOut" unique_id=266851552]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FuseOut/FuseOutArea" unique_id=247807802]
+shape = SubResource("CircleShape2D_ytc0w")
+
+[node name="DragIndicatorOut" type="Sprite2D" parent="FuseOut/FuseOutArea" unique_id=811220857]
+visible = false
+z_index = 2
+texture = ExtResource("3_ytc0w")
+
+[node name="FuseInArea" type="Area2D" parent="." unique_id=1499945832 groups=["fuse_in"]]
+position = Vector2(128, -64)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FuseInArea" unique_id=39035140]
+shape = SubResource("CircleShape2D_28ace")
+
+[connection signal="input_event" from="FuseOut/FuseOutArea" to="." method="_on_fuse_out_area_input_event"]

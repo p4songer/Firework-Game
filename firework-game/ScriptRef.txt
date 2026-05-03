@@ -1,8 +1,8 @@
 ###
 Name: EventBus.gd
-Path: C:\Users\Admin\Desktop\Projects\FireworkGame\firework-game\Global\Scenes\EventBus.gd
-Type: script
-Summary: Provides a centralized event hub by declaring project-wide signals that decouple systems and allow scenes and scripts to communicate without direct references. The file contains only signal declarations and exposes no exported variables or public methods. Includes customers_cleared signal for systems that respond to lineup completion.
+Path: Global/Scenes/EventBus.gd
+Type: autoload
+Summary: Provides a centralized event hub by declaring project-wide signals that decouple systems and allow scenes and scripts to communicate without direct references. Contains signals for gameplay events (color changes, ingredient requests, QTE interactions), assembly operations (firework_assembled, room_changed), minigame completion, and state notifications (customers_cleared, display_started).
 Contents:
 Signals:
 color_changed(new_color: Color)
@@ -17,12 +17,15 @@ firework_finished()
 qte_clicked(data: NPC_Resource)
 spin_finished()
 attempt_ingredient(ing_name: String)
-room_completed()
 new_grain(grain: Node2D)
 notebook_updated(npc: NPC_Resource)
 customer_selected(npc: NPC_Resource)
 craft_stars_completed(final_color: Color)
+star_minigame_completed(effect: int, success: bool)
 customers_cleared()
+room_changed()
+firework_assembled(firework: FireworkResource)
+display_started()
 Exported_variables: null
 Public_methods: null
 ###
@@ -59,6 +62,18 @@ Exported_variables:
 null
 Public_methods:
 null
+###
+###
+Name: assemble_scene.gd
+Path: Main/House Scenes/Assemble/assemble_scene.gd
+Type: script
+Summary: Manages the assembly buffer for firework components and handles assembly finalization. Provides a public API (add_component) for external systems to append components safely without direct mutation of the buffer. Emits firework_assembled signal with a complete FireworkResource when the room_changed signal fires, preserving prior assembly behavior while decoupling from direct room management.
+Contents:
+Signals: null
+Exported_variables: null
+Public_methods:
+add_component(component: FireworkComponent) -> void
+finalize_assembly() -> void
 ###
 ###
 Name: auction_house.gd

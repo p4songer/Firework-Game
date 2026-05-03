@@ -118,6 +118,7 @@ func _on_firework_assembled(firework_resource: FireworkResource) -> void:
 func _on_display_started() -> void:
 	print_debug("START DISPLAY")
 	launch.set_active(fireworks)
+	$FocusCam.enabled = false
 
 ## Generates a structured review for the most recently active customer using the assembled
 ## ingredient, appends it to the NPC's notepad, and instantiates a Review UI node.
