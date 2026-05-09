@@ -55,6 +55,10 @@ func _ready() -> void:
 		if b is Button:
 			b.pressed.connect(_on_selector_pressed.bind(b.name))
 	instruction.text = selection_array[0]
+	#populate build_dict with correct keys
+	for eff in IngredientResource.EFFECTS:
+		print(eff.type_string())
+		build_dict[eff] = _build_dict(eff)
 
 
 func _process(_delta: float) -> void:
@@ -77,7 +81,7 @@ func _parse_build():
 	if active_array.is_empty(): 
 		instruction.text = "Done. Good job."
 		is_game_over = true
-		EventBus.star_minigame_completed.emit(selection_index, true)
+		EventBus.star_minigame_completed.emit(build_dict.keys()[selection_index],  true)
 		await get_tree().create_timer(0.75).timeout
 		# FIXME Reset game here.
 		return
@@ -122,7 +126,7 @@ func _on_craft_pressed() -> void:
 	start_game.emit()
 	#TODO REMOVE THIS LATER. THIS IS FOR TESTING
 	print_debug("emitting signal for testing")
-	EventBus.star_minigame_completed.emit(selection_index, true)
+	EventBus.star_minigame_completed.emit(build_dict.keys()[selection_index], true)
 
 
 func _on_qte_item_dying(_which: Variant) -> void:
@@ -136,5 +140,20 @@ func _on_qte_item_dying(_which: Variant) -> void:
 	
 	Global.review_array[-1].dud_firework = true
 	await get_tree().create_timer(1.0).timeout
-	EventBus.star_minigame_completed.emit(selection_index, false)
+	EventBus.star_minigame_completed.emit(build_dict.keys()[selection_index], false)
 	#FIXME Reset game here.
+
+
+func _build_dict(effect: IngredientResource.EFFECTS) -> Array:
+	match effect:
+		IngredientResource.EFFECTS.FLOWER:
+			return default_sequence
+		IngredientResource.EFFECTS.CRACKLE:
+			return crackle_sequence
+		IngredientResource.EFFECTS.BROCADE:
+			return brocade_sequence
+		IngredientResource.EFFECTS.PALM:
+			return palm_sequence
+		_:
+			push_warning("Invalid effect enum value for build dict: " + str(effect))
+			return default_sequence

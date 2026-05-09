@@ -1,46 +1,69 @@
 extends Control
 
-@export var is_first : bool = false
+@export var is_first: bool = false
+@export var component: FireworkComponent
 
 @onready var fuse_out: Line2D = $FuseOut
 @onready var fuse_out_area: Area2D = $FuseOut/FuseOutArea
 
-var connected_firework : Node
+var connected_firework: Node
 
-var dragging : bool = false
-var drag_offset : Vector2 = Vector2.ZERO 
+var dragging: bool = false
+var drag_offset: Vector2 = Vector2.ZERO
 
+## Returns the FireworkComponent assigned to this piece.
+func get_component() -> FireworkComponent:
+	return component
+
+## Returns true if connecting this piece's fuse_out to proposed_target would
+## create a cycle in the chain. Used to reject invalid connections before committing.
+## proposed_target: The firework_piece node the player is attempting to connect to.
+func would_create_loop(proposed_target: Node) -> bool:
+	var current: Node = proposed_target
+	var visited: Dictionary = {}
+	while current != null:
+		if current == self:
+			return true
+		if visited.has(current):
+			break
+		visited[current] = true
+		current = current.connected_firework
+	return false
+
+## Handles fuse_out drag initiation and connection commit on mouse release.
 func _on_fuse_out_area_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-		print_debug("start dragging from fuse in area.")
 		dragging = true
 		drag_offset = fuse_out_area.position - get_global_mouse_position()
 		$FuseOut/FuseOutArea/DragIndicatorOut.show()
-
 	elif event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_released():
 		dragging = false
 		$FuseOut/FuseOutArea/DragIndicatorOut.hide()
 		if fuse_out_area.has_overlapping_areas():
 			var connection_made: bool = false
-			for area in fuse_out_area.get_overlapping_areas():
+			for area: Area2D in fuse_out_area.get_overlapping_areas():
 				if area.is_in_group("fuse_in") and not area.get_parent().is_first:
-					print_debug("making connection")
+					var target: Node = area.get_parent()
+					if would_create_loop(target):
+						push_warning("Connection rejected: would create a loop.")
+						break
 					fuse_out_area.global_position = area.global_position
 					fuse_out.set_point_position(1, fuse_out_area.position)
-					connected_firework = area.get_parent()
+					connected_firework = target
 					connection_made = true
 					break
 			if not connection_made:
 				fuse_out_area.position = fuse_out.get_point_position(0)
 				fuse_out.remove_point(1)
-
-				if connected_firework: connected_firework = null
+				if connected_firework:
+					connected_firework = null
 		else:
 			fuse_out_area.position = fuse_out.get_point_position(0)
 			fuse_out.remove_point(1)
+			if connected_firework:
+				connected_firework = null
 
-			if connected_firework: connected_firework = null
-				
+## Extends the fuse_out line to follow the mouse while dragging.
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and dragging:
 		fuse_out_area.position = get_global_mouse_position() + drag_offset

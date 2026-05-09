@@ -1,7 +1,7 @@
 extends Node
 
 # var active_fireworks: Array = [] This should be safe to delete
-var is_whistle: bool = false
+# var is_whistle: bool = false This should be included in IngredientResource now.
 
 ## All NPC reviews collected across sessions. Each entry is an NPC_Resource instance representing a unique customer.
 var review_array: Array[NPC_Resource] = []
@@ -50,32 +50,38 @@ func mix_exists(mix_name: String) -> bool:
 	return _color_mix_registry.has(mix_name)
 
 ## Returns all registered mix names as an Array of Strings.
-func list_mixes() -> Array[String]:
-	var keys: Array[String] = []
-	for key: String in _color_mix_registry.keys():
-		keys.append(key)
-	return keys
+func get_mixes() -> Dictionary:
+	return _color_mix_registry
 
 #endregion
 
 #region Effect Registry
 var _effect_registry: Dictionary = {}
 
-func add_effect(effect_type: int, is_dud: bool) -> void:
-	_effect_registry[effect_type] = is_dud
+## Registers a new effect. effect_string : String, is_dud : bool
+func add_effect(effect_string: String, is_dud: bool) -> void:
+	var suffix = "_dud" if is_dud else ""
+	_effect_registry[effect_string + suffix] = {
+		"effect": IngredientResource.key_to_effect(effect_string), 
+		"cost": 0.0, "is_dud":is_dud
+		}
 
 
-func get_effect(effect_type: int) -> bool:
-	return _effect_registry.get(effect_type, false)
+func get_effect(effect_string: String) -> bool:
+	return _effect_registry.get(effect_string, false)
 
 
-func remove_effect(effect_type: int) -> void:
+func remove_effect(effect_type: IngredientResource.EFFECTS) -> void:
 	_effect_registry.erase(effect_type)
 
 ## Returns true if an effect with the given type exists in the registry.
-## effect_type: The identifier to check.
-func effect_exists(effect_type: int) -> bool:
-	return _effect_registry.has(effect_type)
+## effect_type: The EFFECTS enum value to check.
+# func effect_exists(effect_type: IngredientResource.EFFECTS) -> bool:
+# 	return _effect_registry.has(IngredientResource.key_to_effect(effect_type))
+
+
+func get_effects() -> Dictionary:
+	return _effect_registry
 #endregion
 
 #region Transition Functionality

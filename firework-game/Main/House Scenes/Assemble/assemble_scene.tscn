@@ -70,5 +70,5 @@ columns = 5
 
 [connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_screen_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_screen_exited"]
-[connection signal="pressed" from="UI/VBoxContainer/HBoxContainer/Build" to="." method="_on_build_pressed"]
+[connection signal="pressed" from="UI/VBoxContainer/HBoxContainer/Build" to="." method="finalize_assembly"]
 [connection signal="pressed" from="UI/VBoxContainer/HBoxContainer/Add" to="." method="_on_add_pressed"]

@@ -22,12 +22,6 @@ var ui_tween: Tween
 var room_index: int = 0
 
 #TODO Put this in IngredientResource or something. Maybe not a dictionary, maybe just a function that translates the enum to a string.
-var effect_translator: Dictionary = {
-	IngredientResource.EFFECTS.FLOWER: "default",
-	IngredientResource.EFFECTS.CRACKLE: "crackle",
-	IngredientResource.EFFECTS.BROCADE: "brocade",
-	IngredientResource.EFFECTS.PALM: "palm"
-}
 
 var fireworks: Array[FireworkResource] = []
 
@@ -106,8 +100,9 @@ func _on_craft_stars_completed(final_color: Color) -> void:
 	Global.add_mix("CustomBlend", 15.0, final_color)
 
 
-func _on_star_minigame_completed(effect_index: int, success: bool) -> void:
-	Global.add_effect(effect_index, success)
+func _on_star_minigame_completed(effect: IngredientResource.EFFECTS, success: bool) -> void:
+	var effect_string : String = IngredientResource.translate(effect)
+	Global.add_effect(effect_string, success)
 
 
 func _on_firework_assembled(firework_resource: FireworkResource) -> void:

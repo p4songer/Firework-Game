@@ -2,7 +2,7 @@
 Name: EventBus.gd
 Path: Global/Scenes/EventBus.gd
 Type: autoload
-Summary: Provides a centralized event hub by declaring project-wide signals that decouple systems and allow scenes and scripts to communicate without direct references. Contains signals for gameplay events (color changes, ingredient requests, QTE interactions), assembly operations (firework_assembled, room_changed), minigame completion, and state notifications (customers_cleared, display_started).
+Summary: Provides a centralized event hub by declaring project-wide signals that decouple systems and allow scenes and scripts to communicate without direct references. Contains signals for gameplay events (color changes, ingredient requests, QTE interactions), assembly operations (firework_assembled, room_changed), minigame completion with typed effect enum, and state notifications (customers_cleared, display_started).
 Contents:
 Signals:
 color_changed(new_color: Color)
@@ -21,7 +21,7 @@ new_grain(grain: Node2D)
 notebook_updated(npc: NPC_Resource)
 customer_selected(npc: NPC_Resource)
 craft_stars_completed(final_color: Color)
-star_minigame_completed(effect: int, success: bool)
+star_minigame_completed(effect: IngredientResource.EFFECTS, success: bool)
 customers_cleared()
 room_changed()
 firework_assembled(firework: FireworkResource)
@@ -67,13 +67,28 @@ null
 Name: assemble_scene.gd
 Path: Main/House Scenes/Assemble/assemble_scene.gd
 Type: script
-Summary: Manages the assembly buffer for firework components and handles assembly finalization. Provides a public API (add_component) for external systems to append components safely without direct mutation of the buffer. Emits firework_assembled signal with a complete FireworkResource when the room_changed signal fires, preserving prior assembly behavior while decoupling from direct room management.
+Summary: Manages the firework assembly scene using a connection-driven chain architecture. Players instantiate firework_piece components via _on_add_pressed, connect them visually using fuse drag mechanics, and finalize assembly by walking the player-defined connection chain to produce a FireworkResource that is emitted via EventBus.firework_assembled. Uses a grid-based UI layout and gets_sequence_from_connections to traverse the linked chain and extract components in order.
 Contents:
 Signals: null
 Exported_variables: null
 Public_methods:
-add_component(component: FireworkComponent) -> void
+_on_add_pressed() -> void
+get_sequence_from_connections() -> Array[FireworkComponent]
 finalize_assembly() -> void
+###
+###
+Name: firework_piece.gd
+Path: Main/House Scenes/Assemble/Components/firework_piece.gd
+Type: script
+Summary: Represents a single firework component in the assembly chain. Manages drag-based fuse connection mechanics with loop prevention, stores a FireworkComponent via the component export, and provides accessor methods for chain traversal. Each piece tracks its downstream connection and validates that new connections do not create cycles before committing.
+Contents:
+Signals: null
+Exported_variables:
+is_first: bool
+component: FireworkComponent
+Public_methods:
+get_component() -> FireworkComponent
+would_create_loop(proposed_target: Node) -> bool
 ###
 ###
 Name: auction_house.gd
@@ -172,9 +187,9 @@ null
 ###
 ###
 Name: star_minigame.gd
-Path: Main\House Scenes\Star Minigame\star_minigame.gd
+Path: Main/House Scenes/Star Minigame/star_minigame.gd
 Type: script
-Summary: Controls the star crafting minigame: it manages star type selection, sequences the build steps for each star, and runs associated QTE and mash mechanics. It updates UI instructions, responds to spin and ingredient events, and emits room completion when a build finishes or fails.
+Summary: Controls the star crafting minigame: manages star type selection by converting string keys to IngredientResource.EFFECTS enum values, sequences build steps for each star type, and runs associated QTE and mash mechanics. Updates UI instructions, responds to spin and ingredient events, and emits EventBus.star_minigame_completed with typed effect enum values when a build finishes or QTE times out.
 Contents:
 Signals:
 start_game()
@@ -336,21 +351,22 @@ add_player_note(text: String) -> void
 ###
 ###
 Name: IngredientResource.gd
-Path: Main\Resources\IngredientResource.gd
+Path: Main/Resources/IngredientResource.gd
 Type: script
-Summary: Resource class representing a crafted firework ingredient with its color, effect type, associated sprites, and whistle flag. Used throughout the crafting and launch systems to store ingredient data.
+Summary: Resource class representing a crafted firework ingredient with its color, effect type as an EFFECTS enum, associated sprites, and whistle flag. Provides static helper methods to convert between effect enum values and their canonical string keys for serialization and signal emission. Used throughout the crafting and launch systems to store ingredient data.
 Contents:
-Signals:
-null
+Signals: null
 Exported_variables:
 ing_name: String
 ing_color: Color
 ing_sprite: CompressedTexture2D
 star_sprite: Texture2D
-effect: int
+effect: EFFECTS
 is_whistle: bool
+is_dud: bool
 Public_methods:
-null
+translate(eff: EFFECTS) -> String (static)
+key_to_effect(key: String) -> EFFECTS (static)
 ###
 ###
 Name: FireworkResource.gd
