@@ -4,10 +4,13 @@ extends Control
 @onready var color_grid: GridContainer = $Vbox/Colors/Grid
 @onready var effect_grid: GridContainer = $Vbox/Effect/Grid
 @onready var scroll_label: Label = $Vbox/VScrollBar/Label
+@onready var mouse_timer: Timer = $MouseTimer
 
 var active_color: String
 var active_effect: int
 var real_fuse_length: float = 2.75
+
+var active_tween : Tween
 
 const DEFAULT_ICON : GradientTexture2D = preload("uid://ubw2obtraius")
 const DEFAULT_ICON_PRESSED : GradientTexture2D = preload("uid://bre17i2wf4p8u")
@@ -20,7 +23,6 @@ func _ready() -> void:
 
 func _update_grids() -> void:
 	var color_mixes: Dictionary = Global.get_mixes()
-	print(color_mixes)
 	for index in color_mixes.keys().size():
 		var button = TextureButton.new()
 		var mix = color_mixes.keys()[index]
@@ -31,7 +33,6 @@ func _update_grids() -> void:
 		color_grid.add_child(button)
 		button.pressed.connect(_on_color_button_pressed.bind(mix, index))
 	var effects: Dictionary = Global.get_effects()
-	print(effects)
 	for effect in effects.keys():
 		var button = TextureButton.new()
 		button.toggle_mode = true
@@ -54,7 +55,35 @@ func _on_color_button_pressed(mix_name: String, index: int) -> void:
 				continue
 			else:
 				color_grid.get_child(idx).button_pressed = false
-	
 
-# func _input(event: InputEvent) -> void:
-# 	if event.is_action_pressed("ui_accept"): print(active_color)
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion: #or event is InputEventMouseButton:
+		var menu_rect : Rect2 = $Vbox.get_global_rect()
+		if not menu_rect.has_point(event.global_position):
+			print("moved off")
+			mouse_timer.start()
+		else:
+			print("moved on")
+			mouse_timer.stop()
+
+
+func activate(enabled: bool) -> void:
+	if not enabled:
+		if active_tween: active_tween.kill()
+		active_tween = create_tween()
+		active_tween.tween_property(self, "scale", Vector2.ZERO, 0.25)
+		await active_tween.finished
+		self.queue_free()
+	else:
+		self.scale = Vector2.ZERO
+		if active_tween: active_tween.kill()
+		active_tween = create_tween()
+		active_tween.tween_property(self, "scale", Vector2.ONE, 0.25)
+
+
+func _on_mouse_timer_timeout() -> void:
+	print("timed out")
+	activate(false)
+
+

@@ -61,4 +61,9 @@ position = Vector2(128, -64)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FuseInArea" unique_id=39035140]
 shape = SubResource("CircleShape2D_28ace")
 
+[node name="MouseTimer" type="Timer" parent="." unique_id=889663521]
+one_shot = true
+
+[connection signal="input_event" from="OverlapArea" to="." method="_on_overlap_area_input_event"]
 [connection signal="input_event" from="FuseOut/FuseOutArea" to="." method="_on_fuse_out_area_input_event"]
+[connection signal="timeout" from="MouseTimer" to="." method="_on_mouse_timer_timeout"]

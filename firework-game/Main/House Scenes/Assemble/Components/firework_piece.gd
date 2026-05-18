@@ -3,13 +3,17 @@ extends Control
 @export var is_first: bool = false
 @export var component: FireworkComponent
 
+@onready var mouse_timer: Timer = $MouseTimer
 @onready var fuse_out: Line2D = $FuseOut
 @onready var fuse_out_area: Area2D = $FuseOut/FuseOutArea
 
 var connected_firework: Node
-
 var dragging: bool = false
 var drag_offset: Vector2 = Vector2.ZERO
+
+var active_menu : Control
+
+var context_menu = preload("uid://blks5xe5qjutm")
 
 ## Returns the FireworkComponent assigned to this piece.
 func get_component() -> FireworkComponent:
@@ -71,3 +75,22 @@ func _input(event: InputEvent) -> void:
 			fuse_out.set_point_position(1, fuse_out_area.position)
 		else:
 			fuse_out.add_point(fuse_out_area.position)
+
+
+func _get_new_menu() -> void:
+	if active_menu:
+		print_debug("killing active menu")
+		active_menu.queue_free()
+	print_debug("adding new menu")
+	var new_menu = context_menu.instantiate()
+	add_child(new_menu)
+	new_menu.global_position = get_global_mouse_position()
+	new_menu.z_index = 1
+	new_menu.activate(true)
+
+
+func _on_overlap_area_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
+	if event is InputEventMouseButton and Input.is_mouse_button_pressed(
+		MOUSE_BUTTON_LEFT) and not dragging:
+		print("showing context")
+		_get_new_menu()

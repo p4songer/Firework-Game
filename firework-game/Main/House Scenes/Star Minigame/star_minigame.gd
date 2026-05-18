@@ -57,7 +57,6 @@ func _ready() -> void:
 	instruction.text = selection_array[0]
 	#populate build_dict with correct keys
 	for eff in IngredientResource.EFFECTS:
-		print(eff.type_string())
 		build_dict[eff] = _build_dict(eff)
 
 
@@ -144,15 +143,15 @@ func _on_qte_item_dying(_which: Variant) -> void:
 	#FIXME Reset game here.
 
 
-func _build_dict(effect: IngredientResource.EFFECTS) -> Array:
+func _build_dict(effect) -> Array:
 	match effect:
-		IngredientResource.EFFECTS.FLOWER:
+		"FLOWER":
 			return default_sequence
-		IngredientResource.EFFECTS.CRACKLE:
+		"CRACKLE":
 			return crackle_sequence
-		IngredientResource.EFFECTS.BROCADE:
+		"BROCADE":
 			return brocade_sequence
-		IngredientResource.EFFECTS.PALM:
+		"PALM":
 			return palm_sequence
 		_:
 			push_warning("Invalid effect enum value for build dict: " + str(effect))
