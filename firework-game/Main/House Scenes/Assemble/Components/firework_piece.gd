@@ -79,14 +79,17 @@ func _input(event: InputEvent) -> void:
 
 func _get_new_menu() -> void:
 	if active_menu:
-		print_debug("killing active menu")
-		active_menu.queue_free()
+		print_debug("moving active menu")
+		active_menu.global_position = get_global_mouse_position()
+		active_menu.activate(true)
+		return
 	print_debug("adding new menu")
 	var new_menu = context_menu.instantiate()
 	add_child(new_menu)
-	new_menu.global_position = get_global_mouse_position()
-	new_menu.z_index = 1
-	new_menu.activate(true)
+	active_menu = new_menu
+	active_menu.global_position = get_global_mouse_position()
+	active_menu.z_index = 1
+	active_menu.activate(true)
 
 
 func _on_overlap_area_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:

@@ -62,9 +62,13 @@ var _effect_registry: Dictionary = {}
 func add_effect(effect_string: String, is_dud: bool) -> void:
 	var suffix = "_dud" if is_dud else ""
 	_effect_registry[effect_string + suffix] = {
-		"effect": IngredientResource.key_to_effect(effect_string), 
+		"effect": effect_string, 
 		"cost": 0.0, "is_dud":is_dud
 		}
+	# _effect_registry[effect_string + suffix] = {
+	# 	"effect": IngredientResource.key_to_effect(effect_string), 
+	# 	"cost": 0.0, "is_dud":is_dud
+	# 	}
 
 
 func get_effect(effect_string: String) -> bool:

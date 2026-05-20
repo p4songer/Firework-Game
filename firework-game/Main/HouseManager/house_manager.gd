@@ -50,6 +50,10 @@ func _ready() -> void:
 			var new_review: Node = REVIEW.instantiate()
 			new_review.data = npc
 			reviews.add_child(new_review)
+	
+	# TODO Temp effects in global
+	for eff in IngredientResource.EFFECTS:
+		Global.add_effect(eff, true)
 
 
 func _input(event: InputEvent) -> void:

@@ -7,21 +7,21 @@ extends Control
 @onready var mouse_timer: Timer = $MouseTimer
 
 var active_color: String
-var active_effect: int
+var active_effect: String # Changed to String to match Dictionary keys
 var real_fuse_length: float = 2.75
 
 var active_tween : Tween
+var mouse_hover : bool = false
 
 const DEFAULT_ICON : GradientTexture2D = preload("uid://ubw2obtraius")
 const DEFAULT_ICON_PRESSED : GradientTexture2D = preload("uid://bre17i2wf4p8u")
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	scrollbar.value_changed.connect(_on_scrollbar_value_changed)
 	_update_grids()
-	 
 
 func _update_grids() -> void:
+	# --- Color Grid Setup ---
 	var color_mixes: Dictionary = Global.get_mixes()
 	for index in color_mixes.keys().size():
 		var button = TextureButton.new()
@@ -32,13 +32,22 @@ func _update_grids() -> void:
 		button.toggle_mode = true
 		color_grid.add_child(button)
 		button.pressed.connect(_on_color_button_pressed.bind(mix, index))
+
+	# --- Effect Grid Setup ---
 	var effects: Dictionary = Global.get_effects()
-	for effect in effects.keys():
+	for index in effects.keys().size():
 		var button = TextureButton.new()
+		var effect_name = effects.keys()[index]
 		button.toggle_mode = true
 		button.texture_normal = DEFAULT_ICON
 		button.texture_pressed = DEFAULT_ICON_PRESSED
+		
+		# Optional: If you want to color-tint or texture your effect icons based 
+		# on global configuration parameters later, you'd do it here.
+		
 		effect_grid.add_child(button)
+		# Bind both the effect identifier key and its grid index
+		button.pressed.connect(_on_effect_button_pressed.bind(effect_name, index))
 
 
 func _on_scrollbar_value_changed(value: float) -> void:
@@ -57,15 +66,35 @@ func _on_color_button_pressed(mix_name: String, index: int) -> void:
 				color_grid.get_child(idx).button_pressed = false
 
 
+	# --- New Effect Button Radio-Group Logic ---
+func _on_effect_button_pressed(effect_name: String, index: int) -> void:
+	print("Effect button pressed: " + effect_name, " INDEX: ", index)
+	active_effect = effect_name
+
+	# Clear alternative options to make selections mutually exclusive
+	for idx in effect_grid.get_child_count():
+		if effect_grid.get_child(idx).button_pressed:
+			if idx == index:
+				continue
+			else:
+				effect_grid.get_child(idx).button_pressed = false
+
+
 func _input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion: #or event is InputEventMouseButton:
-		var menu_rect : Rect2 = $Vbox.get_global_rect()
-		if not menu_rect.has_point(event.global_position):
-			print("moved off")
-			mouse_timer.start()
-		else:
-			print("moved on")
+	if event is InputEventMouseMotion:
+		if mouse_hover:
+			print("hoever")
 			mouse_timer.stop()
+		else:
+			mouse_timer.start()
+			print("not hover")
+		# var menu_rect : Rect2 = $Vbox.get_global_rect()
+		# if not menu_rect.has_point(event.global_position):
+		# 	print("don't have point")
+		# 	mouse_timer.start()
+		# else:
+		# 	print("have point")
+		# 	mouse_timer.stop()
 
 
 func activate(enabled: bool) -> void:
@@ -74,7 +103,9 @@ func activate(enabled: bool) -> void:
 		active_tween = create_tween()
 		active_tween.tween_property(self, "scale", Vector2.ZERO, 0.25)
 		await active_tween.finished
-		self.queue_free()
+		
+		# --- Save / Emit Configuration on Destruction ---
+		_dispatch_selected_data()
 	else:
 		self.scale = Vector2.ZERO
 		if active_tween: active_tween.kill()
@@ -83,7 +114,17 @@ func activate(enabled: bool) -> void:
 
 
 func _on_mouse_timer_timeout() -> void:
-	print("timed out")
 	activate(false)
 
 
+	# Packaging choices into the global pipeline
+func _dispatch_selected_data() -> void:
+	print("Saving Data: Color=", active_color, " Effect=", active_effect, " Fuse=", real_fuse_length)
+	# EventBus.emit_signal("fuse_configured", active_color, active_effect, real_fuse_length)
+
+func _on_area_2d_mouse_entered() -> void:
+	mouse_hover = true
+
+
+func _on_area_2d_mouse_exited() -> void:
+	mouse_hover = false
