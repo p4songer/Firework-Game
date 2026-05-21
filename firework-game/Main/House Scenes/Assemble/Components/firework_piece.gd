@@ -15,6 +15,11 @@ var active_menu : Control
 
 var context_menu = preload("uid://blks5xe5qjutm")
 
+func _ready() -> void:
+	component = FireworkComponent.new()
+	component.ingredient = IngredientResource.new()
+
+
 ## Returns the FireworkComponent assigned to this piece.
 func get_component() -> FireworkComponent:
 	return component
@@ -77,16 +82,15 @@ func _input(event: InputEvent) -> void:
 			fuse_out.add_point(fuse_out_area.position)
 
 
-func _get_new_menu() -> void:
+func _get_menu() -> void:
 	if active_menu:
-		print_debug("moving active menu")
 		active_menu.global_position = get_global_mouse_position()
 		active_menu.activate(true)
 		return
-	print_debug("adding new menu")
 	var new_menu = context_menu.instantiate()
 	add_child(new_menu)
 	active_menu = new_menu
+	new_menu.menu_closed.connect(_on_menu_closed)
 	active_menu.global_position = get_global_mouse_position()
 	active_menu.z_index = 1
 	active_menu.activate(true)
@@ -95,5 +99,19 @@ func _get_new_menu() -> void:
 func _on_overlap_area_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and Input.is_mouse_button_pressed(
 		MOUSE_BUTTON_LEFT) and not dragging:
-		print("showing context")
-		_get_new_menu()
+		_get_menu()
+
+
+func _on_menu_closed(selected_color: String, selected_effect: String, selected_fuse_length: float) -> void:
+	if not selected_color or not selected_effect:
+		push_warning("Menu closed without valid selections. Ignoring.")
+		return
+
+	var ingredient: IngredientResource = component.ingredient
+	var mix = Global.get_mix(selected_color)
+	ingredient.ing_color = mix.get("color", Color.WHITE_SMOKE)
+	var effect = Global.get_effect(selected_effect).get("effect")
+	effect = IngredientResource.EFFECTS[effect] as IngredientResource.EFFECTS
+	ingredient.effect = effect
+	component.fuse_length = selected_fuse_length
+ 

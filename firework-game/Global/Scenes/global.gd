@@ -71,8 +71,8 @@ func add_effect(effect_string: String, is_dud: bool) -> void:
 	# 	}
 
 
-func get_effect(effect_string: String) -> bool:
-	return _effect_registry.get(effect_string, false)
+func get_effect(effect_string: String) -> Dictionary:
+	return _effect_registry.get(effect_string, {})
 
 
 func remove_effect(effect_type: IngredientResource.EFFECTS) -> void:
