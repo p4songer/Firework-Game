@@ -1,13 +1,7 @@
 class_name IngredientResource extends Resource
 
-enum EFFECTS { FLOWER, CRACKLE, BROCADE, PALM }
-
-# Maps lowercase storage strings to true Enum values
-const KEY_MAP = {
-	"default": EFFECTS.FLOWER,
-	"crackle": EFFECTS.CRACKLE,
-	"brocade": EFFECTS.BROCADE,
-	"palm": EFFECTS.PALM
+enum EFFECTS {
+	FLOWER, CRACKLE, BROCADE, PALM
 }
 
 @export var ing_name: String
@@ -19,20 +13,35 @@ const KEY_MAP = {
 @export var is_dud: bool = false
 
 ## Converts an EFFECTS enum value to its canonical string key.
+## Used for storage, serialization, and display translation.
+## eff: The EFFECTS enum value to translate.
 static func translate(eff: EFFECTS) -> String:
-	# Find the key string in our map where the value matches 'eff'
-	var keys = KEY_MAP.keys()
-	for k in keys:
-		if KEY_MAP[k] == eff:
-			return k
-			
-	push_warning("Invalid effect enum value: " + str(eff))
-	return "unknown"
+	match eff:
+		EFFECTS.FLOWER:
+			return "default"
+		EFFECTS.CRACKLE:
+			return "crackle"
+		EFFECTS.BROCADE:
+			return "brocade"
+		EFFECTS.PALM:
+			return "palm"
+		_:
+			push_warning("Invalid effect enum value: " + str(eff))
+			return "unknown"
 
 ## Converts a canonical string key to its corresponding EFFECTS enum value.
+## Returns EFFECTS.FLOWER as a safe default if the key is not recognized.
+## key: The string key to look up.
 static func key_to_effect(key: String) -> EFFECTS:
-	# Use .get() to return the enum, or default to FLOWER if not found
-	if not KEY_MAP.has(key):
-		push_warning("Unrecognized effect key: " + key + ". Defaulting to FLOWER.")
-	return KEY_MAP.get(key, EFFECTS.FLOWER)
- 
+	match key:
+		"default":
+			return EFFECTS.FLOWER
+		"crackle":
+			return EFFECTS.CRACKLE
+		"brocade":
+			return EFFECTS.BROCADE
+		"palm":
+			return EFFECTS.PALM
+		_:
+			push_warning("Unrecognized effect key: " + key + ". Defaulting to FLOWER.")
+			return EFFECTS.FLOWER

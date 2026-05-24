@@ -12,12 +12,9 @@ var real_fuse_length: float = 2.75
 
 var active_tween : Tween
 var mouse_hover : bool = false
-var is_active : bool = false
 
 const DEFAULT_ICON : GradientTexture2D = preload("uid://ubw2obtraius")
 const DEFAULT_ICON_PRESSED : GradientTexture2D = preload("uid://bre17i2wf4p8u")
-
-signal menu_closed(active_color: String, active_effect: String, real_fuse_length: float)
 
 func _ready() -> void:
 	scrollbar.value_changed.connect(_on_scrollbar_value_changed)
@@ -84,13 +81,20 @@ func _on_effect_button_pressed(effect_name: String, index: int) -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if not is_active: return
-
 	if event is InputEventMouseMotion:
 		if mouse_hover:
+			print("hoever")
 			mouse_timer.stop()
 		else:
 			mouse_timer.start()
+			print("not hover")
+		# var menu_rect : Rect2 = $Vbox.get_global_rect()
+		# if not menu_rect.has_point(event.global_position):
+		# 	print("don't have point")
+		# 	mouse_timer.start()
+		# else:
+		# 	print("have point")
+		# 	mouse_timer.stop()
 
 
 func activate(enabled: bool) -> void:
@@ -102,13 +106,11 @@ func activate(enabled: bool) -> void:
 		
 		# --- Save / Emit Configuration on Destruction ---
 		_dispatch_selected_data()
-		is_active = false
 	else:
 		self.scale = Vector2.ZERO
 		if active_tween: active_tween.kill()
 		active_tween = create_tween()
 		active_tween.tween_property(self, "scale", Vector2.ONE, 0.25)
-		is_active = true 
 
 
 func _on_mouse_timer_timeout() -> void:
@@ -117,9 +119,8 @@ func _on_mouse_timer_timeout() -> void:
 
 	# Packaging choices into the global pipeline
 func _dispatch_selected_data() -> void:
-	# print("Saving Data: Color=", active_color, " Effect=", active_effect, " Fuse=", real_fuse_length)
-	menu_closed.emit(active_color, active_effect, real_fuse_length)
-
+	print("Saving Data: Color=", active_color, " Effect=", active_effect, " Fuse=", real_fuse_length)
+	# EventBus.emit_signal("fuse_configured", active_color, active_effect, real_fuse_length)
 
 func _on_area_2d_mouse_entered() -> void:
 	mouse_hover = true
