@@ -17,7 +17,6 @@ var given_review: String = ""
 var dud_firework: bool = false
 
 const _color_array: Array[Color] = [
-const _color_array: Array[Color] = [
 	Color(1.0, 0.0, 0.0, 1.0), Color(0.0, 0.0, 1.0, 1.0), Color(0.0, 1.0, 0.0, 1.0),
 	Color(1.0, 1.0, 1.0, 1.0), Color(0.7, 0.0, 0.7, 1.0), Color(1.0, 0.4, 0.0, 1.0)
 ]
