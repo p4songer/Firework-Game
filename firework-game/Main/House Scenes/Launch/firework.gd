@@ -33,7 +33,7 @@ var exp_array : Array = [
 	preload("uid://bw2y274anh3we"), preload("uid://miqxy0fsxpdh")
 ]
 
-# TODO make directionality work internally here.
+# TODO make directionality work internally here. Decouple from launch scenes
 func launch(data : IngredientResource) -> void:
 	if is_trail: 
 		trail.emitting = true

@@ -40,6 +40,7 @@ func _on_gui_input(event: InputEvent) -> void:
 		
 		if active:
 			EventBus.qte_clicked.emit(npc_data)
+			EventBus.customer_selected.emit(npc_data)
 			self.self_modulate = Color(0.0, 0.5, 0.192, 1.0)
 
 

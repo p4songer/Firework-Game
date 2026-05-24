@@ -52,6 +52,10 @@ layout_mode = 2
 columns = 2
 metadata/_tab_index = 1
 
+[node name="CustomerDetail" parent="CustomerUI" unique_id=604899511 instance=ExtResource("6_35rxw")]
+layout_mode = 3
+anchors_preset = 15
+
 [connection signal="start_game" from="StarMinigame" to="." method="_on_star_minigame_start_game"]
 [connection signal="mouse_entered" from="CustomerUI/TabContainer" to="." method="_on_ui_mouse_entered"]
 [connection signal="mouse_exited" from="CustomerUI/TabContainer" to="." method="_on_ui_mouse_exited"]

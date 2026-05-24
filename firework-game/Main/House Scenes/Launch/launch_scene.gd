@@ -51,15 +51,10 @@ func launch_firework() -> void:
 	$Tube/Path2D/PathFollow2D/FuseParticles.emitting = false
 	$LaunchTimer.start()
 	fire_break.global_position = get_launch_pos()
-	#TODO Make sure this isn't reusable for later.
-	#var ingredient = Global.active_fireworks.pop_front()
-	#mine.display(ingredient)
-	#fire_break.trail.texture = ingredient.star_sprite
 	
 	var tween = create_tween()
 	tween.tween_property(fire_break, "position", destination, 1.2)
 	tween.finished.connect(_on_star_finished)
-	#effect.global_position = destination
 	fire_break.is_trail = true
 	fire_break.launch(ingredient)
 	

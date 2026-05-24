@@ -1,15 +1,27 @@
 class_name AuctionHouse extends Node2D
 
-## Listens to: none
-## Emits: EventBus.qte_clicked(npc), EventBus.customers_cleared()
-## Contract: Renders a static clickable customer lineup. Does not control any camera.
-## NPC generation and lineup display are self-contained. HouseManager drives flow
+#TODO Completely remove the camera/auction funcitonality in favor of customer lineups.
+# includes this is where all customer UI should live.
 
-#TODO Update Customer UI to live here.
+@onready var bids: Node2D = $Bids
+@onready var cam: Camera2D = $Camera2D
+@onready var delay: Timer = $Delay
 
-@onready var lineup_container: Node2D = $LineupContainer
+@export var active : bool = false:
+	set(new):
+		active = new
+		if active:
+			delay.start()
+			$Camera2D.enabled = true
+		else:
+			delay.stop()
+			$Camera2D.enabled = false
 
-const QTE_ITEM: PackedScene = preload("uid://l2s6ioimdxc")
+# var current_money : float = 0.0
+
+var bid_array : Array
+
+const QTE_ITEM = preload("uid://l2s6ioimdxc")
 
 ## Generates count randomized NPC_Resource instances, renders them as clickable lineup
 ## entries, and registers them with Global.customers_seen.

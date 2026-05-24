@@ -1,0 +1,47 @@
+[gd_scene load_steps=2 format=3 uid="uid://d3j7q4uy5gp3p"]
+
+[ext_resource type="Script" path="res://Main/HouseManager/customer_detail.gd" id="1_a2e5m"]
+
+[node name="CustomerDetail" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1_a2e5m")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+
+[node name="NameLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "NPC Name"
+theme_override_font_sizes/font_size = 24
+
+[node name="RequestLabel" type="RichTextLabel" parent="VBoxContainer"]
+layout_mode = 2
+fit_content = true
+text = "NPC Request"
+
+[node name="ReviewsContainer" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="NotesContainer" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="NoteInput" type="TextEdit" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+placeholder_text = "Write a note..."
+
+[node name="SaveButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Save Note"
+
+[node name="CloseButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Close"

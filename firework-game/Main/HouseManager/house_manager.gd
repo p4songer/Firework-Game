@@ -1,12 +1,8 @@
 extends Node2D
 
 #TODO Create economy for buying ingredients, and selling fireworks.
-
+@onready var launch: Node2D = $Launch
 @onready var auction_house: Node2D = $AuctionHouse
-@onready var craft_stars: Node2D = $CraftStars
-@onready var star_minigame: Node2D = $StarMinigame
-# @onready var launch: Node2D = $LaunchScene
-@onready var launch: Node2D = $NewLaunch
 @onready var customers: GridContainer = $CustomerUI/TabContainer/Customers
 @onready var reviews: GridContainer = $CustomerUI/TabContainer/Reviews
 @onready var customer_detail: Control = $CustomerUI/CustomerDetail
