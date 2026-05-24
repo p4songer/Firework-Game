@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://cj73xl2uujryc"]
+
+[ext_resource type="Script" uid="uid://4rgt3vs3nupo" path="res://Main/HouseManager/house_manager.gd" id="1_6you1"]
+[ext_resource type="PackedScene" uid="uid://d0r1ikl3flsxy" path="res://Main/House Scenes/Auction/auction_house.tscn" id="2_6wiyr"]
+[ext_resource type="PackedScene" uid="uid://b1ftf4dw2ox35" path="res://Main/House Scenes/Craft Stars/craft_stars.tscn" id="3_6wiyr"]
+[ext_resource type="PackedScene" uid="uid://7c0nt2ewvbfx" path="res://Main/House Scenes/Star Minigame/star_minigame.tscn" id="4_y3hmn"]
+[ext_resource type="PackedScene" uid="uid://ctjb54lph47ca" path="res://Main/House Scenes/Assemble/assemble_scene.tscn" id="5_35rxw"]
+[ext_resource type="PackedScene" uid="uid://bctn68bmta4ju" path="res://Main/House Scenes/Launch/new_launch.tscn" id="6_35rxw"]
+
+[node name="HouseManager" type="Node2D" unique_id=466819776]
+script = ExtResource("1_6you1")
+
+[node name="FocusCam" type="Camera2D" parent="." unique_id=1457486742]
+zoom = Vector2(0.6, 0.6)
+
+[node name="AuctionHouse" parent="." unique_id=852820366 instance=ExtResource("2_6wiyr")]
+
+[node name="CraftStars" parent="." unique_id=1554626229 instance=ExtResource("3_6wiyr")]
+position = Vector2(1920, 0)
+
+[node name="StarMinigame" parent="." unique_id=948536394 instance=ExtResource("4_y3hmn")]
+position = Vector2(3840, 0)
+
+[node name="AssembleScene" parent="." unique_id=2018367091 instance=ExtResource("5_35rxw")]
+position = Vector2(5760, 0)
+
+[node name="NewLaunch" parent="." unique_id=312980518 instance=ExtResource("6_35rxw")]
+position = Vector2(7680, 0)
+
+[node name="CustomerUI" type="CanvasLayer" parent="." unique_id=543081015]
+layer = 2
+
+[node name="TabContainer" type="TabContainer" parent="CustomerUI" unique_id=2052046214]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -31.0
+grow_horizontal = 2
+grow_vertical = 0
+current_tab = 0
+tab_1/hidden = true
+
+[node name="Customers" type="GridContainer" parent="CustomerUI/TabContainer" unique_id=622559427]
+layout_mode = 2
+columns = 5
+metadata/_tab_index = 0
+
+[node name="Reviews" type="GridContainer" parent="CustomerUI/TabContainer" unique_id=491286279]
+visible = false
+layout_mode = 2
+columns = 2
+metadata/_tab_index = 1
+
+[connection signal="start_game" from="StarMinigame" to="." method="_on_star_minigame_start_game"]
+[connection signal="mouse_entered" from="CustomerUI/TabContainer" to="." method="_on_ui_mouse_entered"]
+[connection signal="mouse_exited" from="CustomerUI/TabContainer" to="." method="_on_ui_mouse_exited"]
+[connection signal="tab_hovered" from="CustomerUI/TabContainer" to="." method="_on_tab_hovered"]
