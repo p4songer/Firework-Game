@@ -63,6 +63,7 @@ func launch_new() -> void:
 	launch_pos.add_child(fire_inst)
 	# var component = testing_array[0]
 	var component = firework_queue[0]
+	print(component)
 	fire_inst.launch(component.ingredient)
 	if active_tween: active_tween.kill()
 	active_tween = create_tween()
@@ -75,7 +76,8 @@ func launch_new() -> void:
 
 
 func _lift_finished() -> void:
-	print("LIFT FINISHED")
+	print_debug("LIFT FINISHED")
+	print(firework_queue[0].ingredient)
 	active_firework.display(firework_queue.pop_front().ingredient)
 	# active_firework.display(testing_array.pop_front().ingredient)
 

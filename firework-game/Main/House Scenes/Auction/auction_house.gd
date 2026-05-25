@@ -3,6 +3,7 @@ class_name AuctionHouse extends Node2D
 #TODO Completely remove the camera/auction funcitonality in favor of customer lineups.
 # includes this is where all customer UI should live.
 
+@onready var lineup_container: Node2D = $LineupContainer
 @onready var bids: Node2D = $Bids
 @onready var cam: Camera2D = $Camera2D
 @onready var delay: Timer = $Delay

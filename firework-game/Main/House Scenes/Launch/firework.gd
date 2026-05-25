@@ -42,7 +42,9 @@ func launch(data : IngredientResource) -> void:
 
 
 func display(data : IngredientResource) -> void:
-	print("DISPLAYING")
+	print_debug("DISPLAYING") 
+	print(data)
+	#FIXME Probably not giving a default sprite in the componenet.
 	star = data.star_sprite
 	(F_METHODS[data.effect]).call(data.ing_color)
 	if is_trail : trail.emitting = false

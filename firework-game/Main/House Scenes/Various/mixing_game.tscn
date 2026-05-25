@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c0we4sqqu2wm6"]
 
-[ext_resource type="Script" uid="uid://f8lr2v6ufkby" path="res://Main/House Scenes/Various/test_rotate.gd" id="1_gllxq"]
+[ext_resource type="Script" uid="uid://f8lr2v6ufkby" path="res://Main/House Scenes/Various/mixing_game.gd" id="1_gllxq"]
 [ext_resource type="Texture2D" uid="uid://osnvj1428820" path="res://Main/Assets/Spoon.png" id="2_l5t03"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_l5t03"]

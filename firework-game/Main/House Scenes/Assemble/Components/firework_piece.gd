@@ -15,6 +15,12 @@ var active_menu : Control
 
 var context_menu = preload("uid://blks5xe5qjutm")
 
+
+func _ready() -> void:
+	component = FireworkComponent.new()
+	component.ingredient = IngredientResource.new()
+
+
 ## Returns the FireworkComponent assigned to this piece.
 func get_component() -> FireworkComponent:
 	return component
@@ -79,12 +85,12 @@ func _input(event: InputEvent) -> void:
 
 func _get_new_menu() -> void:
 	if active_menu:
-		print_debug("moving active menu")
 		active_menu.global_position = get_global_mouse_position()
 		active_menu.activate(true)
 		return
-	print_debug("adding new menu")
 	var new_menu = context_menu.instantiate()
+	new_menu.fuse_configured.connect(_on_fuse_configured)
+	 
 	add_child(new_menu)
 	active_menu = new_menu
 	active_menu.global_position = get_global_mouse_position()
@@ -95,5 +101,18 @@ func _get_new_menu() -> void:
 func _on_overlap_area_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and Input.is_mouse_button_pressed(
 		MOUSE_BUTTON_LEFT) and not dragging:
-		print("showing context")
 		_get_new_menu()
+
+
+func _on_fuse_configured(color: String, effect: String, fuse_length: float) -> void:
+	#TODO Make use of this later.
+	@warning_ignore("unused_variable")
+	var dud = true if "dud" in effect else false 
+
+	var eff_int = IngredientResource.EFFECTS.get(effect.trim_suffix("_dud"),
+	 IngredientResource.EFFECTS.FLOWER)
+
+	component.ingredient.effect = eff_int
+	component.ingredient.ing_color = Global.get_mix(color).get(
+		"color", Color.WHITE_SMOKE)
+	component.fuse_length = fuse_length

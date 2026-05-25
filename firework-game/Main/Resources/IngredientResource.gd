@@ -1,7 +1,13 @@
 class_name IngredientResource extends Resource
 
-enum EFFECTS {
-	FLOWER, CRACKLE, BROCADE, PALM
+enum EFFECTS {FLOWER, CRACKLE, BROCADE, PALM}
+
+# A clean, centralized dictionary to map your custom string keys to the enum values
+const KEY_MAP: Dictionary = {
+	"default": EFFECTS.FLOWER,
+	"crackle": EFFECTS.CRACKLE,
+	"brocade": EFFECTS.BROCADE,
+	"palm": EFFECTS.PALM
 }
 
 @export var ing_name: String
@@ -13,35 +19,18 @@ enum EFFECTS {
 @export var is_dud: bool = false
 
 ## Converts an EFFECTS enum value to its canonical string key.
-## Used for storage, serialization, and display translation.
-## eff: The EFFECTS enum value to translate.
 static func translate(eff: EFFECTS) -> String:
-	match eff:
-		EFFECTS.FLOWER:
-			return "default"
-		EFFECTS.CRACKLE:
-			return "crackle"
-		EFFECTS.BROCADE:
-			return "brocade"
-		EFFECTS.PALM:
-			return "palm"
-		_:
-			push_warning("Invalid effect enum value: " + str(eff))
-			return "unknown"
+	# Looks up the string key by finding the enum value in the dictionary keys
+	var keys = KEY_MAP.keys()
+	for key in keys:
+		if KEY_MAP[key] == eff:
+			return key
+	
+	push_warning("Invalid effect enum value: " + str(eff))
+	return "unknown"
 
 ## Converts a canonical string key to its corresponding EFFECTS enum value.
-## Returns EFFECTS.FLOWER as a safe default if the key is not recognized.
-## key: The string key to look up.
 static func key_to_effect(key: String) -> EFFECTS:
-	match key:
-		"default":
-			return EFFECTS.FLOWER
-		"crackle":
-			return EFFECTS.CRACKLE
-		"brocade":
-			return EFFECTS.BROCADE
-		"palm":
-			return EFFECTS.PALM
-		_:
-			push_warning("Unrecognized effect key: " + key + ". Defaulting to FLOWER.")
-			return EFFECTS.FLOWER
+	# Using .get() ensures a safe fallback to EFFECTS.FLOWER if the key doesn't exist,
+	# and we use "as EFFECTS" to satisfy GDScript's strict type checker.
+	return KEY_MAP.get(key, EFFECTS.FLOWER) as EFFECTS

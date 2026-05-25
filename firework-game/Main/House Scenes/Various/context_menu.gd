@@ -16,6 +16,8 @@ var mouse_hover : bool = false
 const DEFAULT_ICON : GradientTexture2D = preload("uid://ubw2obtraius")
 const DEFAULT_ICON_PRESSED : GradientTexture2D = preload("uid://bre17i2wf4p8u")
 
+signal fuse_configured(color: String, effect: String, fuse_length: float)
+
 func _ready() -> void:
 	scrollbar.value_changed.connect(_on_scrollbar_value_changed)
 	_update_grids()
@@ -83,18 +85,15 @@ func _on_effect_button_pressed(effect_name: String, index: int) -> void:
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		if mouse_hover:
-			print("hoever")
+			print("hover")
 			mouse_timer.stop()
 		else:
 			mouse_timer.start()
 			print("not hover")
-		# var menu_rect : Rect2 = $Vbox.get_global_rect()
-		# if not menu_rect.has_point(event.global_position):
-		# 	print("don't have point")
-		# 	mouse_timer.start()
-		# else:
-		# 	print("have point")
-		# 	mouse_timer.stop()
+	if event is InputEventMouseButton and Input.is_mouse_button_pressed(
+		MOUSE_BUTTON_LEFT) and not mouse_hover:
+		activate(false)
+
 
 
 func activate(enabled: bool) -> void:
@@ -119,8 +118,8 @@ func _on_mouse_timer_timeout() -> void:
 
 	# Packaging choices into the global pipeline
 func _dispatch_selected_data() -> void:
-	print("Saving Data: Color=", active_color, " Effect=", active_effect, " Fuse=", real_fuse_length)
-	# EventBus.emit_signal("fuse_configured", active_color, active_effect, real_fuse_length)
+	print_debug("Saving Data: Color=", active_color, " Effect=", active_effect, " Fuse=", real_fuse_length)
+	fuse_configured.emit(active_color, active_effect, real_fuse_length)
 
 func _on_area_2d_mouse_entered() -> void:
 	mouse_hover = true

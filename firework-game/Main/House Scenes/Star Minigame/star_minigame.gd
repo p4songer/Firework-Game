@@ -42,7 +42,7 @@ var mash_counter : int = 0
 
 var is_game_over : bool = false
 
-const TEST_ROTATE = preload("res://Main/House Scenes/Various/test_rotate.tscn")
+const TEST_ROTATE = preload("uid://c0we4sqqu2wm6")
 
 signal start_game
 

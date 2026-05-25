@@ -1,7 +1,7 @@
 extends Node2D
 
 #TODO Create economy for buying ingredients, and selling fireworks.
-@onready var launch: Node2D = $Launch
+@onready var launch: Node2D = $NewLaunch
 @onready var auction_house: Node2D = $AuctionHouse
 @onready var customers: GridContainer = $CustomerUI/TabContainer/Customers
 @onready var reviews: GridContainer = $CustomerUI/TabContainer/Reviews
@@ -112,6 +112,7 @@ func _on_firework_assembled(firework_resource: FireworkResource) -> void:
 
 func _on_display_started() -> void:
 	print_debug("START DISPLAY")
+	print(fireworks)
 	launch.set_active(fireworks)
 	$FocusCam.enabled = false
 
