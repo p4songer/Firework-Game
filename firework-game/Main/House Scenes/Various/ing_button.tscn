@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://xigrea6kwh44" path="res://Main/Assets/Glue.png" id="1_43ik2"]
 [ext_resource type="Script" uid="uid://bcgicgg4q13qd" path="res://Main/House Scenes/Various/ing_button.gd" id="2_svvd8"]
-[ext_resource type="Theme" uid="uid://s8eqo3epuhi7" path="res://Global/MainTheme.tres" id="3_nkt7j"]
+[ext_resource type="Theme" uid="uid://s8eqo3epuhi7" path="res://Global/UI/MainTheme.tres" id="3_nkt7j"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_svvd8"]
 radius = 120.0

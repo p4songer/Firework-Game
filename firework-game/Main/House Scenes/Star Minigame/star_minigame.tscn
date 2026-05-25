@@ -3,11 +3,11 @@
 [ext_resource type="Script" uid="uid://dh3gffbcl0apr" path="res://Main/House Scenes/Star Minigame/star_minigame.gd" id="1_xmyfd"]
 [ext_resource type="PackedScene" uid="uid://cctpygcdw38xd" path="res://Main/House Scenes/Various/ing_button.tscn" id="2_4gvii"]
 [ext_resource type="Texture2D" uid="uid://eauved75drq3" path="res://Main/Assets/Mix.png" id="2_s5j57"]
-[ext_resource type="Theme" uid="uid://s8eqo3epuhi7" path="res://Global/MainTheme.tres" id="4_58s1h"]
+[ext_resource type="Theme" uid="uid://s8eqo3epuhi7" path="res://Global/UI/MainTheme.tres" id="4_58s1h"]
 [ext_resource type="Texture2D" uid="uid://b3h5eop3kaydj" path="res://Main/Assets/MixChem.png" id="4_d34rt"]
 [ext_resource type="Texture2D" uid="uid://b8bioafvnu7m3" path="res://Main/Assets/Star5.png" id="5_d34rt"]
 [ext_resource type="PackedScene" uid="uid://l2s6ioimdxc" path="res://Main/House Scenes/Various/qte_item.tscn" id="6_4gvii"]
-[ext_resource type="Script" uid="uid://banl78w28ejtn" path="res://Main/Resources/NPC.gd" id="7_podmp"]
+[ext_resource type="Script" uid="uid://banl78w28ejtn" path="res://Global/Scenes/Resources/NPC.gd" id="7_podmp"]
 [ext_resource type="Texture2D" uid="uid://dgpkswr3jkp86" path="res://Main/Assets/MixStation.png" id="8_klg8q"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_rbv71"]

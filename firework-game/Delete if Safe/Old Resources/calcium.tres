@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="IngredientResource" format=3 uid="uid://7jjmoa7qa28y"]
+
+[ext_resource type="Script" uid="uid://cna124i1fi236" path="res://Global/Scenes/Resources/IngredientResource.gd" id="2_8jmik"]
+
+[resource]
+script = ExtResource("2_8jmik")
+ing_name = "Calcium"
+ing_color = Color(0.9936834, 0.5960786, 0, 1)
+metadata/_custom_type_script = "uid://cna124i1fi236"

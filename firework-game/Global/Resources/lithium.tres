@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="IngredientResource" format=3 uid="uid://dic88j7pevp7"]
-
-[ext_resource type="Script" uid="uid://cna124i1fi236" path="res://Main/Resources/IngredientResource.gd" id="2_8mdtm"]
-
-[resource]
-script = ExtResource("2_8mdtm")
-ing_name = "Lithium"
-ing_color = Color(0.8784314, 0.05882353, 0, 1)
-metadata/_custom_type_script = "uid://cna124i1fi236"

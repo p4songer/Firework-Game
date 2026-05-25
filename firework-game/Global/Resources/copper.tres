@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="IngredientResource" format=3 uid="uid://dgdvg4kucekux"]
-
-[ext_resource type="Script" uid="uid://cna124i1fi236" path="res://Main/Resources/IngredientResource.gd" id="2_762av"]
-
-[resource]
-script = ExtResource("2_762av")
-ing_name = "Copper"
-ing_color = Color(0, 0.3647059, 1, 1)
-metadata/_custom_type_script = "uid://cna124i1fi236"

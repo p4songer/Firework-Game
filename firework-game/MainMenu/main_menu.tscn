@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://brvhnlnuddexr"]
 
 [ext_resource type="Script" uid="uid://ni6xriixrpec" path="res://MainMenu/main_menu.gd" id="1_g0dtr"]
-[ext_resource type="Theme" uid="uid://s8eqo3epuhi7" path="res://Global/MainTheme.tres" id="2_3w4mj"]
+[ext_resource type="Theme" uid="uid://s8eqo3epuhi7" path="res://Global/UI/MainTheme.tres" id="2_3w4mj"]
 
 [sub_resource type="Gradient" id="Gradient_3w4mj"]
 interpolation_mode = 2

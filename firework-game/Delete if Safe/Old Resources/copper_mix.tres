@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="IngredientResource" format=3 uid="uid://cqkcjrv1kywv0"]
+
+[ext_resource type="Script" uid="uid://cna124i1fi236" path="res://Global/Scenes/Resources/IngredientResource.gd" id="2_xh3pv"]
+
+[resource]
+script = ExtResource("2_xh3pv")
+ing_name = "Copper + Strontium"
+ing_color = Color(0.83137256, 0, 1, 1)
+metadata/_custom_type_script = "uid://cna124i1fi236"

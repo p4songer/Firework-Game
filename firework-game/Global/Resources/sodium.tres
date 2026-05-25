@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="IngredientResource" format=3 uid="uid://wmuthliqpv3m"]
-
-[ext_resource type="Script" uid="uid://cna124i1fi236" path="res://Main/Resources/IngredientResource.gd" id="2_25iv0"]
-
-[resource]
-script = ExtResource("2_25iv0")
-ing_name = "Sodium"
-ing_color = Color(0.9490196, 1, 0, 1)
-metadata/_custom_type_script = "uid://cna124i1fi236"

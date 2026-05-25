@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="IngredientResource" format=3 uid="uid://yh4cpjejnkb2"]
+
+[ext_resource type="Script" uid="uid://cna124i1fi236" path="res://Global/Scenes/Resources/IngredientResource.gd" id="2_i7i4s"]
+
+[resource]
+script = ExtResource("2_i7i4s")
+ing_name = "Iron + Charcoal"
+ing_color = Color(1, 0.8156863, 0.21176471, 1)
+metadata/_custom_type_script = "uid://cna124i1fi236"
