@@ -1,0 +1,621 @@
+###
+NAME: options.gd
+PATH: MainMenu/options.gd
+TYPE: script
+SUMMARY: UI controller for the options menu in the main menu. Handles audio slider synchronization and returns to the main menu. Manages SFX playback when settings change.
+CONTENTS:
+  signals: null
+  exported_variables: null
+  public_methods: null
+  file_level_annotations: null
+###
+
+###
+NAME: main_menu.gd
+PATH: MainMenu/main_menu.gd
+TYPE: script
+SUMMARY: Main menu scene controller. Handles button hover animations, scene transitions to options and house manager, and quit functionality. Manages tween animations for button scale effects.
+CONTENTS:
+  signals: null
+  exported_variables:
+    speed: float = 0.05
+    max_scale: Vector2 = Vector2(1.1, 1.1)
+    min_scale: Vector2 = Vector2.ONE
+  public_methods: null
+  file_level_annotations: null
+###
+
+###
+NAME: audio_slider.gd
+PATH: MainMenu/audio_slider.gd
+TYPE: script
+SUMMARY: Audio volume control slider. Extends HSlider to synchronize with Godot's AudioServer for real-time volume adjustment through database conversion.
+CONTENTS:
+  signals: null
+  exported_variables:
+    bus_name: String
+  public_methods: null
+  file_level_annotations: null
+###
+
+###
+NAME: house_manager.gd
+PATH: Main/HouseManager/house_manager.gd
+TYPE: script
+SUMMARY: Central hub manager for the main gameplay scene. Orchestrates customer interactions, firework assembly, launches, and display. Manages UI visibility, camera transitions, and state for active customers and completed fireworks.
+CONTENTS:
+  signals: null
+  exported_variables: null
+  public_methods:
+    _on_qte_click(npc: NPC_Resource) -> void
+    tween_cam(destination: int = 1) -> void
+    _on_craft_stars_completed(final_color: Color) -> void
+    _on_star_minigame_completed(effect: IngredientResource.EFFECTS, success: bool) -> void
+    _on_firework_assembled(firework_resource: FireworkResource) -> void
+    _on_display_started() -> void
+    _generate_customer_review() -> void
+    _on_customer_selected(npc: NPC_Resource) -> void
+  file_level_annotations: null
+###
+
+###
+NAME: customer_detail.gd
+PATH: Main/HouseManager/customer_detail.gd
+TYPE: script
+SUMMARY: UI panel for displaying and managing individual NPC customer details. Shows notepad entries (reviews and player notes), displays customer requests, and allows players to append new notes. Implements class_name CustomerDetail.
+CONTENTS:
+  signals: null
+  exported_variables: null
+  public_methods:
+    load_npc(npc: NPC_Resource) -> void
+    _refresh() -> void
+    _populate_entries() -> void
+  file_level_annotations: null
+###
+
+###
+NAME: review.gd
+PATH: Main/HouseManager/review.gd
+TYPE: script
+SUMMARY: UI component for displaying NPC review text and associated sprite. Extends HBoxContainer to show customer feedback with texture display. Implements class_name Review.
+CONTENTS:
+  signals: null
+  exported_variables:
+    data: NPC_Resource
+    sprite: CompressedTexture2D
+  public_methods: null
+  file_level_annotations: null
+###
+
+###
+NAME: Pattern.gd
+PATH: addons/Todo_Manager/Pattern.gd
+TYPE: script
+SUMMARY: Todo pattern editor UI component. Allows editing regex patterns with case sensitivity toggle and removal button. Part of the Todo Manager addon plugin system. Implements @tool behavior.
+CONTENTS:
+  signals: null
+  exported_variables:
+    text: String
+    disabled: bool
+    index: int
+  public_methods:
+    set_text(value: String) -> void
+  file_level_annotations:
+    @tool
+###
+
+###
+NAME: Dock.gd
+PATH: addons/Todo_Manager/Dock.gd
+TYPE: script
+SUMMARY: Main UI controller for the Todo Manager docked panel. Manages tab switching between project view, current script view, and settings. Handles pattern and color configuration, auto-refresh settings, and integration with the editor plugin system. Implements @tool behavior.
+CONTENTS:
+  signals: null
+  exported_variables: null
+  public_methods:
+    build_tree() -> void
+    get_active_script() -> TodoItem
+    go_to_script(script_path: String, line_number: int = 0) -> void
+    get_exec_flags(editor_path: String, script_path: String, line_number: int) -> PackedStringArray
+    sort_alphabetical(a, b) -> bool
+    sort_backwards(a, b) -> bool
+    populate_settings() -> void
+    rebuild_settings() -> void
+    create_config_file() -> void
+    load_config() -> void
+    change_colour(colour: Color, index: int) -> void
+    change_pattern(value: String, index: int, this_colour: Node) -> void
+    remove_pattern(index: int, this: Node, this_colour: Node) -> void
+    case_sensitive_pattern(active: bool, index: int) -> void
+  file_level_annotations:
+    @tool
+###
+
+###
+NAME: Project.gd
+PATH: addons/Todo_Manager/Project.gd
+TYPE: script
+SUMMARY: Project-wide todo tree builder for the Todo Manager. Constructs a tree view of all scripts with their todo items, handles sorting and path filtering, and manages the display hierarchy. Implements @tool behavior.
+CONTENTS:
+  signals:
+    tree_built
+  exported_variables: null
+  public_methods:
+    build_tree(todo_items: Array, ignore_paths: Array, patterns: Array, cased_patterns: Array[String], sort_alphabetical: bool, full_path: bool) -> void
+    sort_alphabetical(a, b) -> bool
+    sort_backwards(a, b) -> bool
+  file_level_annotations:
+    @tool
+###
+
+###
+NAME: plugin.gd
+PATH: addons/Todo_Manager/plugin.gd
+TYPE: script
+SUMMARY: Main editor plugin for the Todo Manager addon. Integrates with Godot editor to scan scripts, parse todo/hack/fixme comments, cache results, and provide a dockable UI. Manages filesystem monitoring and auto-refresh. Implements @tool behavior and extends EditorPlugin.
+CONTENTS:
+  signals: null
+  exported_variables: null
+  public_methods:
+    find_tokens_from_path(scripts: Array[String]) -> void
+    handle_built_in_scripts(contents: String, resource_path: String)
+    find_tokens(text: String, script_path: String) -> void
+    create_todo_item(regex_results: Array[RegExMatch], text: String, script_path: String) -> TodoItem
+    update_todo_item(todo_item: TodoItem, regex_results: Array[RegExMatch], text: String, script_path: String) -> TodoItem
+    get_line_number(what: String, from: String, start: int = 0) -> int
+    find_scripts() -> Array[String]
+    cache_todos(todos: Array, script_path: String) -> void
+    get_cached_todos(script_path: String) -> Array
+    get_dir_contents(dir: DirAccess, scripts: Array[String], directory_queue: Array[String]) -> void
+    rescan_files(clear_cache: bool) -> void
+    combine_patterns(patterns: Array) -> String
+    create_todo(todo_string: String, script_path: String) -> Todo
+    queue_remove(file: String)
+  file_level_annotations:
+    @tool
+###
+
+###
+NAME: todo_class.gd
+PATH: addons/Todo_Manager/todo_class.gd
+TYPE: script
+SUMMARY: Data class representing a single todo item. Stores pattern, title, content, script path, and line number information. Implements @tool behavior and extends RefCounted.
+CONTENTS:
+  signals: null
+  exported_variables:
+    pattern: String
+    title: String
+    content: String
+    script_path: String
+    line_number: int
+  public_methods: null
+  file_level_annotations:
+    @tool
+###
+
+###
+NAME: todoItem_class.gd
+PATH: addons/Todo_Manager/todoItem_class.gd
+TYPE: script
+SUMMARY: Data class representing a script with its collection of todo items. Wraps script path and todos array, provides short path accessor. Implements @tool behavior and extends RefCounted.
+CONTENTS:
+  signals: null
+  exported_variables:
+    script_path: String
+    todos: Array
+  public_methods:
+    _init(script_path: String, todos: Array)
+    get_short_path() -> String
+  file_level_annotations:
+    @tool
+###
+
+###
+NAME: GlobalRef.gd
+PATH: Global/Scenes/GlobalRef.gd
+TYPE: script
+SUMMARY: Reference singleton providing static access to preloaded scene resources. Maps enum indices to scene paths for global resource lookups.
+CONTENTS:
+  signals: null
+  exported_variables: null
+  public_methods: null
+  file_level_annotations: null
+###
+
+###
+NAME: global.gd
+PATH: Global/Scenes/global.gd
+TYPE: script
+SUMMARY: Global singleton managing game state across scenes. Maintains customer and review arrays, color mix registry, effect registry, and scene transition system with animations. Provides economy and inventory methods.
+CONTENTS:
+  signals: null
+  exported_variables:
+    review_array: Array[NPC_Resource]
+    customers_seen: Array[NPC_Resource]
+    _color_mix_registry: Dictionary
+    _effect_registry: Dictionary
+    _transition_dict: Dictionary
+    RNG: RandomNumberGenerator
+  public_methods:
+    register_customers(customers: Array[NPC_Resource]) -> void
+    play_sfx() -> void
+    add_mix(mix_name: String, cost: float, color: Color) -> void
+    get_mix(mix_name: String) -> Dictionary
+    remove_mix(mix_name: String) -> void
+    mix_exists(mix_name: String) -> bool
+    get_mixes() -> Dictionary
+    add_effect(effect_string: String, is_dud: bool) -> void
+    get_effect(effect_string: String) -> bool
+    remove_effect(effect_type: IngredientResource.EFFECTS) -> void
+    get_effects() -> Dictionary
+    get_end_anim(prefix: String) -> void
+    start_transition(next_scene: PackedScene, transition: TRANSITIONS) -> void
+    _change_scene() -> void
+    get_random_ingredient() -> IngredientResource
+  file_level_annotations: null
+###
+
+###
+NAME: EventBus.gd
+PATH: Global/Scenes/EventBus.gd
+TYPE: script
+SUMMARY: Global event bus providing decoupled signal infrastructure for scene communication. Emits signals for gameplay events, UI interactions, and state changes across the entire project without requiring direct node references.
+CONTENTS:
+  signals:
+    color_changed(new_color: Color)
+    star_finished_emitting()
+    launch_firework()
+    request_ingredient(requestor: Node2D)
+    part_finished()
+    color_button_pressed()
+    effect_button_pressed()
+    prepare_launch()
+    firework_finished()
+    qte_clicked(data: NPC_Resource)
+    spin_finished()
+    attempt_ingredient(ing_name: String)
+    new_grain(grain: Node2D)
+    notebook_updated(npc: NPC_Resource)
+    customer_selected(npc: NPC_Resource)
+    craft_stars_completed(final_color: Color)
+    star_minigame_completed(effect: IngredientResource.EFFECTS, success: bool)
+    customers_cleared()
+    firework_assembled(firework: FireworkResource)
+    room_changed()
+    display_started()
+  exported_variables: null
+  public_methods: null
+  file_level_annotations:
+    @warning_ignore("unused_signal")
+###
+
+###
+NAME: user_interface.gd
+PATH: Global/Scenes/user_interface.gd
+TYPE: script
+SUMMARY: Global UI manager extending CanvasLayer. Handles pause menu animations, launch button state management, whistle toggle, and firework preparation countdown. Provides UI visibility controls via pause system.
+CONTENTS:
+  signals:
+    pause_menu_changed
+  exported_variables:
+    drawer_offset: Vector2
+  public_methods:
+    button_toggle() -> void
+  file_level_annotations: null
+###
+
+###
+NAME: FireworkResource.gd
+PATH: Global/Scenes/Resources/FireworkResource.gd
+TYPE: script
+SUMMARY: Data resource class representing a complete firework with style, sequence of components, display name and sprite. Extends Resource and implements class_name FireworkResource.
+CONTENTS:
+  signals: null
+  exported_variables:
+    firework_style: STYLE
+    sequence: Array
+    display_name: String
+    display_sprite: String
+  public_methods: null
+  file_level_annotations: null
+###
+
+###
+NAME: NPC.gd
+PATH: Global/Scenes/Resources/NPC_Resource.gd
+TYPE: script
+SUMMARY: Data resource for NPC customers with personality, preferences, and notepad system. Handles review generation with weighted scoring, player note management, and color/effect preference tracking. Provides constants for color/effect translations and review flavor text. Implements class_name NPC_Resource and extends Resource.
+CONTENTS:
+  signals: null
+  exported_variables:
+    npc_name: String
+    fav_color: Color
+    fav_effect: String
+    npc_request: String
+    npc_sprite: CompressedTexture2D
+    notepad_entries: Array
+    given_review: String
+    dud_firework: bool
+  public_methods:
+    build_random() -> void
+    _color_score(ing_color: Color, target_color: Color) -> float
+    _map_score_to_rating(score: float) -> int
+    generate_and_append_review(ingredient: IngredientResource, observed_price: float, expected_price: float = 0.0, price_tolerance: float = 1.0) -> void
+    add_player_note(content: String, author: String = "Player") -> void
+    add_auto_review(review_text: String, rating: int = 0) -> void
+  file_level_annotations: null
+###
+
+###
+NAME: IngredientResource.gd
+PATH: Global/Scenes/Resources/IngredientResource.gd
+TYPE: script
+SUMMARY: Data resource for ingredient components used in firework crafting. Manages effect enum, color, sprite, and dud/whistle flags. Provides static translation methods between effect enums and string keys. Implements class_name IngredientResource and extends Resource.
+CONTENTS:
+  signals: null
+  exported_variables:
+    ing_name: String
+    ing_color: Color
+    ing_sprite: CompressedTexture2D
+    star_sprite: Texture2D
+    effect: EFFECTS
+    is_whistle: bool
+    is_dud: bool
+  public_methods:
+    translate(eff: EFFECTS) -> String
+    key_to_effect(key: String) -> EFFECTS
+  file_level_annotations: null
+###
+
+###
+NAME: FireworkComponent.gd
+PATH: Global/Scenes/Resources/FireworkComponent.gd
+TYPE: script
+SUMMARY: Data resource representing a single component in a firework sequence. Stores fuse length delay, debug name, and IngredientResource for display. Extends Resource and implements class_name FireworkComponent.
+CONTENTS:
+  signals: null
+  exported_variables:
+    fuse_length: float
+    debug_name: String
+    ingredient: IngredientResource
+  public_methods: null
+  file_level_annotations: null
+###
+
+###
+NAME: qte_item.gd
+PATH: Main/House Scenes/Various/qte_item.gd
+TYPE: script
+SUMMARY: Quick-time event display item for customer selection. Shows customer name, request, and time bar. Emits EventBus signals when clicked and sends events when timer expires. Extends TextureProgressBar.
+CONTENTS:
+  signals:
+    hovered
+    unhovered
+    dying(which)
+  exported_variables:
+    time: float
+    npc_data: NPC_Resource
+    active: bool
+    display_info: bool
+  public_methods:
+    start() -> void
+  file_level_annotations: null
+###
+
+###
+NAME: ing_button.gd
+PATH: Main/House Scenes/Various/ing_button.gd
+TYPE: script
+SUMMARY: Draggable ingredient button for the crafting workstation. Allows clicking and dragging ingredients to ingredient areas, detects overlaps to emit ingredient usage signals. Extends TextureButton.
+CONTENTS:
+  signals: null
+  exported_variables:
+    ing_text: String
+    ing_name: String
+    sprite: CompressedTexture2D
+  public_methods:
+    detect_areas() -> void
+  file_level_annotations: null
+###
+
+###
+NAME: mixing_game.gd
+PATH: Main/House Scenes/Star Minigame/mixing_game.gd
+TYPE: script
+SUMMARY: Spin/rotation QTE minigame for mixing firework components. Tracks sequential directional inputs on spin nodes, detects valid patterns, and handles mashing press action. Manages state transitions and emits completion signals via EventBus.
+CONTENTS:
+  signals:
+    start_game
+  exported_variables:
+    spin_count: int
+  public_methods:
+    activate_mash() -> void
+  file_level_annotations: null
+###
+
+###
+NAME: star_minigame.gd
+PATH: Main/House Scenes/Star Minigame/star_minigame.gd
+TYPE: script
+SUMMARY: Main controller for the star crafting minigame workstation. Orchestrates multi-step firework assembly sequences (default, crackle, brocade, palm), manages ingredient button interactions, spin QTE completion, and press mashing phases. Tracks game over state and emits completion events with success status.
+CONTENTS:
+  signals:
+    start_game
+  exported_variables:
+    current_build: String
+    active: bool
+  public_methods:
+    _on_spin_finished() -> void
+    _on_attempt_ingredient(ing_name: String) -> void
+    _on_selector_pressed(direction: String) -> void
+    activate_mash() -> void
+    _on_craft_pressed() -> void
+    _on_qte_item_dying(_which: Variant) -> void
+    _build_dict(effect) -> Array
+  file_level_annotations: null
+###
+
+###
+NAME: auction_house.gd
+PATH: Main/House Scenes/Auction/auction_house.gd
+TYPE: script
+SUMMARY: Customer lineup manager generating and displaying randomized NPC instances as clickable QTE items. Handles customer selection, emits global progression signals when lineup clears. Implements class_name AuctionHouse and extends Node2D.
+CONTENTS:
+  signals: null
+  exported_variables:
+    active: bool
+  public_methods:
+    spawn_lineup(count: int) -> void
+    _clear_lineup() -> void
+  file_level_annotations: null
+###
+
+###
+NAME: launch_scene.gd
+PATH: Main/House Scenes/Launch/launch_scene.gd
+TYPE: script
+SUMMARY: Firework launch sequence manager. Handles fuse animation, trajectory tweens, sound effects (whistle/lift), and explosion display timing. Manages particle effects for break and trail stages, and generates customer reviews post-display. Extends Node2D.
+CONTENTS:
+  signals: null
+  exported_variables:
+    destination: Vector2
+  public_methods:
+    make_active() -> void
+    launch_firework() -> void
+    get_launch_pos() -> Vector2
+    temp_display(thingy) -> void
+  file_level_annotations: null
+###
+
+###
+NAME: firework.gd
+PATH: Main/House Scenes/Launch/firework.gd
+TYPE: script
+SUMMARY: CPU particle system manager for firework display effects. Implements four firework display patterns (flower, crackle, brocade, palm) using particle emissions and physics bodies. Handles sound effects playback per effect type. Extends Node2D.
+CONTENTS:
+  signals: null
+  exported_variables:
+    is_trail: bool
+    is_mine: bool
+  public_methods:
+    launch(data: IngredientResource) -> void
+    display(data: IngredientResource) -> void
+  file_level_annotations: null
+###
+
+###
+NAME: new_launch.gd
+PATH: Main/House Scenes/Launch/new_launch.gd
+TYPE: script
+SUMMARY: Firework sequence player managing launch queue and timing. Handles multi-firework display sequences with fuse timing between components. Manages camera control and screen entry/exit detection. Awaitable launch methods for async control flow. Extends Node2D.
+CONTENTS:
+  signals:
+    firework_complete()
+  exported_variables:
+    testing_firework: IngredientResource
+    testing_array: Array[FireworkComponent]
+  public_methods:
+    begin_launch_sequence(firework: FireworkResource) -> void
+    launch_new() -> void
+    set_active(fireworks: Array[FireworkResource]) -> void
+  file_level_annotations: null
+###
+
+###
+NAME: star.gd
+PATH: Main/House Scenes/Launch/star.gd
+TYPE: script
+SUMMARY: Rigid body particle component for firework effects. Manages trail emission on spawn and break particle emission on trail completion. Emits EventBus.star_finished_emitting signal when animation completes. Extends RigidBody2D.
+CONTENTS:
+  signals: null
+  exported_variables: null
+  public_methods: null
+  file_level_annotations: null
+###
+
+###
+NAME: pitcher.gd
+PATH: Main/House Scenes/Craft Stars/pitcher.gd
+TYPE: script
+SUMMARY: Draggable color pitcher for the grain mixing minigame. Pours colored grain particles into the grain holder when rotated over drop zone. Handles visual tilt animation and emits new grain instances via EventBus. Extends TextureRect.
+CONTENTS:
+  signals: null
+  exported_variables:
+    color: Color
+    color_name: String
+  public_methods:
+    set_data(arr: Array) -> void
+  file_level_annotations: null
+###
+
+###
+NAME: grain.gd
+PATH: Main/House Scenes/Craft Stars/grain.gd
+TYPE: script
+SUMMARY: Physics grain particle for the mixing minigame. Simple rigid body that queues for deletion on screen exit. Extends RigidBody2D.
+CONTENTS:
+  signals: null
+  exported_variables: null
+  public_methods: null
+  file_level_annotations: null
+###
+
+###
+NAME: craft_stars.gd
+PATH: Main/House Scenes/Craft Stars/craft_stars.gd
+TYPE: script
+SUMMARY: Main color mixing minigame controller. Collects grain particles, aggregates their colors into a final blend, and manages pitcher UI. Emits craft_stars_completed signal with computed color when finalizing. Extends Node2D.
+CONTENTS:
+  signals: null
+  exported_variables:
+    pitcher_array: Array[Array]
+  public_methods:
+    add_grain(new_grain: Node2D) -> void
+  file_level_annotations: null
+###
+
+###
+NAME: context_menu.gd
+PATH: Main/House Scenes/Assemble/context_menu.gd
+TYPE: script
+SUMMARY: Context menu for firework component configuration. Provides color and effect selection grids with fuse timing scrollbar. Emits fuse_configured signal with selected data on menu close. Manages mouse hover timeout for auto-dismissal. Extends Control.
+CONTENTS:
+  signals:
+    fuse_configured(color: String, effect: String, fuse_length: float)
+  exported_variables: null
+  public_methods:
+    _update_grids() -> void
+    activate(enabled: bool) -> void
+  file_level_annotations: null
+###
+
+###
+NAME: firework_piece.gd
+PATH: Main/House Scenes/Assemble/Components/firework_piece.gd
+TYPE: script
+SUMMARY: Firework component piece UI for assembly scene. Manages fuse connection dragging between pieces, detects loop creation, and launches context menu for configuration. Stores FireworkComponent data and connected_firework reference. Extends Control.
+CONTENTS:
+  signals: null
+  exported_variables:
+    is_first: bool
+    component: FireworkComponent
+  public_methods:
+    get_component() -> FireworkComponent
+    would_create_loop(proposed_target: Node) -> bool
+  file_level_annotations: null
+###
+
+###
+NAME: assemble_scene.gd
+PATH: Main/House Scenes/Assemble/assemble_scene.gd
+TYPE: script
+SUMMARY: Main firework assembly scene controller. Manages player-created firework component chains, validates connections, builds FireworkResource from user-defined sequence, and emits completion signal. Handles screen visibility tracking. Extends Node2D.
+CONTENTS:
+  signals: null
+  exported_variables: null
+  public_methods:
+    _on_add_pressed() -> void
+    get_sequence_from_connections() -> Array[FireworkComponent]
+    finalize_assembly() -> void
+  file_level_annotations: null
+###
