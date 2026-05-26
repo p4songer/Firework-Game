@@ -41,6 +41,7 @@ var is_mashing : bool = false
 var mash_counter : int = 0
 
 var is_game_over : bool = false
+var steps_completed: int = 0
 
 const TEST_ROTATE = preload("uid://c0we4sqqu2wm6")
 
@@ -70,6 +71,16 @@ func _process(_delta: float) -> void:
 			$AnimationPlayer.play("RESET")
 
 
+func register_step() -> void:
+	steps_completed += 1
+
+
+func finalize_effect_cost() -> float:
+	var cost: float = Economy.get_effect_cost(steps_completed)
+	steps_completed = 0
+	return cost
+
+
 func _parse_build():
 	if start_qte:
 		$QteItem.show()
@@ -79,12 +90,14 @@ func _parse_build():
 	if active_array.is_empty(): 
 		instruction.text = "Done. Good job."
 		is_game_over = true
-		EventBus.star_minigame_completed.emit(build_dict.keys()[selection_index],  true)
+		var effect_cost: float = finalize_effect_cost()
+		EventBus.star_minigame_completed.emit(build_dict.keys()[selection_index],  true, effect_cost)
 		await get_tree().create_timer(0.75).timeout
 		# FIXME Reset game here.
 		return
 	active_element = active_array.pop_front()
 	instruction.text = active_element.to_upper()
+	register_step()
 	if active_element == "mix":
 		var new_spin = TEST_ROTATE.instantiate()
 		$IngArea.add_child(new_spin)
@@ -124,7 +137,8 @@ func _on_craft_pressed() -> void:
 	start_game.emit()
 	#TODO REMOVE THIS LATER. THIS IS FOR TESTING
 	print_debug("emitting signal for testing")
-	EventBus.star_minigame_completed.emit(build_dict.keys()[selection_index], true)
+	var effect_cost: float = finalize_effect_cost()
+	EventBus.star_minigame_completed.emit(build_dict.keys()[selection_index], true, effect_cost)
 
 
 func _on_qte_item_dying(_which: Variant) -> void:
@@ -136,9 +150,13 @@ func _on_qte_item_dying(_which: Variant) -> void:
 	await $AnimationPlayer.animation_finished
 	instruction.text = "You didn't finish in time. Dud firework."
 	
+	#TODO Inventory Script
+	# This shouldn't be global, we should be deciding if something is a dud
+	# in the inventory system. 
 	Global.review_array[-1].dud_firework = true
 	await get_tree().create_timer(1.0).timeout
-	EventBus.star_minigame_completed.emit(build_dict.keys()[selection_index], false)
+	var effect_cost: float = finalize_effect_cost()
+	EventBus.star_minigame_completed.emit(build_dict.keys()[selection_index], false, effect_cost)
 	#FIXME Reset game here.
 
 

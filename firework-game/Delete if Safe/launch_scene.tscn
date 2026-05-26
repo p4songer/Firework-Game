@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dmlsjsr8rfh1"]
 
-[ext_resource type="Script" uid="uid://cdsg82fsm0pdy" path="res://Main/House Scenes/Launch/launch_scene.gd" id="1_diak1"]
+[ext_resource type="Script" uid="uid://cdsg82fsm0pdy" path="res://Delete if Safe/launch_scene.gd" id="1_diak1"]
 [ext_resource type="Texture2D" uid="uid://be6ekjt8xxlgo" path="res://Main/Assets/SkyBackground.png" id="2_3pum5"]
 [ext_resource type="Texture2D" uid="uid://bi56x6d7p0e7k" path="res://Main/Assets/LiftSprite.png" id="3_6v7us"]
 [ext_resource type="PackedScene" uid="uid://bxnuykamvq5wl" path="res://Main/House Scenes/Launch/firework.tscn" id="4_6v7us"]

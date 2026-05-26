@@ -17,9 +17,9 @@ var ui_tween: Tween
 
 var room_index: int = 0
 
-#TODO Put this in IngredientResource or something. Maybe not a dictionary, maybe just a function that translates the enum to a string.
-
 var fireworks: Array[FireworkResource] = []
+var _pending_color_cost: float = 0.0
+var _pending_effect_cost: float = 0.0
 
 const QTE_ITEM: PackedScene = preload("uid://l2s6ioimdxc")
 const REVIEW: PackedScene = preload("uid://drq4tuq8bw3k6")
@@ -40,6 +40,7 @@ func _ready() -> void:
 
 	auction_house.spawn_lineup(5)
 
+	# TODO Revisit and delete from global. House manager should hold customers and reviews.
 	if not Global.review_array.is_empty():
 		$CustomerUI/TabContainer.set_tab_hidden(1, false)
 		for npc: NPC_Resource in Global.review_array:
@@ -65,6 +66,7 @@ func _input(event: InputEvent) -> void:
 ## npc: The NPC_Resource of the customer who clicked the QTE.
 func _on_qte_click(npc: NPC_Resource) -> void:
 	customer_array.append(npc)
+	# TODO Revisit and delete from global. Refactor customer interactions.
 	Global.review_array.append(npc)
 
 	var new_cust: Node = QTE_ITEM.instantiate()
@@ -96,13 +98,26 @@ func tween_cam(destination: int = 1) -> void:
 
 ## Receives the final crafted color from craft_stars adds it to the color mix registry in Global.
 ## final_color: The blended color computed by the craft_stars scene.
-func _on_craft_stars_completed(final_color: Color) -> void:
+## color_cost: The cost of crafting the color based on grain count.
+func _on_craft_stars_completed(final_color: Color, color_cost: float) -> void:
+	_pending_color_cost = color_cost
+	#TODO Inventory Script
 	Global.add_mix("CustomBlend", 15.0, final_color)
 
 
-func _on_star_minigame_completed(effect: IngredientResource.EFFECTS, success: bool) -> void:
+func _on_star_minigame_completed(effect: IngredientResource.EFFECTS, success: bool, effect_cost: float) -> void:
+	_pending_effect_cost = effect_cost
+	_validate_affordability()
 	var effect_string : String = IngredientResource.translate(effect)
+	#TODO Inventory Script
 	Global.add_effect(effect_string, success)
+
+
+func _validate_affordability() -> void:
+	var total_cost: float = _pending_color_cost + _pending_effect_cost
+	# TODO: Expand with actual wallet implementation
+	_pending_color_cost = 0.0
+	_pending_effect_cost = 0.0
 
 
 func _on_firework_assembled(firework_resource: FireworkResource) -> void:

@@ -3,19 +3,19 @@ extends Node
 @warning_ignore("unused_signal")
 signal color_changed(new_color: Color)
 @warning_ignore("unused_signal")
-signal star_finished_emitting()
-@warning_ignore("unused_signal")
-signal launch_firework()
-@warning_ignore("unused_signal")
-signal request_ingredient(requestor: Node2D)
-@warning_ignore("unused_signal")
-signal part_finished()
-@warning_ignore("unused_signal")
-signal color_button_pressed()
-@warning_ignore("unused_signal")
-signal effect_button_pressed()
-@warning_ignore("unused_signal")
-signal prepare_launch()
+signal star_finished_emitting() # Revisit. Might be safe to delete.
+# @warning_ignore("unused_signal") 
+# signal launch_firework() # Both connections in "delete if safe"
+# @warning_ignore("unused_signal")
+# signal request_ingredient(requestor: Node2D) # No connections found.
+# @warning_ignore("unused_signal")
+# signal part_finished() Only connection in "delete if safe"
+# @warning_ignore("unused_signal")
+# signal color_button_pressed() # No connections found.
+# @warning_ignore("unused_signal")
+# signal effect_button_pressed() # No connections found.
+# @warning_ignore("unused_signal")
+# signal prepare_launch() # One connection in delete if safe
 @warning_ignore("unused_signal")
 signal firework_finished()
 @warning_ignore("unused_signal")

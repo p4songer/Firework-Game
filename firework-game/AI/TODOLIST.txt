@@ -1,0 +1,70 @@
+====================================================================
+FIREWORK GAME DEVELOPMENT - MASTER TODO LIST (UPDATED)
+====================================================================
+
+[STATUS OVERVIEW]
+- HouseManager Decoupling: SUCCESSFUL (Priority A Core Backlog)
+- Context Menu & Persistence: COMPLETED (Hover bounds, filters, and persistence resolved)
+- Core Mechanical Assembly Chain: COMPLETED (Drag-and-drop connections wired)
+- Current Active Phase: Barebones Economy Framework (Implementation Step)
+
+--------------------------------------------------------------------
+PRIORITY GROUP A: ECONOMY & VALIDATION LOOP (IMMEDIATE FOCUS)
+--------------------------------------------------------------------
+[ ] TODO-0014: Establish Static Price Definitions (Global.gd)
+	- Add a "cost" float property to each entry inside the color_mixes dictionary.
+	- Add a "cost" float property to each entry inside the effects dictionary.
+	- Expose universal getter functions: get_mix_cost(name) and get_effect_cost(name).
+
+[ ] TODO-0015: Build Wallet & Transaction Interface (HouseManager.gd)
+	- Track active player funds using a persistent cash variable (e.g., current_money: float).
+	- Implement can_afford(amount: float) -> bool for safety checks.
+	- Implement spend_money(amount: float) -> bool to deduct balances securely.
+
+[ ] TODO-0016: Assemble Scene Verification Gating (assemble_scene.gd)
+	- Map layout loop to parse placed items or nodes belonging to "assembly_slots".
+	- Calculate total composite cost by summing colors and effects via Global database.
+	- Intercept final compilation step to enforce a strict affordability checkpoint before building.
+
+--------------------------------------------------------------------
+PRIORITY GROUP B: INVENTORY MANAGEMENT & REFACTORING
+--------------------------------------------------------------------
+[ ] TODO-0013: Chemical Grain Sourcing & Gate Implementation
+	- Code a backend validation constraint inside the add_grain framework.
+	- Force star production inputs to pull from and gate against raw global stockpiles.
+
+[ ] TODO-0017: Extract Global.gd Sub-Systems to Dedicated Autoloads
+	- Split monolithic responsibilities out of Global.gd.
+	- Create a new runtime Inventory.gd state manager script to track dynamic player stashes.
+	- Leave Global.gd strictly as a read-only setup registry/database.
+	- Standardize text string properties via .effect moving away from old .ing_effect parameters.
+
+[ ] TODO-0018: Implement Clean EventBus Inventory Communication
+	- Wire up Inventory.gd to listen for EventBus.star_crafted.
+	- Broadcast EventBus.inventory_updated from the inventory manager so UI grids redraw themselves automatically.
+
+--------------------------------------------------------------------
+PRIORITY GROUP C: LAUNCH SEQUENCE & COMPLEX SIMULATION
+--------------------------------------------------------------------
+[ ] TODO-0019: Data Parsing for Launchpad Sequencing
+	- Build processing logic to convert the workbench assembly array into a timed execution playlist.
+	- Parse delay triggers chronologically across the fuse timing chains.
+
+[ ] TODO-0020: Simultaneous Day Finale Playback
+	- Transition execution from single firework tests to launching a full day's purchased order list sequentially.
+
+[ ] TODO-0021: Interactive Launch Mechanics (The Finale Feedback Loop)
+	- Circle back to add player inputs during shows (e.g., ignition cues, rhythm mechanics, or matching prompts).
+
+--------------------------------------------------------------------
+PRIORITY GROUP D: COSMETICS, BUG FIXES, & REVIEWS
+--------------------------------------------------------------------
+[ ] TODO-0022: Black Normalization Visual Bug
+	- Fix visual representation calculations causing fireworks to render as pitch black when no color proportions are added to mixtures.
+	- Safeguard color normalization thresholds inside Global script configurations.
+
+[ ] TODO-0023: Full Customer Management & Review Pipelines
+	- Transition static NPC_Resource functions into a dynamic standalone CustomerManager system.
+	- Wire live store tracking, patience timers, and review generation matrices using weighted scoring components.
+firework_todo_list.txt
+Displaying firework_todo_list.txt.

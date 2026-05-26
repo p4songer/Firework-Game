@@ -60,9 +60,16 @@ func _on_new_grain(grain: Node2D) -> void:
 	grain_holder.add_child(grain)
 
 
+## Computes and returns the color cost based on grain count. Resets grain count.
+func finalize_color_cost() -> float:
+	var cost: float = Economy.get_color_cost(grain_holder.get_child_count())
+	for g in grain_holder.get_children(): g.queue_free()
+	return cost
+
+
 ## Finalizes crafting, stores the computed color, and emits completion signals.
 func _on_button_pressed() -> void:
-	$Vbox/Button.disabled = true
 	final_color = $Chem.modulate
-	EventBus.craft_stars_completed.emit(final_color)
+	var color_cost: float = finalize_color_cost()
+	EventBus.craft_stars_completed.emit(final_color, color_cost)
 	#TODO Reset the scene here.

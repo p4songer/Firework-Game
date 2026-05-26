@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cbjctmxdlnhod"]
 
-[ext_resource type="Script" uid="uid://dj3oojnn4s31" path="res://Global/Scenes/user_interface.gd" id="1_tb5ua"]
+[ext_resource type="Script" uid="uid://dj3oojnn4s31" path="res://Delete if Safe/user_interface.gd" id="1_tb5ua"]
 [ext_resource type="Theme" uid="uid://s8eqo3epuhi7" path="res://Global/UI/MainTheme.tres" id="2_nkuyb"]
 [ext_resource type="PackedScene" uid="uid://dcdf81eayjyro" path="res://MainMenu/options.tscn" id="3_ugsu1"]
 [ext_resource type="Texture2D" uid="uid://be6ekjt8xxlgo" path="res://Main/Assets/SkyBackground.png" id="4_uksao"]

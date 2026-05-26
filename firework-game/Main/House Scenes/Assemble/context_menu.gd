@@ -24,6 +24,7 @@ func _ready() -> void:
 
 func _update_grids() -> void:
 	# --- Color Grid Setup ---
+	#TODO Inventory Script
 	var color_mixes: Dictionary = Global.get_mixes()
 	for index in color_mixes.keys().size():
 		var button = TextureButton.new()
@@ -36,6 +37,7 @@ func _update_grids() -> void:
 		button.pressed.connect(_on_color_button_pressed.bind(mix, index))
 
 	# --- Effect Grid Setup ---
+	#TODO Inventory Script
 	var effects: Dictionary = Global.get_effects()
 	for index in effects.keys().size():
 		var button = TextureButton.new()

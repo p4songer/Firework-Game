@@ -59,6 +59,7 @@ func _on_sequence_delay_timeout() -> void:
 
 func launch_new() -> void:
 	print_debug("LAUNCH")
+	#TODO Revisit globalref for instances
 	var fire_inst = GlobalRef.DICT[GlobalRef.INDEX.FIREWORK].instantiate()
 	launch_pos.add_child(fire_inst)
 	# var component = testing_array[0]
