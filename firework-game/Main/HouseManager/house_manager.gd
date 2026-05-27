@@ -50,7 +50,12 @@ func _ready() -> void:
 	
 	# TODO Temp effects in global
 	for eff in IngredientResource.EFFECTS:
-		Global.add_effect(eff, true)
+		Economy.add_effect(eff, true)
+	
+	#TODO Temp colors in economy
+	Economy.add_color("CrimsonBurst", 10.0, Color8(220, 20, 60))
+	Economy.add_color("OceanBlue", 8.0, Color8(30, 144, 255))
+	Economy.add_color("Sunflare", 12.5, Color8(255, 180, 25))
 
 
 func _input(event: InputEvent) -> void:

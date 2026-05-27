@@ -151,6 +151,7 @@ func _on_qte_item_dying(_which: Variant) -> void:
 	instruction.text = "You didn't finish in time. Dud firework."
 	
 	#TODO Inventory Script
+	#FIXME Refactor the way this is generated. Customer responsibility issue.
 	# This shouldn't be global, we should be deciding if something is a dud
 	# in the inventory system. 
 	Global.review_array[-1].dud_firework = true

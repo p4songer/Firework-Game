@@ -112,8 +112,7 @@ func _on_fuse_configured(color: String, effect: String, fuse_length: float) -> v
 	var eff_int = IngredientResource.EFFECTS.get(effect.trim_suffix("_dud"),
 	 IngredientResource.EFFECTS.FLOWER)
 
-	#TODO Inventory Script
 	component.ingredient.effect = eff_int
-	component.ingredient.ing_color = Global.get_mix(color).get(
+	component.ingredient.ing_color = Economy.color_by_name(color).get(
 		"color", Color.WHITE_SMOKE)
 	component.fuse_length = fuse_length
