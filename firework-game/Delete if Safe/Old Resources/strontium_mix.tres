@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="IngredientResource" format=3 uid="uid://iw02skqqsv1e"]
-
-[ext_resource type="Script" uid="uid://cna124i1fi236" path="res://Global/Scenes/Resources/IngredientResource.gd" id="2_o3clj"]
-
-[resource]
-script = ExtResource("2_o3clj")
-ing_name = "Strontium + Sodium"
-ing_color = Color(0.9887417, 0.42812264, 1.92523e-07, 1)
-metadata/_custom_type_script = "uid://cna124i1fi236"

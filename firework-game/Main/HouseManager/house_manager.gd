@@ -50,12 +50,12 @@ func _ready() -> void:
 	
 	# TODO Temp effects in global
 	for eff in IngredientResource.EFFECTS:
-		Economy.add_effect(eff, true)
-	
-	#TODO Temp colors in economy
-	Economy.add_color("CrimsonBurst", 10.0, Color8(220, 20, 60))
-	Economy.add_color("OceanBlue", 8.0, Color8(30, 144, 255))
-	Economy.add_color("Sunflare", 12.5, Color8(255, 180, 25))
+		Economy.add_effect(eff, {"effect": eff, "cost": 2.0, "is_dud": true})
+		
+	#TODO Temp colors in economy 
+	Economy.add_color("CrimsonBurst", {"color": Color8(220, 20, 60), "cost": 3.0})
+	Economy.add_color("OceanBlue", {"color": Color8(30, 144, 255), "cost": 4.29})
+	Economy.add_color("Sunflare", {"color": Color8(255, 180, 25), "cost": 4.60})
 
 
 func _input(event: InputEvent) -> void:
@@ -106,16 +106,14 @@ func tween_cam(destination: int = 1) -> void:
 ## color_cost: The cost of crafting the color based on grain count.
 func _on_craft_stars_completed(final_color: Color, color_cost: float) -> void:
 	_pending_color_cost = color_cost
-	#TODO Inventory Script
-	Global.add_mix("CustomBlend", 15.0, final_color)
+	Economy.add_color("CustomBlend", {"color": final_color, "cost": color_cost})
 
 
 func _on_star_minigame_completed(effect: IngredientResource.EFFECTS, success: bool, effect_cost: float) -> void:
 	_pending_effect_cost = effect_cost
 	_validate_affordability()
 	var effect_string : String = IngredientResource.translate(effect)
-	#TODO Inventory Script
-	Global.add_effect(effect_string, success)
+	Economy.add_effect(effect_string, {"effect": effect, "cost":effect_cost, "success": success})
 
 
 func _validate_affordability() -> void:

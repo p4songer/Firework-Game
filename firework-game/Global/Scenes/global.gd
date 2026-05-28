@@ -128,11 +128,6 @@ func _change_scene() -> void:
 
 #endregion
 
-func _ready() -> void:
-	add_mix("CrimsonBurst", 10.0, Color8(220, 20, 60))
-	add_mix("OceanBlue", 8.0, Color8(30, 144, 255))
-	add_mix("Sunflare", 12.5, Color8(255, 180, 25))
-
 
 func get_random_ingredient() -> IngredientResource:
 	var effect = _effect_registry.keys().pick_random()
