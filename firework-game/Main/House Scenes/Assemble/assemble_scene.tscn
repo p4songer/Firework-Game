@@ -17,9 +17,9 @@ texture = ExtResource("1_s4bf0")
 layout_mode = 3
 anchors_preset = 0
 offset_left = -959.0
-offset_top = -551.0
+offset_top = -400.0
 offset_right = 959.0
-offset_bottom = 550.0
+offset_bottom = 701.0
 mouse_filter = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI" unique_id=793152493]
@@ -47,6 +47,10 @@ text = "BUILD FIREWORK"
 layout_mode = 2
 size_flags_horizontal = 3
 text = "ADD COMPONENT"
+
+[node name="Cost" type="Label" parent="UI/VBoxContainer" unique_id=1089936730]
+layout_mode = 2
+text = "Projected Cost: "
 
 [node name="ScrollContainer" type="ScrollContainer" parent="UI/VBoxContainer" unique_id=1031058998]
 custom_minimum_size = Vector2(1920, 850)

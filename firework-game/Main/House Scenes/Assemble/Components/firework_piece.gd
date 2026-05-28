@@ -10,11 +10,11 @@ extends Control
 var connected_firework: Node
 var dragging: bool = false
 var drag_offset: Vector2 = Vector2.ZERO
-
 var active_menu : Control
 
 var context_menu = preload("uid://blks5xe5qjutm")
 
+signal update_cost
 
 func _ready() -> void:
 	component = FireworkComponent.new()
@@ -104,15 +104,16 @@ func _on_overlap_area_input_event(_viewport: Node, event: InputEvent, _shape_idx
 		_get_new_menu()
 
 
-func _on_fuse_configured(color: String, effect: String, fuse_length: float) -> void:
-	#TODO Make use of this later.
-	@warning_ignore("unused_variable")
-	var dud = true if "dud" in effect else false 
+func _on_fuse_configured(color: String, effect_name: String, fuse_length: float) -> void:
+	# Fetch the dictionaries from your new system
+	var effect_data: Dictionary = Economy.effect_by_name(effect_name)
+	var color_data: Dictionary = Economy.color_by_name(color)
 
-	var eff_int = IngredientResource.EFFECTS.get(effect.trim_suffix("_dud"),
-	 IngredientResource.EFFECTS.FLOWER)
-
-	component.ingredient.effect = eff_int
-	component.ingredient.ing_color = Economy.color_by_name(color).get(
-		"color", Color.WHITE_SMOKE)
+	component.ingredient.effect = effect_data.get(effect_name, IngredientResource.EFFECTS.FLOWER)
+	component.ingredient.ing_color = color_data.get("color", Color.WHITE_SMOKE)
 	component.fuse_length = fuse_length
+
+	component.component_cost = color_data.get(
+		"cost", 0.0) + effect_data.get("cost", 0.0) + fuse_length
+
+	update_cost.emit()

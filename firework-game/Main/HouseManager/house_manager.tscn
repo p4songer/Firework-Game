@@ -52,6 +52,15 @@ layout_mode = 2
 columns = 2
 metadata/_tab_index = 1
 
+[node name="Cash" type="Label" parent="CustomerUI" unique_id=1308208209]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 50
+text = "Money: "
+
 [connection signal="start_game" from="StarMinigame" to="." method="_on_star_minigame_start_game"]
 [connection signal="mouse_entered" from="CustomerUI/TabContainer" to="." method="_on_ui_mouse_entered"]
 [connection signal="mouse_exited" from="CustomerUI/TabContainer" to="." method="_on_ui_mouse_exited"]

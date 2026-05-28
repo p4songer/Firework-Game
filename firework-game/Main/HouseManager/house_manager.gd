@@ -6,6 +6,7 @@ extends Node2D
 @onready var customers: GridContainer = $CustomerUI/TabContainer/Customers
 @onready var reviews: GridContainer = $CustomerUI/TabContainer/Reviews
 @onready var customer_detail: Control = $CustomerUI/CustomerDetail
+@onready var cash_display: Label = $CustomerUI/Cash
 
 var ui_active: bool = true:
 	set(new):
@@ -48,7 +49,7 @@ func _ready() -> void:
 			new_review.data = npc
 			reviews.add_child(new_review)
 	
-	# TODO Temp effects in global
+	# TODO Temp effects 
 	for eff in IngredientResource.EFFECTS:
 		Economy.add_effect(eff, {"effect": eff, "cost": 2.0, "is_dud": true})
 		
@@ -56,6 +57,10 @@ func _ready() -> void:
 	Economy.add_color("CrimsonBurst", {"color": Color8(220, 20, 60), "cost": 3.0})
 	Economy.add_color("OceanBlue", {"color": Color8(30, 144, 255), "cost": 4.29})
 	Economy.add_color("Sunflare", {"color": Color8(255, 180, 25), "cost": 4.60})
+
+	#TODO Temp starting money
+	Economy.set_money(100.0)
+	cash_display.text = "Cash: $" + str(Economy.get_money())
 
 
 func _input(event: InputEvent) -> void:
@@ -126,6 +131,8 @@ func _validate_affordability() -> void:
 func _on_firework_assembled(firework_resource: FireworkResource) -> void:
 	print_debug("ASSEMBLED")
 	fireworks.append(firework_resource)
+	Economy.set_money(Economy.get_money() - firework_resource.get_total_cost())
+	cash_display.text = "Cash: $" + str(Economy.get_money())
 
 
 func _on_display_started() -> void:

@@ -7,3 +7,10 @@ enum STYLE {BIG_CAKE, CAKE, CANDLE, NOAB, MORTAR, SINGLE_SHOT, ROCKET, SPARKLER,
 @export var sequence : Array ## Needs to have at least 1 element to display.
 @export var display_name : String
 @export var display_sprite : String
+
+
+func get_total_cost():
+    var temp: float = 0.0
+    for component in sequence:
+        temp += component.component_cost
+    return temp

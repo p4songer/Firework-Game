@@ -1,6 +1,7 @@
 extends Node2D
 
 @onready var grid: GridContainer = $UI/VBoxContainer/ScrollContainer/MarginContainer/GridContainer
+@onready var cost_display: Label = $UI/VBoxContainer/Cost
 
 var is_on_screen: bool = false
 
@@ -17,6 +18,7 @@ func _on_add_pressed() -> void:
 	comp.debug_name = piece.name + str(grid.get_child_count())
 	piece.component = comp
 	grid.add_child(piece)
+	piece.update_cost.connect(_update_cost_display)
 	if grid.get_child_count() == 1:
 		piece.is_first = true
   
@@ -59,11 +61,15 @@ func finalize_assembly() -> void:
 ## Triggers finalize_assembly when a room_changed event fires, provided
 ## this scene is currently on screen. 
 
-#TODO Replace this with the button functionality instead.
-# func _on_room_changed() -> void:
-# 	if not is_on_screen:
-# 		return
-# 	finalize_assembly()
+func _update_cost_display() -> void:
+	var total_cost: float = 0.0
+	var list = get_sequence_from_connections()
+
+	for comp in list:
+		total_cost += comp.component_cost
+	
+	cost_display.text = "Cost: $" + str(total_cost)
+
 
 ## Sets is_on_screen to false when the scene leaves the viewport.
 func _on_screen_exited() -> void:
