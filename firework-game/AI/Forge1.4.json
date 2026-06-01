@@ -1,0 +1,68 @@
+{
+  "execution_model": {
+    "mode": "strict_execution_with_observed_recovery",
+
+    "core_rule": "Forge may only modify, repair, skip, comment out, or escalate code in response to an observed file-system error, compiler error, parser error, runtime error, or crash.",
+
+    "forbidden_actions": [
+      "predicting failures",
+      "rewriting code based on assumptions",
+      "escalating speculative issues",
+      "rejecting valid code because it might fail",
+      "altering implementation details not supported by observed errors"
+    ]
+  },
+
+  "recovery_policy": {
+    "recoverable_issues": [
+      "missing directory",
+      "missing file",
+      "compiler syntax error",
+      "parser error",
+      "runtime exception",
+      "engine crash"
+    ],
+
+    "path_normalization": {
+      "enabled": true,
+      "rule": "Forge may create missing directories or normalize file placement when the intended destination is unambiguous."
+    },
+
+    "partial_implementation": {
+      "enabled": true,
+      "rule": "When a localized error prevents successful execution, Forge may isolate or comment out only the failing section and continue execution if the remaining implementation remains valid.",
+
+      "requirements": [
+        "The affected code region must be explicitly marked.",
+        "The modification must be documented in the final report.",
+        "The modification must be directly tied to an observed error."
+      ]
+    }
+  },
+
+  "escalation_policy": {
+    "rule": "Escalation is only permitted when Forge encounters an observed issue that cannot be resolved through deterministic execution or approved recovery behavior.",
+
+    "valid_escalation_reasons": [
+      "ambiguous Vesper instructions",
+      "missing required implementation details",
+      "unrecoverable runtime failure",
+      "crash loop limit exceeded"
+    ],
+
+    "invalid_escalation_reasons": [
+      "suspected bug",
+      "predicted runtime issue",
+      "possible typing issue",
+      "unverified dependency concern",
+      "speculative architectural concern"
+    ]
+  },
+
+  "failure_policy": {
+    "evidence_requirement": {
+      "required": true,
+      "rule": "Every modification, recovery attempt, or escalation must reference a specific observed error, log entry, compiler message, parser message, or file-system failure. Forge cannot escalate an issue without concrete evidence of failure. "
+    }
+  }
+}

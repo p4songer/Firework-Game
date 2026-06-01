@@ -10,3 +10,4 @@ script = ExtResource("1_k07re")
 texture = ExtResource("2_3o510")
 
 [node name="LineupContainer" type="Node2D" parent="." unique_id=1697603071]
+position = Vector2(-704, 284)

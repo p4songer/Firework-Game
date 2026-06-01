@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://7c0nt2ewvbfx" path="res://Main/House Scenes/Star Minigame/star_minigame.tscn" id="4_y3hmn"]
 [ext_resource type="PackedScene" uid="uid://ctjb54lph47ca" path="res://Main/House Scenes/Assemble/assemble_scene.tscn" id="5_35rxw"]
 [ext_resource type="PackedScene" uid="uid://bctn68bmta4ju" path="res://Main/House Scenes/Launch/new_launch.tscn" id="6_35rxw"]
+[ext_resource type="PackedScene" uid="uid://d3j7q4uy5gp3p" path="res://Main/HouseManager/CustomerDetail.tscn" id="7_2walx"]
 
 [node name="HouseManager" type="Node2D" unique_id=466819776]
 script = ExtResource("1_6you1")
@@ -60,6 +61,10 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 50
 text = "Money: "
+
+[node name="CustomerDetail" parent="CustomerUI" unique_id=1227798120 instance=ExtResource("7_2walx")]
+layout_mode = 3
+anchors_preset = 15
 
 [connection signal="start_game" from="StarMinigame" to="." method="_on_star_minigame_start_game"]
 [connection signal="mouse_entered" from="CustomerUI/TabContainer" to="." method="_on_ui_mouse_entered"]
