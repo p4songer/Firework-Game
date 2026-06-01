@@ -1,47 +1,75 @@
 [gd_scene format=3 uid="uid://d3j7q4uy5gp3p"]
 
-[ext_resource type="Script" path="res://Main/HouseManager/customer_detail.gd" id="1_a2e5m"]
+[ext_resource type="Script" uid="uid://cexj42ghi8126" path="res://Main/HouseManager/customer_detail.gd" id="1_a2e5m"]
 
-[node name="CustomerDetail" type="Control"]
+[node name="CustomerDetail" type="Control" unique_id=1333761274]
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource("1_a2e5m")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=1984570923]
+custom_minimum_size = Vector2(1080, 720)
+layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 10.0
-offset_top = 10.0
-offset_right = -10.0
-offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="NameLabel" type="Label" parent="VBoxContainer"]
+[node name="Vbox" type="VBoxContainer" parent="ScrollContainer" unique_id=629462900]
 layout_mode = 2
-text = "NPC Name"
+size_flags_horizontal = 3
+size_flags_vertical = 6
+
+[node name="NameBox" type="PanelContainer" parent="ScrollContainer/Vbox" unique_id=727384068]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Vbox" type="VBoxContainer" parent="ScrollContainer/Vbox/NameBox" unique_id=1882809600]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="ScrollContainer/Vbox/NameBox/Vbox" unique_id=588488308]
+layout_mode = 2
 theme_override_font_sizes/font_size = 24
+text = "NPC Name"
 
-[node name="RequestLabel" type="RichTextLabel" parent="VBoxContainer"]
+[node name="RequestLabel" type="RichTextLabel" parent="ScrollContainer/Vbox/NameBox/Vbox" unique_id=1543214687]
+custom_minimum_size = Vector2(0, 250)
 layout_mode = 2
-fit_content = true
 text = "NPC Request"
+fit_content = true
 
-[node name="ReviewsContainer" type="VBoxContainer" parent="VBoxContainer"]
+[node name="ReviewBox" type="VBoxContainer" parent="ScrollContainer/Vbox" unique_id=393210665]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="NotesContainer" type="VBoxContainer" parent="VBoxContainer"]
+[node name="NoteBox" type="VBoxContainer" parent="ScrollContainer/Vbox" unique_id=2111588246]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="NoteInput" type="TextEdit" parent="VBoxContainer"]
+[node name="NoteInput" type="TextEdit" parent="ScrollContainer/Vbox/NoteBox" unique_id=1144775965]
 layout_mode = 2
 size_flags_vertical = 3
 placeholder_text = "Write a note..."
 
-[node name="SaveButton" type="Button" parent="VBoxContainer"]
+[node name="SaveButton" type="Button" parent="ScrollContainer/Vbox" unique_id=1078375380]
 layout_mode = 2
 text = "Save Note"
 
-[node name="CloseButton" type="Button" parent="VBoxContainer"]
+[node name="CloseButton" type="Button" parent="ScrollContainer/Vbox" unique_id=1835343321]
 layout_mode = 2
 text = "Close"
+
+[node name="GiveBox" type="VBoxContainer" parent="ScrollContainer/Vbox" unique_id=566122334]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Give" type="Button" parent="ScrollContainer/Vbox/GiveBox" unique_id=1746573020]
+layout_mode = 2
+text = "Give Firework"
+
+[node name="GiveMenu" type="MenuButton" parent="ScrollContainer/Vbox/GiveBox" unique_id=513968351]
+layout_mode = 2
+text = "Select Firework"

@@ -3,6 +3,7 @@ extends Node
 var _money : float = 0.0
 var _color_inventory : Dictionary = {}
 var _effect_inventory : Dictionary = {}
+var _firework_inventory : Dictionary = {}
 
 func get_money() -> float:
 	return _money
@@ -20,6 +21,10 @@ func add_effect(effect_name: String, data: Dictionary) -> void:
 	_effect_inventory[effect_name] = data
 
 
+func add_firework(firework_name: String, data: Dictionary) -> void:
+	_firework_inventory[firework_name] = data
+
+
 func effect_by_name(effect_name: String) -> Dictionary:
 	if not _effect_inventory.has(effect_name):
 		push_error("Effect not found in inventory: " + effect_name)
@@ -35,8 +40,12 @@ func color_by_name(color_name: String) -> Dictionary:
 
 
 func get_all_colors() -> Dictionary:
-	return _color_inventory
+	return _color_inventory.duplicate()
 
 
 func get_all_effects() -> Dictionary:
-	return _effect_inventory
+	return _effect_inventory.duplicate()
+
+
+func get_all_fireworks() -> Dictionary:
+	return _firework_inventory.duplicate()

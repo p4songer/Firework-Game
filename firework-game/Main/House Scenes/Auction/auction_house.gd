@@ -44,9 +44,10 @@ func _clear_lineup() -> void:
 ## item: The Node instance representing this entry in the lineup.
 func _on_item_gui_input(event: InputEvent, npc: NPC_Resource, item: Node) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-		#INVESTIGATE THIS CONNECTION
+		#Temporarily okay. Rename
 		EventBus.qte_clicked.emit(npc)
-		print(item)
+		print(item, npc)
+
 		#This is where we add data to customer detail.
 		# item.queue_free()
 		

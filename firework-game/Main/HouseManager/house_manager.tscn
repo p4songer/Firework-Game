@@ -31,6 +31,10 @@ position = Vector2(7680, 0)
 [node name="CustomerUI" type="CanvasLayer" parent="." unique_id=543081015]
 layer = 2
 
+[node name="CustomerDetail" parent="CustomerUI" unique_id=1227798120 instance=ExtResource("7_2walx")]
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="TabContainer" type="TabContainer" parent="CustomerUI" unique_id=2052046214]
 anchors_preset = 12
 anchor_top = 1.0
@@ -61,10 +65,6 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 50
 text = "Money: "
-
-[node name="CustomerDetail" parent="CustomerUI" unique_id=1227798120 instance=ExtResource("7_2walx")]
-layout_mode = 3
-anchors_preset = 15
 
 [connection signal="start_game" from="StarMinigame" to="." method="_on_star_minigame_start_game"]
 [connection signal="mouse_entered" from="CustomerUI/TabContainer" to="." method="_on_ui_mouse_entered"]

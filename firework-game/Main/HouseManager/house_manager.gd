@@ -70,25 +70,28 @@ func _input(event: InputEvent) -> void:
 	#TODO Make the workstation visible on up/down. Maybe notebook also?
 
 
-## Handles a customer accepting a QTE. Adds the NPC to the active customer list
-## and instantiates a display card in the UI. Triggers camera transition on first
-## customer collected.
-## npc: The NPC_Resource of the customer who clicked the QTE.
+# ## Handles a customer accepting a QTE. Adds the NPC to the active customer list
+# ## and instantiates a display card in the UI. Triggers camera transition on first
+# ## customer collected.
+# ## npc: The NPC_Resource of the customer who clicked the QTE.
 func _on_qte_click(npc: NPC_Resource) -> void:
-	customer_array.append(npc)
-	# TODO Revisit and delete from global. Refactor customer interactions.
-	Global.review_array.append(npc)
+	print("clicked npc")
+	customer_detail.load_npc(npc)
+	customer_detail.visible = true
+# 	customer_array.append(npc)
+# 	# TODO Revisit and delete from global. Refactor customer interactions.
+# 	Global.review_array.append(npc)
 
-	var new_cust: Node = QTE_ITEM.instantiate()
-	new_cust.npc_data = npc
-	new_cust.display_info = true
-	new_cust.active = false
-	customers.add_child(new_cust)
-	new_cust.scale = Vector2(0.5, 0.5)
-	customers.pivot_offset = customers.size / 2
+# 	var new_cust: Node = QTE_ITEM.instantiate()
+# 	new_cust.npc_data = npc
+# 	new_cust.display_info = true
+# 	new_cust.active = false
+# 	customers.add_child(new_cust)
+# 	new_cust.scale = Vector2(0.5, 0.5)
+# 	customers.pivot_offset = customers.size / 2
 
-	if customer_array.size() == 1:
-		tween_cam()
+# 	if customer_array.size() == 1:
+# 		tween_cam()
 
 
 ## Tweens the focus camera to a new position. If no destination is provided, advances
@@ -129,8 +132,9 @@ func _validate_affordability() -> void:
 
 
 func _on_firework_assembled(firework_resource: FireworkResource) -> void:
-	print_debug("ASSEMBLED")
 	fireworks.append(firework_resource)
+	Economy.add_firework("firework_resource.display_name",
+		{"firework": firework_resource, "cost": firework_resource.get_total_cost()})
 	Economy.set_money(Economy.get_money() - firework_resource.get_total_cost())
 	cash_display.text = "Cash: $" + str(Economy.get_money())
 

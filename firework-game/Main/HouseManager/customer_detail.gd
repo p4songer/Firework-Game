@@ -4,19 +4,22 @@ class_name CustomerDetail extends Control
 ## Shows the NPC's name, active request, all auto-generated reviews,
 ## and allows the player to append new freeform notes.
 
-@onready var name_label: Label = $VBoxContainer/NameLabel
-@onready var request_label: RichTextLabel = $VBoxContainer/RequestLabel
-@onready var reviews_container: VBoxContainer = $VBoxContainer/ReviewsContainer
-@onready var notes_container: VBoxContainer = $VBoxContainer/NotesContainer
-@onready var note_input: TextEdit = $VBoxContainer/NoteInput
-@onready var save_button: Button = $VBoxContainer/SaveButton
-@onready var close_button: Button = $VBoxContainer/CloseButton
+@onready var name_label: Label = $ScrollContainer/Vbox/NameBox/Vbox/NameLabel
+@onready var request_label: RichTextLabel = $ScrollContainer/Vbox/NameBox/Vbox/RequestLabel
+@onready var review_box: VBoxContainer = $ScrollContainer/Vbox/ReviewBox
+@onready var note_box: VBoxContainer = $ScrollContainer/Vbox/NoteBox
+@onready var note_input: TextEdit = $ScrollContainer/Vbox/NoteBox/NoteInput
+@onready var save_button: Button = $ScrollContainer/Vbox/SaveButton
+@onready var close_button: Button = $ScrollContainer/Vbox/CloseButton
+@onready var give_button: Button = $ScrollContainer/Vbox/GiveBox/Give
+@onready var give_menu: MenuButton = $ScrollContainer/Vbox/GiveBox/GiveMenu
 
 var _current_npc: NPC_Resource
 
 func _ready() -> void:
 	save_button.pressed.connect(_on_save_pressed)
 	close_button.pressed.connect(_on_close_pressed)
+	give_button.pressed.connect(_on_give_pressed)
 	EventBus.notebook_updated.connect(_on_notebook_updated)
 	visible = false
 
@@ -24,6 +27,7 @@ func _ready() -> void:
 ## Loads an NPC_Resource into the detail view and refreshes all displayed content.
 ## npc: The NPC_Resource to display.
 func load_npc(npc: NPC_Resource) -> void:
+	print("loaded")
 	_current_npc = npc
 	_refresh()
 
@@ -39,9 +43,9 @@ func _refresh() -> void:
 
 ## Clears and repopulates the reviews and notes containers from notepad_entries.
 func _populate_entries() -> void:
-	for child: Node in reviews_container.get_children():
+	for child: Node in review_box.get_children():
 		child.queue_free()
-	for child: Node in notes_container.get_children():
+	for child: Node in note_box.get_children():
 		child.queue_free()
 
 	for entry: Dictionary in _current_npc.notepad_entries:
@@ -50,10 +54,10 @@ func _populate_entries() -> void:
 		label.bbcode_enabled = false
 		if entry["type"] == "auto_review":
 			label.text = entry["content"]
-			reviews_container.add_child(label)
+			review_box.add_child(label)
 		elif entry["type"] == "player_note":
 			label.text = "[%s]: %s" % [entry["author"], entry["content"]]
-			notes_container.add_child(label)
+			note_box.add_child(label)
 
 
 ## Saves the current TextEdit content as a player note on the active NPC.
@@ -80,3 +84,11 @@ func _on_notebook_updated(npc: NPC_Resource) -> void:
 	if _current_npc == null or npc != _current_npc:
 		return
 	_populate_entries()
+
+
+func _on_give_pressed() -> void:
+	if _current_npc == null: return
+
+	for item in Economy.get_all_fireworks().keys():
+		give_menu.get_popup().add_item(item)
+	give_menu.show_popup()
