@@ -18,16 +18,9 @@ var active_firework : CPUParticles2D
 
 signal firework_complete()
 
-# func _ready() -> void:
-# 	firework_complete.connect(_on_firework_complete)
-# 	var path = "Main/Testing Resources/"
-# 	var dir = ResourceLoader.list_directory(path)
-# 	for data in dir:
-# 		var inst = load(path + data)
-# 		testing_array.append(inst)
-# 	var fire = FireworkResource.new()
-# 	fire.sequence = testing_array
-# 	set_active([fire])
+func _ready() -> void:
+	if Global.fireworks_to_launch.size() > 0:
+		set_active(Global.fireworks_to_launch)
 
 
 func _input(_event: InputEvent) -> void:
@@ -49,11 +42,6 @@ func _on_sequence_delay_timeout() -> void:
 	if firework_queue.is_empty():
 		firework_complete.emit()
 		return
-	# if testing_array.is_empty():
-	# 	print_debug("EMPTY")
-	# 	currently_launching = false
-	# 	sequence_delay.stop()
-	# 	return
 	launch_new()
 
 

@@ -8,6 +8,8 @@ extends Node2D
 @onready var customer_detail: Control = $CustomerUI/CustomerDetail
 @onready var cash_display: Label = $CustomerUI/Cash
 
+@export var room_count : int = 3
+
 var ui_active: bool = true:
 	set(new):
 		ui_active = new
@@ -39,15 +41,15 @@ func _ready() -> void:
 	#triggers start of firework display
 	EventBus.display_started.connect(_on_display_started)
 
-	auction_house.spawn_lineup(5)
-
+	auction_house.spawn_lineup(1)
+ 
 	# TODO Revisit and delete from global. House manager should hold customers and reviews.
-	if not Global.review_array.is_empty():
-		$CustomerUI/TabContainer.set_tab_hidden(1, false)
-		for npc: NPC_Resource in Global.review_array:
-			var new_review: Node = REVIEW.instantiate()
-			new_review.data = npc
-			reviews.add_child(new_review)
+	# if not Global.review_array.is_empty():
+	# 	$CustomerUI/TabContainer.set_tab_hidden(1, false)
+	# 	for npc: NPC_Resource in Global.review_array:
+	# 		var new_review: Node = REVIEW.instantiate()
+	# 		new_review.data = npc
+	# 		reviews.add_child(new_review)
 	
 	# TODO Temp effects 
 	for eff in IngredientResource.EFFECTS:
@@ -103,7 +105,7 @@ func tween_cam(destination: int = 1) -> void:
 		transition_tween.kill()
 	transition_tween = create_tween()
 	var new_pos : Vector2 = Vector2(snapped($FocusCam.position.x, 1920) + 1920 * destination, 0)
-	new_pos = new_pos.clamp(Vector2(0, 0), Vector2(1920* 4, 0))
+	new_pos = new_pos.clamp(Vector2(0, 0), Vector2(1920* room_count, 0))
 	transition_tween.tween_property($FocusCam, "position", new_pos, 1.0)
 	transition_tween.finished.connect(_transition_finished)
 	await transition_tween.finished
@@ -163,6 +165,9 @@ func _generate_customer_review() -> void:
 func _on_customer_selected(npc: NPC_Resource) -> void:
 	customer_detail.load_npc(npc)
 	customer_detail.visible = true
+
+	var firework = customer_detail.get_selected_firework()
+	print(firework)
 
 
 func _ui_view() -> void:

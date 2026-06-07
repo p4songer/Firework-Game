@@ -11,3 +11,14 @@ texture = ExtResource("2_3o510")
 
 [node name="LineupContainer" type="Node2D" parent="." unique_id=1697603071]
 position = Vector2(-704, 284)
+
+[node name="EndButton" type="Button" parent="." unique_id=132249270]
+visible = false
+offset_left = -704.0
+offset_top = -87.0
+offset_right = -500.0
+offset_bottom = -10.0
+theme_override_font_sizes/font_size = 50
+text = "End Day"
+
+[connection signal="pressed" from="EndButton" to="." method="_on_end_button_pressed"]

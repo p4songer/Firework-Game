@@ -6,6 +6,8 @@ class_name NPC_Resource extends Resource
 @export var npc_request: String = ""
 @export var npc_sprite: CompressedTexture2D
 
+@export var _held_firework: FireworkResource
+
 ## Runtime notepad entries for this NPC. Each entry is a Dictionary with keys:
 ## "id" (String), "timestamp" (int), "author" (String), "content" (String),
 ## "type" (String: "player_note" or "auto_review"), "rating" (int),
@@ -254,3 +256,15 @@ func add_auto_review(review_text: String, rating: int = 0) -> void:
 	}
 	notepad_entries.append(review_entry)
 	EventBus.notebook_updated.emit(self)
+
+
+func give_firework(firework: FireworkResource) -> void:
+	_held_firework = firework
+
+
+func get_firework() -> FireworkResource:
+	return _held_firework
+
+
+func has_firework() -> bool:
+	return _held_firework != null

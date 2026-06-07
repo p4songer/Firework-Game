@@ -15,6 +15,7 @@ class_name CustomerDetail extends Control
 @onready var give_menu: MenuButton = $ScrollContainer/Vbox/GiveBox/GiveMenu
 
 var _current_npc: NPC_Resource
+var _popup : PopupMenu
 
 func _ready() -> void:
 	save_button.pressed.connect(_on_save_pressed)
@@ -22,6 +23,9 @@ func _ready() -> void:
 	give_button.pressed.connect(_on_give_pressed)
 	EventBus.notebook_updated.connect(_on_notebook_updated)
 	visible = false
+
+	_popup = give_menu.get_popup()
+	_popup.id_pressed.connect(_on_give_menu_item_pressed)
 
 
 ## Loads an NPC_Resource into the detail view and refreshes all displayed content.
@@ -92,3 +96,10 @@ func _on_give_pressed() -> void:
 	for item in Economy.get_all_fireworks().keys():
 		give_menu.get_popup().add_item(item)
 	give_menu.show_popup()
+
+
+func _on_give_menu_item_pressed(id: int) -> void:
+	var item = _popup.get_item_text(id)
+	var firework = Economy.get_all_fireworks()[item]
+	_current_npc.give_firework(firework["firework"])
+ 

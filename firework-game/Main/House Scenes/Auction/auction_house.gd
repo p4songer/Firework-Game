@@ -7,6 +7,10 @@ extends Node2D
 var bid_array : Array
 
 const QTE_ITEM = preload("uid://l2s6ioimdxc")
+const LAUNCH = preload("uid://bctn68bmta4ju")
+
+func _ready() -> void:
+	EventBus.qte_clicked.connect(_on_qte_click)
 
 ## Generates count randomized NPC_Resource instances, renders them as clickable lineup
 ## entries, and registers them with Global.customers_seen.
@@ -48,6 +52,27 @@ func _on_item_gui_input(event: InputEvent, npc: NPC_Resource, item: Node) -> voi
 		EventBus.qte_clicked.emit(npc)
 		print(item, npc)
 
-		#This is where we add data to customer detail.
-		# item.queue_free()
-		
+		_check_customers()
+
+
+func _check_customers() -> void:
+	var flag = false
+	for child in lineup_container.get_children():
+		if child.npc_data.has_firework():
+			flag = true
+		else:
+			flag = false
+			break
+	if flag:
+		$EndButton.show()
+
+
+func _on_qte_click() -> void:
+	_check_customers()
+
+
+func _on_end_button_pressed() -> void:
+	for customer in lineup_container.get_children():
+		var firework = customer.npc_data.get_firework()
+		Global.fireworks_to_launch.append(firework)
+	Global.start_transition(LAUNCH, Global.TRANSITIONS.DEFAULT)
