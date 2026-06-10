@@ -84,5 +84,6 @@ layout_mode = 2
 z_index = -2
 texture = ExtResource("5_af870")
 
-[connection signal="area_exited" from="Sprite2D/Area2D" to="." method="_on_area_2d_area_exited"]
+[connection signal="area_entered" from="Sprite2D/Area2D" to="." method="_on_jar_area_entered"]
+[connection signal="body_entered" from="Sprite2D/Area2D" to="." method="_on_jar_body_entered"]
 [connection signal="pressed" from="Vbox/Button" to="." method="_on_button_pressed"]

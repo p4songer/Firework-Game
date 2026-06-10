@@ -6,10 +6,10 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_4tx6t"]
 radius = 4.0
 
-[node name="Grain" type="RigidBody2D" unique_id=1167622594]
+[node name="Grain" type="RigidBody2D" unique_id=1167622594 groups=["grain"]]
 script = ExtResource("1_6a0qv")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1506815678]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1506815678 groups=["grain"]]
 shape = SubResource("CircleShape2D_4tx6t")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=970595625]
@@ -19,4 +19,9 @@ texture = ExtResource("1_6iltu")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1331510809]
 
+[node name="Timer" type="Timer" parent="." unique_id=457857776]
+one_shot = true
+autostart = true
+
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_screen_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

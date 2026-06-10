@@ -4,18 +4,6 @@ extends Node
 signal color_changed(new_color: Color)
 @warning_ignore("unused_signal")
 signal star_finished_emitting() # Revisit. Might be safe to delete.
-# @warning_ignore("unused_signal") 
-# signal launch_firework() # Both connections in "delete if safe"
-# @warning_ignore("unused_signal")
-# signal request_ingredient(requestor: Node2D) # No connections found.
-# @warning_ignore("unused_signal")
-# signal part_finished() Only connection in "delete if safe"
-# @warning_ignore("unused_signal")
-# signal color_button_pressed() # No connections found.
-# @warning_ignore("unused_signal")
-# signal effect_button_pressed() # No connections found.
-# @warning_ignore("unused_signal")
-# signal prepare_launch() # One connection in delete if safe
 @warning_ignore("unused_signal")
 signal firework_finished()
 @warning_ignore("unused_signal")
@@ -31,7 +19,7 @@ signal notebook_updated(npc: NPC_Resource)
 @warning_ignore("unused_signal")
 signal customer_selected(npc: NPC_Resource)
 @warning_ignore("unused_signal")
-signal craft_stars_completed(final_color: Color)
+signal craft_stars_completed(final_color: Color, color_cost: float)
 @warning_ignore("unused_signal")
 signal star_minigame_completed(effect: IngredientResource.EFFECTS, success: bool)
 @warning_ignore("unused_signal")

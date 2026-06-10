@@ -121,16 +121,8 @@ func _on_craft_stars_completed(final_color: Color, color_cost: float) -> void:
 
 func _on_star_minigame_completed(effect: IngredientResource.EFFECTS, success: bool, effect_cost: float) -> void:
 	_pending_effect_cost = effect_cost
-	_validate_affordability()
 	var effect_string : String = IngredientResource.translate(effect)
 	Economy.add_effect(effect_string, {"effect": effect, "cost":effect_cost, "success": success})
-
-
-func _validate_affordability() -> void:
-	var total_cost: float = _pending_color_cost + _pending_effect_cost
-	# TODO: Expand with actual wallet implementation
-	_pending_color_cost = 0.0
-	_pending_effect_cost = 0.0
 
 
 func _on_firework_assembled(firework_resource: FireworkResource) -> void:
