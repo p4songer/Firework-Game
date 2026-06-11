@@ -6,9 +6,6 @@ extends Node2D
 @onready var parts: CPUParticles2D = $IngArea/Parts
 @onready var instruction: Label = $Instructions/Vbox/CurrentInstruction
 
-@export var current_build : String
-@export var active : bool = false
-
 var default_sequence : Array = [
 	"dextrin", "water", "color", "mix", "oxidizer", "mix", "press"
 ]
@@ -24,14 +21,12 @@ var palm_sequence : Array = [
 ]
 
 var build_dict : Dictionary = {
-	"default" : default_sequence,
-	"crackle" : crackle_sequence,
-	"brocade" : brocade_sequence,
-	"palm": palm_sequence,
+	"FLOWER" : {"sequence": default_sequence, "display": "Default Star" },
+	"CRACKLE" : {"sequence": crackle_sequence, "display": "Crackle Star"},
+	"BROCADE" : {"sequence": brocade_sequence, "display": "Brocade Star"},
+	"PALM" : {"sequence": palm_sequence, "display": "Palm Star"},
 }
-var selection_array : Array =[
-	"Default Star", "Crackle Star", "Brocade Star", "Palm Star", 
-]
+
 var selection_index : int = 0
 var active_array : Array
 var active_element : String
@@ -54,10 +49,10 @@ func _ready() -> void:
 	for b in $Instructions.get_children():
 		if b is Button:
 			b.pressed.connect(_on_selector_pressed.bind(b.name))
-	instruction.text = selection_array[0]
+	instruction.text = build_dict.values()[0]["display"]
 	#populate build_dict with correct keys
 	for eff in IngredientResource.EFFECTS:
-		build_dict[eff] = _build_dict(eff)
+		test_dictionary(eff)
 
 
 func _process(_delta: float) -> void:
@@ -71,16 +66,6 @@ func _process(_delta: float) -> void:
 			$AnimationPlayer.play("RESET")
 
 
-func register_step() -> void:
-	steps_completed += 1
-
-
-func finalize_effect_cost() -> float:
-	var cost: float = Economy.get_effect_cost(steps_completed)
-	steps_completed = 0
-	return cost
-
-
 func _parse_build():
 	if start_qte:
 		$QteItem.show()
@@ -90,14 +75,13 @@ func _parse_build():
 	if active_array.is_empty(): 
 		instruction.text = "Done. Good job."
 		is_game_over = true
-		var effect_cost: float = finalize_effect_cost()
+		var effect_cost: float = build_dict.values()[selection_index]["sequence"].size() * 1.25
 		EventBus.star_minigame_completed.emit(build_dict.keys()[selection_index],  true, effect_cost)
 		await get_tree().create_timer(0.75).timeout
 		# FIXME Reset game here.
 		return
 	active_element = active_array.pop_front()
 	instruction.text = active_element.to_upper()
-	register_step()
 	if active_element == "mix":
 		var new_spin = TEST_ROTATE.instantiate()
 		$IngArea.add_child(new_spin)
@@ -119,8 +103,8 @@ func _on_attempt_ingredient(ing_name : String) -> void:
 
 
 func _on_selector_pressed(direction: String) -> void:
-	selection_index = wrap(selection_index + int(direction), 0, selection_array.size())
-	instruction.text = selection_array[selection_index]
+	selection_index = wrap(selection_index + int(direction), 0, build_dict.size())
+	instruction.text = build_dict.values()[selection_index]["display"]
 
 
 func activate_mash() -> void:
@@ -131,14 +115,15 @@ func activate_mash() -> void:
 
 func _on_craft_pressed() -> void:
 	var choice = build_dict.keys()[selection_index]
-	active_array = build_dict[choice]
+	active_array = build_dict[choice]["sequence"].duplicate()
 	$"Instructions/-1".hide(); $"Instructions/1".hide(); $Instructions/Vbox/Craft.hide()
 	_parse_build()
 	start_game.emit()
-	#TODO REMOVE THIS LATER. THIS IS FOR TESTING
-	print_debug("emitting signal for testing")
-	var effect_cost: float = finalize_effect_cost()
-	EventBus.star_minigame_completed.emit(build_dict.keys()[selection_index], true, effect_cost)
+	# #TODO REMOVE THIS LATER. THIS IS FOR TESTING
+	# print_debug("emitting signal for testing")
+	# var effect_cost: float = finalize_effect_cost()
+
+	# EventBus.star_minigame_completed.emit(build_dict.keys()[selection_index], true, effect_cost)
 
 
 func _on_qte_item_dying(_which: Variant) -> void:
@@ -156,21 +141,14 @@ func _on_qte_item_dying(_which: Variant) -> void:
 	# in the inventory system. 
 	Global.review_array[-1].dud_firework = true
 	await get_tree().create_timer(1.0).timeout
-	var effect_cost: float = finalize_effect_cost()
+	var effect_cost: float = build_dict.values()[selection_index]["sequence"].size() * 1.25
 	EventBus.star_minigame_completed.emit(build_dict.keys()[selection_index], false, effect_cost)
 	#FIXME Reset game here.
 
 
-func _build_dict(effect) -> Array:
-	match effect:
-		"FLOWER":
-			return default_sequence
-		"CRACKLE":
-			return crackle_sequence
-		"BROCADE":
-			return brocade_sequence
-		"PALM":
-			return palm_sequence
-		_:
-			push_warning("Invalid effect enum value for build dict: " + str(effect))
-			return default_sequence
+func test_dictionary(effect) -> void:
+	if effect in build_dict:
+		return
+	else:
+		push_warning("Invalid effect enum value for build dict: " + str(effect))
+
