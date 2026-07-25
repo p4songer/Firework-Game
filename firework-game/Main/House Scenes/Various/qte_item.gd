@@ -17,6 +17,8 @@ signal unhovered
 signal dying(which)
 
 func _ready() -> void:
+	EventBus.star_minigame_completed.connect(_on_star_minigame_completed)
+
 	if not npc_data:
 		push_error("NPC data is empty.")
 	else:
@@ -27,6 +29,8 @@ func _ready() -> void:
 func _on_timer_timeout() -> void:
 	if complete: 
 		dying.emit(self)
+		complete = false
+		timer.stop()
 		return
 	
 	self.value = max(0, self.value - 1)
@@ -60,5 +64,11 @@ func start() -> void:
 	if time:
 		timer.wait_time = time
 		timer.start()
+
+		self.value = self.max_value
 	else:
 		push_error("No time set for %s. Make sure this is an NPC." % self.name)
+
+
+func _on_star_minigame_completed(_item_name: String, _success: bool, _effect_cost: float) -> void:
+	timer.stop()

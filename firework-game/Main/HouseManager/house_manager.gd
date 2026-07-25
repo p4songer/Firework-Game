@@ -64,10 +64,21 @@ func _ready() -> void:
 	Economy.set_money(100.0)
 	cash_display.text = "Cash: $" + str(Economy.get_money())
 
+	#TODO Starting inventory
+	Inventory.add_item("strontium", 1000)
+	Inventory.add_item("barium", 1000)
+	Inventory.add_item("copper", 1000)
+	Inventory.add_item("charcoal", 10)
+	Inventory.add_item("glue", 10)
+	Inventory.add_item("palm_wrap", 10)
+	Inventory.add_item("oxidizer", 10)
+	Inventory.add_item("dextrin", 10)
+	Inventory.add_item("divider", 10)
+
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_left") or event.is_action_pressed("ui_right"):
-		var direction: int = -1 if event.is_action_pressed("ui_left") else 1
+	if event.is_action_pressed("move_left") or event.is_action_pressed("move_right"):
+		var direction: int = -1 if event.is_action_pressed("move_left") else 1
 		tween_cam(direction)
 	#TODO Make the workstation visible on up/down. Maybe notebook also?
 
@@ -119,10 +130,9 @@ func _on_craft_stars_completed(final_color: Color, color_cost: float) -> void:
 	Economy.add_color("CustomBlend", {"color": final_color, "cost": color_cost})
 
 
-func _on_star_minigame_completed(effect: IngredientResource.EFFECTS, success: bool, effect_cost: float) -> void:
+func _on_star_minigame_completed(effect: String, success: bool, effect_cost: float) -> void:
 	_pending_effect_cost = effect_cost
-	var effect_string : String = IngredientResource.translate(effect)
-	Economy.add_effect(effect_string, {"effect": effect, "cost":effect_cost, "success": success})
+	Economy.add_effect(effect, {"effect": effect, "cost": effect_cost, "success": success})
 
 
 func _on_firework_assembled(firework_resource: FireworkResource) -> void:
