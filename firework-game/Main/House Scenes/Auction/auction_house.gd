@@ -67,7 +67,7 @@ func _check_customers() -> void:
 		$EndButton.show()
 
 
-func _on_qte_click() -> void:
+func _on_qte_click(_npc: NPC_Resource) -> void:
 	_check_customers()
 
 

@@ -1,70 +1,110 @@
-====================================================================
-FIREWORK GAME DEVELOPMENT - MASTER TODO LIST (UPDATED)
-====================================================================
+======================================================================
+FIREWORK ASSEMBLY ENGINE - DEVELOPMENT ROADMAP & BACKLOG
+======================================================================
 
-[STATUS OVERVIEW]
-- HouseManager Decoupling: SUCCESSFUL (Priority A Core Backlog)
-- Context Menu & Persistence: COMPLETED (Hover bounds, filters, and persistence resolved)
-- Core Mechanical Assembly Chain: COMPLETED (Drag-and-drop connections wired)
-- Current Active Phase: Barebones Economy Framework (Implementation Step)
+[X] PROGRESS MILESTONES COMPLETED:
+	- HouseManager decoupling from craft_stars.gd [TODO-0012]
+	- Inventory Gate Validation Implementation [TODO-0013]
+	- Barebones Financial Framework Integration [TODO-0014]
+	- Extract Autoload State Concerns (Inventory.gd singleton split) [TODO-0015]
+	- Data Parsing for the Launch Pad [TODO-0016]
+	- Chronological Fuse Ignition Timing [TODO-0017]
+	- Fixed 0x0 UI container layout boundary collision bug
+	- Context menu persistence architecture (show/hide instead of queue_free)
+	- Mouse filter pass overrides for nested grid TextureButtons
+	- Area-based mouse boundary proximity detection tracking
+	- Mutual exclusivity button toggling logic for Color & Effect grids
+	- Drag-and-drop fuse sequence layout connections wired
+	- IngredientResource performance translation optimization refactor
 
---------------------------------------------------------------------
-PRIORITY GROUP A: ECONOMY & VALIDATION LOOP (IMMEDIATE FOCUS)
---------------------------------------------------------------------
-[ ] TODO-0014: Establish Static Price Definitions (Global.gd)
-	- Add a "cost" float property to each entry inside the color_mixes dictionary.
-	- Add a "cost" float property to each entry inside the effects dictionary.
-	- Expose universal getter functions: get_mix_cost(name) and get_effect_cost(name).
+======================================================================
+PRIORITY GROUP B: ECONOMY CLOSURE & WORKSPACE ARCHITECTURE
+======================================================================
 
-[ ] TODO-0015: Build Wallet & Transaction Interface (HouseManager.gd)
-	- Track active player funds using a persistent cash variable (e.g., current_money: float).
-	- Implement can_afford(amount: float) -> bool for safety checks.
-	- Implement spend_money(amount: float) -> bool to deduct balances securely.
+[ ] [TODO-0014b] Wholesale Material Store
+	- Build a lightweight UI panel to act as the raw materials shop.
+	- Wire purchase buttons to trigger 'HouseManager.deduct_money(cost)'.
+	- On successful transaction, trigger 'Inventory.add_item(material, amount)' 
+	  to instantly supply the player's stock.
 
-[ ] TODO-0016: Assemble Scene Verification Gating (assemble_scene.gd)
-	- Map layout loop to parse placed items or nodes belonging to "assembly_slots".
-	- Calculate total composite cost by summing colors and effects via Global database.
-	- Intercept final compilation step to enforce a strict affordability checkpoint before building.
+[ ] [TODO-0021] 2D Grid Camera Navigation & Spatial Restructuring (HouseManager)
+	- Reorganize HouseManager view positions into a 2-column spatial grid layout:
+	  * Column 1 (Commercial): Wholesale Shop / Economy Manager, Customer Lineup.
+	  * Column 2 (Production): Color Mixing, Star Minigame, Assembly Bench.
+	- Overhaul Camera2D navigation logic to support 2D grid panning (up/down 
+	  between rows, left/right between columns) instead of a 1D linear track.
 
---------------------------------------------------------------------
-PRIORITY GROUP B: INVENTORY MANAGEMENT & REFACTORING
---------------------------------------------------------------------
-[ ] TODO-0013: Chemical Grain Sourcing & Gate Implementation
-	- Code a backend validation constraint inside the add_grain framework.
-	- Force star production inputs to pull from and gate against raw global stockpiles.
+[ ] [TODO-0022] UI Legacy Deprecation & Interface Integration
+	- Strip legacy UI components: purge outdated Customer Reviews panel, 
+	  Customer Tracker overlays, and legacy economic placeholders.
+	- Integrate unified interface displays across views: persistent Inventory HUD, 
+	  dynamic Wallet counter, and clean workstation headers.
 
-[ ] TODO-0017: Extract Global.gd Sub-Systems to Dedicated Autoloads
-	- Split monolithic responsibilities out of Global.gd.
-	- Create a new runtime Inventory.gd state manager script to track dynamic player stashes.
-	- Leave Global.gd strictly as a read-only setup registry/database.
-	- Standardize text string properties via .effect moving away from old .ing_effect parameters.
+[ ] [TODO-0023] Closed-Loop Economic Validation & Balance Tuning
+	- Set player starting wallet balance to $20.00 and grant a generous initial inventory stockpile.
+	- Wire customer firework purchases to deposit cash directly into HouseManager wallet.
+	- Verify that buying raw materials in the Shop correctly decrements cash and increments Inventory.
 
-[ ] TODO-0018: Implement Clean EventBus Inventory Communication
-	- Wire up Inventory.gd to listen for EventBus.star_crafted.
-	- Broadcast EventBus.inventory_updated from the inventory manager so UI grids redraw themselves automatically.
+[ ] [TODO-0024] Assembly Scene Real-Time UX & Metadata Expansion
+	- Refactor total assembly cost calculation to run in real-time as components are linked, 
+	  replacing the static 'on_assemble_pressed' check.
+	- Implement a full workstation state reset upon pressing 'Assemble'.
+	- Add UI input fields allowing players to name their creation (e.g. "Candelabra") and select 
+	  a structural style category (Roman Candle, Cake, Single Shot, Shell).
 
---------------------------------------------------------------------
-PRIORITY GROUP C: LAUNCH SEQUENCE & COMPLEX SIMULATION
---------------------------------------------------------------------
-[ ] TODO-0019: Data Parsing for Launchpad Sequencing
-	- Build processing logic to convert the workbench assembly array into a timed execution playlist.
-	- Parse delay triggers chronologically across the fuse timing chains.
+======================================================================
+PRIORITY GROUP C: LAUNCH PLAYBACK & GENERAL POLISH
+======================================================================
 
-[ ] TODO-0020: Simultaneous Day Finale Playback
-	- Transition execution from single firework tests to launching a full day's purchased order list sequentially.
+[ ] [TODO-0025] Launch Display HUD & Fast-Forward / Skip System
+	- Implement a playback HUD overlay showing the active firework name and style currently firing.
+	- Add a skip / fast-forward feature allowing players to bypass the launch sequence animation.
 
-[ ] TODO-0021: Interactive Launch Mechanics (The Finale Feedback Loop)
-	- Circle back to add player inputs during shows (e.g., ignition cues, rhythm mechanics, or matching prompts).
+[ ] [TODO-0026] Customer Portrait & Visual Avatar Overhaul
+	- Replace placeholder circles and text names with distinct visual face sprites/avatars for customers.
 
---------------------------------------------------------------------
-PRIORITY GROUP D: COSMETICS, BUG FIXES, & REVIEWS
---------------------------------------------------------------------
-[ ] TODO-0022: Black Normalization Visual Bug
-	- Fix visual representation calculations causing fireworks to render as pitch black when no color proportions are added to mixtures.
-	- Safeguard color normalization thresholds inside Global script configurations.
+[ ] [TODO-0027] Assembly Workstation Visual Art Pass
+	- Replace placeholder UI boxes and background elements in 'assemble_scene.gd' with final workbench art assets.
 
-[ ] TODO-0023: Full Customer Management & Review Pipelines
-	- Transition static NPC_Resource functions into a dynamic standalone CustomerManager system.
-	- Wire live store tracking, patience timers, and review generation matrices using weighted scoring components.
-firework_todo_list.txt
-Displaying firework_todo_list.txt.
+======================================================================
+FUTURE ROADMAP & DESIGN HORIZONS
+======================================================================
+
+[ ] [TODO-0028] Blueprint Store Catalog (Pre-Assembled Recipe Purchasing)
+	- Allow players to save custom firework designs (e.g. "Candelabra") as purchasable store catalog items.
+	- Enable players to buy pre-assembled custom fireworks directly from the shop panel without re-crafting.
+
+[ ] [TODO-0020] End-of-Day Storefront Handoff & Departure Polish
+	- Add UI polish, customer departure animations, and earnings summaries 
+	  when clicking '$EndButton'.
+	- Smoothly clear lineup container nodes after packaging choices into 
+	  'Global.fireworks_to_launch'.
+
+[ ] Interactive Launch Mechanics Evaluation (The Finale Expansion)
+	- Revisit the transition from passive launch rewards to interactive systems 
+	  (e.g., QTE rhythm triggers, ignition sync timing arrays, custom display pacing).
+
+[ ] Macro-Economy Market Simulation (The Sourcing Pipeline)
+	- Implement the realistic commercial simulation framework post loop stability.
+	- Wire operational variables for component delivery lead times, order shipping 
+	  delays, regional chemical import tariffs, and customer archetype budgets.
+
+[ ] Assembly UI: The Dud-to-Mine Recycling Loop [TODO-0018]
+	- Allow players to break down/recycle inventory duds specifically into lifting 
+	  charges for Mine-type fireworks.
+	- Integrate this feature directly into the Assembly Workstation UI view layout.
+	- Ensure the mine effect visibly glows/ignites inside the launch tube upon firing.
+
+[ ] NPC Purchase Willingness & Desire Engine [TODO-0019]
+	- Implement a dynamic utility scoring metric determining how willing an NPC is to buy.
+	- Award positive score weight (+2 points) if structural colors and effects match buyer preferences.
+	- Apply negative score weight (-2 points) for poor cosmetic packaging or structural flaws.
+
+======================================================================
+BACKLOG WORKING RULES & TYPING CONSTRAINTS (FOR REFACTOR INTEGRITY)
+======================================================================
+	1. Maintain strict tab formatting across workflow text sheets.
+	2. Standardize data mapping properties to use '.effect' rather than old '.ing_effect'.
+	3. Safely resolve Variant dictionary types using explicit cast syntax: 
+	   'as IngredientResource.EFFECTS'.
+	4. Isolate dud status calculations by tracking keys via 'trim_suffix("_dud")'.
