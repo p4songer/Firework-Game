@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://dklhdpretsw5j"]
+
+[ext_resource type="Script" uid="uid://crpm4c3mq5ftw" path="res://Main/House Scenes/Shop/shop_button.gd" id="1_3snuy"]
+[ext_resource type="Texture2D" uid="uid://bv4viluirxsok" path="res://Global/UI/Sprites/icon.svg" id="1_jnwhj"]
+
+[node name="ShopButton" type="VBoxContainer" unique_id=418513112]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_3snuy")
+
+[node name="Icon" type="Button" parent="." unique_id=566713810]
+layout_mode = 2
+text = "Hello"
+icon = ExtResource("1_jnwhj")
+icon_alignment = 1
+vertical_icon_alignment = 0
+
+[node name="Selection" type="HBoxContainer" parent="." unique_id=1300654414]
+layout_mode = 2
+alignment = 1
+
+[node name="-1" type="Button" parent="Selection" unique_id=1681590562]
+layout_mode = 2
+text = "<"
+
+[node name="Label" type="Label" parent="Selection" unique_id=247222604]
+layout_mode = 2
+text = "0"
+
+[node name="1" type="Button" parent="Selection" unique_id=1362298387]
+layout_mode = 2
+text = ">"

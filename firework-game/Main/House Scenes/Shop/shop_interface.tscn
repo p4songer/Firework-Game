@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://dsr1pav6crjcd"]
+
+[node name="ShopInterface" type="Node2D" unique_id=1032791472]
+
+[node name="Tabs" type="TabContainer" parent="." unique_id=1723592320]
+offset_right = 8.0
+offset_bottom = 40.0
+current_tab = 0
+clip_tabs = false
+
+[node name="Shop" type="VBoxContainer" parent="Tabs" unique_id=423078875]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="Inventory" type="VBoxContainer" parent="Tabs" unique_id=41637703]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="Shipments" type="VBoxContainer" parent="Tabs" unique_id=953861558]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
