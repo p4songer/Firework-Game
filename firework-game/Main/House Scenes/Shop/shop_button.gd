@@ -10,7 +10,7 @@ func _ready() -> void:
 	for c in selection.get_children():
 		if c is Button:
 			c.pressed.connect(_on_button_pressed.bind(c.name))
-	self.pressed.connect(_on_purchase_pressed)
+	$Icon.pressed.connect(_on_purchase_pressed)
 
 
 func _on_button_pressed(button_name: String) -> void:

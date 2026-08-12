@@ -1,23 +1,97 @@
 [gd_scene format=3 uid="uid://dsr1pav6crjcd"]
 
+[ext_resource type="PackedScene" uid="uid://dklhdpretsw5j" path="res://Main/House Scenes/Shop/shop_button.tscn" id="1_2qtw5"]
+
 [node name="ShopInterface" type="Node2D" unique_id=1032791472]
 
 [node name="Tabs" type="TabContainer" parent="." unique_id=1723592320]
-offset_right = 8.0
-offset_bottom = 40.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -470.5
+offset_top = -124.0
+offset_right = 470.5
+offset_bottom = 124.0
+grow_horizontal = 2
+grow_vertical = 2
 current_tab = 0
 clip_tabs = false
 
-[node name="Shop" type="VBoxContainer" parent="Tabs" unique_id=423078875]
+[node name="Shop" type="GridContainer" parent="Tabs" unique_id=1938400899]
 layout_mode = 2
+theme_override_constants/h_separation = 25
+theme_override_constants/v_separation = 10
+columns = 6
 metadata/_tab_index = 0
 
-[node name="Inventory" type="VBoxContainer" parent="Tabs" unique_id=41637703]
+[node name="ShopButton" parent="Tabs/Shop" unique_id=418513112 instance=ExtResource("1_2qtw5")]
+layout_mode = 2
+
+[node name="ShopButton4" parent="Tabs/Shop" unique_id=550785379 instance=ExtResource("1_2qtw5")]
+layout_mode = 2
+
+[node name="ShopButton5" parent="Tabs/Shop" unique_id=2077695005 instance=ExtResource("1_2qtw5")]
+layout_mode = 2
+
+[node name="ShopButton6" parent="Tabs/Shop" unique_id=1249136313 instance=ExtResource("1_2qtw5")]
+layout_mode = 2
+
+[node name="ShopButton2" parent="Tabs/Shop" unique_id=1257283766 instance=ExtResource("1_2qtw5")]
+layout_mode = 2
+
+[node name="ShopButton3" parent="Tabs/Shop" unique_id=854872993 instance=ExtResource("1_2qtw5")]
+layout_mode = 2
+
+[node name="Inventory" type="GridContainer" parent="Tabs" unique_id=1665001136]
 visible = false
 layout_mode = 2
+theme_override_constants/h_separation = 25
+theme_override_constants/v_separation = 10
+columns = 6
 metadata/_tab_index = 1
 
-[node name="Shipments" type="VBoxContainer" parent="Tabs" unique_id=953861558]
+[node name="ShopButton" parent="Tabs/Inventory" unique_id=1457006798 instance=ExtResource("1_2qtw5")]
+layout_mode = 2
+
+[node name="ShopButton4" parent="Tabs/Inventory" unique_id=1431203047 instance=ExtResource("1_2qtw5")]
+layout_mode = 2
+
+[node name="ShopButton5" parent="Tabs/Inventory" unique_id=1310505293 instance=ExtResource("1_2qtw5")]
+layout_mode = 2
+
+[node name="ShopButton6" parent="Tabs/Inventory" unique_id=1949259781 instance=ExtResource("1_2qtw5")]
+layout_mode = 2
+
+[node name="ShopButton2" parent="Tabs/Inventory" unique_id=249001832 instance=ExtResource("1_2qtw5")]
+layout_mode = 2
+
+[node name="ShopButton3" parent="Tabs/Inventory" unique_id=2044359767 instance=ExtResource("1_2qtw5")]
+layout_mode = 2
+
+[node name="Shipments" type="GridContainer" parent="Tabs" unique_id=1945318011]
 visible = false
 layout_mode = 2
+theme_override_constants/h_separation = 25
+theme_override_constants/v_separation = 10
+columns = 6
 metadata/_tab_index = 2
+
+[node name="ShopButton" parent="Tabs/Shipments" unique_id=775424150 instance=ExtResource("1_2qtw5")]
+layout_mode = 2
+
+[node name="ShopButton4" parent="Tabs/Shipments" unique_id=1621284323 instance=ExtResource("1_2qtw5")]
+layout_mode = 2
+
+[node name="ShopButton5" parent="Tabs/Shipments" unique_id=2098172163 instance=ExtResource("1_2qtw5")]
+layout_mode = 2
+
+[node name="ShopButton6" parent="Tabs/Shipments" unique_id=1913732605 instance=ExtResource("1_2qtw5")]
+layout_mode = 2
+
+[node name="ShopButton2" parent="Tabs/Shipments" unique_id=528910578 instance=ExtResource("1_2qtw5")]
+layout_mode = 2
+
+[node name="ShopButton3" parent="Tabs/Shipments" unique_id=1571948911 instance=ExtResource("1_2qtw5")]
+layout_mode = 2
