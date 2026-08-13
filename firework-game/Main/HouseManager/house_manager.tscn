@@ -15,21 +15,27 @@ script = ExtResource("1_6you1")
 zoom = Vector2(0.6, 0.6)
 
 [node name="AuctionHouse" parent="." unique_id=852820366 instance=ExtResource("2_6wiyr")]
+visible = false
 
 [node name="CraftStars" parent="." unique_id=1554626229 instance=ExtResource("3_6wiyr")]
+visible = false
 position = Vector2(1920, 0)
 
 [node name="StarMinigame" parent="." unique_id=948536394 instance=ExtResource("4_y3hmn")]
+visible = false
 position = Vector2(1920, 1080)
 
 [node name="AssembleScene" parent="." unique_id=2018367091 instance=ExtResource("5_35rxw")]
+visible = false
 position = Vector2(1920, 2160)
 
 [node name="ShopInterface" parent="." unique_id=1032791472 instance=ExtResource("7_cvj20")]
+visible = false
 position = Vector2(0, 1080)
 
 [node name="CustomerUI" type="CanvasLayer" parent="." unique_id=543081015]
 layer = 2
+visible = false
 
 [node name="CustomerDetail" parent="CustomerUI" unique_id=1227798120 instance=ExtResource("7_2walx")]
 

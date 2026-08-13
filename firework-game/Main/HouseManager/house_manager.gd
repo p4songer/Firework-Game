@@ -27,7 +27,38 @@ var _pending_effect_cost: float = 0.0
 const QTE_ITEM: PackedScene = preload("uid://l2s6ioimdxc")
 const REVIEW: PackedScene = preload("uid://drq4tuq8bw3k6")
 
+const AUCTION_HOUSE : PackedScene = preload("uid://d0r1ikl3flsxy")
+const SHOP : PackedScene = preload("uid://dsr1pav6crjcd")
+const ASSEMBLE : PackedScene = preload("uid://ctjb54lph47ca")
+const CRAFT_STARS : PackedScene = preload("uid://b1ftf4dw2ox35")
+const STAR_MINIGAME : PackedScene = preload("uid://7c0nt2ewvbfx")
+
+@export_category("NewCam Vars")
+@export var active_column_0: Node2D = null
+@export var active_column_1: Node2D = null
+@export var is_col_0: bool = true
+
+
+# Scene dict should be indexed with is_col_0
+var scene_dict : Dictionary = {
+	true: [
+		AUCTION_HOUSE,
+		SHOP
+	],
+	false: [
+		CRAFT_STARS,
+		STAR_MINIGAME,
+		ASSEMBLE
+	]
+}
+
 func _ready() -> void:
+#TODO Temp camera experiments.
+	active_column_0 = scene_dict[true][0].instantiate()
+	active_column_1 = scene_dict[false][0].instantiate()
+	add_child(active_column_0)
+	add_child(active_column_1)
+
 	#gets the npc clicked to global
 	EventBus.qte_clicked.connect(_on_qte_click)
 	#unsure what this does, but probably for customer UI
@@ -77,10 +108,11 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("move_left") or event.is_action_pressed("move_right"):
-		var direction: int = -1 if event.is_action_pressed("move_left") else 1
+	var direction: Vector2 = Vector2.ZERO
+	direction.x = 1 if event.is_action_pressed("ui_right") else -1 if event.is_action_pressed("ui_left") else 0
+	direction.y = 1 if event.is_action_pressed("ui_down") else -1 if event.is_action_pressed("ui_up") else 0
+	if direction != Vector2.ZERO:
 		tween_cam(direction)
-	#TODO Make the workstation visible on up/down. Maybe notebook also?
 
 
 # ## Handles a customer accepting a QTE. Adds the NPC to the active customer list
@@ -91,35 +123,36 @@ func _on_qte_click(npc: NPC_Resource) -> void:
 	print("clicked npc")
 	customer_detail.load_npc(npc)
 	customer_detail.visible = true
-# 	customer_array.append(npc)
-# 	# TODO Revisit and delete from global. Refactor customer interactions.
-# 	Global.review_array.append(npc)
-
-# 	var new_cust: Node = QTE_ITEM.instantiate()
-# 	new_cust.npc_data = npc
-# 	new_cust.display_info = true
-# 	new_cust.active = false
-# 	customers.add_child(new_cust)
-# 	new_cust.scale = Vector2(0.5, 0.5)
-# 	customers.pivot_offset = customers.size / 2
-
-# 	if customer_array.size() == 1:
-# 		tween_cam()
 
 
 ## Tweens the focus camera to a new position. If no destination is provided, advances
 ## one screen width to the right. Awaitable.
 ## destination: Optional target position for the camera. Defaults to null.
-func tween_cam(destination: int = 1) -> void:
+func tween_cam(destination: Vector2) -> void:
 	EventBus.room_changed.emit()
 	if transition_tween:
 		transition_tween.kill()
 	transition_tween = create_tween()
-	var new_pos : Vector2 = Vector2(snapped($FocusCam.position.x, 1920) + 1920 * destination, 0)
-	new_pos = new_pos.clamp(Vector2(0, 0), Vector2(1920* room_count, 0))
-	transition_tween.tween_property($FocusCam, "position", new_pos, 1.0)
-	transition_tween.finished.connect(_transition_finished)
-	await transition_tween.finished
+	
+	# var new_pos : Vector2 = Vector2(snapped($FocusCam.position.x, 1920) + 1920 * destination, 0)
+	# new_pos = new_pos.clamp(Vector2(0, 0), Vector2(1920* room_count, 0))
+	# transition_tween.tween_property($FocusCam, "position", new_pos, 1.0)
+	# transition_tween.finished.connect(_transition_finished)
+	# await transition_tween.finished
+	if destination.x:
+		print("move x")
+		var current_scene = active_column_0 if is_col_0 else active_column_1
+		var next_scene = active_column_1 if is_col_0 else active_column_0
+
+		next_scene.position = Vector2(1920 * destination.x, 0)
+		is_col_0 = not is_col_0
+
+		transition_tween.set_parallel(true)
+		transition_tween.tween_property(current_scene, "position", Vector2(1920 * destination.x, 0), 1.0)
+		transition_tween.tween_property(next_scene, "position", Vector2(1920 * destination.x + 1920, 0), 1.0)
+
+	else:
+		print("move y")
 
 
 ## Receives the final crafted color from craft_stars adds it to the color mix registry in Global.
