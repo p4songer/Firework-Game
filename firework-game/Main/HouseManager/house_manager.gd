@@ -41,23 +41,32 @@ const STAR_MINIGAME : PackedScene = preload("uid://7c0nt2ewvbfx")
 
 # Scene dict should be indexed with is_col_0
 var scene_dict : Dictionary = {
-	true: [
+	true: {"count": 0, "scenes": [
 		AUCTION_HOUSE,
 		SHOP
-	],
-	false: [
+	]},
+	false: {"count": 0, "scenes": [
 		CRAFT_STARS,
 		STAR_MINIGAME,
 		ASSEMBLE
-	]
+	]}
 }
 
 func _ready() -> void:
 #TODO Temp camera experiments.
-	active_column_0 = scene_dict[true][0].instantiate()
-	active_column_1 = scene_dict[false][0].instantiate()
+	var col_0_count = scene_dict[true]["count"]
+	var col_1_count = scene_dict[false]["count"]
+	var scene_0 = scene_dict[true]["scenes"][col_0_count]
+	var scene_1 = scene_dict[false]["scenes"][col_1_count]
+
+	active_column_0 = scene_0.instantiate()
+	active_column_1 = scene_1.instantiate()
+
 	add_child(active_column_0)
 	add_child(active_column_1)
+	active_column_1.position = Vector2(1920, 0)
+	scene_0 = active_column_0
+	scene_1 = active_column_1
 
 	#gets the npc clicked to global
 	EventBus.qte_clicked.connect(_on_qte_click)
@@ -140,19 +149,52 @@ func tween_cam(destination: Vector2) -> void:
 	# transition_tween.finished.connect(_transition_finished)
 	# await transition_tween.finished
 	if destination.x:
-		print("move x")
+		print("move x ", destination.x)
 		var current_scene = active_column_0 if is_col_0 else active_column_1
 		var next_scene = active_column_1 if is_col_0 else active_column_0
-
-		next_scene.position = Vector2(1920 * destination.x, 0)
 		is_col_0 = not is_col_0
 
+		current_scene.show()
+		next_scene.show()
+
+		next_scene.position = Vector2(-1920 * destination.x, 0)
+		
+		transition_tween.finished.connect(_on_tween_finished.bind(next_scene, current_scene))
 		transition_tween.set_parallel(true)
 		transition_tween.tween_property(current_scene, "position", Vector2(1920 * destination.x, 0), 1.0)
-		transition_tween.tween_property(next_scene, "position", Vector2(1920 * destination.x + 1920, 0), 1.0)
+		transition_tween.tween_property(next_scene, "position", Vector2(0, 0), 1.0)
 
 	else:
-		print("move y")
+		print("move y", destination.y)
+		var current_scene = active_column_0 if is_col_0 else active_column_1
+
+		var next_index = scene_dict[is_col_0]["count"] + int(destination.y)
+		next_index = wrap(next_index, 0, scene_dict[is_col_0]["scenes"].size())
+		print("next index: ", next_index)
+		scene_dict[is_col_0]["count"] = next_index
+
+		var next_scene = scene_dict[is_col_0]["scenes"][next_index]
+		if is_instance_of(next_scene, Node2D):
+			next_scene.visible = true
+			print("next scene in tree.")
+		else:
+			next_scene = next_scene.instantiate()
+			scene_dict[is_col_0]["scenes"][next_index] = next_scene
+			add_child(next_scene)
+
+		next_scene.position = Vector2(0, 1920 * destination.y)
+		
+		transition_tween.finished.connect(_on_tween_finished.bind(next_scene, current_scene))
+		transition_tween.set_parallel(true)
+		transition_tween.tween_property(current_scene, "position", Vector2(0, 1920 * destination.y), 1.0)
+		transition_tween.tween_property(next_scene, "position", Vector2(0, 0), 1.0)
+
+
+func _on_tween_finished(next_scene: Node2D, current_scene: Node2D) -> void:
+	current_scene.visible = false
+	var _choice = active_column_0 if is_col_0 else active_column_1
+	_choice = next_scene
+
 
 
 ## Receives the final crafted color from craft_stars adds it to the color mix registry in Global.
